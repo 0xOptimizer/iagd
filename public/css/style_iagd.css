@@ -1,0 +1,59 @@
+body {
+    background-color: #11082b;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url(../images/blurry-gradient-haikei.png);
+}
+
+.header {
+    padding: 0.65rem;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid #312c57;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.tewi-btn-icon {
+    color: white;
+    background-color: transparent;
+    border-radius: 8px;
+    border: none;
+}
+
+.tewi-btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.45);
+    transform: scale(1.2);
+    cursor: pointer;
+    transition: 0.08s;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.16);
+    color: white;
+    border-color: transparent;
+}
+
+.form-control:active, .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: inherit;
+    background-color: inherit;
+}
+
+.form-floating label {
+    color: white !important;
+}
+
+.form-floating label::after {
+    background-color: transparent !important;
+}
