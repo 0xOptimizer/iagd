@@ -57,3 +57,90 @@ body {
 .form-floating label::after {
     background-color: transparent !important;
 }
+
+.text-gradient-primary {
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    /* background: linear-gradient(74deg, #5692f5 0, #b342f4 9%, #ffcf86 20%, #ffcf86 24%, #b342f4 35%, #5692f5 44%, #b342f4 50%, #ffcf86 56%, #ffcf86 75%, #ffcf86 100%); */
+    background: linear-gradient(74deg, #be93ff 0, #db9efd 9%, #ffd333 20%, #ffd400 24%, #db9efd 35%, #be93ff 44%, #db9efd 50%, #ffcf86 56%, #ffd333 75%, #ffcf86 100%);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.card {
+    position: relative;
+    background-color: rgba(214, 167, 255, 0.05);
+    color: rgba(231, 231, 231, 1);
+    margin-bottom: 0;
+}
+
+.card .card-title {
+    font-size: 32px;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.card .card-body {
+    padding-bottom: 2rem;
+}
+
+.card .card-icon {
+	position: absolute;
+    font-size: 96px;
+    top: 0px;
+    right: -5px;
+    color: rgba(255, 255, 255, 0.04);
+}
+
+.card .card-value {
+	position: absolute;
+    top: 19px;
+    right: 28px;
+    font-size: 39px;
+}
+
+.card-hoverable:hover {
+    outline: 1px solid #312c57;
+    outline-offset: 1px;
+    cursor: pointer;
+}
+
+.text-muted {
+    color: rgba(231, 231, 231, 0.5) !important;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.btn {
+    border-radius: 24px;
+}
+
+.btn-primary {
+    background-color: rgb(114 0 189 / 75%);
+    border: 2px solid transparent;
+    border-top: 1px solid rgb(135 135 135 / 25%);
+}
+
+.btn-primary:hover {
+    background-color: rgba(92, 11, 147, 0.75);
+    border: 2px solid transparent;
+    border-top: 1px solid rgb(135 135 135 / 25%);
+}
+
+.btn-secondary {
+    background-color: rgba(49, 44, 87, 0.5);
+    border: 2px solid transparent;
+    border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(49, 44, 87, 0.75);
+    border: 2px solid transparent;
+    border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
