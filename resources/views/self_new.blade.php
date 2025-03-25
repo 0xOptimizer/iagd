@@ -354,7 +354,7 @@
 		            		<i class="bi bi-person-bounding-box" style="vertical-align: 0;"></i> Your Photo
 		            	</div>
 						<div class="text-center">
-						<input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;">
+							<input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;">
 							<div class="drop-zone create-drop-zone">
 								<div class="drop-message">
 									<i class="bi bi-download text-primary" style="font-size: 20px;"></i>

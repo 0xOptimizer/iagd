@@ -13,6 +13,11 @@
 @include('components.imports-cdn')
 
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="{{ asset('css/style_iagd.css') }}" rel="stylesheet">
+
+@if (Agent::isMobile())
+    <link href="{{ asset('css/style_m_iagd.css') }}" rel="stylesheet">
+@else
+    <link href="{{ asset('css/style_m_iagd.css') }}" rel="stylesheet">
+@endif
 
 @include('components.scripts')

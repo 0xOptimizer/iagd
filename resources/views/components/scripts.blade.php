@@ -110,5 +110,57 @@ $(document).ready(function() {
 		$('.container-groups').hide();
 		$('.container-groups[data-group=' + group + ']').show();
 	});
+
+    $('body').on('click', '.group-navigate-btn', function() {
+        const group = $(this).data('group');
+        const $current = $('.group-container:visible');
+        const $next = $(`.group-container[data-group="${group}"]`);
+        
+        if (group == 'main') {
+            $current.addClass('animate__animated animate__fadeOutRight');
+
+            $current.one('animationend', function() {
+                $current.hide().removeClass('animate__animated animate__fadeOutRight');
+                $next.show().addClass('animate__animated animate__fadeInLeft');
+                $next.one('animationend', function() {
+                    $next.removeClass('animate__animated animate__fadeInLeft');
+                });
+            });
+        } else {
+            $current.addClass('animate__animated animate__fadeOutLeft');
+
+            $current.one('animationend', function() {
+                $current.hide().removeClass('animate__animated animate__fadeOutLeft');
+                $next.show().addClass('animate__animated animate__fadeInRight');
+                $next.one('animationend', function() {
+                    $next.removeClass('animate__animated animate__fadeInRight');
+                });
+            });
+        }
+    });
+
+    $('body').on('click', '.btn', function(e) {
+        const $btn = $(this);
+        const ripple = $('<span class="ripple"></span>');
+        
+        const offset = $btn.offset();
+        const x = e.pageX - offset.left;
+        const y = e.pageY - offset.top;
+        const diameter = Math.max($btn.outerWidth(), $btn.outerHeight());
+        const radius = diameter / 2;
+
+        ripple.css({
+            width: diameter,
+            height: diameter,
+            left: x - radius,
+            top: y - radius
+        });
+
+        $btn.append(ripple);
+        
+        ripple.on('animationend webkitAnimationEnd', function() {
+            ripple.remove();
+        });
+    });
 });
 </script>

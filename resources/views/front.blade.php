@@ -48,7 +48,7 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-dog-raw.jpeg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -86,7 +86,7 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-dog-raw.jpeg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <img src="{{ asset('images/iagd-container-bird-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -105,7 +105,7 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-dog-raw.jpeg') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <img src="{{ asset('images/iagd-container-rabbit-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -124,7 +124,7 @@
             <div class="row mt-1 g-3">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="card card-hoverable h-100">
-                        <img src="{{ asset('images/iagd-container-dog-raw.jpeg') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="max-height: 256px;">
+                        <img src="{{ asset('images/iagd-container-animal_facility-raw.jpeg') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="max-height: 256px;">
                         <div class="card-body">
                             <b class="card-title">Animal Facilities</b>
                             <p class="card-text">534&nbsp;registered</p>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="card card-hoverable h-100">
-                        <img src="{{ asset('') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
+                        <img src="{{ asset('images/iagd-container-other_animal-raw.png') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
                         <div class="card-body">
                             <b class="card-title">Other Animals</b>
                             <p class="card-text">534&nbsp;registered</p>
