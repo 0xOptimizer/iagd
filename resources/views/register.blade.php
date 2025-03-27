@@ -361,11 +361,11 @@ $(document).ready(function() {
 	    if (input.files && input.files[0]) {
 	        let reader = new FileReader();
 	        reader.onload = function(e) {
-	            let img = $("<img>").attr("src", e.target.result).css({
-	                "max-width": "100%",
-	                "max-height": "100%",
-	                "object-fit": "contain"
-	            });
+                let img = $("<img>").attr("src", e.target.result).addClass("drop-zone-img").css({
+                    "max-width": "100%",
+                    "max-height": "100%",
+                    "object-fit": "contain"
+                });
 
 	            // Store the base64 image in localStorage
 	            // localStorage.setItem(input.name, e.target.result);

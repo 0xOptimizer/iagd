@@ -109,11 +109,35 @@ p {
 	padding: 12px;
 }
 
+.btn-primary {
+    background-color: rgb(114 0 189 / 75%);
+    border: 2px solid transparent;
+    border-top: 1px solid rgb(135 135 135 / 25%);
+}
+
+.btn-primary:hover {
+    background-color: rgba(92, 11, 147, 0.75);
+    border: 2px solid transparent;
+    border-top: 1px solid rgb(135 135 135 / 25%);
+}
+
+.btn-secondary {
+    background-color: rgba(49, 44, 87, 0.5);
+    border: 2px solid transparent;
+    border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(49, 44, 87, 0.75);
+    border: 2px solid transparent;
+    border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
 span.ripple {
 	position: absolute;
 	border-radius: 50%;
 	transform: scale(0);
-	animation: ripple 800ms linear;
+	animation: ripple 300ms linear;
 	background-color: rgba(255, 255, 255, 0.7);
 }
 
@@ -257,3 +281,21 @@ span.ripple {
  #drop-zone img {
       padding-right: 25px;
  }
+
+.drop-zone-img {
+	--s: 50px; /* the size on the corner */
+	--t: 5px;  /* the thickness of the border */
+	--g: 20px; /* the gap between the border and image */
+	
+	padding: calc(var(--g) + var(--t));
+	outline: var(--t) solid rgb(114 0 189 / 75%); /* the color here */
+	outline-offset: calc(-1*var(--t));
+	mask:
+	conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
+	0 0/calc(100% - var(--s)) calc(100% - var(--s)),
+	conic-gradient(#000 0 0) content-box;
+	transition: .4s;
+}
+.drop-zone-img:hover {
+	outline-offset: calc(-1*var(--g));
+}
