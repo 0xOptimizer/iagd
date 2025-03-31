@@ -58,18 +58,18 @@ p {
 .form-control {
      background-color: rgba(0, 0, 0, 0.16);
      color: white;
-     border-color: transparent;
+     border-color: #662497;
  }
  
  .form-control:active, .form-control:focus {
      outline: none;
      box-shadow: none;
-     border-color: inherit;
-     background-color: inherit;
+	 background-color: transparent;
+	 color: white;
  }
  
  .form-floating label {
-     color: white !important;
+     color: #ffc500 !important;
  }
  
  .form-floating label::after {
@@ -260,10 +260,12 @@ span.ripple {
      align-items: center;
      justify-content: center;
      overflow: hidden;
-     border: 2px dashed var(--color-muted);
+     border: 1px dashed #662497;
      border-radius: 5px;
      background: rgba(0, 0, 0, 0.16);
      padding: 20px;
+	 margin: 0 auto;
+	 width: 95%;
      height: 300px;
      text-align: center;
      cursor: pointer;
@@ -298,4 +300,8 @@ span.ripple {
 }
 .drop-zone-img:hover {
 	outline-offset: calc(-1*var(--g));
+}
+.drop-message i {
+	font-size: 36px;
+	color: #ffc500;
 }

@@ -11,21 +11,43 @@
 <body>
     <div class="phone-container">
         <div class="group-container" data-group="schedule">
-            <div class="mb-5">
-                <h4 class="text-center">Set an Appointment</h4>
-                <h6 class="text-center">₱1,000 per 30 minutes</h6>
+            <div class="d-flex align-items-center justify-content-center mb-4">
+                <img src="{{ asset('images/iagd_logo.png') }}" width="125" height="125" class="me-3">
+                <div>
+                    <h4 class="mt-2">Free IAGD Registration</h4>
+                    <p>For paid premium benefits, click here.</p>
+                </div>
             </div>
             <form id="registrationForm" autocomplete="off">
                 <div class="row">
                     <input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;">
                     <div class="drop-zone create-drop-zone">
                         <div class="drop-message">
-                            <i class="bi bi-download text-primary" style="font-size: 20px;"></i>
+                            <i class="bi bi-download"></i>
                             <br>
                             <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
                                 <br>
                             <span style="font-size: 14px;">or press to browse from your device</span>
                         </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-12">
+                        <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
+                        <label for="pet-name" style="margin-left: 12px;">Pet's Name</label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-4">
+                        <select class="form-control" id="pet-type" required>
+                            <option value="cat">Cat</option>
+                            <option value="dog">Dog</option>
+                        </select>
+                        <label for="pet-type" style="margin-left: 12px;">Species</label>
+                    </div>
+                    <div class="form-floating col-sm-8">
+                        <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
+                        <label for="pet-breed" style="margin-left: 12px;">Breed</label>
                     </div>
                 </div>
                 <!-- Submit Button -->
@@ -435,7 +457,7 @@ $(document).ready(function() {
 	        previewImage(input, dropZone);
 	    } else {
 	        dropZone.html(`<div class="drop-message">
-	            <i class="bi bi-download text-primary" style="font-size: 20px;"></i>
+	            <i class="bi bi-download"></i>
 	            <br>
 	            <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
 	            <br>
@@ -462,7 +484,7 @@ $(document).ready(function() {
 	            previewImage(this, dropZone);
 	        } else {
 	            dropZone.html(`<div class="drop-message">
-	                <i class="bi bi-download text-primary" style="font-size: 20px;"></i>
+	                <i class="bi bi-download"></i>
 	                <br>
 	                <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
 	                <br>
@@ -486,7 +508,7 @@ $(document).ready(function() {
 
 	        // Show the drop message
 	        dropZone.html(`<div class="drop-message">
-	            <i class="bi bi-download text-primary" style="font-size: 20px;"></i>
+	            <i class="bi bi-download"></i>
 	            <br>
 	            <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
 	            <br>
