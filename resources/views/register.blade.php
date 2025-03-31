@@ -10,11 +10,33 @@
 </style>
 <body>
     <div class="phone-container">
-        <div class="group-container" data-group="schedule">
+        <nav class="navbar navbar-dark header sticky-top">
+            <div class="container-fluid">
+                <!-- Left Group - Logo -->
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('images/IAGD_Logo_Silver.png') }}" alt="Logo" style="transform: scale(2.25);">
+                </a>
+
+                <div class="d-flex">
+                    IAGD
+                </div>
+
+                <!-- Middle Group - Search Bar -->
+                <div class="flex-grow-1 mx-3">
+                    &nbsp;
+                </div>
+
+                <!-- Right Group - Buttons -->
+                <div class="d-flex gap-2">
+                    <img class="rounded-circle" src="{{ asset('images/default.png') }}" width="50" height="50" class="me-3">
+                </div>
+            </div>
+        </nav>
+        <div class="group-container" data-group="page_1">
             <div class="d-flex align-items-center justify-content-center mb-4">
                 <img src="{{ asset('images/iagd_logo.png') }}" width="125" height="125" class="me-3">
                 <div>
-                    <h4 class="mt-2">Free IAGD Registration</h4>
+                    <h4 class="text-gradient-primary mt-2">Free IAGD Registration</h4>
                     <p>For paid premium benefits, click here.</p>
                 </div>
             </div>
@@ -39,11 +61,15 @@
                 </div>
                 <div class="row mt-2">
                     <div class="form-floating col-sm-4">
-                        <select class="form-control" id="pet-type" required>
+                        <select class="form-control" id="pet-species" required>
+                            <option value="default" hidden>Select</option>
+                            <option value="bird">Bird</option>
                             <option value="cat">Cat</option>
                             <option value="dog">Dog</option>
+                            <option value="rabbit">Rabbit</option>
+                            <option value="others">Others</option>
                         </select>
-                        <label for="pet-type" style="margin-left: 12px;">Species</label>
+                        <label for="pet-species" style="margin-left: 12px;">Species</label>
                     </div>
                     <div class="form-floating col-sm-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
@@ -57,46 +83,141 @@
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
                         </div>
                         <div class="form-floating col-sm-9 mb-3">
-                            <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="iagd" style="height: 100%; width: 100%;">Continue</button>
+                            <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="group-container" data-group="iagd" style="display: none;">
-            <div class="mb-5">
-                <h4 class="text-center">Your Appointment</h4>
-                <h6 class="text-center">₱1,000 per 30 minutes</h6>
-                <h6 class="text-center">March 20th, 2025</h6>
-                <h6 class="text-center">12:30 PM to 1:00 PM</h6>
+        <div class="group-container" data-group="page_2" style="display: none;">
+            <div class="d-flex align-items-center justify-content-start mb-4">
+                <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+                <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+                <div style="margin-left: 25px;">
+                    <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
+                    <h6 class="pet-preview-pet_breed">...</h6>
+                </div>
             </div>
             <form id="registrationForm" autocomplete="off">
-                <!-- Pet Name -->
-                <div class="row mb-3">
-                    <div class="banner-info p-3 text-center">
-                        <i class="bi bi-info-circle"></i> Let us help you find your pet's details online.
+                <div class="row">
+                    <div class="form-floating col-sm-4">
+                        <input type="date" class="form-control" id="pet-birth_date" placeholder="Date of Birth">
+                        <label for="pet-birth_date" style="margin-left: 12px;">Date of Birth</label>
+                    </div>
+                    <div class="form-floating col-sm-8">
+                        <input type="text" class="form-control" id="pet-age" placeholder="Age" readonly>
+                        <label for="pet-age" style="margin-left: 12px;">Age</label>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
-                        <input type="text" class="form-control" id="pet-name" placeholder="Is your pet an IAGD member?" value="IAGD-" required>
-                        <label for="pet-name" style="margin-left: 12px;">Is your pet an IAGD member?</label>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-4">
+                        <select class="form-control" id="pet-gender" required>
+                            <option value="default" hidden>Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <label for="pet-gender" style="margin-left: 12px;">Gender</label>
                     </div>
-                    <!-- <div class="col-sm-12 mt-2">
-                        <a href="" target="_blank" style="font-size: 14px;">What is IAGD?</a>
-                    </div> -->
+                    <div class="form-floating col-sm-4">
+                        <input type="text" class="form-control" id="pet-weight" placeholder="Weight">
+                        <label for="pet-weight" style="margin-left: 12px;">Weight</label>
+                    </div>
+                    <div class="form-floating col-sm-4">
+                        <input type="text" class="form-control" id="pet-height" placeholder="Height">
+                        <label for="pet-height" style="margin-left: 12px;">Height</label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-12">
+                        <input type="text" class="form-control" id="pet-color_eye" placeholder="Eye Color">
+                        <label for="pet-color_eye" style="margin-left: 12px;">Eye Color</label>
+                    </div>
+                    <div class="form-floating col-sm-12 mt-2">
+                        <input type="text" class="form-control" id="pet-color_body" placeholder="Body Color">
+                        <label for="pet-color_body" style="margin-left: 12px;">Body Color</label>
+                    </div>
+                    <div class="form-floating col-sm-12 mt-2">
+                        <input type="text" class="form-control" id="pet-markings" placeholder="Markings">
+                        <label for="pet-markings" style="margin-left: 12px;">Markings</label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-10">
+                        <input type="text" class="form-control" id="pet-address" placeholder="Pet Address">
+                        <label for="pet-address" style="margin-left: 12px;">Pet Address</label>
+                    </div>
+                    <div class="form-floating col-sm-2">
+                        <button type="button" class="pet-address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="banner-info p-3 text-center">
+                        <i class="bi bi-info-circle"></i> Your pet's address can be vague, as it will be publicly displayed.
+                    </div>
                 </div>
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
                         <div class="form-floating col-sm-3 mb-3">
-                            <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="schedule" style="height: 100%; width: 100%;">Back</button>
+                            <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_1" style="height: 100%; width: 100%;">Back</button>
                         </div>
-                        <div class="form-floating col-sm-4 mb-3">
-                            <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="fill_up_pet" style="height: 100%; width: 100%;">Not a Member</button>
+                        <div class="form-floating col-sm-9 mb-3">
+                            <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_3" style="height: 100%; width: 100%;">Continue</button>
                         </div>
-                        <div class="form-floating col-sm-5 mb-3">
-                            <button type="button" class="btn btn-primary btn-lg" style="height: 100%; width: 100%;">Find Details</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="group-container" data-group="page_3" style="display: none;">
+            <div class="d-flex align-items-center justify-content-start mb-4">
+                <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+                <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+                <div style="margin-left: 25px;">
+                    <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
+                    <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+                </div>
+            </div>
+            <form id="registrationForm" autocomplete="off">
+                <div class="row">
+                    <div class="form-floating col-sm-12">
+                        <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
+                        <label for="pet-owner" style="margin-left: 12px;">Main Owner Name</label>
+                    </div>
+                    <div class="form-floating col-sm-12 mt-2">
+                        <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
+                        <label for="pet-co_owners" style="margin-left: 12px;">Co-Owner(s)</label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-floating col-sm-10">
+                        <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner Location">
+                        <label for="pet-owner_location" style="margin-left: 12px;">Owner Location</label>
+                    </div>
+                    <div class="form-floating col-sm-2">
+                        <button type="button" class="pet-owner_address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
+                    </div>
+                    <div class="form-floating col-sm-12 mt-2">
+                        <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner Contact Number">
+                        <label for="pet-owner_contact" style="margin-left: 12px;">Owner Contact Number</label>
+                    </div>
+                    <div class="form-floating col-sm-12 mt-2">
+                        <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner Email">
+                        <label for="pet-owner_email" style="margin-left: 12px;">Owner Email</label>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="banner-info p-3 text-center">
+                        <i class="bi bi-info-circle"></i> The owner's location will be privately stored in the system.
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4 mb-3">
+                    <div class="row">
+                        <div class="form-floating col-sm-3 mb-3">
+                            <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Back</button>
+                        </div>
+                        <div class="form-floating col-sm-9 mb-3">
+                            <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
                 </div>
@@ -123,11 +244,11 @@
                 </div>
                 <div class="row mb-3">
                     <div class="form-floating col-sm-4">
-                        <select class="form-control" id="pet-type" required>
+                        <select class="form-control" id="pet-species" required>
                             <option value="cat">Cat</option>
                             <option value="dog">Dog</option>
                         </select>
-                        <label for="pet-type" style="margin-left: 12px;">Pet Type</label>
+                        <label for="pet-species" style="margin-left: 12px;">Pet Type</label>
                     </div>
                     <div class="form-floating col-sm-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
@@ -389,6 +510,9 @@ $(document).ready(function() {
                     "object-fit": "contain"
                 });
 
+                $('.pet-preview-image').attr("src", e.target.result);
+                $('.pet-preview-image-backdrop').attr("src", e.target.result);
+
 	            // Store the base64 image in localStorage
 	            // localStorage.setItem(input.name, e.target.result);
 
@@ -410,7 +534,7 @@ $(document).ready(function() {
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        console.log("Detected species:", response.species);
+                        $('#pet-species').val(response.species);
                     },
                     error: function (xhr, status, error) {
                         console.error("Error:", error);
@@ -519,6 +643,108 @@ $(document).ready(function() {
 	    // Clear input files
 	    $("input[type='file']").val('');
 	}
+
+    $('#pet-name').on('input', function() {
+        let petName = $(this).val();
+        $('.pet-preview-pet_name').text(petName);
+    });
+    $('#pet-breed').on('input', function() {
+        let petBreed = $(this).val();
+        $('.pet-preview-pet_breed').text(petBreed);
+    });
+
+    $(".pet-address-autofill").click(function() {
+        var $button = $(this);
+        var $input = $("#pet-address");
+
+        if ($input.val().trim() !== "" && !confirm("This will remove the currently entered address. Do you want to continue?")) {
+            return;
+        }
+
+        $button.prop("disabled", true).html('<span class="spinner-border spinner-border-sm"></span>');
+        $input.prop("disabled", true);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+
+                $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
+                    var city = data.address.city || data.address.town || data.address.village || "Unknown City";
+                    var region = data.address.state || "Unknown Region";
+                    var country = data.address.country || "Unknown Country";
+                    
+                    $input.val(`${city}, ${region}, ${country}`);
+                }).always(function() {
+                    resetPetLocationAutofill($button, $input);
+                });
+            }, function() {
+                resetPetLocationAutofill($button, $input);
+            });
+        } else {
+            resetPetLocationAutofill($button, $input);
+        }
+    });
+
+    function resetPetLocationAutofill($button, $input) {
+        $button.prop("disabled", false).html('<i class="bi bi-geo-alt-fill"></i>');
+        $input.prop("disabled", false);
+    }
+
+    $(".pet-owner_address-autofill").click(function() {
+        var $button = $(this);
+        var $input = $("#pet-owner_location");
+
+        if ($input.val().trim() !== "" && !confirm("This will remove the currently entered address. Do you want to continue?")) {
+            return;
+        }
+
+        $button.prop("disabled", true).html('<span class="spinner-border spinner-border-sm"></span>');
+        $input.prop("disabled", true);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+
+                $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
+                    var city = data.address.city || data.address.town || data.address.village || "Unknown City";
+                    var region = data.address.state || "Unknown Region";
+                    var country = data.address.country || "Unknown Country";
+                    
+                    $input.val(`${city}, ${region}, ${country}`);
+                }).always(function() {
+                    resetPetOwnerLocationAutofill($button, $input);
+                });
+            }, function() {
+                resetPetOwnerLocationAutofill($button, $input);
+            });
+        } else {
+            resetPetOwnerLocationAutofill($button, $input);
+        }
+    });
+
+    function resetPetOwnerLocationAutofill($button, $input) {
+        $button.prop("disabled", false).html('<i class="bi bi-geo-alt-fill"></i>');
+        $input.prop("disabled", false);
+    }
+
+    $('#pet-birth_date').on('change', function () {
+        let birthDate = $(this).val();
+        if (!birthDate) return;
+
+        let dt = luxon.DateTime.fromISO(birthDate);
+        let now = luxon.DateTime.now();
+        let diff = now.diff(dt, ['years', 'months']).toObject();
+
+        let years = Math.floor(diff.years);
+        let months = Math.floor(diff.months);
+
+        let ageText = years > 0 ? `${years} years, ${months} months` : `${months} months`;
+        
+        $('#pet-age').val(ageText);
+        $('.pet-preview-pet_age').text(ageText);
+    });
 });
 </script>
 </html>
