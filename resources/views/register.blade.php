@@ -54,13 +54,13 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
                         <label for="pet-name" style="margin-left: 12px;">Pet's Name</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <select class="form-control" id="pet-species" required>
                             <option value="default" hidden>Select</option>
                             <option value="bird">Bird</option>
@@ -71,7 +71,7 @@
                         </select>
                         <label for="pet-species" style="margin-left: 12px;">Species</label>
                     </div>
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                         <label for="pet-breed" style="margin-left: 12px;">Breed</label>
                     </div>
@@ -79,10 +79,10 @@
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
-                        <div class="form-floating col-sm-3 mb-3">
+                        <div class="form-floating col-3 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
                         </div>
-                        <div class="form-floating col-sm-9 mb-3">
+                        <div class="form-floating col-9 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
@@ -100,17 +100,17 @@
             </div>
             <form id="registrationForm" autocomplete="off">
                 <div class="row">
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="date" class="form-control" id="pet-birth_date" placeholder="Date of Birth">
                         <label for="pet-birth_date" style="margin-left: 12px;">Date of Birth</label>
                     </div>
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-age" placeholder="Age" readonly>
                         <label for="pet-age" style="margin-left: 12px;">Age</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <select class="form-control" id="pet-gender" required>
                             <option value="default" hidden>Select</option>
                             <option value="male">Male</option>
@@ -118,35 +118,35 @@
                         </select>
                         <label for="pet-gender" style="margin-left: 12px;">Gender</label>
                     </div>
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="text" class="form-control" id="pet-weight" placeholder="Weight">
                         <label for="pet-weight" style="margin-left: 12px;">Weight</label>
                     </div>
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="text" class="form-control" id="pet-height" placeholder="Height">
                         <label for="pet-height" style="margin-left: 12px;">Height</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <input type="text" class="form-control" id="pet-color_eye" placeholder="Eye Color">
                         <label for="pet-color_eye" style="margin-left: 12px;">Eye Color</label>
                     </div>
-                    <div class="form-floating col-sm-12 mt-2">
+                    <div class="form-floating col-12 mt-2">
                         <input type="text" class="form-control" id="pet-color_body" placeholder="Body Color">
                         <label for="pet-color_body" style="margin-left: 12px;">Body Color</label>
                     </div>
-                    <div class="form-floating col-sm-12 mt-2">
+                    <div class="form-floating col-12 mt-2">
                         <input type="text" class="form-control" id="pet-markings" placeholder="Markings">
                         <label for="pet-markings" style="margin-left: 12px;">Markings</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-10">
+                    <div class="form-floating col-10">
                         <input type="text" class="form-control" id="pet-address" placeholder="Pet Address">
                         <label for="pet-address" style="margin-left: 12px;">Pet Address</label>
                     </div>
-                    <div class="form-floating col-sm-2">
+                    <div class="form-floating col-2">
                         <button type="button" class="pet-address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
                     </div>
                 </div>
@@ -158,10 +158,10 @@
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
-                        <div class="form-floating col-sm-3 mb-3">
+                        <div class="form-floating col-3 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_1" style="height: 100%; width: 100%;">Back</button>
                         </div>
-                        <div class="form-floating col-sm-9 mb-3">
+                        <div class="form-floating col-9 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_3" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
@@ -179,28 +179,28 @@
             </div>
             <form id="registrationForm" autocomplete="off">
                 <div class="row">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
                         <label for="pet-owner" style="margin-left: 12px;">Main Owner Name</label>
                     </div>
-                    <div class="form-floating col-sm-12 mt-2">
+                    <div class="form-floating col-12 mt-2">
                         <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
                         <label for="pet-co_owners" style="margin-left: 12px;">Co-Owner(s)</label>
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-floating col-sm-10">
+                    <div class="form-floating col-10">
                         <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner Location">
                         <label for="pet-owner_location" style="margin-left: 12px;">Owner Location</label>
                     </div>
-                    <div class="form-floating col-sm-2">
+                    <div class="form-floating col-2">
                         <button type="button" class="pet-owner_address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
                     </div>
-                    <div class="form-floating col-sm-12 mt-2">
+                    <div class="form-floating col-12 mt-2">
                         <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner Contact Number">
                         <label for="pet-owner_contact" style="margin-left: 12px;">Owner Contact Number</label>
                     </div>
-                    <div class="form-floating col-sm-12 mt-2">
+                    <div class="form-floating col-12 mt-2">
                         <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner Email">
                         <label for="pet-owner_email" style="margin-left: 12px;">Owner Email</label>
                     </div>
@@ -213,10 +213,10 @@
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
-                        <div class="form-floating col-sm-3 mb-3">
+                        <div class="form-floating col-3 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Back</button>
                         </div>
-                        <div class="form-floating col-sm-9 mb-3">
+                        <div class="form-floating col-9 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
@@ -233,60 +233,60 @@
             <form id="registrationForm" autocomplete="off">
                 <!-- Pet Name -->
                 <div class="row mb-4">
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
                         <label for="pet-name" style="margin-left: 12px;">Pet Name</label>
                     </div>
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="text" class="form-control" id="pet-iagd" placeholder="IAGD Number">
                         <label for="pet-iagd" style="margin-left: 12px;">IAGD Number</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <select class="form-control" id="pet-species" required>
                             <option value="cat">Cat</option>
                             <option value="dog">Dog</option>
                         </select>
                         <label for="pet-species" style="margin-left: 12px;">Pet Type</label>
                     </div>
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                         <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <select class="form-control" id="pet-gender" required>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                         <label for="pet-gender" style="margin-left: 12px;">Gender</label>
                     </div>
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="text" class="form-control" id="pet-age" placeholder="Age">
                         <label for="pet-age" style="margin-left: 12px;">Age</label>
                     </div>
-                    <div class="form-floating col-sm-4">
+                    <div class="form-floating col-4">
                         <input type="text" class="form-control" id="pet-weight" placeholder="Weight">
                         <label for="pet-weight" style="margin-left: 12px;">Current Weight</label>
                     </div>
                 </div>
                 <!-- Reason -->
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-reason" placeholder="Briefly describe the reason for your consultation" rows="3" required></textarea>
                         <label for="consultation-reason" style="margin-left: 12px;">Please briefly describe the reason for consultation</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-food" placeholder="What are you feeding your pet?" rows="3"></textarea>
                         <label for="consultation-food" style="margin-left: 12px;">What are you feeding your pet?</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-medications" placeholder="Is your pet currently under any medications or vitamins?" rows="3"></textarea>
                         <label for="consultation-medications" style="margin-left: 12px;">Is your pet currently under any medications or vitamins?</label>
                     </div>
@@ -294,10 +294,10 @@
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
-                        <div class="form-floating col-sm-3 mb-3">
+                        <div class="form-floating col-3 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="iagd" style="height: 100%; width: 100%;">Back</button>
                         </div>
-                        <div class="form-floating col-sm-9 mb-3">
+                        <div class="form-floating col-9 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="fill_up_owner" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
@@ -315,38 +315,38 @@
             <form id="registrationForm" autocomplete="off">
                 <!-- Pet Name -->
                 <div class="row mb-4">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
                         <label for="pet-name" style="margin-left: 12px;">Owner Name</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                         <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-8">
+                    <div class="form-floating col-8">
                         <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                         <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
                     </div>
                 </div>
                 <!-- Reason -->
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-reason" placeholder="Briefly describe the reason for your consultation" rows="3" required></textarea>
                         <label for="consultation-reason" style="margin-left: 12px;">Please briefly describe the reason for consultation</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-food" placeholder="What are you feeding your pet?" rows="3"></textarea>
                         <label for="consultation-food" style="margin-left: 12px;">What are you feeding your pet?</label>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="form-floating col-sm-12">
+                    <div class="form-floating col-12">
                         <textarea class="form-control" id="consultation-medications" placeholder="Is your pet currently under any medications or vitamins?" rows="3"></textarea>
                         <label for="consultation-medications" style="margin-left: 12px;">Is your pet currently under any medications or vitamins?</label>
                     </div>
@@ -354,10 +354,10 @@
                 <!-- Submit Button -->
                 <div class="d-grid gap-2 mt-4 mb-3">
                     <div class="row">
-                        <div class="form-floating col-sm-3 mb-3">
+                        <div class="form-floating col-3 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="iagd" style="height: 100%; width: 100%;">Back</button>
                         </div>
-                        <div class="form-floating col-sm-9 mb-3">
+                        <div class="form-floating col-9 mb-3">
                             <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="fill_up_owner" style="height: 100%; width: 100%;">Continue</button>
                         </div>
                     </div>
