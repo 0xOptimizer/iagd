@@ -18,6 +18,6 @@ class SignInController extends Controller
             'urlBase' => URL::to('/'),
             'assetUrl' => asset('/'),
         ]);
-        return view('admin.sigin', $data);
+        return view('admin.signin', $data);
     }
 }
