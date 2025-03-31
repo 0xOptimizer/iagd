@@ -12,7 +12,7 @@
 <body id="admin-page">
 
     <div class="wrapper">
-
+        @include('admin.sections.floating-sidebar')
     </div>
 
     @include('jsVars')
