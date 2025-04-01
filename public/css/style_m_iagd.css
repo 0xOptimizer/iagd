@@ -7,6 +7,13 @@
     font-family: vice-city;
     src: url(../fonts/GTVCS-Book.otf);
 }
+html, body {
+	overflow: -ms-autohiding-scrollbar; /* For Internet Explorer and Edge */
+	overflow: scrollbar; /* For other browsers */
+}
+::-webkit-scrollbar {
+	display: none;
+}
 html {
 	overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
@@ -125,9 +132,9 @@ p {
 }
 
 .btn-primary:active, .btn-primary:focus {
-    background-color: rgba(92, 11, 147, 0.75);
-    border: 2px solid transparent;
-    border-top: 1px solid rgb(135 135 135 / 25%);
+    background-color: rgba(92, 11, 147, 0.75) !important;
+    border: 2px solid transparent !important;
+    border-top: 1px solid rgb(135 135 135 / 25%) !important;
 }
 
 .btn-secondary {
@@ -356,6 +363,7 @@ select.form-control option {
 	position: absolute;
 	filter: blur(12px);
 	z-index: -5;
+	object-fit: contain;
 	pointer-events: none;
 }
 
@@ -382,6 +390,15 @@ select.form-control option {
 	transition: transform 0.16s ease-in-out; !important
 }
 
+.offcanvas-backdrop {
+	background-color: transparent;
+}
+
+.offcanvas-backdrop.show {
+	opacity: 1;
+	backdrop-filter: blur(16px);
+}
+
 .card {
 	border: 1px solid #312c57;
 	background-color: rgba(0, 0, 0, 0.16);
@@ -397,4 +414,18 @@ select.form-control option {
 	cursor: pointer;
 	border: 1px solid #67666f;
 	background-color: rgba(0, 0, 0, 0.33);
+}
+
+.rotating {
+    animation: rotate 48s linear infinite;
+	transform-origin: center;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

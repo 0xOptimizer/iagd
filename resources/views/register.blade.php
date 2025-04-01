@@ -34,10 +34,18 @@
     </nav>
     <div class="group-container" data-group="page_1">
         <div class="d-flex align-items-center justify-content-center mb-4">
+            <div class="rotating" style="position: absolute; top: 74px; left: 57px; font-size: 144px; color: #312c57; opacity: 0.33; z-index: -1; pointer-events: none;">
+                <i class="rotating bi bi-ubuntu"></i>
+            </div>
+            <!-- <img src="{{ asset('images/iagd_logo_mica.png') }}" width="150" height="150" style="position: absolute; top: 102px; left: 57px; opacity: 0.55;"> -->
             <img src="{{ asset('images/iagd_logo.png') }}" width="125" height="125" class="me-3">
             <div>
                 <h4 class="text-gradient-primary mt-2">Free IAGD Registration</h4>
-                <p>For paid premium benefits, click here.</p>
+                <p>
+                    <!-- <a href="" target="_blank" class="btn btn-outline-primary" style="font-size: 12px;">Check out our IAGD products <i class="bi bi-caret-right-fill" style="vertical-align: 0px;"></i></a> -->
+                    <a href="" target="_blank" class="btn btn-outline-primary" style="font-size: 12px;">What is IAGD?</a>
+                    <a href="https://redirect.manalok9.com/facebook/iagd" target="_blank" class="btn btn-outline-primary" style="font-size: 12px;"><i class="bi bi-facebook" style="vertical-align: 0px; margin-right: 5px;"></i> Message Us</a>
+                </p>
             </div>
         </div>
         <form id="registrationForm" autocomplete="off">
@@ -45,7 +53,7 @@
                 <input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;">
                 <div class="drop-zone create-drop-zone">
                     <div class="drop-message">
-                        <i class="bi bi-download"></i>
+                        <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
                         <br>
                         <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
                             <br>
@@ -55,13 +63,13 @@
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
-                    <label for="pet-name" style="margin-left: 12px;">Pet's Name</label>
+                    <input type="text" class="form-control" id="pet-name" placeholder="What is your pet's name?" required>
+                    <label for="pet-name" style="margin-left: 12px;">What is your pet's name?</label>
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" style="position: relative;">
                 <div class="form-floating col-4">
-                    <input type="text" class="pet-gender-input input-interactable input-interactable-readonly form-control" id="pet-species" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-select-species" placeholder="Species" readonly>
+                    <input type="text" class="pet-species-input input-interactable input-interactable-readonly form-control" id="pet-species" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-select-species" placeholder="Species" readonly>
                     <!-- <select class="form-control" id="pet-species" required>
                         <option value="default" hidden>Select</option>
                         <option value="bird">Bird</option>
@@ -76,6 +84,7 @@
                     <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                     <label for="pet-breed" style="margin-left: 12px;">Breed</label>
                 </div>
+                <i class="bi bi-caret-right-fill" style="position: absolute; top: 6px; left: 145px; font-size: 32px; color: #312c57;"></i>
             </div>
             <!-- Submit Button -->
             <div class="d-grid gap-2 mt-4 mb-3">
@@ -100,7 +109,13 @@
             </div>
         </div>
         <form id="registrationForm" autocomplete="off">
-            <div class="row">
+            <div class="pet-input-age-mimic-group row">
+                <div class="form-floating col-12">
+                    <input type="date" class="form-control" id="pet-birth_date-mimic" placeholder="Date of Birth">
+                    <label for="pet-birth_date-mimic" style="margin-left: 12px;">Date of Birth</label>
+                </div>
+            </div>
+            <div class="pet-input-age-actual-group preview-age row" style="position: relative; display: none;">
                 <div class="form-floating col-4">
                     <input type="date" class="form-control" id="pet-birth_date" placeholder="Date of Birth">
                     <label for="pet-birth_date" style="margin-left: 12px;">Date of Birth</label>
@@ -109,10 +124,11 @@
                     <input type="text" class="form-control" id="pet-age" placeholder="Age" readonly>
                     <label for="pet-age" style="margin-left: 12px;">Age</label>
                 </div>
+                <i class="bi bi-caret-right-fill" style="position: absolute; top: 6px; left: 145px; font-size: 32px; color: #312c57;"></i>
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-4">
-                    <input type="text" class="pet-gender-input input-interactable-readonly form-control" id="pet-gender" placeholder="Weight" readonly>
+                    <input type="text" class="pet-gender-input input-interactable-readonly form-control" id="pet-gender" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-select-gender" placeholder="Gender" readonly>
                     <!-- <select class="form-control" id="pet-gender" required>
                         <option value="default" hidden>Select</option>
                         <option value="male">Male</option>
@@ -154,7 +170,7 @@
             </div>
             <div class="row mt-2">
                 <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Your pet's address can be vague, as it will be publicly displayed.
+                    <i class="bi bi-info-circle"></i> Note: Your pet details will be publicly displayed.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -430,17 +446,18 @@
 </div>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-select-species">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Select Species</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h5 class="offcanvas-title text-gradient-primary text-center">What is your pet's species?</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
     </div>
     <div class="offcanvas-body">
+        <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
         <div class="card card-interactable">
             <div class="select-species-option card-body d-flex align-items-center" data-option="Dog">
                 <img src="{{ asset('images/mayor_icons_dog.png') }}" width="64" height="64" class="me-4">
                 <div>
                     <span style="font-size: 24px;">Dog</span>
                     <br>
-                    <span style="font-style: italic; opacity: 0.16;">Canis lupus familiaris</span>
+                    <span style="font-style: italic; opacity: 0.16;">Genus: Canis lupus familiaris</span>
                 </div>
             </div>
         </div>
@@ -450,7 +467,7 @@
                 <div>
                     <span style="font-size: 24px;">Cat</span>
                     <br>
-                    <span style="font-style: italic; opacity: 0.16;">Felis catus</span>
+                    <span style="font-style: italic; opacity: 0.16;">Genus: Felis catus</span>
                 </div>
             </div>
         </div>
@@ -460,7 +477,7 @@
                 <div>
                     <span style="font-size: 24px;">Rabbit</span>
                     <br>
-                    <span style="font-style: italic; opacity: 0.16;">Oryctolagus cuniculus</span>
+                    <span style="font-style: italic; opacity: 0.16;">Genus: Oryctolagus cuniculus</span>
                 </div>
             </div>
         </div>
@@ -470,8 +487,13 @@
                 <div>
                     <span style="font-size: 24px;">Bird</span>
                     <br>
-                    <span style="font-style: italic; opacity: 0.16;">Aves</span>
+                    <span style="font-style: italic; opacity: 0.16;">Genus: Aves</span>
                 </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="banner-info p-3 text-center">
+                <i class="bi bi-info-circle"></i> Can't find your pet species?<br>Contact us and let us help you!
             </div>
         </div>
         <!-- <div class="card mt-2">
@@ -482,6 +504,30 @@
                 </div>
             </div>
         </div> -->
+    </div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-select-gender">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-gradient-primary text-center">What is your pet's gender?</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card card-interactable">
+            <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
+                <img src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Male</span>
+                </div>
+            </div>
+        </div>
+        <div class="card card-interactable">
+            <div class="select-gender-option card-body d-flex align-items-center" data-option="Female">
+                <img src="{{ asset('images/freepik_female.png') }}" width="48" height="48" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Female</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -593,8 +639,10 @@ $(document).ready(function() {
                     processData: false,
                     success: function (response) {
                         if (response && response.species) {
-                            $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
-                            animateShine($('#pet-species').parent('.form-floating'));
+                            if (response.species_confidence > 0.8) {
+                                $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
+                                animateShine($('#pet-species').parent('.form-floating'));
+                            }
                         } else {
                             console.warn("Unexpected response format:", response);
                         }
@@ -794,7 +842,7 @@ $(document).ready(function() {
         $input.prop("disabled", false);
     }
 
-    $('#pet-birth_date').on('change', function () {
+    $('#pet-birth_date-mimic, #pet-birth_date').on('change', function () {
         let birthDate = $(this).val();
         if (!birthDate) return;
 
@@ -807,8 +855,25 @@ $(document).ready(function() {
 
         let ageText = years > 0 ? `${years} years, ${months} months` : `${months} months`;
         
+        $('#pet-birth_date').val(birthDate);
         $('#pet-age').val(ageText);
         $('.pet-preview-pet_age').text(ageText);
+
+        $('.pet-input-age-mimic-group').hide();
+        $('.pet-input-age-actual-group').show();
+        animateShine($('#pet-age').parent('.form-floating'));
+    });
+
+    $('.select-species-option').on('click', function() {
+        const option = $(this).data('option');
+        $('#pet-species').val(option);
+        $('#offcanvas-select-species').offcanvas('hide');
+    });
+
+    $('.select-gender-option').on('click', function() {
+        const option = $(this).data('option');
+        $('#pet-gender').val(option);
+        $('#offcanvas-select-gender').offcanvas('hide');
     });
 });
 </script>

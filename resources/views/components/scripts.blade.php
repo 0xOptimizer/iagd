@@ -171,12 +171,13 @@ $(document).ready(function() {
         const group = $(this).data('group');
         const $current = $('.group-container:visible');
         const $next = $(`.group-container[data-group="${group}"]`);
-        
+
         if (group == 'main') {
             $current.addClass('animate__animated animate__fadeOutRight');
 
             $current.one('animationend', function() {
                 $current.hide().removeClass('animate__animated animate__fadeOutRight');
+                $(window).scrollTop(0);
                 $next.show().addClass('animate__animated animate__fadeInLeft');
                 $next.one('animationend', function() {
                     $next.removeClass('animate__animated animate__fadeInLeft');
@@ -187,6 +188,7 @@ $(document).ready(function() {
 
             $current.one('animationend', function() {
                 $current.hide().removeClass('animate__animated animate__fadeOutLeft');
+                $(window).scrollTop(0);
                 $next.show().addClass('animate__animated animate__fadeInRight');
                 $next.one('animationend', function() {
                     $next.removeClass('animate__animated animate__fadeInRight');
