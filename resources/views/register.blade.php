@@ -598,7 +598,7 @@ $(document).ready(function() {
                         } else {
                             console.warn("Unexpected response format:", response);
                         }
-                    }
+                    },
                     error: function (xhr, status, error) {
                         console.error("Error:", error);
                     }

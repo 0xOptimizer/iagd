@@ -124,6 +124,12 @@ p {
     border-top: 1px solid rgb(135 135 135 / 25%);
 }
 
+.btn-primary:active, .btn-primary:focus {
+    background-color: rgba(92, 11, 147, 0.75);
+    border: 2px solid transparent;
+    border-top: 1px solid rgb(135 135 135 / 25%);
+}
+
 .btn-secondary {
     background-color: rgba(49, 44, 87, 0.5);
     border: 2px solid transparent;
@@ -143,6 +149,12 @@ p {
 }
 
 .btn-outline-primary:hover {
+	background-color: #312c57 !important;
+	border: 1px solid #312c57 !important;
+	color: #fff !important;
+}
+
+.btn-outline-primary:active, .btn-outline-primary:focus {
 	background-color: #312c57 !important;
 	border: 1px solid #312c57 !important;
 	color: #fff !important;
