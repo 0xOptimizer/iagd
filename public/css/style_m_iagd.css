@@ -17,12 +17,12 @@ html::-webkit-scrollbar {
     height: 0;
 }
 body {
-     background-color: #11082b;
-     background-position: center;
-     background-size: cover;
-     background-repeat: no-repeat;
-     background-attachment: fixed;
-     background-image: url(../images/blurry-gradient-haikei.png);
+	background-color: #11082b;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: url(../images/blurry-gradient-haikei.png);
 	font-family: 'Roboto';
 }
 p {
@@ -353,4 +353,36 @@ select.form-control option {
 	width: 95%;
 	margin: 0 auto;
 	font-size: 14px;
+}
+
+.input-interactable-readonly {
+	transition: background-color 0.3s ease;
+}
+
+.input-interactable-readonly:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.16) !important;
+}
+
+.offcanvas {
+	background-color: rgba(214, 167, 255, 0.05);
+	color: rgba(231, 231, 231, 1);
+	transition: transform 0.16s ease-in-out; !important
+}
+
+.card {
+	border: 1px solid #312c57;
+	background-color: rgba(0, 0, 0, 0.16);
+	color: rgba(231, 231, 231, 1);
+	margin-bottom: 0.5rem;
+}
+
+.card-interactable {
+	transition: 0.08s;
+}
+
+.card-interactable:hover {
+	cursor: pointer;
+	border: 1px solid #67666f;
+	background-color: rgba(0, 0, 0, 0.33);
 }
