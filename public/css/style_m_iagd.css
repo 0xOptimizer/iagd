@@ -78,6 +78,11 @@ p {
 	 color: white;
  }
  
+ .form-control:disabled, .form-control.disabled {
+	background-color: #170e2d;
+	color: #312c57;
+ }
+ 
  .form-floating label {
      color: #ffc500 !important;
  }
@@ -322,18 +327,33 @@ span.ripple {
 	--s: 50px; /* the size on the corner */
 	--t: 5px;  /* the thickness of the border */
 	--g: 20px; /* the gap between the border and image */
-	
+
 	padding: calc(var(--g) + var(--t));
+	filter: drop-shadow(5px 5px 10px #000000);
+	transition: .4s;
+}
+.drop-zone-img:hover {
+	outline-offset: calc(-1*var(--g));
+}
+.drop-zone-single-primary-img {
+	--s: 50px; /* the size on the corner */
+	--t: 5px;  /* the thickness of the border */
+	--g: 20px; /* the gap between the border and image */
+
 	outline: var(--t) solid rgb(114 0 189 / 75%); /* the color here */
 	outline-offset: calc(-1*var(--t));
 	mask:
 	conic-gradient(at var(--s) var(--s),#0000 75%,#000 0)
 	0 0/calc(100% - var(--s)) calc(100% - var(--s)),
 	conic-gradient(#000 0 0) content-box;
-	transition: .4s;
+
+	filter: drop-shadow(0px 0px 0px transparent);
 }
-.drop-zone-img:hover {
-	outline-offset: calc(-1*var(--g));
+.drop-zone-multiple-primary-img {
+	border: 2px solid #ffc500;
+	border-radius: 5px;
+
+	filter: drop-shadow(0px 0px 0px transparent);
 }
 .drop-message i {
 	font-size: 36px;

@@ -50,50 +50,52 @@
         </div>
         <form id="registrationForm" autocomplete="off">
             <div class="row">
-                <input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;">
+                <input class="form-control self-input-new-fields-fields" type="file" id="self-input-photo" name="file" accept="image/*" required="" style="display:none;" multiple>
                 <div class="drop-zone create-drop-zone">
                     <div class="drop-message">
                         <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
                         <br>
                         <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
-                            <br>
-                        <span style="font-size: 14px;">or press to browse from your device</span>
+                        <br>
+                        <span style="font-size: 14px;">or press to browse from your device.</span>
                     </div>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-12">
                     <input type="text" class="form-control" id="pet-name" placeholder="What is your pet's name?" required>
-                    <label for="pet-name" style="margin-left: 12px;">What is your pet's name?</label>
+                    <label for="pet-name" style="margin-left: 12px;">What is your pet's name? <span class="text-danger">*</span></label>
                 </div>
             </div>
             <div class="row mt-2" style="position: relative;">
-                <div class="form-floating col-4">
+                <div class="form-floating col-4" style="position: relative;">
                     <input type="text" class="pet-species-input input-interactable input-interactable-readonly form-control" id="pet-species" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-select-species" placeholder="Species" readonly>
-                    <!-- <select class="form-control" id="pet-species" required>
-                        <option value="default" hidden>Select</option>
-                        <option value="bird">Bird</option>
-                        <option value="cat">Cat</option>
-                        <option value="dog">Dog</option>
-                        <option value="rabbit">Rabbit</option>
-                        <option value="others">Others</option>
-                    </select> -->
-                    <label for="pet-species" style="margin-left: 12px;">Species</label>
+                    <label for="pet-species" style="margin-left: 12px;">Species <span class="text-danger">*</span></label>
+                    <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                 </div>
                 <div class="form-floating col-8">
                     <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
                     <label for="pet-breed" style="margin-left: 12px;">Breed</label>
                 </div>
-                <i class="bi bi-caret-right-fill" style="position: absolute; top: 6px; left: 145px; font-size: 32px; color: #312c57;"></i>
             </div>
             <!-- Submit Button -->
             <div class="d-grid gap-2 mt-4 mb-3">
                 <div class="row">
-                    <div class="form-floating col-3 mb-3">
+                    <div class="form-floating col-3">
                         <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
                     </div>
-                    <div class="form-floating col-9 mb-3">
+                    <div class="page_1-incomplete-continue-btn-group form-floating col-9">
+                        <button type="button" class="page_1-incomplete-continue-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">Continue</button>
+                    </div>
+                    <div class="page_1-complete-continue-btn-group form-floating col-9" style="display: none;">
                         <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Continue</button>
+                    </div>
+                </div>
+                <div class="page_1-error-banner row" style="display: none;">
+                    <div class="col-12">
+                        <div class="banner-info p-3 text-danger text-center w-100" style="font-weight: bold;">
+                            <i class="bi bi-exclamation-circle"></i> We need your pet's name, photo, and species.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,15 +118,15 @@
                 </div>
             </div>
             <div class="pet-input-age-actual-group preview-age row" style="position: relative; display: none;">
-                <div class="form-floating col-4">
+                <div class="form-floating col-4" style="position: relative;">
                     <input type="date" class="form-control" id="pet-birth_date" placeholder="Date of Birth">
                     <label for="pet-birth_date" style="margin-left: 12px;">Date of Birth</label>
+                    <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                 </div>
                 <div class="form-floating col-8">
                     <input type="text" class="form-control" id="pet-age" placeholder="Age" readonly>
                     <label for="pet-age" style="margin-left: 12px;">Age</label>
                 </div>
-                <i class="bi bi-caret-right-fill" style="position: absolute; top: 6px; left: 145px; font-size: 32px; color: #312c57;"></i>
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-4">
@@ -161,16 +163,17 @@
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-10">
-                    <input type="text" class="form-control" id="pet-address" placeholder="Pet Address">
-                    <label for="pet-address" style="margin-left: 12px;">Pet Address</label>
+                    <input type="text" class="form-control" id="pet-address" placeholder="Pet's Address">
+                    <label for="pet-address" style="margin-left: 12px;"><span class="pet-preview-pet_name"></span>'s Address</label>
                 </div>
-                <div class="form-floating col-2">
+                <div class="form-floating col-2" style="position: relative;">
+                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                     <button type="button" class="pet-address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Note: Your pet details will be publicly displayed.
+                    <i class="bi bi-info-circle"></i> Note: As part of IAGD, your pet details will appear publicly.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -199,7 +202,7 @@
             <div class="row">
                 <div class="form-floating col-12">
                     <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
-                    <label for="pet-owner" style="margin-left: 12px;">Main Owner Name</label>
+                    <label for="pet-owner" style="margin-left: 12px;">Who is the main owner of <span class="pet-preview-pet_name"></span>?</label>
                 </div>
                 <div class="form-floating col-12 mt-2">
                     <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
@@ -208,24 +211,25 @@
             </div>
             <div class="row mt-2">
                 <div class="form-floating col-10">
-                    <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner Location">
-                    <label for="pet-owner_location" style="margin-left: 12px;">Owner Location</label>
+                    <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner's Location">
+                    <label for="pet-owner_location" style="margin-left: 12px;">Owner's Location</label>
                 </div>
-                <div class="form-floating col-2">
+                <div class="form-floating col-2" style="position: relative;">
+                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                     <button type="button" class="pet-owner_address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
                 </div>
                 <div class="form-floating col-12 mt-2">
-                    <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner Contact Number">
-                    <label for="pet-owner_contact" style="margin-left: 12px;">Owner Contact Number</label>
+                    <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner's Contact Number">
+                    <label for="pet-owner_contact" style="margin-left: 12px;">Owner's Contact Number</label>
                 </div>
                 <div class="form-floating col-12 mt-2">
-                    <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner Email">
-                    <label for="pet-owner_email" style="margin-left: 12px;">Owner Email</label>
+                    <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner's Email">
+                    <label for="pet-owner_email" style="margin-left: 12px;">Owner's Email</label>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> The owner's location will be privately stored in the system.
+                    <i class="bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -236,147 +240,6 @@
                     </div>
                     <div class="form-floating col-9 mb-3">
                         <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Continue</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="group-container" data-group="fill_up_pet" style="display: none;">
-        <div class="mb-5">
-            <h4 class="text-center">Your Appointment</h4>
-            <h6 class="text-center">₱1,000 per 30 minutes</h6>
-            <h6 class="text-center">March 20th, 2025</h6>
-            <h6 class="text-center">12:30 PM to 1:00 PM</h6>
-        </div>
-        <form id="registrationForm" autocomplete="off">
-            <!-- Pet Name -->
-            <div class="row mb-4">
-                <div class="form-floating col-8">
-                    <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
-                    <label for="pet-name" style="margin-left: 12px;">Pet Name</label>
-                </div>
-                <div class="form-floating col-4">
-                    <input type="text" class="form-control" id="pet-iagd" placeholder="IAGD Number">
-                    <label for="pet-iagd" style="margin-left: 12px;">IAGD Number</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-4">
-                    <select class="form-control" id="pet-species" required>
-                        <option value="cat">Cat</option>
-                        <option value="dog">Dog</option>
-                    </select>
-                    <label for="pet-species" style="margin-left: 12px;">Pet Type</label>
-                </div>
-                <div class="form-floating col-8">
-                    <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
-                    <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
-                </div>
-            </div>
-            <div class="row mb-4">
-                <div class="form-floating col-4">
-                    <select class="form-control" id="pet-gender" required>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                    <label for="pet-gender" style="margin-left: 12px;">Gender</label>
-                </div>
-                <div class="form-floating col-4">
-                    <input type="text" class="form-control" id="pet-age" placeholder="Age">
-                    <label for="pet-age" style="margin-left: 12px;">Age</label>
-                </div>
-                <div class="form-floating col-4">
-                    <input type="text" class="form-control" id="pet-weight" placeholder="Weight">
-                    <label for="pet-weight" style="margin-left: 12px;">Current Weight</label>
-                </div>
-            </div>
-            <!-- Reason -->
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-reason" placeholder="Briefly describe the reason for your consultation" rows="3" required></textarea>
-                    <label for="consultation-reason" style="margin-left: 12px;">Please briefly describe the reason for consultation</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-food" placeholder="What are you feeding your pet?" rows="3"></textarea>
-                    <label for="consultation-food" style="margin-left: 12px;">What are you feeding your pet?</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-medications" placeholder="Is your pet currently under any medications or vitamins?" rows="3"></textarea>
-                    <label for="consultation-medications" style="margin-left: 12px;">Is your pet currently under any medications or vitamins?</label>
-                </div>
-            </div>
-            <!-- Submit Button -->
-            <div class="d-grid gap-2 mt-4 mb-3">
-                <div class="row">
-                    <div class="form-floating col-3 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="iagd" style="height: 100%; width: 100%;">Back</button>
-                    </div>
-                    <div class="form-floating col-9 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="fill_up_owner" style="height: 100%; width: 100%;">Continue</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="group-container" data-group="fill_up_owner" style="display: none;">
-        <div class="mb-5">
-            <h4 class="text-center">Your Appointment</h4>
-            <h6 class="text-center">₱1,000 per 30 minutes</h6>
-            <h6 class="text-center">March 20th, 2025</h6>
-            <h6 class="text-center">12:30 PM to 1:00 PM</h6>
-            <h6 class="text-center">Loki</h6>
-        </div>
-        <form id="registrationForm" autocomplete="off">
-            <!-- Pet Name -->
-            <div class="row mb-4">
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="pet-name" placeholder="Pet Name" required>
-                    <label for="pet-name" style="margin-left: 12px;">Owner Name</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-8">
-                    <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
-                    <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-8">
-                    <input type="text" class="form-control" id="pet-breed" placeholder="Pet Breed">
-                    <label for="pet-breed" style="margin-left: 12px;">Pet Breed</label>
-                </div>
-            </div>
-            <!-- Reason -->
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-reason" placeholder="Briefly describe the reason for your consultation" rows="3" required></textarea>
-                    <label for="consultation-reason" style="margin-left: 12px;">Please briefly describe the reason for consultation</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-food" placeholder="What are you feeding your pet?" rows="3"></textarea>
-                    <label for="consultation-food" style="margin-left: 12px;">What are you feeding your pet?</label>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="form-floating col-12">
-                    <textarea class="form-control" id="consultation-medications" placeholder="Is your pet currently under any medications or vitamins?" rows="3"></textarea>
-                    <label for="consultation-medications" style="margin-left: 12px;">Is your pet currently under any medications or vitamins?</label>
-                </div>
-            </div>
-            <!-- Submit Button -->
-            <div class="d-grid gap-2 mt-4 mb-3">
-                <div class="row">
-                    <div class="form-floating col-3 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="iagd" style="height: 100%; width: 100%;">Back</button>
-                    </div>
-                    <div class="form-floating col-9 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="fill_up_owner" style="height: 100%; width: 100%;">Continue</button>
                     </div>
                 </div>
             </div>
@@ -530,13 +393,33 @@
         </div>
     </div>
 </div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-pet-images">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-gradient-primary text-center">Select an image to make it the primary</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="pet-input-images-container"></div>
+    </div>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
+var hasPetImage = false;
+function page_1_continue_validate() {
+    const petName = $('#pet-name').val();
+    const petSpecies = $('#pet-species').val();
 
+    if (petName && petSpecies && hasPetImage) {
+        $('.page_1-incomplete-continue-btn-group').hide();
+        $('.page_1-complete-continue-btn-group').show();
+    } else {
+        $('.page_1-complete-continue-btn-group').hide();
+    }
+}
 $(document).ready(function() {
 
     $('.group-navigate-btn').on('click', function() {
@@ -604,156 +487,220 @@ $(document).ready(function() {
 
     let droppedFiles = {}; // For drag 'n drop functionality
 
-	function previewImage(input, dropZone) {
-	    if (input.files && input.files[0]) {
-	        let reader = new FileReader();
-	        reader.onload = function(e) {
-                let img = $("<img>").attr("src", e.target.result).addClass("drop-zone-img").css({
-                    "max-width": "100%",
-                    "max-height": "100%",
-                    "object-fit": "contain"
-                });
-
-                $('.pet-preview-image').attr("src", e.target.result);
-                $('.pet-preview-image-backdrop').attr("src", e.target.result);
-
-	            // Store the base64 image in localStorage
-	            // localStorage.setItem(input.name, e.target.result);
-
-	            // Remove any existing images in the drop-zone before appending the new one
-	            dropZone.find("img").remove();
-	            dropZone.prepend(img);
-
-	            // Hide the drop message
-	            dropZone.find(".drop-message").hide();
-
-                // Send the image to the API
-                let formData = new FormData();
-                formData.append("file", input.files[0]);
-
-                $.ajax({
-                    url: "https://iagd-api.metaanimals.org/classify/",
-                    type: "POST",
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function (response) {
-                        if (response && response.species) {
-                            if (response.species_confidence > 0.8) {
-                                $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
-                                animateShine($('#pet-species').parent('.form-floating'));
-                            }
-                        } else {
-                            console.warn("Unexpected response format:", response);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error:", error);
+    function previewImage(input, dropZone) {
+        if (input.files && input.files.length) {
+            hasPetImage = true;
+            dropZone.empty();
+            $(".pet-input-images-container").empty();
+            let files = Array.from(input.files).slice(0, 5);
+            files.forEach(function(file, index) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    // Create drop zone image element.
+                    let dzImg = $("<img>")
+                        .attr("src", e.target.result)
+                        .addClass("drop-zone-img")
+                        .data("index", index)
+                        .css({
+                            "object-fit": "contain",
+                            "max-width": "100%",
+                            "max-height": "100%"
+                        });
+                    if (index === 0) {
+                        dzImg.addClass('drop-zone-primary-img');
+                        dzImg.css({
+                            "transform": "none",
+                            "position": "relative",
+                            "z-index": 10
+                        });
+                    } else {
+                        let rotation = (index % 2 === 0 ? "rotate(3deg)" : "rotate(-3deg)");
+                        dzImg.css({
+                            "transform": rotation,
+                            "position": "absolute",
+                            "top": 0,
+                            "left": 0,
+                            "z-index": 10 - index,
+                            "border": "none"
+                        });
                     }
-                });
-	        };
-	        reader.readAsDataURL(input.files[0]);
-	    } else {
-	        // Show the drop message when no image is selected
-	        dropZone.find(".drop-message").show();
-	    }
-	}
+                    dropZone.append(dzImg);
+                    
+                    // Create offcanvas card element (displayed normally).
+                    let card = $("<div>")
+                        .addClass("pet-image-card")
+                        .data("index", index)
+                        .css({
+                            "cursor": "pointer",
+                            "border": index === 0 ? "2px solid #000" : "none",
+                            "margin-bottom": "10px",
+                            "max-width": "300px",
+                            "max-height": "300px",
+                            "overflow": "hidden"
+                        });
+                    let cardImg = $("<img>")
+                        .attr("src", e.target.result)
+                        .css({
+                            "width": "100%",
+                            "height": "100%",
+                            "object-fit": "contain"
+                        });
+                    card.append(cardImg);
+                    $(".pet-input-images-container").append(card);
+                    
+                    // Clicking a card updates primary image and closes offcanvas.
+                    card.on("click", function() {
+                        $(".pet-input-images-container .pet-image-card").css("border", "none");
+                        $(this).css("border", "2px solid #000");
+                        let selectedSrc = $(this).find("img").attr("src");
+                        dropZone.find("img.drop-zone-img").each(function() {
+                            let idx = $(this).data("index");
+                            if ($(this).attr("src") === selectedSrc) {
+                                $(this).css({
+                                    "border": "2px solid #000",
+                                    "transform": "none",
+                                    "z-index": 10
+                                });
+                            } else {
+                                let rotation = (idx % 2 === 0 ? "rotate(3deg)" : "rotate(-3deg)");
+                                $(this).css({
+                                    "border": "none",
+                                    "transform": rotation,
+                                    "z-index": 10 - idx
+                                });
+                            }
+                        });
+                        $("#offcanvas-pet-images").offcanvas("hide");
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+            dropZone.find(".drop-message").hide();
+            droppedFiles[input.id] = input.files;
+            // Send the first image for classification.
+            let formData = new FormData();
+            formData.append("file", input.files[0]);
+            $.ajax({
+                url: "https://iagd-api.metaanimals.org/classify/",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response && response.species) {
+                        if (response.species_confidence > 0.8) {
+                            $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
+                            animateShine($('#pet-species').parent('.form-floating'));
+                            // $('.drop-zone').floatingText(getRandomResponse(response.species));
+                        }
+                    } else {
+                        console.warn("Unexpected response format:", response);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                }
+            });
+            // Show offcanvas and button if more than one image.
+            if (input.files.length > 1) {
+                $('.drop-zone-primary-img').addClass('drop-zone-multiple-primary-img');
+                $(".offcanvas-input-images-btn").show();
+                $("#offcanvas-pet-images").offcanvas("show");
+            } else {
+                $('.drop-zone-primary-img').addClass('drop-zone-single-primary-img');
+                $(".offcanvas-input-images-btn").hide();
+            }
+        } else {
+            dropZone.find(".drop-message").show();
+        }
+    }
 
-	function handleDragging(e) {
-	    e.preventDefault();
-	    e.stopPropagation();
-	}
+    function handleDragging(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
-	function handleDragEnterLeave(e) {
-	    e.preventDefault();
-	    e.stopPropagation();
-	    let dropZone = $(e.target).closest(".drop-zone");
-	    dropZone.toggleClass("dragging", e.type === "dragenter");
-	}
+    function handleDragEnterLeave(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let dropZone = $(e.target).closest(".drop-zone");
+        dropZone.toggleClass("dragging", e.type === "dragenter");
+    }
 
-	function handleDrop(e) {
-	    e.preventDefault();
-	    e.stopPropagation();
-	    let dropZone = $(e.target).closest(".drop-zone");
-	    let files = e.originalEvent.dataTransfer.files;
-	    let input = dropZone.siblings("input[type='file']")[0];
+    function handleDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        let dropZone = $(e.target).closest(".drop-zone");
+        let files = e.originalEvent.dataTransfer.files;
+        let input = dropZone.siblings("input[type='file']")[0];
 
-	    // Store the dropped files in the droppedFiles variable
-	    droppedFiles[input.id] = files;
+        droppedFiles[input.id] = files;
 
-	    dropZone.removeClass("dragging");
+        dropZone.removeClass("dragging");
 
-	    // Call the previewImage function to show the image preview
-	    if (files.length) {
-	        // Modify the input's files property to store the dropped files
-	        input.files = files;
+        if (files.length) {
+            input.files = files;
+            previewImage(input, dropZone);
+        } else {
+            dropZone.html(`<div class="drop-message">
+                <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
+                <br>
+                <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
+                <br>
+                <span style="font-size: 14px;">or press to browse from your device.</span>
+            </div>`);
+        }
+    }
 
-	        // Call previewImage with the input and dropZone elements
-	        previewImage(input, dropZone);
-	    } else {
-	        dropZone.html(`<div class="drop-message">
-	            <i class="bi bi-download"></i>
-	            <br>
-	            <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
-	            <br>
-	            <span style="font-size: 14px;">or press to browse from your files</span>
-	            </div>`);
-	    }
-	}
+    function setupDropZone(dropZoneSelector) {
+        let dropZones = $(dropZoneSelector);
 
-	function setupDropZone(dropZoneSelector) {
-	    let dropZones = $(dropZoneSelector);
+        dropZones.on("dragenter", handleDragEnterLeave);
+        dropZones.on("dragleave", handleDragEnterLeave);
+        dropZones.on("dragover", handleDragging);
+        dropZones.on("drop", handleDrop);
 
-	    dropZones.on("dragenter", handleDragEnterLeave);
-	    dropZones.on("dragleave", handleDragEnterLeave);
-	    dropZones.on("dragover", handleDragging);
-	    dropZones.on("drop", handleDrop);
+        dropZones.on("click", function () {
+            $(this).siblings("input[type='file']").click();
+        });
 
-	    dropZones.on("click", function () {
-	        $(this).siblings("input[type='file']").click();
-	    });
+        $("input[type='file']").on("change", function () {
+            let dropZone = $(this).siblings(dropZoneSelector);
+            if (this.files.length) {
+                previewImage(this, dropZone);
+            } else {
+                dropZone.html(`<div class="drop-message">
+                    <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
+                    <br>
+                    <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
+                    <br>
+                    <span style="font-size: 14px;">or press to browse from your device.</span>
+                </div>`);
+            }
+        });
+    }
 
-	    $("input[type='file']").on("change", function () {
-	        let dropZone = $(this).siblings(dropZoneSelector);
-	        if (this.files.length) {
-	            previewImage(this, dropZone);
-	        } else {
-	            dropZone.html(`<div class="drop-message">
-	                <i class="bi bi-download"></i>
-	                <br>
-	                <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
-	                <br>
-	                <span style="font-size: 14px;">or press to browse from your files</span>
-	                </div>`);
-	        }
-	    });
-	}
+    setupDropZone(".create-drop-zone");
+    setupDropZone(".affiliates-drop-zone");
 
-	setupDropZone(".create-drop-zone");
-	setupDropZone(".affiliates-drop-zone");
+    function resetDropZone(dropZoneSelector) {
+        let dropZones = $(dropZoneSelector);
+        
+        dropZones.each(function() {
+            let dropZone = $(this);
 
-	function resetDropZone(dropZoneSelector) {
-	    let dropZones = $(dropZoneSelector);
-	    
-	    dropZones.each(function() {
-	        let dropZone = $(this);
+            dropZone.find("img").remove();
+            dropZone.html(`<div class="drop-message">
+                <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
+                <br>
+                <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
+                <br>
+                <span style="font-size: 14px;">or press to browse from your device.</span>
+            </div>`);
+        });
 
-	        // Remove any existing images in the drop-zone
-	        dropZone.find("img").remove();
-
-	        // Show the drop message
-	        dropZone.html(`<div class="drop-message">
-	            <i class="bi bi-download"></i>
-	            <br>
-	            <span style="font-size: 14px;">Drag and drop receipt photo here,</span>
-	            <br>
-	            <span style="font-size: 14px;">or press to browse from your files</span>
-	            </div>`);
-	    });
-
-	    // Clear input files
-	    $("input[type='file']").val('');
-	}
+        $("input[type='file']").val('');
+    }
 
     $('#pet-name').on('input', function() {
         let petName = $(this).val();
@@ -868,12 +815,29 @@ $(document).ready(function() {
         const option = $(this).data('option');
         $('#pet-species').val(option);
         $('#offcanvas-select-species').offcanvas('hide');
+        page_1_continue_validate();
     });
 
     $('.select-gender-option').on('click', function() {
         const option = $(this).data('option');
         $('#pet-gender').val(option);
         $('#offcanvas-select-gender').offcanvas('hide');
+    });
+
+    $('.page_1-incomplete-continue-btn').on('click', function() {
+        $('.page_1-error-banner').show();
+        $('.page_1-error-banner').show().addClass('animate__animated animate__headShake')
+            .one('animationend', function() {
+                $(this).removeClass('animate__animated animate__headShake');
+            });
+    });
+
+    $('.page_1-complete-continue-btn').on('click', function() {
+        $('.page_1-error-banner').hide();
+    });
+
+    $('#petName').bind('input', function() {
+        page_1_continue_validate();
     });
 });
 </script>
