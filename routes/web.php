@@ -58,7 +58,7 @@ Route::prefix('admin')->group(function () {
      * @param string 'admin.logout'
      * @return \Illuminate\Routing\Route
      */
-    Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout')->middleware(['auth']);
 
     /**
      * Dashboard route group for endpoints
