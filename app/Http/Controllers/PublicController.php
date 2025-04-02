@@ -17,7 +17,8 @@ class PublicController extends Controller
     function register(Request $request) {
         $agent = new Agent();
         
-        $view = $agent->isMobile() ? 'm_register' : 'register';
+        // $view = $agent->isMobile() ? 'm_register' : 'register';
+        $view = 'register';
         
         $data = [
             'title' => 'Register your Pet — IAGD'

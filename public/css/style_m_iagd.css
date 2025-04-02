@@ -7,6 +7,13 @@
     font-family: vice-city;
     src: url(../fonts/GTVCS-Book.otf);
 }
+html, body {
+	overflow: -ms-autohiding-scrollbar; /* For Internet Explorer and Edge */
+	overflow: scrollbar; /* For other browsers */
+}
+::-webkit-scrollbar {
+	display: none;
+}
 html {
 	overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
@@ -17,12 +24,12 @@ html::-webkit-scrollbar {
     height: 0;
 }
 body {
-     background-color: #11082b;
-     background-position: center;
-     background-size: cover;
-     background-repeat: no-repeat;
-     background-attachment: fixed;
-     background-image: url(../images/blurry-gradient-haikei.png);
+	background-color: #11082b;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-image: url(../images/blurry-gradient-haikei.png);
 	font-family: 'Roboto';
 }
 p {
@@ -35,9 +42,11 @@ p {
 	height: 100vh;
 	background-color: rgba(214, 167, 255, 0.05);
      color: rgba(231, 231, 231, 1);
-	padding: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	position: relative;
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 .logo {
 	max-width: 150px;
@@ -48,7 +57,7 @@ p {
     display: inline-block;
     color: transparent;
     /* background: linear-gradient(74deg, #93c3ff 0, #9ea9fd 9%, #d2a8a8 20%, #ff8f8f 24%, #9ea9fd 35%, #93c3ff 44%, #9ea9fd 50%, #ffc5c5 56%, #d2a8a8 75%, #ffc5c5 100%); */
-	background: linear-gradient(74deg, #6d91be 0, #7a83c5 9%, #f48d8d 20%, #ff8f8f 24%, #7a83c5 35%, #6d91be 44%, #7a83c5 50%, #ffc5c5 56%, #f48d8d 75%, #ffc5c5 100%);
+	background: linear-gradient(74deg, #be93ff 0, #db9efd 9%, #ffd333 20%, #ffd400 24%, #db9efd 35%, #be93ff 44%, #db9efd 50%, #ffcf86 56%, #ffd333 75%, #ffcf86 100%);
     background-size: 400% 100%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -58,13 +67,14 @@ p {
 .form-control {
      background-color: rgba(0, 0, 0, 0.16);
      color: white;
-     border-color: #662497;
+     border-color: #312c57;
  }
  
  .form-control:active, .form-control:focus {
      outline: none;
      box-shadow: none;
 	 background-color: transparent;
+	 border-color: #ffc500;
 	 color: white;
  }
  
@@ -121,6 +131,12 @@ p {
     border-top: 1px solid rgb(135 135 135 / 25%);
 }
 
+.btn-primary:active, .btn-primary:focus {
+    background-color: rgba(92, 11, 147, 0.75) !important;
+    border: 2px solid transparent !important;
+    border-top: 1px solid rgb(135 135 135 / 25%) !important;
+}
+
 .btn-secondary {
     background-color: rgba(49, 44, 87, 0.5);
     border: 2px solid transparent;
@@ -131,6 +147,24 @@ p {
     background-color: rgba(49, 44, 87, 0.75);
     border: 2px solid transparent;
     border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
+.btn-outline-primary {
+	background-color: transparent !important;
+	border: 1px solid #58518a !important;
+	color: #58518a !important;
+}
+
+.btn-outline-primary:hover {
+	background-color: #312c57 !important;
+	border: 1px solid #312c57 !important;
+	color: #fff !important;
+}
+
+.btn-outline-primary:active, .btn-outline-primary:focus {
+	background-color: #312c57 !important;
+	border: 1px solid #312c57 !important;
+	color: #fff !important;
 }
 
 span.ripple {
@@ -260,7 +294,7 @@ span.ripple {
      align-items: center;
      justify-content: center;
      overflow: hidden;
-     border: 1px dashed #662497;
+     border: 1px dashed #312c57;
      border-radius: 5px;
      background: rgba(0, 0, 0, 0.16);
      padding: 20px;
@@ -304,4 +338,94 @@ span.ripple {
 .drop-message i {
 	font-size: 36px;
 	color: #ffc500;
+}
+
+select.form-control option {
+	background-color: #222;
+	color: #fff;
+}
+
+.phone-container .navbar {
+	padding: 4px 16px;
+	backdrop-filter: blur(16px); /* Apply blur effect to the background */
+	width: calc(100% + 40px);
+	margin-left: -20px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #312c57;
+}
+
+.pet-preview-image {
+	object-fit: contain;
+}
+
+.pet-preview-image-backdrop {
+	position: absolute;
+	filter: blur(12px);
+	z-index: -5;
+	object-fit: contain;
+	pointer-events: none;
+}
+
+.banner-info {
+	background-color: rgba(151, 100, 255, 0.16);
+	border-radius: 16px;
+	width: 95%;
+	margin: 0 auto;
+	font-size: 14px;
+}
+
+.input-interactable-readonly {
+	transition: background-color 0.3s ease;
+}
+
+.input-interactable-readonly:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.16) !important;
+}
+
+.offcanvas {
+	background-color: #130d22;
+	color: rgba(231, 231, 231, 1);
+	transition: transform 0.16s ease-in-out; !important
+}
+
+.offcanvas-backdrop {
+	background-color: transparent;
+}
+
+.offcanvas-backdrop.show {
+	opacity: 1;
+	backdrop-filter: blur(16px);
+}
+
+.card {
+	border: 1px solid #312c57;
+	background-color: rgba(0, 0, 0, 0.16);
+	color: rgba(231, 231, 231, 1);
+	margin-bottom: 0.5rem;
+}
+
+.card-interactable {
+	transition: 0.08s;
+}
+
+.card-interactable:hover {
+	cursor: pointer;
+	border: 1px solid #67666f;
+	background-color: rgba(0, 0, 0, 0.33);
+}
+
+.rotating {
+    animation: rotate 48s linear infinite;
+	transform-origin: center;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
