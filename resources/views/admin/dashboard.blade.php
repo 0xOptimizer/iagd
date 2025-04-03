@@ -123,6 +123,28 @@
 
 
                         </div>
+
+                        <div class="row pt-3">
+                            <div class="col-12 col-lg-6 mb-3">
+                                <div class="bs-card col-12 d-flex flex-row justify-content-center align-items-center h-100 p-3 p-lg-4">
+                                    <div class="w-100 h-100">
+                                        <canvas id="pieChart"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-6 mb-3">
+                                <div class="bs-card col-12 d-flex flex-row justify-content-center align-items-center h-100 p-3 p-lg-4">
+                                    <div class="w-100 h-100">
+                                        <canvas id="barChart" style="min-height: 320px;"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,7 +156,8 @@
 
     {{-- Scripts --}}
     @include('admin.sections.jsscripts')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script src="{{ asset('admin-resources/js/dashboard.js') }}"></script>
 </body>
 
 </html>

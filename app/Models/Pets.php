@@ -17,11 +17,11 @@ class Pets extends Model
 
     public function details()
     {
-        return $this->hasOne(PetDetail::class, 'uuid', 'uuid');
+        return $this->hasOne(PetsDetails::class, 'uuid', 'uuid');
     }
 
     public function meta()
     {
-        return $this->hasOne(PetMeta::class, 'uuid', 'uuid');
+        return $this->hasOne(PetsMeta::class, 'uuid', 'uuid');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SignInController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Rest\PetController as RestPetController;
 use App\Http\Controllers\SessionController;
 
 /*
@@ -78,5 +79,13 @@ Route::prefix('admin')->group(function () {
 
     });
 
+});
+
+Route::prefix('rest/v1')->group(function () {
+
+    Route::prefix('pets')->group(function () {
+        Route::get('/get', [RestPetController::class, 'get'])->name('rest.v1.pets.get');
+
+    });
 });
 
