@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PetsController as AdminPetsController;
 use App\Http\Controllers\Admin\SignInController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +80,9 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('pets')->middleware(['auth'])->group(function () {
+        Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
+    });
 });
 
 Route::prefix('rest/v1')->group(function () {
