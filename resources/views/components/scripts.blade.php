@@ -123,6 +123,124 @@ function animateShine(selector, duration = 400, delay = 0) {
         );
     }, delay);
 }
+const responseMap = {
+    cat: [
+        "That's a cute cat!",
+        "Aww, such a fluffy feline!",
+        "Look at this adorable cat!",
+        "This little furball is precious!",
+        "A majestic feline appears!"
+    ],
+    dog: [
+        "What a good boy!",
+        "Such a loyal companion!",
+        "Look at this happy pupper!",
+        "A wagging tail means a happy heart!",
+        "A playful doggo joins the fun!"
+    ],
+    bird: [
+        "A beautiful little bird!",
+        "Chirp chirp! What a cutie!",
+        "Feathers so vibrant!",
+        "Look at this singing wonder!",
+        "A tiny flyer is here!"
+    ],
+    rabbit: [
+        "A fluffy bunny hops in!",
+        "Such soft ears!",
+        "Bouncy and cute!",
+        "A little hopper joins the fun!",
+        "This rabbit is just too adorable!"
+    ],
+    fish: [
+        "A shimmering swimmer!",
+        "Look at those dazzling scales!",
+        "A graceful fish glides by!",
+        "Swimming through with elegance!",
+        "Such a vibrant aquatic friend!"
+    ],
+    reptile: [
+        "A scaly friend appears!",
+        "Look at this cool reptile!",
+        "Slithery or scaly, still adorable!",
+        "Such a unique little creature!",
+        "A reptilian beauty joins in!"
+    ],
+    rodent: [
+        "A tiny ball of energy!",
+        "Look at this adorable rodent!",
+        "This little critter is full of life!",
+        "Such a curious little creature!",
+        "Whiskers and cuteness overload!"
+    ],
+    mythical: [
+        "A rare and magical creature!",
+        "A legendary being appears!",
+        "Mystical and majestic!",
+        "A creature of pure wonder!",
+        "A fantasy friend has arrived!"
+    ],
+    default: [
+        "Such a wonderful creature!",
+        "A truly unique companion!",
+        "Nature’s beauty in motion!",
+        "What an amazing little friend!",
+        "A special guest appears!"
+    ]
+};
+
+function getRandomResponse(species) {
+    let responses = responseMap[species] || responseMap.default;
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+(function ($) {
+    $.fn.floatingText = function (options) {
+        let settings = $.extend({
+            text: "Floating Text",
+            color: "#fff",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            fontSize: "20px",
+            duration: 2000,
+            floatDistance: 50
+        }, typeof options === "string" ? { text: options } : options);
+
+        return this.each(function () {
+            let $parent = $(this);
+            let parentOffset = $parent.offset();
+            let parentWidth = $parent.outerWidth();
+            let parentHeight = $parent.outerHeight();
+
+            let randomX = Math.random() * (parentWidth - 50); 
+            let randomY = Math.random() * (parentHeight - 20); 
+
+            let $text = $("<div>", {
+                text: settings.text,
+                css: {
+                    position: "absolute",
+                    left: parentOffset.left + randomX,
+                    top: parentOffset.top + randomY,
+                    color: settings.color,
+                    background: settings.backgroundColor,
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    fontSize: settings.fontSize,
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    zIndex: 9999,
+                    opacity: 1,
+                    transition: `transform ${settings.duration / 1000}s ease-out, opacity ${settings.duration / 1000}s ease-out`
+                }
+            }).appendTo("body");
+
+            requestAnimationFrame(() => {
+                $text.css({ transform: `translateY(-${settings.floatDistance}px)`, opacity: 0 });
+            });
+
+            setTimeout(() => $text.remove(), settings.duration);
+        });
+    };
+}(jQuery));
 $(document).ready(function() {
     $('body').on('show.bs.modal', '.modal', function () { // when the modal begins opening
         $('.blur-overlay').show();
@@ -235,9 +353,9 @@ $(document).ready(function() {
         animateShine($(this));
     });
 
-    $('body').on('click', '.input-interactable', function() {
-        let parent = $(this).parent('.form-floating');
-        animateShine(parent);
-    });
+    // $('body').on('click', '.input-interactable', function() {
+    //     let parent = $(this).parent('.form-floating');
+    //     animateShine(parent);
+    // });
 });
 </script>
