@@ -84,10 +84,10 @@
                     <div class="form-floating col-3">
                         <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
                     </div>
-                    <div class="page_1-incomplete-continue-btn-group form-floating col-9">
+                    <div class="page_1-incomplete-continue-btn-group form-floating col-9" style="display: none;">
                         <button type="button" class="page_1-incomplete-continue-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">Continue</button>
                     </div>
-                    <div class="page_1-complete-continue-btn-group form-floating col-9" style="display: none;">
+                    <div class="page_1-complete-continue-btn-group form-floating col-9">
                         <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Continue</button>
                     </div>
                 </div>
@@ -131,11 +131,6 @@
             <div class="row mt-2">
                 <div class="form-floating col-4">
                     <input type="text" class="pet-gender-input input-interactable-readonly form-control" id="pet-gender" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-select-gender" placeholder="Gender" readonly>
-                    <!-- <select class="form-control" id="pet-gender" required>
-                        <option value="default" hidden>Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select> -->
                     <label for="pet-gender" style="margin-left: 12px;">Gender</label>
                 </div>
                 <div class="form-floating col-4">
@@ -200,10 +195,84 @@
         </div>
         <form id="registrationForm" autocomplete="off">
             <div class="row">
+                <div class="form-floating col-2">
+                    <img src="" class="img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
+                </div>
+                <div class="form-floating col-6">
+                    <input type="text" class="pet-sire-input input-interactable-readonly form-control" id="pet-sire-name" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire" placeholder="Sire's Name" readonly>
+                    <label for="pet-sire-name" style="margin-left: 12px;">Sire's Name</label>
+                </div>
+                <div class="form-floating col-4" style="position: relative;">
+                    <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; left: -17px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    <input type="text" class="form-control" id="pet-sire-breed" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire" placeholder="Sire's Breed" readonly>
+                    <label for="pet-sire-breed" style="margin-left: 12px;">Sire's Breed</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-floating col-2">
+                    <img src="" class="img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
+                </div>
+                <div class="form-floating col-6">
+                    <input type="text" class="pet-dam-input input-interactable-readonly form-control" id="pet-dam-name" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam" placeholder="Dam's Name" readonly>
+                    <label for="pet-dam-name" style="margin-left: 12px;">Dam's Name</label>
+                </div>
+                <div class="form-floating col-4" style="position: relative;">
+                    <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; left: -17px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    <input type="text" class="pet-dam-input input-interactable-readonly form-control" id="pet-dam-breed" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire" placeholder="Dam's Breed" readonly>
+                    <label for="pet-dam-breed" style="margin-left: 12px;">Dam's Breed</label>
+                </div>
+            </div>
+            <div class="row mt-4">
                 <div class="form-floating col-12">
+                    <input type="text" class="pet-animal_facility-input input-interactable-readonly form-control" id="pet-animal_facility" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-animal_facility" placeholder="Animal Facility" readonly>
+                    <label for="pet-animal_facility" style="margin-left: 12px;">Animal Facility</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-floating col-12">
+                    <input type="text" class="pet-vet_records-input input-interactable-readonly form-control" id="pet-vet_records" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-vet_records" placeholder="Vet Records" readonly>
+                    <label for="pet-vet_records" style="margin-left: 12px;">Vet Records</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="banner-info p-3 text-center">
+                    <i class="bi bi-info-circle"></i> Note: Using IAGD, we automatically trace and connect your pet's pedigree, including their parents and ancestors. You only need to add their immediate details to the database.
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mt-4 mb-3">
+                <div class="row">
+                    <div class="form-floating col-3 mb-3">
+                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Back</button>
+                    </div>
+                    <div class="form-floating col-9 mb-3">
+                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="group-container" data-group="page_4" style="display: none;">
+        <div class="d-flex align-items-center justify-content-start mb-4">
+            <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <div style="margin-left: 25px;">
+                <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
+                <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+            </div>
+        </div>
+        <form id="registrationForm" autocomplete="off">
+            <div class="row">
+                <div class="form-floating col-8">
                     <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
                     <label for="pet-owner" style="margin-left: 12px;">Who is the main owner of <span class="pet-preview-pet_name"></span>?</label>
                 </div>
+                <div class="form-floating col-4" style="position: relative;">
+                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100"><i class="bi bi-link-45deg"></i> Link Lounge</button>
+                </div>
+            </div>
+            <div class="row mt-2">
                 <div class="form-floating col-12 mt-2">
                     <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
                     <label for="pet-co_owners" style="margin-left: 12px;">Co-Owner(s)</label>
@@ -236,73 +305,181 @@
             <div class="d-grid gap-2 mt-4 mb-3">
                 <div class="row">
                     <div class="form-floating col-3 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Back</button>
+                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_3" style="height: 100%; width: 100%;">Back</button>
                     </div>
                     <div class="form-floating col-9 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Continue</button>
+                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_5" style="height: 100%; width: 100%;">Continue</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-</div>
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Sales Entry</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="group-container" data-group="page_4" style="display: none;">
+        <div class="d-flex align-items-center justify-content-start mb-4">
+            <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <div style="margin-left: 25px;">
+                <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
+                <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
             </div>
-            <div class="modal-body">
-                <form id="editSalesForm">
-                    <div class="form-floating mb-3">
-                        <select class="form-control" id="edit-team">
-                            <option value="default" hidden>Select</option>
-                            <option value="extreme_aces">Extreme Aces</option>
-                            <option value="unstoppable_closers">Unstoppable Closers</option>
-                        </select>
-                        <label for="edit-team">Team</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <select class="edit-sales-input type-select form-control" name="edit-type" id="edit-type">
-                            <option value="default" selected hidden>Select</option>
-                            <option value="distributors">Distributors</option>
-                            <option value="dealers">Dealers</option>
-                            <option value="iagd">IAGD</option>
-                            <option value="mainstream">Mainstream</option>
-                            <option value="mk9">MK9 Business Unit</option>
-                            <option value="mrh_/_f&b">MRH / F&B</option>
-                            <option value="retail">Retail</option>
-                            <option value="osd">OSD</option>
-                        </select>
-                        <label for="creeditate-type">Type</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="edit-sales_amount" step="0.01" required>
-                        <label for="edit-sales_amount">Sales Amount</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <select class="form-control" id="edit-currency">
-                            <option value="php" selected>PHP</option>
-                            <option value="usd" disabled>USD</option>
-                            <option value="jpy" disabled>JPY</option>
-                            <option value="cny" disabled>CNY</option>
-                        </select>
-                        <label for="edit-currency">Currency</label>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="edit-date" required>
-                        <label for="edit-date">Date</label>
-                    </div>
-                </form>
+        </div>
+        <form id="registrationForm" autocomplete="off">
+            <div class="row">
+                <div class="form-floating col-8">
+                    <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
+                    <label for="pet-owner" style="margin-left: 12px;">Who is the main owner of <span class="pet-preview-pet_name"></span>?</label>
+                </div>
+                <div class="form-floating col-4" style="position: relative;">
+                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100"><i class="bi bi-link-45deg"></i> Link Lounge</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger me-auto" id="deleteEntry" style="width: 50px;"><i class="bi bi-trash-fill"></i></button>
-                <button type="button" class="btn btn-primary" id="saveEdit" style="width: 225px;"><i class="bi bi-floppy2-fill"></i> Save Changes</button>
+            <div class="row mt-2">
+                <div class="form-floating col-12 mt-2">
+                    <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
+                    <label for="pet-co_owners" style="margin-left: 12px;">Co-Owner(s)</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="form-floating col-10">
+                    <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner's Location">
+                    <label for="pet-owner_location" style="margin-left: 12px;">Owner's Location</label>
+                </div>
+                <div class="form-floating col-2" style="position: relative;">
+                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    <button type="button" class="pet-owner_address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
+                </div>
+                <div class="form-floating col-12 mt-2">
+                    <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner's Contact Number">
+                    <label for="pet-owner_contact" style="margin-left: 12px;">Owner's Contact Number</label>
+                </div>
+                <div class="form-floating col-12 mt-2">
+                    <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner's Email">
+                    <label for="pet-owner_email" style="margin-left: 12px;">Owner's Email</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="banner-info p-3 text-center">
+                    <i class="bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
+                </div>
+            </div>
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mt-4 mb-3">
+                <div class="row">
+                    <div class="form-floating col-3 mb-3">
+                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_3" style="height: 100%; width: 100%;">Back</button>
+                    </div>
+                    <div class="form-floating col-9 mb-3">
+                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_5" style="height: 100%; width: 100%;">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="group-container" data-group="page_5" style="display: none;">
+        <div class="d-flex align-items-center justify-content-start mb-4">
+            <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
+            <div style="margin-left: 25px;">
+                <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
+                <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+            </div>
+        </div>
+        
+        <div class="summary-container">
+            <!-- Pet Details Summary -->
+            <div class="summary-section">
+                <h5 class="summary-title text-gradient-primary">Pet Details</h5>
+                <div class="summary-row">
+                    <span class="summary-label">Name:</span>
+                    <span class="summary-value" data-source="pet-name"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Species:</span>
+                    <span class="summary-value" data-source="pet-species"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Breed:</span>
+                    <span class="summary-value" data-source="pet-breed"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Date of Birth:</span>
+                    <span class="summary-value" data-source="pet-birth_date"></span>
+                </div>
+            </div>
+
+            <!-- Physical Characteristics -->
+            <div class="summary-section mt-4">
+                <h5 class="summary-title text-gradient-primary">Physical Characteristics</h5>
+                <div class="summary-row">
+                    <span class="summary-label">Gender:</span>
+                    <span class="summary-value" data-source="pet-gender"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Weight:</span>
+                    <span class="summary-value" data-source="pet-weight"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Height:</span>
+                    <span class="summary-value" data-source="pet-height"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Colors:</span>
+                    <span class="summary-value" data-source="pet-color_body"></span> /
+                    <span class="summary-value" data-source="pet-color_eye"></span>
+                </div>
+            </div>
+
+            <!-- Ownership Details -->
+            <div class="summary-section mt-4">
+                <h5 class="summary-title text-gradient-primary">Ownership Details</h5>
+                <div class="summary-row">
+                    <span class="summary-label">Main Owner:</span>
+                    <span class="summary-value" data-source="pet-owner"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Location:</span>
+                    <span class="summary-value" data-source="pet-owner_location"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Contact:</span>
+                    <span class="summary-value" data-source="pet-owner_contact"></span>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="summary-section mt-4">
+                <h5 class="summary-title text-gradient-primary">Additional Information</h5>
+                <div class="summary-row">
+                    <span class="summary-label">Animal Facility:</span>
+                    <span class="summary-value" data-source="pet-animal_facility"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Vet Records:</span>
+                    <span class="summary-value" data-source="pet-vet_records"></span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Pedigree:</span>
+                    <span class="summary-value" data-source="pet-sire-name"></span> /
+                    <span class="summary-value" data-source="pet-dam-name"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid gap-2 mt-4 mb-3">
+            <div class="row">
+                <div class="form-floating col-3 mb-3">
+                    <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Back</button>
+                </div>
+                <div class="form-floating col-9 mb-3">
+                    <button type="submit" class="btn btn-success btn-lg" style="height: 100%; width: 100%;">
+                        <i class="bi bi-check-circle-fill"></i> Submit Registration
+                    </button>
+                </div>
+            </div>
+            <div class="text-center text-muted mt-3" style="font-size: 0.9em;">
+                Review all information before submitting. You can go back to make changes.
             </div>
         </div>
     </div>
@@ -402,6 +579,59 @@
         <div class="pet-input-images-container"></div>
     </div>
 </div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-gradient-primary text-center">Who is <span class="pet-preview-pet_name">...</span>'s Sire?</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
+        <div class="card card-interactable">
+            <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
+                <img src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Male</span>
+                    <br>
+                    <span style="opacity: 0.16;">No IAGD number found.</span>
+                </div>
+            </div>
+        </div>
+        <hr class="my-5">
+        <div class="card card-interactable">
+            <div class="select-species-option card-body d-flex align-items-center" data-option="Dog">
+                <img src="{{ asset('images/iagd_logo_mica.png') }}" width="64" height="64" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Use IAGD Number</span>
+                    <br>
+                    <span style="opacity: 0.16;">Enter the sire's IAGD number to identify details automatically.</span>
+                </div>
+            </div>
+        </div>
+        <div class="card card-interactable">
+            <div class="select-species-option card-body d-flex align-items-center" data-option="Cat">
+                <img src="{{ asset('images/mayor_icons_pencil.png') }}" width="64" height="64" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Write their Name</span>
+                    <br>
+                    <span style="opacity: 0.16;">No IAGD number? Enter the sire's name manually.</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="banner-info p-3 text-center">
+                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            </div>
+        </div>
+        <!-- <div class="card mt-2">
+            <div class="select-species-option card-body d-flex align-items-center">
+                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
+                <div class="w-100">
+                    <input type="text" class="form-control" placeholder="Other (Enter species)">
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -412,6 +642,10 @@ var hasPetImage = false;
 function page_1_continue_validate() {
     const petName = $('#pet-name').val();
     const petSpecies = $('#pet-species').val();
+
+    console.log(petName);
+    console.log(petSpecies);
+    console.log(hasPetImage);
 
     if (petName && petSpecies && hasPetImage) {
         $('.page_1-incomplete-continue-btn-group').hide();
@@ -592,6 +826,7 @@ $(document).ready(function() {
                             $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
                             animateShine($('#pet-species').parent('.form-floating'));
                             // $('.drop-zone').floatingText(getRandomResponse(response.species));
+                            page_1_continue_validate();
                         }
                     } else {
                         console.warn("Unexpected response format:", response);
@@ -601,6 +836,14 @@ $(document).ready(function() {
                     console.error("Error:", error);
                 }
             });
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $('.pet-preview-image').attr('src', e.target.result);
+                    $('.pet-preview-image-backdrop').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
             // Show offcanvas and button if more than one image.
             if (input.files.length > 1) {
                 $('.drop-zone-primary-img').addClass('drop-zone-multiple-primary-img');
@@ -836,9 +1079,21 @@ $(document).ready(function() {
         $('.page_1-error-banner').hide();
     });
 
-    $('#petName').bind('input', function() {
+    $('#pet-name').bind('input', function() {
         page_1_continue_validate();
     });
+
+    $('.group-navigate-btn[data-group="page_5"]').on('click', function() {
+        $('[data-source]').each(function() {
+            var sourceId = $(this).data('source');
+            var sourceElement = $('#' + sourceId);
+            $(this).text(sourceElement.length ? sourceElement.val() : 'N/A');
+        });
+
+        var petName = $('#pet-name').val();
+        $('.pet-preview-pet_name').text(petName);
+    });
+
 });
 </script>
 </html>

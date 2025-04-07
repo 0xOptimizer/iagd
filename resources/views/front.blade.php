@@ -48,13 +48,14 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <!-- <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
+                                <img src="{{ asset('images/mayor_icons_dog.png') }}" class="img-fluid rounded-start mt-3 ms-1" alt="..." width="128" height="128">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Dogs</b>
-                                    <p class="card-text">25,034&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                                    <p class="card-text">{{ number_format($pet_counts['Dog'] ?? 0) }}&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -67,13 +68,14 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-cat-raw-2.jfif') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <!-- <img src="{{ asset('images/iagd-container-cat-raw-2.jfif') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
+                                <img src="{{ asset('images/mayor_icons_cat.png') }}" class="img-fluid rounded-start mt-3 ms-1" alt="..." width="128" height="128">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Cats</b>
-                                    <p class="card-text">8,034&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                                    <p class="card-text">{{ number_format($pet_counts['Cat'] ?? 0) }}&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Cat'] ?? now())->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -86,13 +88,14 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-bird-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <!-- <img src="{{ asset('images/iagd-container-bird-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
+                                <img src="{{ asset('images/mayor_icons_bird.png') }}" class="img-fluid rounded-start mt-3 ms-1" alt="..." width="128" height="128">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Birds</b>
-                                    <p class="card-text">34&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                                    <p class="card-text">{{ number_format($pet_counts['Bird'] ?? 0) }}&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Bird'] ?? now())->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -105,13 +108,14 @@
                     <div class="card card-hoverable h-100">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="{{ asset('images/iagd-container-rabbit-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="...">
+                                <!-- <img src="{{ asset('images/iagd-container-rabbit-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
+                                <img src="{{ asset('images/mayor_icons_rabbit.png') }}" class="img-fluid rounded-start mt-3 ms-1" alt="..." width="128" height="128">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Rabbits</b>
-                                    <p class="card-text">4&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                                    <p class="card-text">{{ number_format($pet_counts['Rabbit'] ?? 0) }}&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Rabbit'] ?? now())->diffForHumans() }}</small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -128,7 +132,7 @@
                         <div class="card-body">
                             <b class="card-title">Animal Facilities</b>
                             <p class="card-text">534&nbsp;registered</p>
-                            <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                            <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
@@ -141,7 +145,7 @@
                         <div class="card-body">
                             <b class="card-title">Vet & Medical</b>
                             <p class="card-text">534&nbsp;records</p>
-                            <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                            <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
@@ -154,7 +158,7 @@
                         <div class="card-body">
                             <b class="card-title">Other Animals</b>
                             <p class="card-text">534&nbsp;registered</p>
-                            <p class="card-text"><small class="text-muted">Newest 3 mins ago</small></p>
+                            <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
