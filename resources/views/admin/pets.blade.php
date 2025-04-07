@@ -56,7 +56,7 @@
                             <div class="col-12">
                                 <div class="bs-card p-3">
                                     <div class="d-flex justify-content-end mb-3">
-                                        <button type="button" class="btn btn-primary btn d-flex flex-row justify-content-center align-items-center">
+                                        <a href="{{ route('admin.pets.form') }}" type="button" class="btn btn-primary btn d-flex flex-row justify-content-center align-items-center">
                                             <div class="svg-icon-sm me-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -64,7 +64,7 @@
                                             </div>
 
                                             <span>Create</span>
-                                        </button>
+                                        </a>
 
                                     </div>
                                     <div class="table-responsive">

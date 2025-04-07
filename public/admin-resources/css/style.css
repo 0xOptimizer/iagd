@@ -279,7 +279,10 @@
     -webkit-animation: rotateSvgIcon 0.5s forwards;
 }
 
-
+.sectionTabContainerTabs {
+    display: none;
+    visibility: hidden;
+}
 @keyframes rotateSvgIcon {
     0% {
         transform: scale(1);

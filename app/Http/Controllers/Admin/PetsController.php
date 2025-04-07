@@ -20,4 +20,18 @@ class PetsController extends Controller
         ]);
         return view('admin.pets', $data);
     }
+
+    public function form() {
+
+        $data = [
+            'title' => 'Register Pet | International Animals Genetic Database (v2!)'
+        ];
+
+        JavaScript::put([
+            'urlBase' => URL::to('/'),
+            'assetUrl' => asset('/'),
+        ]);
+        return view('admin.pages.pets.form', $data);
+
+    }
 }

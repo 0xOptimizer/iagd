@@ -83,6 +83,9 @@ Route::prefix('admin')->group(function () {
     Route::prefix('pets')->middleware(['auth'])->group(function () {
         Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
 
+        Route::get('/form', [AdminPetsController::class, 'form'])->name('admin.pets.form');
+
+
     });
 });
 
