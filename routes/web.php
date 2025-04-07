@@ -82,12 +82,16 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('pets')->middleware(['auth'])->group(function () {
         Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
+
     });
 });
 
 Route::prefix('rest/v1')->group(function () {
 
     Route::prefix('pets')->group(function () {
+
+        Route::get('/', [RestPetController::class, 'index'])->name('rest.v1.pets');
+
         Route::get('/get', [RestPetController::class, 'get'])->name('rest.v1.pets.get');
 
     });
