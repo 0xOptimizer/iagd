@@ -35,6 +35,28 @@ body {
 p {
 	margin-bottom: 0.25rem;
 }
+
+hr {
+	color: #312c57;
+	opacity: 1;
+}
+
+.header {
+    padding: 0.65rem;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid #312c57;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
 .phone-container {
 	min-width: 375px; /* Standard mobile width */
 	max-width: 540px; /* Standard mobile width */
@@ -419,6 +441,44 @@ select.form-control option {
 	backdrop-filter: blur(16px);
 }
 
+main .card {
+    position: relative;
+    background-color: rgba(214, 167, 255, 0.05);
+    color: rgba(231, 231, 231, 1);
+    margin-bottom: 0;
+}
+
+main .card .card-title {
+    font-size: 32px;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+main .card .card-body {
+    padding-bottom: 2rem;
+}
+
+main .card .card-icon {
+	position: absolute;
+    font-size: 96px;
+    top: 0px;
+    right: -5px;
+    color: rgba(255, 255, 255, 0.04);
+}
+
+main .card .card-value {
+	position: absolute;
+    top: 19px;
+    right: 28px;
+    font-size: 39px;
+}
+
+main .card-hoverable:hover {
+    /* outline: 1px solid #312c57;
+    outline-offset: 1px; */
+    cursor: pointer;
+}
+
 .card {
 	border: 1px solid #312c57;
 	background-color: rgba(0, 0, 0, 0.16);
@@ -448,4 +508,61 @@ select.form-control option {
     to {
         transform: rotate(360deg);
     }
+}
+
+.img-border-primary {
+	border: 1px solid #312c57;
+	background-color: rgba(0, 0, 0, 0.16);
+}
+
+.summary-section {
+    background: rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #312c57;
+}
+
+.summary-title {
+    border-bottom: 2px solid #312c57;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #312c57;
+}
+
+.summary-label {
+    font-weight: 500;
+    color: #312c57;
+}
+
+.summary-value {
+    color: #fff;
+    text-align: right;
+    max-width: 60%;
+}
+
+.text-muted {
+	color: #fff !important;
+	opacity: 0.16;
+}
+
+.tewi-btn-icon {
+    color: white;
+    background-color: transparent;
+    border-radius: 8px;
+    border: none;
+}
+
+.tewi-btn-icon:hover {
+    background-color: rgba(0, 0, 0, 0.16);
+	outline: 1px solid #312c57;
+    /* transform: scale(1.2); */
+    cursor: pointer;
+    transition: 0.08s;
 }
