@@ -74,12 +74,16 @@
                                     <div class="d-flex justify-content-start mb-3">
 
 
-                                        <a href="{{ (url()->previous()) ? url()->previous() : route('admin.pets') }}" type="button"
+                                        <a href="{{ url()->previous() ? url()->previous() : route('admin.pets') }}"
+                                            type="button"
                                             class="btn btn-danger d-flex flex-row justify-content-center align-items-center ms-0 ms-md-2">
                                             <div class="svg-icon-sm me-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                                                  </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                                </svg>
 
                                             </div>
 
@@ -101,7 +105,7 @@
                                                 <div class="col-12 col-lg-4">
                                                     <div class="mb-3">
                                                         <div class="form-floating">
-                                                            <input type="text" class="form-control form-control-sm"
+                                                            <input id="pet_name" type="text" class="form-control form-control-sm"
                                                                 placeholder="" />
                                                             <label for="formId1">Name</label>
                                                         </div>
@@ -112,9 +116,9 @@
                                                     <div class="mb-3">
 
                                                         <div class="form-floating">
-                                                            <input type="file" class="form-control" id="fileInput"
-                                                                placeholder="Choose">
-                                                            <label for="fileInput">Image</label>
+                                                            <input id="pet_images" type="file" class="form-control"
+                                                                placeholder="Choose" multiple>
+                                                            <label for="pet_images">Image</label>
                                                         </div>
 
                                                     </div>
@@ -123,11 +127,11 @@
                                                 <div class="col-12 col-lg-4">
                                                     <div class="mb-3">
                                                         <div class="form-floating">
-                                                            <select class="form-select">
+                                                            <select id="pet_type" class="form-select">
                                                                 <option selected>Select one</option>
-                                                                <option value="">New Delhi</option>
-                                                                <option value="">Istanbul</option>
-                                                                <option value="">Jakarta</option>
+                                                                <option value="dog">Dog</option>
+                                                                <option value="cat">Cat</option>
+                                                                <option value="bird">Bird</option>
                                                             </select>
                                                             <label for="floatingSelectGrid">
                                                                 Choose type
@@ -155,6 +159,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="container-fluid mx-0 w-100 sectionTabContainerTabs">
                                             <div class="row">
                                                 <div class="col-12">
@@ -162,57 +167,38 @@
                                                         Pet Details
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-lg-4">
-                                                    <div class="mb-3">
-                                                        <div class="form-floating">
-                                                            <input type="text" class="form-control form-control-sm"
-                                                                placeholder="" />
-                                                            <label for="formId1">Name</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-12 col-lg-4">
-                                                    <div class="mb-3">
-
-                                                        <div class="form-floating">
-                                                            <input type="file" class="form-control" id="fileInput"
-                                                                placeholder="Choose">
-                                                            <label for="fileInput">Image</label>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-12 col-lg-4">
-                                                    <div class="mb-3">
-                                                        <div class="form-floating">
-                                                            <select class="form-select">
-                                                                <option selected>Select one</option>
-                                                                <option value="">New Delhi</option>
-                                                                <option value="">Istanbul</option>
-                                                                <option value="">Jakarta</option>
-                                                            </select>
-                                                            <label for="floatingSelectGrid">
-                                                                Choose type
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="col-12">
-                                                    <div class="mb-3">
+                                                    <div
+                                                        class="mb-3 d-flex flex-row justify-content-between align-items-center gap-2">
                                                         <button type="button"
-                                                            class="btn btn-primary d-flex flex-row justify-content-center align-items-center nextSectionTabs">
+                                                            class="btn btn-secondary d-flex flex-row justify-content-center align-items-center prevSectionTabs">
                                                             <div class="svg-icon-sm me-1">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="size-6">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
+                                                                        d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                                                </svg>
+                                                            </div>
+                                                            <span>Return</span>
+
+                                                        </button>
+
+                                                        <button id="submitPetForm" type="button"
+                                                            class="btn btn-primary d-flex flex-row justify-content-center align-items-center">
+                                                            <div class="svg-icon-sm me-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke-width="1.5"
+                                                                    stroke="currentColor" class="size-6">
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                                                                 </svg>
 
                                                             </div>
-                                                            <span>Continue</span>
+                                                            <span>Save</span>
 
                                                         </button>
                                                     </div>
@@ -239,6 +225,7 @@
     @include('admin.sections.jsscripts')
 
     <script src="{{ asset('admin-resources/js/sectionTabControl.js') }}"></script>
+    <script type="module" src="{{ asset('admin-resources/js/pets-form.js') }}"></script>
 </body>
 
 </html>

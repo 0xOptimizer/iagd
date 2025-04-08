@@ -97,6 +97,8 @@ Route::prefix('rest/v1')->group(function () {
 
         Route::get('/get', [RestPetController::class, 'get'])->name('rest.v1.pets.get');
 
+        Route::post('/create', [RestPetController::class, 'create'])->name('rest.v1.pets.create');
+
     });
 });
 

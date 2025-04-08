@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pets extends Model
 {
@@ -14,6 +15,16 @@ class Pets extends Model
     protected $fillable = [
         'uuid', 'pet_name', 'pet_type', 'image'
     ];
+
+    /**
+     * Get all of the images for the Pets
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(PetsFile::class, 'attached_to_uuid', 'uuid');
+    }
 
     public function details()
     {
