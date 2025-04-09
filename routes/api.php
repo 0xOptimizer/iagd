@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// api v1 group
+Route::group(['prefix' => 'v1'], function () {
+    Route::get('/pets/count', [APIController::class, 'get_pets_count'])->name('api.v1.pets.count');
 });

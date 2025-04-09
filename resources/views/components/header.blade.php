@@ -19,5 +19,6 @@
 @else
     <link href="{{ asset('css/style_m_iagd.css?v=5') }}" rel="stylesheet">
 @endif
+<link href="{{ asset('css/helix.css') }}" rel="stylesheet">
 
 @include('components.scripts')

@@ -24,4 +24,9 @@ class Pets extends Model
     {
         return $this->hasOne(PetMeta::class, 'uuid', 'uuid');
     }
+
+    public function files()
+    {
+        return $this->hasOne(PetFiles::class, 'uuid', 'uuid');
+    }
 }
