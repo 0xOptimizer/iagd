@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\PetsDetails;
+use App\Models\PetsMeta;
+use App\Models\PetsFiles;
 
 class Pets extends Model
 {
@@ -17,16 +20,16 @@ class Pets extends Model
 
     public function details()
     {
-        return $this->hasOne(PetDetail::class, 'uuid', 'uuid');
+        return $this->hasOne(PetsDetails::class, 'uuid', 'uuid');
     }
 
     public function meta()
     {
-        return $this->hasOne(PetMeta::class, 'uuid', 'uuid');
+        return $this->hasOne(PetsMeta::class, 'uuid', 'uuid');
     }
 
     public function files()
     {
-        return $this->hasOne(PetFiles::class, 'uuid', 'uuid');
+        return $this->hasMany(PetsFiles::class, 'attached_to_uuid', 'uuid');
     }
 }

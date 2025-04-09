@@ -13,12 +13,20 @@
     <main class="p-3" style="position: relative;">
         <div class="mt-5">
             <div>
-                <img src="{{ asset('images/default.png') }}" class="rounded-circle" alt="" class="src" width="128" height="128">
+                @php
+                    $file = $pet->files->first();
+                @endphp
+                <img src="{{ asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension) }}" class="rounded-circle" alt="" width="128" height="128">
             </div>
             <div class="mt-3">
                 <h1 class="h1wrap text-center">
-                    <span class="text-gradient-primary">Pet Name</span>
+                    <span class="text-gradient-primary">{{ $pet->pet_name }}</span>
                 </h1>
+            </div>
+            <div class="mt-3" style="width: 250px; overflow-x: auto;">
+                <pre style="color: #fff; white-space: pre-wrap; word-wrap: break-word;">
+                    {{ $pet }}
+                </pre>
             </div>
         </div>
     </main>

@@ -30,17 +30,21 @@ class PublicController extends Controller
     }
 
     function pet_profile($iagd_number) {
-        $pet = Pets::where('iagd_number', $iagd_number)->first();
-
+        $pet = Pets::with(['details', 'meta', 'files'])
+            ->whereHas('details', function ($query) use ($iagd_number) {
+                $query->where('iagd_number', $iagd_number);
+            })
+            ->first();
+    
         if (!$pet) {
             abort(404, 'Pet not found');
         }
-
+    
         $data = [
             'title' => $pet->name . ' — Pet Profile',
             'pet' => $pet
         ];
-
-        return view('pet_profile', $data);
-    }
+    
+        return view('pets.profile', $data);
+    }    
 }
