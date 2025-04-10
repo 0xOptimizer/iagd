@@ -1,8 +1,11 @@
 $(function () {
-    let sectionPageCurrent = 0;
-    let maxSectionPage = null;
+    let sectionPageMin = 1;
 
-    localStorage.setItem("sectionPageCurrent", sectionPageCurrent);
+    let currentPage = 1;
+
+    let idNumberCount = 0;
+
+    let sectionPageMax = 0;
 
     const sectionTabContainer = () => {
         const sectionTabContainer = $(".sectionTabContainer");
@@ -10,31 +13,40 @@ $(function () {
         const children = sectionTabContainer.find(".sectionTabContainerTabs");
 
         $(children).each(function (index, element) {
-            sectionPageCurrent++;
+
+            idNumberCount++;
 
             let el = $(this);
 
-            el.attr("id", `thisPage${sectionPageCurrent}`);
+            el.attr("id", `thisPage${idNumberCount}`);
 
-            if (sectionPageCurrent == 1) {
+            if (sectionPageMin == idNumberCount) {
                 el.css("display", "block");
                 el.css("visibility", "visible");
             }
 
-            console.log(sectionPageCurrent);
         });
 
-        maxSectionPage = sectionPageCurrent;
+        sectionPageMax = idNumberCount;
 
-        console.log(sectionPageCurrent);
+        console.log(`sectionPageMin = ${sectionPageMin}`);
+        console.log(`currentPage = ${currentPage}`);
+        console.log(`idNumberCount = ${idNumberCount}`);
+        console.log(`sectionPageMax = ${sectionPageMax}`);
+
     };
 
     sectionTabContainer();
 
     $(".nextSectionTabs").on("click", function () {
-        if (maxSectionPage > sectionPageCurrent) {
+
+
+        if (currentPage  > sectionPageMax) {
+
             return;
         }
+
+        currentPage++;
 
         let sectionTabContainer = $(this).closest(".sectionTabContainer");
 
@@ -44,15 +56,45 @@ $(function () {
 
             let el = $(this);
 
-            el.css("display", "none");
-            el.css("visibility", "hidden");
-
-            if (el.attr("id") == `thisPage${sectionPageCurrent}`) {
+            if (el.attr("id") == `thisPage${currentPage}`) {
                 el.css("display", "block");
                 el.css("visibility", "visible");
- 
+
+            } else {
+                el.css("display", "none");
+                el.css("visibility", "hidden");
             }
 
         });
     });
+
+    $(".prevSectionTabs").on("click", function () {
+        if (currentPage  < sectionPageMin) {
+
+            return;
+        }
+
+        currentPage--;
+
+        let sectionTabContainer = $(this).closest(".sectionTabContainer");
+
+        const children = sectionTabContainer.find(".sectionTabContainerTabs");
+
+        $(children).each(function (index, element) {
+
+            let el = $(this);
+
+            if (el.attr("id") == `thisPage${currentPage}`) {
+                el.css("display", "block");
+                el.css("visibility", "visible");
+
+            } else {
+                el.css("display", "none");
+                el.css("visibility", "hidden");
+            }
+
+        });
+    });
+
+
 });
