@@ -37,18 +37,18 @@ class APIController extends Controller
         $query = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
         }])
-        ->join('pets_details', 'pets.uuid', '=', 'pets_details.uuid')
-        ->whereNotNull('pets_details.iagd_number')
-        ->orderBy('pets_details.iagd_number', 'asc')
-        ->select('pets.*');
+        ->whereHas('details', function ($q) {
+            $q->whereNotNull('iagd_number');
+        })
+        ->orderBy('details.iagd_number', 'asc');
 
         if ($request->has('starts_with')) {
             $query->where('pet_name', 'LIKE', $request->input('starts_with') . '%');
         }
 
         if ($request->has('species')) {
-            $query->where('pet_type', $request->input('species'));
-        }
+            $query->where('pet_type', rtrim($request->input('species'), 's'));
+        }        
 
         $perPage = $request->input('per_page', 15);
         $pets = $query->paginate($perPage)->appends($request->all());
