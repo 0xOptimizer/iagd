@@ -40,36 +40,48 @@
         <div class="loading-group row">
             <div class="row g-3">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
             </div>
             <div class="row mt-1 g-3">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px;"></div>
+                    <div class="skeleton" style="width: 100%; height: 158px; border-radius: 8px; display: none;"></div>
                 </div>
             </div>
         </div>
         <div class="iagd-containers row text-center" style="display: none;">
-            <div class="col-12">
-                <h4 style="color: #fff">12,595,304 pets registered</h4>
+            <div class="col-12" style="position: relative;">
+                    <div class="DNA_cont" style="position: absolute; left: 50%; transform: translateX(-50%) scale(0.4); opacity: 0.08;">
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>
+                    </div>
+                <h4 style="color: #fff">12,595,304 records</h4>
             </div>
         </div>
         <div class="iagd-containers row" style="display: none;">
@@ -199,7 +211,8 @@
         </div>
     </main>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script src="{{ asset('js/TweenMax.min.js') }}"></script>
+<script src="{{ asset('js/luxon.min.js') }}"></script>
 <script>
 $(document).ready(function() {
     $('.card-hoverable').on('mouseover', function() {
@@ -221,7 +234,7 @@ $(document).ready(function() {
 
             // Update the newest registry dates
             $.each(data.latest_pets, function(group, date) {
-                $('.iagd-newest-registry[data-group="' + group + '"]').text(moment(date).fromNow());
+                $('.iagd-newest-registry[data-group="' + group + '"]').text(luxon.DateTime.fromISO(date).toRelative());
             });
 
             setTimeout(function() {
@@ -251,10 +264,10 @@ $(document).ready(function() {
     //   TweenMax.staggerFrom("h1 > span", 1.2, {opacity:0, transform: "translateY(16vh) scaleY(-0.382)", transformOrigin:'50% 20%', ease:Expo.easeOut, force3D: true},0.035)
       
     //   TweenMax.from("h1", 3.6, {transform: "translateY(16vh)", ease:Expo.easeOut, force3D: true})
-      $('.nucleobase').show();
+      $('.loading-group .nucleobase').show();
       $('.skeleton').show();
-      TweenMax.staggerFrom(".nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
-      TweenMax.staggerFrom(".skeleton", 0.5, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
+      TweenMax.staggerFrom(".loading-group .nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
+      TweenMax.staggerFrom(".skeleton", 0.5, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 2.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
     };
 
     function afterLoading(){  

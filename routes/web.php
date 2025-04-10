@@ -28,6 +28,7 @@ Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/register', [PublicController::class, 'register'])->name('register');
 
 Route::get('/pets/{iagd_number}', [PublicController::class, 'pet_profile'])->name('pet_profile');
+Route::get('/species/{species}', [PublicController::class, 'species'])->name('species');
 
 
 /**

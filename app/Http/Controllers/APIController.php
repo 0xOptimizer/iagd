@@ -31,4 +31,36 @@ class APIController extends Controller
 
         return response()->json($data);
     }
+
+    public function get_species(Request $request)
+    {
+        $query = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->join('pets_details', 'pets.uuid', '=', 'pets_details.uuid')
+        ->whereNotNull('pets_details.iagd_number')
+        ->orderBy('pets_details.iagd_number', 'asc')
+        ->select('pets.*');
+
+        if ($request->has('starts_with')) {
+            $query->where('pet_name', 'LIKE', $request->input('starts_with') . '%');
+        }
+
+        if ($request->has('species')) {
+            $query->where('pet_type', $request->input('species'));
+        }
+
+        $perPage = $request->input('per_page', 15);
+        $pets = $query->paginate($perPage)->appends($request->all());
+
+        $pets->getCollection()->transform(function ($pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+            return $pet;
+        });
+
+        return response()->json($pets);
+    }
 }
