@@ -97,7 +97,7 @@
 <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <script src="{{ asset('js/luxon.min.js') }}"></script>
 <script>
-function fetchSpecies(page = 1, startsWith = '', species = '') {
+function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
     $('.species-list-container').html('<p>Loading...</p>');
 
     $.ajax({
@@ -173,7 +173,7 @@ $(document).ready(function() {
   
     introOpen();
 
-    fetchSpecies();
+    fetchSpecies(1, 'a', '{{ $species_name }}');
 });
 </script>
 </html>
