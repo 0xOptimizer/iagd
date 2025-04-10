@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PetsController as AdminPetsController;
 use App\Http\Controllers\Admin\SignInController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Rest\PetController as RestPetController;
 use App\Http\Controllers\SessionController;
 
 /*
@@ -80,5 +82,23 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('pets')->middleware(['auth'])->group(function () {
+        Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
+
+        Route::get('/form', [AdminPetsController::class, 'form'])->name('admin.pets.form');
+
+
+    });
+});
+
+Route::prefix('rest/v1')->group(function () {
+
+    Route::prefix('pets')->group(function () {
+
+        Route::get('/', [RestPetController::class, 'index'])->name('rest.v1.pets');
+
+        Route::get('/get', [RestPetController::class, 'get'])->name('rest.v1.pets.get');
+
+    });
 });
 
