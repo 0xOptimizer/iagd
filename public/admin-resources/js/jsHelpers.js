@@ -34,7 +34,7 @@ export const fetchApiGetData = async (url) => {
     try {
         const response = await fetch(url, {
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content"),
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
 
@@ -52,7 +52,7 @@ export const fetchApiPostData = async (url,fd) => {
             method: "POST",
 
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content")
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
             },
 
             body: fd,
