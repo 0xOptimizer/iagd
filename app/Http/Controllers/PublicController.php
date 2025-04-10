@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Pets;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use JavaScript;
+use URL;
 
 class PublicController extends Controller
 {
@@ -14,14 +16,19 @@ class PublicController extends Controller
         $data = [
             'title' => 'International Animals Genetic Database (v2!)'
         ];
-    
+
         return view('front', $data);
-    }    
+    }
 
     function register(Request $request) {
         $agent = new Agent();
         $view = 'register';
 
+        JavaScript::put([
+            'urlBase' => URL::to('/'),
+            'assetUrl' => asset('/')
+        ]);
+        
         $data = [
             'title' => 'Register your Pet — IAGD'
         ];
