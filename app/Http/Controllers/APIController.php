@@ -40,7 +40,7 @@ class APIController extends Controller
         ->whereHas('details', function ($q) {
             $q->whereNotNull('iagd_number');
         })
-        ->orderBy('details.iagd_number', 'asc');
+        ->orderByRaw('(SELECT iagd_number FROM pets_details WHERE pets_details.uuid = pets.uuid) ASC');
 
         if ($request->has('starts_with')) {
             $query->where('pet_name', 'LIKE', $request->input('starts_with') . '%');
@@ -48,7 +48,7 @@ class APIController extends Controller
 
         if ($request->has('species')) {
             $query->where('pet_type', rtrim($request->input('species'), 's'));
-        }        
+        }
 
         $perPage = $request->input('per_page', 15);
         $pets = $query->paginate($perPage)->appends($request->all());
