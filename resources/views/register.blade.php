@@ -314,78 +314,12 @@
             </div>
         </form>
     </div>
-    <div class="group-container" data-group="page_4" style="display: none;">
-        <div class="d-flex align-items-center justify-content-start mb-4">
-            <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-            <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-            <div style="margin-left: 25px;">
-                <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
-                <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
-            </div>
-        </div>
-        <form id="registrationForm" autocomplete="off">
-            <div class="row">
-                <div class="form-floating col-8">
-                    <input type="text" class="form-control" id="pet-owner" placeholder="Main Owner">
-                    <label for="pet-owner" style="margin-left: 12px;">Who is the main owner of <span class="pet-preview-pet_name"></span>?</label>
-                </div>
-                <div class="form-floating col-4" style="position: relative;">
-                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
-                    <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100"><i class="bi bi-link-45deg"></i> Link Lounge</button>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="form-floating col-12 mt-2">
-                    <textarea class="form-control" id="pet-co_owners" placeholder="Co-Owner(s)" style="min-height: 125px;"></textarea>
-                    <label for="pet-co_owners" style="margin-left: 12px;">Co-Owner(s)</label>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="form-floating col-10">
-                    <input type="text" class="form-control" id="pet-owner_location" placeholder="Owner's Location">
-                    <label for="pet-owner_location" style="margin-left: 12px;">Owner's Location</label>
-                </div>
-                <div class="form-floating col-2" style="position: relative;">
-                    <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
-                    <button type="button" class="pet-owner_address-autofill btn btn-primary btn-lg w-100 h-100"><i class="bi bi-geo-alt-fill"></i></button>
-                </div>
-                <div class="form-floating col-12 mt-2">
-                    <input type="text" class="form-control" id="pet-owner_contact" placeholder="Owner's Contact Number">
-                    <label for="pet-owner_contact" style="margin-left: 12px;">Owner's Contact Number</label>
-                </div>
-                <div class="form-floating col-12 mt-2">
-                    <input type="text" class="form-control" id="pet-owner_email" placeholder="Owner's Email">
-                    <label for="pet-owner_email" style="margin-left: 12px;">Owner's Email</label>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
-                </div>
-            </div>
-            <!-- Submit Button -->
-            <div class="d-grid gap-2 mt-4 mb-3">
-                <div class="row">
-                    <div class="form-floating col-3 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_3" style="height: 100%; width: 100%;">Back</button>
-                    </div>
-                    <div class="form-floating col-9 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_5" style="height: 100%; width: 100%;">Continue</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
     <div class="group-container" data-group="page_5" style="display: none;">
-        <div class="d-flex align-items-center justify-content-start mb-4">
-            <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-            <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-            <div style="margin-left: 25px;">
-                <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
-                <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+        <div class="row mb-2">
+            <div class="banner-info p-3 text-center">
+                <i class="bi bi-info-circle"></i> Review all information before submitting. You can go back to make changes.
             </div>
         </div>
-        
         <div class="summary-container">
             <!-- Pet Details Summary -->
             <div class="summary-section">
@@ -477,9 +411,6 @@
                         <i class="bi bi-check-circle-fill"></i> Submit Registration
                     </button>
                 </div>
-            </div>
-            <div class="text-center text-muted mt-3" style="font-size: 0.9em;">
-                Review all information before submitting. You can go back to make changes.
             </div>
         </div>
     </div>

@@ -13,23 +13,8 @@ use URL;
 class PublicController extends Controller
 {
     function index() {
-        $petCounts = Cache::remember('pet_counts_by_type', 300, function () {
-            return Pets::select('pet_type', DB::raw('count(*) as total'))
-                       ->groupBy('pet_type')
-                       ->pluck('total', 'pet_type');
-        });
-
-        $latestPets = Cache::remember('latest_pets_by_type', 300, function () {
-            return Pets::join('pets_meta', 'pets.uuid', '=', 'pets_meta.uuid')
-                       ->select('pets.pet_type', DB::raw('MAX(pets_meta.date_inserted) as latest'))
-                       ->groupBy('pets.pet_type')
-                       ->pluck('latest', 'pets.pet_type');
-        });
-
         $data = [
-            'title' => 'International Animals Genetic Database (v2!)',
-            'pet_counts' => $petCounts,
-            'latest_pets' => $latestPets
+            'title' => 'International Animals Genetic Database (v2!)'
         ];
 
         return view('front', $data);
@@ -50,4 +35,23 @@ class PublicController extends Controller
 
         return view($view, $data);
     }
+
+    function pet_profile($iagd_number) {
+        $pet = Pets::with(['details', 'meta', 'files'])
+            ->whereHas('details', function ($query) use ($iagd_number) {
+                $query->where('iagd_number', $iagd_number);
+            })
+            ->first();
+    
+        if (!$pet) {
+            abort(404, 'Pet not found');
+        }
+    
+        $data = [
+            'title' => $pet->name . ' — Pet Profile',
+            'pet' => $pet
+        ];
+    
+        return view('pets.profile', $data);
+    }    
 }
