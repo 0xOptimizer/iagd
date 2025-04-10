@@ -167,6 +167,73 @@
                                                         Pet Details
                                                     </div>
                                                 </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="Breed" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="formId1">Breed</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="IAGD #" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="formId1">IAGD #</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <select id="pet_type" class="form-select">
+                                                                <option selected>
+                                                                    Rate
+                                                                </option>
+                                                                <option value="1">
+                                                                    ⭐
+                                                                </option>
+                                                                <option value="2">
+                                                                    ⭐⭐
+                                                                </option>
+                                                                <option value="3">
+                                                                    ⭐⭐⭐
+                                                                </option>
+                                                                <option value="4">
+                                                                    ⭐⭐⭐⭐
+                                                                </option>
+                                                                <option value="5">
+                                                                    ⭐⭐⭐⭐⭐
+                                                                </option>
+                                                            </select>
+                                                            <label for="floatingSelectGrid">
+                                                                Select
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="IAGD #" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="formId1">Owner</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="IAGD #" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="formId1">Co-owner</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
 
                                                 <div class="col-12">
                                                     <div

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Rest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pets;
+use App\Models\PetsDetails;
 use App\Models\PetsFile;
 use Carbon\Carbon;
 use DB;
@@ -130,33 +131,33 @@ class PetController extends Controller
             }
 
             // Step 2: Insert into `pets_details` table using the relationship
-            // $pet->detail()->create([
-            //     'uuid' => $uuid,
-            //     'breed' => $request->input('pet_breed'),
-            //     'iagd_number' => null,
-            //     'stars' => 5,
-            //     'owner' => $request->input('pet_name'),
-            //     'owner_uuid' => (string) Str::uuid(),
-            //     'co_owner' => 'John Smith',
-            //     'co_owner_uuid' => (string) Str::uuid(),
-            //     'location' => 'Cebu City, PH',
-            //     'breeder' => 'Happy Paws Kennel',
-            //     'animal_facility' => 'HPK Facility #1',
-            //     'gender' => 'Female',
-            //     'date_of_birth' => '2023-07-15',
-            //     'markings' => 'White paws, black back',
-            //     'colors_body' => 'Black and White',
-            //     'colors_eye' => 'Blue',
-            //     'weight' => '20kg',
-            //     'height' => '50cm',
-            //     'icgd_number' => 'ICGD78910',
-            //     'link' => 'https://petregistry.com/shadow',
-            //     'male_parent' => 'Alpha',
-            //     'male_parent_uuid' => (string) Str::uuid(),
-            //     'female_parent' => 'Luna',
-            //     'female_parent_uuid' => (string) Str::uuid(),
-            //     'display_status' => 'visible',
-            // ]);
+            $petDetails = PetsDetails::create([
+                'uuid' => $uuid,
+                'breed' => $request->input('pet_breed'),
+                'iagd_number' => $request->input('iagd_number'),
+                'stars' => 5,
+                'owner' => $request->input('pet_name'),
+                'owner_uuid' => (string) Str::uuid(),
+                'co_owner' => 'John Smith',
+                'co_owner_uuid' => (string) Str::uuid(),
+                'location' => 'Cebu City, PH',
+                'breeder' => 'Happy Paws Kennel',
+                'animal_facility' => 'HPK Facility #1',
+                'gender' => 'Female',
+                'date_of_birth' => '2023-07-15',
+                'markings' => 'White paws, black back',
+                'colors_body' => 'Black and White',
+                'colors_eye' => 'Blue',
+                'weight' => '20kg',
+                'height' => '50cm',
+                'icgd_number' => 'ICGD78910',
+                'link' => 'https://petregistry.com/shadow',
+                'male_parent' => 'Alpha',
+                'male_parent_uuid' => (string) Str::uuid(),
+                'female_parent' => 'Luna',
+                'female_parent_uuid' => (string) Str::uuid(),
+                'display_status' => 'visible',
+            ]);
 
             // // Step 3: Insert into `pets_meta` table using the relationship
             // $pet->meta()->create([
@@ -262,7 +263,7 @@ class PetController extends Controller
             'image.*.image' => 'Choose a valid image file.',
             'image.*.mimes' => 'Selected image format not supported.',
             'image.*.max' => 'Image file exceed the maximum file size : 15MB.',
-            
+
             // Pet details validation messages
             // 'breed.required' => 'Breed is required.',
             // 'iagd_number.required' => 'IAGD number is required.',
