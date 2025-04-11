@@ -159,21 +159,6 @@ class PetController extends Controller
                 'display_status' => 'visible',
             ]);
 
-            // // Step 3: Insert into `pets_meta` table using the relationship
-            // $pet->meta()->create([
-            //     'uuid' => $uuid,
-            //     'status' => 2, // Approved
-            //     'from_system' => 'website',
-            //     'inserted_by' => 'user_form',
-            //     'date_inserted' => Carbon::now()->toDateTimeString(),
-            //     'created_by' => 'admin',
-            //     'date_added' => Carbon::now()->toDateTimeString(),
-            //     'updated_by' => 'admin',
-            //     'date_updated' => Carbon::now()->toDateTimeString(),
-            //     'deleted_by' => null,
-            //     'date_deleted' => null,
-            // ]);
-
 
         } catch (\Throwable $th) {
 
@@ -207,7 +192,48 @@ class PetController extends Controller
 
     public function update(Request $request) {}
 
-    public function delete(Request $request) {}
+    public function delete(Request $request)
+    {
+        $rules = [
+            'id' => 'required'
+        ];
+        $validationMessage = [
+            'id.required' => 'ID not found.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $validationMessage);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+
+
+        $delete = Pets::find($request->input('id'));
+
+        if (!$delete) {
+            return response()->json([
+                'status' => 'warning',
+                'message' => "Pet not found."
+            ], 404);
+        }
+
+        if (!$delete->delete()) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete pet.'
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet deleted.'
+        ], 200);
+    }
 
     /**
      * Validate request

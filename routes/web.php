@@ -101,6 +101,8 @@ Route::prefix('rest/v1')->group(function () {
 
         Route::post('/create', [RestPetController::class, 'create'])->name('rest.v1.pets.create');
 
+        Route::delete('/delete', [RestPetController::class, 'delete'])->name('rest.v1.pets.delete');
+
     });
 });
 
