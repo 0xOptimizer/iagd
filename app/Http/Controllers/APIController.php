@@ -37,8 +37,10 @@ class APIController extends Controller
         $query = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
         }])
-        ->whereHas('details', function ($q) {
-            $q->whereNotNull('iagd_number');
+        ->when(true, function ($query) {
+            $query->whereHas('details', function ($q) {
+            $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
+            });
         })
         ->orderByRaw('(SELECT iagd_number FROM pets_details WHERE pets_details.uuid = pets.uuid) ASC');
 
