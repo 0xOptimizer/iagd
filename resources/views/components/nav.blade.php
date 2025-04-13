@@ -18,14 +18,14 @@
             <form class="d-flex">
                 <div class="form-floating w-100">
                     <input class="form-control me-2" type="search" placeholder="Search a pet registry, facility, or vaccination record" aria-label="Search">
-                    <label for="floatingInput">Search</label>
+                    <label for="floatingInput"><i class="bi bi-search me-2"></i> Search</label>
                 </div>
             </form>
         </div>
 
         <!-- Right Group - Buttons -->
         <div class="d-flex gap-2">
-            <button type="button" class="btn btn-primary" style="width: 235px; height: 38px;"><i class="bi bi-feather"></i> Register Pet</button>
+            <a href="{{ route('register') }}" class="btn btn-primary" style="width: 235px; height: 38px;"><i class="bi bi-feather"></i> Register Pet</a>
             <button type="button" class="btn btn-secondary" style="width: 150px; height: 38px;"><i class="bi bi-dice-5"></i> Random</button>
         </div>
     </div>

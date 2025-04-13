@@ -15,9 +15,9 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @if (Agent::isMobile())
-    <link href="{{ asset('css/style_m_iagd.css?v=5') }}" rel="stylesheet">
+    <link href="{{ asset('css/style_m_iagd.css?v=6') }}" rel="stylesheet">
 @else
-    <link href="{{ asset('css/style_m_iagd.css?v=5') }}" rel="stylesheet">
+    <link href="{{ asset('css/style_m_iagd.css?v=6') }}" rel="stylesheet">
 @endif
 <link href="{{ asset('css/helix.css') }}" rel="stylesheet">
 

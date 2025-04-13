@@ -87,29 +87,33 @@ hr {
     font-weight: bold;
 }
 .form-control {
-     background-color: rgba(214, 167, 255, 0.05);
-     color: white;
-     border-color: #312c57;
- }
+	background-color: rgba(214, 167, 255, 0.05);
+	color: white;
+	border-color: #312c57;
+}
+
+.form-control:active, .form-control:focus {
+	outline: none;
+	box-shadow: none;
+	background-color: transparent;
+	border-color: #ffc500;
+	color: white;
+}
+
+.form-control:disabled, .form-control.disabled {
+background-color: #170e2d;
+color: #312c57;
+}
+
+.form-floating label {
+	color: #fff !important;
+}
  
- .form-control:active, .form-control:focus {
-     outline: none;
-     box-shadow: none;
-	 background-color: transparent;
-	 border-color: #ffc500;
-	 color: white;
- }
- 
- .form-control:disabled, .form-control.disabled {
-	background-color: #170e2d;
-	color: #312c57;
- }
- 
- .form-floating label {
+.phone-container .form-floating label {
      color: #ffc500 !important;
  }
  
- .form-floating label::after {
+.form-floating label::after {
      background-color: transparent !important;
  }
 .form-floating label::after {
@@ -590,3 +594,17 @@ main .card-hoverable:hover {
 		background-position: right -40px top 0;
 	}
 }
+
+.species-list-wrapper {
+	margin-top: 90px;
+}
+
+@media (max-width: 575.98px) {
+	.species-filter-starts_with-btn-container {
+		display: none !important;
+	}
+
+	.species-list-wrapper {
+		margin-top: 40px;
+	}
+}  

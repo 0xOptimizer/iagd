@@ -87,7 +87,7 @@
         <div class="iagd-containers row" style="display: none;">
             <div class="row g-3">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card card-hoverable h-100">
+                    <div class="species-card card card-hoverable h-100" data-group="dogs">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card card-hoverable h-100">
+                    <div class="species-card card card-hoverable h-100" data-group="cats">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-cat-raw-2.jfif') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card card-hoverable h-100">
+                    <div class="species-card card card-hoverable h-100" data-group="birds">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-bird-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -147,7 +147,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card card-hoverable h-100">
+                    <div class="species-card card card-hoverable h-100" data-group="rabbits">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-rabbit-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -276,6 +276,12 @@ $(document).ready(function() {
     };
   
     introOpen();
+
+    $('.species-card').on('click', function() {
+        animateShine($(this));
+        const group = $(this).data('group');
+        window.location.replace(`{{ url('species') }}/${group}`);
+    });
 });
 </script>
 </html>
