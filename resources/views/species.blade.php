@@ -125,7 +125,8 @@ function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
             const card = `
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="card card-hoverable h-100" style="${isFirstTime ? 'display: none;' : ''}; position: relative;">
-                        <div class="card-background" style="position: absolute; top: 0; left: 0; right: 0; height: 256px; background-image: url('${image}'); background-size: cover; background-position: center; filter: blur(8px); z-index: -1;"></div>
+                        <div class="card-background" style="position: absolute; top: 0; left: 0; right: 0; height: 256px; background-color: rgba(0, 0, 0, 0.16); z-index: -1;"></div>
+                        <!-- <div class="card-background" style="position: absolute; top: 0; left: 0; right: 0; height: 256px; background-image: url('${image}'); background-size: cover; background-position: center; filter: blur(8px); z-index: -1;"></div> -->
                         <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}'s Cute Photo" style="height: 256px; object-fit: contain; object-position: top;">
                         <div class="card-body">
                             <b class="card-title">${name}</b>
