@@ -84,7 +84,7 @@
                     <div class="nucleobase"></div>
                     <div class="nucleobase"></div>
                 </div>
-                <h4 style="color: #fff">12,595,304 records</h4>
+                <h4 style="color: #fff"><span class="species-list-records-count">...</span> records</h4>
             </div>
         </div>
         <div class="row">
@@ -97,9 +97,9 @@
 <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <script src="{{ asset('js/luxon.min.js') }}"></script>
 <script>
+var isFetching = false; // Failsafe to prevent multiple triggers
+var isFirstTime = true;
 function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
-    $('.species-list-container').html('<p>Loading...</p>');
-
     $.ajax({
         url: '/api/v1/species/filter',
         method: 'GET',
@@ -109,23 +109,23 @@ function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
             species: species
         }
     }).done(function(response) {
-        $('.species-list-container').empty();
+        // $('.species-list-container').empty();
 
         if (!response.data || response.data.length === 0) {
-            $('.species-list-container').html('<p>No pets found.</p>');
+            $('.species-list-container').append('<p>No more pets found.</p>');
             return;
         }
 
         response.data.forEach(pet => {
-            const image = pet.primary_image || '/images/iagd-container-cat-raw.png';
+            const image = pet.primary_image || '/images/no_img.png';
             const name = pet.pet_name || 'Unnamed Pet';
-            const iagdNumber = pet.details?.length || 'No IAGD Number';
+            const iagdNumber = pet.details?.iagd_number || 'No IAGD Number';
             const createdAt = pet.details?.created_at ? moment(pet.details.created_at).fromNow() : 'Unknown';
 
             const card = `
             <div class="col-lg-3 col-md-3 col-sm-12">
-                <div class="card card-hoverable h-100">
-                    <img src="${image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
+                <div class="card card-hoverable h-100" style="${isFirstTime ? 'display: none;' : ''}">
+                    <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}'s Cute Photo" style="height: 256px; object-fit: contain; object-position: top;">
                     <div class="card-body">
                         <b class="card-title">${name}</b>
                         <p class="card-text">${iagdNumber}</p>
@@ -138,12 +138,28 @@ function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
             </div>`;
             $('.species-list-container').append(card);
         });
+        $('.species-list-records-count').text(response.total_species_count);
     }).fail(function(jqXHR) {
         $('.species-list-container').html('<p>Error loading pets. Please try again later.</p>');
         console.error('Fetch failed:', jqXHR.responseText);
+    }).always(function() {
+        isFetching = false;
+        $('.loading-group').hide();
+        $('.after-loading').show();
+        if (isFirstTime) {
+            isFirstTime = false;
+            afterLoading();
+        }
     });
 }
+function afterLoading() {
+    $('.species-list-container .card').show();
+    TweenMax.staggerFrom(".species-list-container .card", 0.4, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
+};
 $(document).ready(function() {
+    var scroll_page_counter = 1;
+    var starts_with = new URLSearchParams(window.location.search).get('starts_with') || "a";
+
     $('.card-hoverable').on('mouseover', function() {
         $(this).find('.card-title').addClass('text-gradient-primary');
     });
@@ -156,24 +172,26 @@ $(document).ready(function() {
     });
 
     function introOpen(){  
-      //Using ex. transform:"translate3d(x,x,x)" instead of (y:__) or (top:__) to maintain vh or em units responsiveness
-    //   TweenMax.staggerFrom("h1 > span", 1.2, {opacity:0, transform: "translateY(16vh) scaleY(-0.382)", transformOrigin:'50% 20%', ease:Expo.easeOut, force3D: true},0.035)
-      
-    //   TweenMax.from("h1", 3.6, {transform: "translateY(16vh)", ease:Expo.easeOut, force3D: true})
-      $('.loading-group .nucleobase').show();
-      $('.skeleton').show();
-      TweenMax.staggerFrom(".loading-group .nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
-      TweenMax.staggerFrom(".skeleton", 0.5, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 2.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
-    };
-
-    function afterLoading(){  
-        $('.iagd-containers .card').show();
-        TweenMax.staggerFrom(".iagd-containers .card", 0.4, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
+        $('.loading-group .nucleobase').show();
+        $('.skeleton').show();
+        TweenMax.staggerFrom(".loading-group .nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
+        TweenMax.staggerFrom(".skeleton", 0.5, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 2.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
     };
   
     introOpen();
 
-    fetchSpecies(1, 'a', '{{ $species_name }}');
+    fetchSpecies(scroll_page_counter, starts_with, '{{ $species_name }}');
+
+    $(window).scroll(function() {
+        if (isFirstTime) {
+            return;
+        }
+        if (!isFetching && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            isFetching = true; // Set fetching flag
+            scroll_page_counter++;
+            fetchSpecies(scroll_page_counter, starts_with, '{{ $species_name }}');
+        }
+    });
 });
 </script>
 </html>

@@ -39,7 +39,7 @@ class APIController extends Controller
         }])
         ->when(true, function ($query) {
             $query->whereHas('details', function ($q) {
-            $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
+                $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
             });
         })
         ->orderByRaw('(SELECT iagd_number FROM pets_details WHERE pets_details.uuid = pets.uuid) ASC');
@@ -49,7 +49,10 @@ class APIController extends Controller
         }
 
         if ($request->has('species')) {
-            $query->where('pet_type', rtrim($request->input('species'), 's'));
+            $species = rtrim($request->input('species'), 's');
+            $query->where('pet_type', $species);
+        } else {
+            $species = null;
         }
 
         $perPage = $request->input('per_page', 15);
@@ -63,6 +66,21 @@ class APIController extends Controller
             return $pet;
         });
 
-        return response()->json($pets);
+        $totalSpeciesCount = Pets::when($species, function ($q) use ($species) {
+            $q->where('pet_type', $species);
+        })
+        ->whereHas('details', function ($q) {
+            $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
+        })
+        ->count();
+
+        return response()->json([
+            'data' => $pets->items(),
+            'current_page' => $pets->currentPage(),
+            'last_page' => $pets->lastPage(),
+            'per_page' => $pets->perPage(),
+            'total' => $pets->total(),
+            'total_species_count' => $totalSpeciesCount
+        ]);
     }
 }
