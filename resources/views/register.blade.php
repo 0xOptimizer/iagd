@@ -564,10 +564,11 @@
     </div>
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="{{ asset('js/chart.js') }}"></script>
+<script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script> -->
+<script src="{{ asset('js/luxon.min.js') }}"></script>
+<script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
 var hasPetImage = false;
 function page_1_continue_validate() {

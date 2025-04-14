@@ -31,4 +31,56 @@ class APIController extends Controller
 
         return response()->json($data);
     }
+
+    public function get_species(Request $request)
+    {
+        $query = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->when(true, function ($query) {
+            $query->whereHas('details', function ($q) {
+                $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
+            });
+        })
+        ->orderByRaw('(SELECT iagd_number FROM pets_details WHERE pets_details.uuid = pets.uuid) ASC');
+
+        if ($request->has('starts_with')) {
+            $query->where('pet_name', 'LIKE', $request->input('starts_with') . '%');
+        }
+
+        if ($request->has('species')) {
+            $species = rtrim($request->input('species'), 's');
+            $query->where('pet_type', $species);
+        } else {
+            $species = null;
+        }
+
+        $perPage = $request->input('per_page', 15);
+        $pets = $query->paginate($perPage)->appends($request->all());
+
+        $pets->getCollection()->transform(function ($pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+            return $pet;
+        });
+
+        $totalSpeciesCount = Pets::when($species, function ($q) use ($species) {
+            $q->where('pet_type', $species);
+        })
+        ->whereHas('details', function ($q) {
+            $q->whereNotNull('iagd_number')->where('iagd_number', '!=', '');
+        })
+        ->count();
+
+        return response()->json([
+            'data' => $pets->items(),
+            'current_page' => $pets->currentPage(),
+            'last_page' => $pets->lastPage(),
+            'per_page' => $pets->perPage(),
+            'total' => $pets->total(),
+            'total_species_count' => $totalSpeciesCount
+        ]);
+    }
 }

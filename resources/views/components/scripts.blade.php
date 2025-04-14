@@ -357,5 +357,9 @@ $(document).ready(function() {
     //     let parent = $(this).parent('.form-floating');
     //     animateShine(parent);
     // });
+
+    $('body').on('click', '.offcanvas-nav-apps-btn', function() {
+        $('#offcanvas-nav-apps').offcanvas('show');
+    });
 });
 </script>

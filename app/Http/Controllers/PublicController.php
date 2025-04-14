@@ -53,5 +53,31 @@ class PublicController extends Controller
         ];
     
         return view('pets.profile', $data);
-    }    
+    }
+
+    function species($species) {
+        $valid_species = ['cats', 'dogs', 'rabbits', 'birds'];
+
+        if (!in_array($species, $valid_species)) {
+            abort(404, 'Species not found');
+        }
+
+        $icon_map = [
+            'cats' => 'mayor_icons_cat.png',
+            'dogs' => 'mayor_icons_dog.png',
+            'rabbits' => 'mayor_icons_rabbit.png',
+            'birds' => 'mayor_icons_bird.png'
+        ];
+
+        // capitalize first letter
+        $species_name = ucfirst($species);
+
+        $data = [
+            'title' => $species_name . ' — IAGD',
+            'species_name' => $species_name,
+            'species_icon' => asset('images/' . $icon_map[$species]),
+        ];
+    
+        return view('species', $data);
+    }
 }

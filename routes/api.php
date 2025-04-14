@@ -23,4 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // api v1 group
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/pets/count', [APIController::class, 'get_pets_count'])->name('api.v1.pets.count');
+    Route::get('/species/{species}', [APIController::class, 'get_species'])->name('api.v1.species.filter');
 });
