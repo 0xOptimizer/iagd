@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Rest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pets;
+use App\Models\PetsDetails;
 use App\Models\PetsFile;
 use Carbon\Carbon;
 use DB;
@@ -130,48 +131,33 @@ class PetController extends Controller
             }
 
             // Step 2: Insert into `pets_details` table using the relationship
-            // $pet->detail()->create([
-            //     'uuid' => $uuid,
-            //     'breed' => $request->input('pet_breed'),
-            //     'iagd_number' => null,
-            //     'stars' => 5,
-            //     'owner' => $request->input('pet_name'),
-            //     'owner_uuid' => (string) Str::uuid(),
-            //     'co_owner' => 'John Smith',
-            //     'co_owner_uuid' => (string) Str::uuid(),
-            //     'location' => 'Cebu City, PH',
-            //     'breeder' => 'Happy Paws Kennel',
-            //     'animal_facility' => 'HPK Facility #1',
-            //     'gender' => 'Female',
-            //     'date_of_birth' => '2023-07-15',
-            //     'markings' => 'White paws, black back',
-            //     'colors_body' => 'Black and White',
-            //     'colors_eye' => 'Blue',
-            //     'weight' => '20kg',
-            //     'height' => '50cm',
-            //     'icgd_number' => 'ICGD78910',
-            //     'link' => 'https://petregistry.com/shadow',
-            //     'male_parent' => 'Alpha',
-            //     'male_parent_uuid' => (string) Str::uuid(),
-            //     'female_parent' => 'Luna',
-            //     'female_parent_uuid' => (string) Str::uuid(),
-            //     'display_status' => 'visible',
-            // ]);
-
-            // // Step 3: Insert into `pets_meta` table using the relationship
-            // $pet->meta()->create([
-            //     'uuid' => $uuid,
-            //     'status' => 2, // Approved
-            //     'from_system' => 'website',
-            //     'inserted_by' => 'user_form',
-            //     'date_inserted' => Carbon::now()->toDateTimeString(),
-            //     'created_by' => 'admin',
-            //     'date_added' => Carbon::now()->toDateTimeString(),
-            //     'updated_by' => 'admin',
-            //     'date_updated' => Carbon::now()->toDateTimeString(),
-            //     'deleted_by' => null,
-            //     'date_deleted' => null,
-            // ]);
+            $petDetails = PetsDetails::create([
+                'uuid' => $uuid,
+                'breed' => $request->input('breed'),
+                'iagd_number' => $request->input('iagd_number'),
+                'stars' => $request->input('stars'),
+                'owner' => $request->input('owner'),
+                'owner_uuid' => (string) Str::uuid(),
+                'co_owner' => $request->input('co_owner'),
+                'co_owner_uuid' => (string) Str::uuid(),
+                'location' => $request->input('location'),
+                'breeder' => $request->input('breeder'),
+                'animal_facility' => $request->input('animal_facility'),
+                'gender' => $request->input('gender'),
+                'date_of_birth' => $request->input('date_of_birth'),
+                'markings' => $request->input('markings'),
+                'colors_body' => $request->input('colors_body'),
+                'colors_eye' => $request->input('colors_eye'),
+                'weight' => $request->input('weight'),
+                'height' => $request->input('height'),
+                'icgd_number' => $request->input('icgd_number'),
+                'link' => $request->input('link'),
+                'male_parent' => $request->input('male_parent'),
+                'male_parent_uuid' => (string) Str::uuid(),
+                'female_parent' => $request->input('female_parent'),
+                'female_parent_uuid' => (string) Str::uuid(),
+                'display_status' => 'visible',
+            ]);
 
 
         } catch (\Throwable $th) {
@@ -206,7 +192,48 @@ class PetController extends Controller
 
     public function update(Request $request) {}
 
-    public function delete(Request $request) {}
+    public function delete(Request $request)
+    {
+        $rules = [
+            'id' => 'required'
+        ];
+        $validationMessage = [
+            'id.required' => 'ID not found.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $validationMessage);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+
+
+        $delete = Pets::find($request->input('id'));
+
+        if (!$delete) {
+            return response()->json([
+                'status' => 'warning',
+                'message' => "Pet not found."
+            ], 404);
+        }
+
+        if (!$delete->delete()) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete pet.'
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet deleted.'
+        ], 200);
+    }
 
     /**
      * Validate request
@@ -223,7 +250,7 @@ class PetController extends Controller
             'pet_type' => 'required',
 
             // Pet images
-            'image' => 'required|array|min:1',
+            'image' => 'image|array|min:1',
             'image.*' => 'image|mimes:jpeg,jpg,png,gif|max:15000',
 
             // Pet details rules
@@ -262,7 +289,7 @@ class PetController extends Controller
             'image.*.image' => 'Choose a valid image file.',
             'image.*.mimes' => 'Selected image format not supported.',
             'image.*.max' => 'Image file exceed the maximum file size : 15MB.',
-            
+
             // Pet details validation messages
             // 'breed.required' => 'Breed is required.',
             // 'iagd_number.required' => 'IAGD number is required.',

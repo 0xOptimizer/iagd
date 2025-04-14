@@ -167,6 +167,242 @@
                                                         Pet Details
                                                     </div>
                                                 </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="pet_breed" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="pet_breed">Breed</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="iagd_number" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="iagd_number">IAGD #</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <select id="pet_stars" class="form-select">
+                                                                <option selected>
+                                                                    ---
+                                                                </option>
+                                                                <option value="1">
+                                                                    ⭐
+                                                                </option>
+                                                                <option value="2">
+                                                                    ⭐⭐
+                                                                </option>
+                                                                <option value="3">
+                                                                    ⭐⭐⭐
+                                                                </option>
+                                                                <option value="4">
+                                                                    ⭐⭐⭐⭐
+                                                                </option>
+                                                                <option value="5">
+                                                                    ⭐⭐⭐⭐⭐
+                                                                </option>
+                                                            </select>
+                                                            <label for="pet_stars">
+                                                                Rate
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="owner_name" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="owner_name">
+                                                                Owner
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="co_owner_name" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="co_owner_name">
+                                                                Co-owner
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="location" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="location">
+                                                                Location
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="breeder" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="breeder">
+                                                                Breeder
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="animal_facility" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="animal_facility">
+                                                                Animal Facility
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="gender" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="gender">
+                                                                Gender
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="date_of_birth" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="date_of_birth">
+                                                                Date of birth
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="markings" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="markings">
+                                                                Markings
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="fur_color" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="fur_color">
+                                                                Fur color
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="eye_color" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="eye_color">
+                                                                Eye color
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="weight" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="weight">
+                                                                Weight
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="height" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="height">
+                                                                Height
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="icgd_number" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="icgd_number">
+                                                                ICGD number
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="link" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="link">
+                                                                Link
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="parent_male" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="parent_male">
+                                                                Parent male
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-lg-4">
+                                                    <div class="mb-3">
+                                                        <div class="form-floating">
+                                                            <input id="parent_female" type="text" class="form-control form-control-sm"
+                                                                placeholder="" />
+                                                            <label for="parent_female">
+                                                                Parent female
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-12">
                                                     <div

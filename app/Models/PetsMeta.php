@@ -12,7 +12,16 @@ class PetsMeta extends Model
     protected $table = 'pets_meta';
 
     protected $fillable = [
-        'uuid', 'status', 'from_system', 'inserted_by', 'date_inserted', 'created_by', 
-        'date_added', 'updated_by', 'date_updated', 'deleted_by', 'date_deleted'
+        'uuid',
+        'status',
+        'from_system',
+        'inserted_by',
+        'date_inserted',
+        'created_by',
+        'date_added',
+        'updated_by',
+        'date_updated',
+        'deleted_by',
+        'date_deleted'
     ];
 }
