@@ -288,7 +288,6 @@
 
 .main-content {
     width: 100%;
-
 }
 
 
@@ -395,9 +394,6 @@
     .main-content {
         width: calc(100vw - 360px);
         margin-left: 360px;
-        position: fixed;
-        /* opacity: 0; */
-        /* margin-right: -1000px; */
         animation: showMainContent 0.3s forwards;
         -webkit-animation: showMainContent 0.3s forwards;
     }
