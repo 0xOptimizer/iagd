@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pets;
 use App\Models\PetsDetails;
 use App\Models\PetsFile;
+use Cache;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -57,7 +58,81 @@ class PetController extends Controller
         }
     }
 
-    public function get(Request $request) {}
+    /**
+     * Get specific pet base on submitted requests
+     * @param Request $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function get(Request $request)
+    {
+        // Create rules
+        $rules = [
+            'search' => 'required'
+        ];
+
+        // Create validation messages
+        $validationMessage = [
+            'search.required' => 'Please enter a search keyword'
+        ];
+
+        // Validate request
+        $validator = Validator::make($request->all(), $rules, $validationMessage);
+
+        // If validator fails
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 200);
+        }
+
+        // Declare variables
+        $searchTerm = $request->input('search');
+
+        // Search pet
+        $pets = Pets::with('details')
+            ->whereFullText(['pet_name', 'pet_type'], $searchTerm)
+            ->get();
+
+        // Search pet details
+        if ($pets->isEmpty()) {
+            $pets = PetsDetails::with('pet')
+                ->whereFullText(['iagd_number'], $searchTerm)
+                ->get()
+                ->map(function ($details) {
+
+                    // Get pet data and remove nested 'pet' from details
+                    $pet = $details->pet;
+
+                    // Convert details to array and remove 'pet'
+                    $detailsArray = $details->toArray();
+                    unset($detailsArray['pet']);
+
+                    // Combine as consistent structure
+                    return collect($pet)->merge([
+                        'details' => $detailsArray
+                    ]);
+                });
+        }
+
+        // Check if pet is empty
+        if ($pets->isEmpty()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'No pet found'
+            ], 200);
+
+        }
+
+        // Return json success
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet found',
+            'data' => $pets
+        ], 200);
+    }
 
     /**
      * Create pet
@@ -160,8 +235,6 @@ class PetController extends Controller
                 'female_parent_uuid' => (string) Str::uuid(),
                 'display_status' => 'visible',
             ]);
-
-
         } catch (\Throwable $th) {
 
             // Rollback database transaction
