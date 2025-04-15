@@ -23,7 +23,7 @@
         </div>
         <div class="loading-group row text-center mb-3">
             <div class="col-12">
-                <div class="DNA_cont">
+                <div class="DNA_cont" style="width: 100%;">
                     <div class="nucleobase" style="display: none;"></div>
                     <div class="nucleobase" style="display: none;"></div>
                     <div class="nucleobase" style="display: none;"></div>
@@ -69,10 +69,10 @@
         </div>
         <div class="iagd-containers row text-center" style="display: none;">
             <div class="col-12" style="position: relative;">
-                    <div class="DNA_cont" style="position: absolute; left: 50%; transform: translateX(-50%) scale(0.4); opacity: 0.08;">
+                    <div class="DNA_cont" style="position: absolute; left: 50%; transform: translateX(-50%) scale(0.4); opacity: 0.08; width: 100%;">
                         <div class="nucleobase"></div>
                         <div class="nucleobase"></div>
-                        <div class="nucleobase"></div>
+                        <div class="nucleobase"></div>      
                         <div class="nucleobase"></div>
                         <div class="nucleobase"></div>
                         <div class="nucleobase"></div>

@@ -74,7 +74,7 @@
         </div>
         <div class="after-loading row text-center" style="display: none;">
             <div class="col-12" style="position: relative;">
-                <div class="DNA_cont" style="position: absolute; left: 50%; transform: translateX(-50%) scale(0.4); top: 12px; opacity: 0.08;">
+                <div class="DNA_cont" style="position: absolute; left: 50%; transform: translateX(-50%) scale(0.4); top: 12px; opacity: 0.08; width: 100%;">
                     <div class="nucleobase"></div>
                     <div class="nucleobase"></div>
                     <div class="nucleobase"></div>
@@ -99,7 +99,7 @@
 
             </div>
             <div class="species-list-loading-group col-12 mt-3" style="display: none;">
-                <div class="DNA_cont">
+                <div class="DNA_cont" style="width: 100%;">
                     <div class="nucleobase"></div>
                     <div class="nucleobase"></div>
                     <div class="nucleobase"></div>
