@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\PetsDetails;
 use App\Models\PetsMeta;
-use App\Models\PetsFiles;
+use App\Models\PetsFile;
 
 class Pets extends Model
 {
@@ -41,6 +41,6 @@ class Pets extends Model
 
     public function files()
     {
-        return $this->hasMany(PetsFiles::class, 'attached_to_uuid', 'uuid');
+        return $this->hasMany(PetsFile::class, 'attached_to_uuid', 'uuid');
     }
 }

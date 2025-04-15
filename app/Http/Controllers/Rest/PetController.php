@@ -101,7 +101,7 @@ class PetController extends Controller
             foreach ($request->file('images') as $image) {
 
                 // Create path
-                $path = public_path("img/pets/$uuid");
+                $path = public_path("uploads/pets/$uuid");
 
                 // Create image name
                 $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
@@ -140,9 +140,11 @@ class PetController extends Controller
                 'owner_uuid' => (string) Str::uuid(),
                 'co_owner' => $request->input('co_owner'),
                 'co_owner_uuid' => (string) Str::uuid(),
-                'location' => $request->input('location'),
+                'pet_location' => $request->input('pet_location'),
+                'owner_location' => $request->input('owner_location'),
                 'breeder' => $request->input('breeder'),
                 'animal_facility' => $request->input('animal_facility'),
+                'animal_facility_uuid' => $request->input('animal_facility_uuid'),
                 'gender' => $request->input('gender'),
                 'date_of_birth' => $request->input('date_of_birth'),
                 'markings' => $request->input('markings'),
@@ -261,7 +263,8 @@ class PetController extends Controller
             // 'owner_uuid' => 'required',
             // 'co_owner' => 'required',
             // 'co_owner_uuid' => 'required',
-            // 'location' => 'nullable',
+            // 'pet_location' => 'nullable',
+            // 'owner_location' => 'nullable',
             // 'breeder' => 'nullable',
             // 'animal_facility' => 'nullable',
             // 'gender' => 'nullable',

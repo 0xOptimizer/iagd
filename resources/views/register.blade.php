@@ -194,6 +194,8 @@
             </div>
         </div>
         <form id="registrationForm" autocomplete="off">
+            <input type="text" id="pet-sire-uuid" hidden>
+            <input type="text" id="pet-dam-uuid" hidden>
             <div class="row">
                 <div class="form-floating col-2">
                     <img src="" class="img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
@@ -407,7 +409,7 @@
                     <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Back</button>
                 </div>
                 <div class="form-floating col-9 mb-3">
-                    <button type="submit" class="btn btn-success btn-lg" style="height: 100%; width: 100%;">
+                    <button type="submit" class="registration-submit-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">
                         <i class="bi bi-check-circle-fill"></i> Submit Registration
                     </button>
                 </div>
@@ -603,7 +605,6 @@ $(document).ready(function() {
             fetchLatestSales(1, 50);
         }
     });
-
     
     $('.subgroup-navigate-btn').on('click', function() {
         const subgroup = $(this).data('group');
@@ -1026,6 +1027,58 @@ $(document).ready(function() {
         $('.pet-preview-pet_name').text(petName);
     });
 
+    $('.registration-submit-btn').on('click', function() {
+        let formData = new FormData();
+        formData.append('pet_name', $('#pet-name').val() || '');
+        formData.append('pet_type', $('#pet-species').val() || '');
+        let petImages = $('#self-input-photo').prop('files');
+        if (petImages && petImages.length > 0) {
+            for (let i = 0; i < petImages.length; i++) {
+                formData.append('pet_images[]', petImages[i]);
+            }
+        }
+        formData.append('breed', $('#pet-breed').val() || '');
+        formData.append('date_of_birth', $('#pet-birth_date').val() || '');
+        formData.append('gender', $('#pet-gender').val() || '');
+        formData.append('weight', $('#pet-weight').val() || '');
+        formData.append('height', $('#pet-height').val() || '');
+        formData.append('colors_eye', $('#pet-color_eye').val() || '');
+        formData.append('colors_body', $('#pet-color_body').val() || '');
+        formData.append('markings', $('#pet-markings').val() || '');
+        formData.append('pet_location', $('#pet-address').val() || '');
+        formData.append('owner', $('#pet-owner').val() || '');
+        formData.append('co_owners', $('#pet-co_owners').val() || '');
+        formData.append('owner_location', $('#pet-owner_location').val() || '');
+        formData.append('owner_contact', $('#pet-owner_contact').val() || '');
+        formData.append('owner_email', $('#pet-owner_email').val() || '');
+        formData.append('animal_facility', $('#pet-animal_facility').val() || '');
+        formData.append('animal_facility_uuid', $('#pet-animal_facility_uuid').val() || '');
+        formData.append('vet_records', $('#pet-vet_records').val() || '');
+        formData.append('male_parent', $('#pet-sire-name').val() || '');
+        formData.append('male_parent_uuid', $('#pet-sire-uuid').val() || '');
+        formData.append('female_parent', $('#pet-dam-name').val() || '');
+        formData.append('female_parent_uuid', $('#pet-dam-uuid').val() || '');
+
+        // Log the form data for debugging
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        // Example AJAX call to submit the form data
+        $.ajax({
+            url: '{{ route("rest.v1.pets.create") }}', // Replace with your endpoint
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log('Registration submitted successfully:', response);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error submitting registration:', error);
+            }
+        });
+    });
 });
 </script>
 </html>

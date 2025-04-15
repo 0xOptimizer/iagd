@@ -24,9 +24,11 @@ return new class extends Migration {
             $table->string('owner_uuid')->nullable();
             $table->text('co_owner')->nullable();
             $table->text('co_owner_uuid')->nullable();
-            $table->text('location')->nullable();
+            $table->text('pet_location')->nullable();
+            $table->text('owner_location')->nullable();
             $table->string('breeder')->nullable();
             $table->string('animal_facility')->nullable();
+            $table->string('animal_facility_uuid')->nullable();
             $table->string('gender')->nullable();
             $table->string('date_of_birth')->nullable();
             $table->string('markings')->nullable();
