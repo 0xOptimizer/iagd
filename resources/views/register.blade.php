@@ -32,7 +32,23 @@
             </div>
         </div>
     </nav>
-    <div class="group-container" data-group="page_1">
+    <div class="loading-group row text-center mt-5">
+            <div class="col-12">
+                <div class="DNA_cont" style="width: 100%;">
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                    <div class="nucleobase" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    <div class="group-container" data-group="page_1" style="display: none;">
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="rotating" style="position: absolute; top: 74px; left: 57px; font-size: 144px; color: #312c57; opacity: 0.33; z-index: -1; pointer-events: none;">
                 <i class="rotating bi bi-ubuntu"></i>
@@ -84,10 +100,10 @@
                     <div class="form-floating col-3">
                         <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
                     </div>
-                    <div class="page_1-incomplete-continue-btn-group form-floating col-9" style="display: none;">
+                    <div class="page_1-incomplete-continue-btn-group form-floating col-9">
                         <button type="button" class="page_1-incomplete-continue-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">Continue</button>
                     </div>
-                    <div class="page_1-complete-continue-btn-group form-floating col-9">
+                    <div class="page_1-complete-continue-btn-group form-floating col-9" style="display: none;">
                         <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_2" style="height: 100%; width: 100%;">Continue</button>
                     </div>
                 </div>
@@ -531,12 +547,12 @@
         </div>
         <hr class="my-5">
         <div class="card card-interactable">
-            <div class="select-species-option card-body d-flex align-items-center" data-option="Dog">
-                <img src="{{ asset('images/iagd_logo_mica.png') }}" width="64" height="64" class="me-4">
+            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd">
+                <img src="{{ asset('images/mayor_icons_search.png') }}" width="64" height="64" class="me-4">
                 <div>
-                    <span style="font-size: 24px;">Use IAGD Number</span>
+                    <span style="font-size: 24px;">Search Database</span>
                     <br>
-                    <span style="opacity: 0.16;">Enter the sire's IAGD number to identify details automatically.</span>
+                    <span style="opacity: 0.16;">Find and identify the sire's details automatically.</span>
                 </div>
             </div>
         </div>
@@ -544,11 +560,90 @@
             <div class="select-species-option card-body d-flex align-items-center" data-option="Cat">
                 <img src="{{ asset('images/mayor_icons_pencil.png') }}" width="64" height="64" class="me-4">
                 <div>
-                    <span style="font-size: 24px;">Write their Name</span>
+                    <span style="font-size: 24px;">No IAGD Number</span>
                     <br>
-                    <span style="opacity: 0.16;">No IAGD number? Enter the sire's name manually.</span>
+                    <span style="opacity: 0.16;">Enter the sire's name manually.</span>
                 </div>
             </div>
+        </div>
+        <div class="mt-2">
+            <div class="banner-info p-3 text-center">
+                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            </div>
+        </div>
+        <!-- <div class="card mt-2">
+            <div class="select-species-option card-body d-flex align-items-center">
+                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
+                <div class="w-100">
+                    <input type="text" class="form-control" placeholder="Other (Enter species)">
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-iagd">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-gradient-primary text-center">Search through our records</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card card-interactable">
+            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd-number">
+                <img src="{{ asset('images/iagd_logo_mica.png') }}" width="64" height="64" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Use IAGD Number</span>
+                    <br>
+                    <span style="opacity: 0.16;">Find the sire using their database ID.</span>
+                </div>
+            </div>
+        </div>
+        <div class="card card-interactable">
+            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd-name">
+                <img src="{{ asset('images/mayor_icons_paper-work.png') }}" width="64" height="64" class="me-4">
+                <div>
+                    <span style="font-size: 24px;">Search their Name</span>
+                    <br>
+                    <span style="opacity: 0.16;">Find the sire using their name.</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="banner-info p-3 text-center">
+                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            </div>
+        </div>
+        <!-- <div class="card mt-2">
+            <div class="select-species-option card-body d-flex align-items-center">
+                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
+                <div class="w-100">
+                    <input type="text" class="form-control" placeholder="Other (Enter species)">
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-iagd-number">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-gradient-primary text-center">Enter the sire's IAGD number</h5>
+        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- input goes here use form control with 100% with. not in card format -->
+        <div class="form-floating">
+            <input type="text" class="form-control" id="pet-sire-search-iagd-number-input" placeholder="IAGD Number">
+            <label for="pet-sire-search-iagd-number-input">IAGD Number</label>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd" aria-label="Back">
+                Back
+            </button>
+            <button type="button" class="pet-sire-search-iagd-number-btn btn btn-primary flex-grow-1">
+                <i class="bi bi-search"></i> Search Records
+            </button>
+        </div>
+        <hr class="my-3">
+        <div class="sire-search-iagd-number-container">
+
         </div>
         <div class="mt-2">
             <div class="banner-info p-3 text-center">
@@ -568,6 +663,7 @@
 </body>
 <script src="{{ asset('js/chart.js') }}"></script>
 <script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
+<script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script> -->
 <script src="{{ asset('js/luxon.min.js') }}"></script>
 <script src="{{ asset('js/html2canvas.min.js') }}"></script>
@@ -652,7 +748,7 @@ $(document).ready(function() {
         });
     });
 
-    let droppedFiles = {}; // For drag 'n drop functionality
+    let droppedFiles = {};
 
     function previewImage(input, dropZone) {
         if (input.files && input.files.length) {
@@ -660,10 +756,13 @@ $(document).ready(function() {
             dropZone.empty();
             $(".pet-input-images-container").empty();
             let files = Array.from(input.files).slice(0, 5);
+            let base64Images = [];
+
             files.forEach(function(file, index) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
-                    // Create drop zone image element.
+                    base64Images.push(e.target.result);
+
                     let dzImg = $("<img>")
                         .attr("src", e.target.result)
                         .addClass("drop-zone-img")
@@ -673,9 +772,9 @@ $(document).ready(function() {
                             "max-width": "100%",
                             "max-height": "100%"
                         });
+
                     if (index === 0) {
-                        dzImg.addClass('drop-zone-primary-img');
-                        dzImg.css({
+                        dzImg.addClass('drop-zone-primary-img').css({
                             "transform": "none",
                             "position": "relative",
                             "z-index": 10
@@ -692,8 +791,7 @@ $(document).ready(function() {
                         });
                     }
                     dropZone.append(dzImg);
-                    
-                    // Create offcanvas card element (displayed normally).
+
                     let card = $("<div>")
                         .addClass("pet-image-card")
                         .data("index", index)
@@ -714,8 +812,7 @@ $(document).ready(function() {
                         });
                     card.append(cardImg);
                     $(".pet-input-images-container").append(card);
-                    
-                    // Clicking a card updates primary image and closes offcanvas.
+
                     card.on("click", function() {
                         $(".pet-input-images-container .pet-image-card").css("border", "none");
                         $(this).css("border", "2px solid #000");
@@ -739,12 +836,17 @@ $(document).ready(function() {
                         });
                         $("#offcanvas-pet-images").offcanvas("hide");
                     });
+
+                    if (index === files.length - 1) {
+                        localStorage.setItem('pet_image_gallery', JSON.stringify(base64Images));
+                    }
                 };
                 reader.readAsDataURL(file);
             });
+
             dropZone.find(".drop-message").hide();
             droppedFiles[input.id] = input.files;
-            // Send the first image for classification.
+
             let formData = new FormData();
             formData.append("file", input.files[0]);
             $.ajax({
@@ -756,9 +858,10 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response && response.species) {
                         if (response.species_confidence > 0.8) {
-                            $('#pet-species').val(response.species.charAt(0).toUpperCase() + response.species.slice(1));
+                            const response_species = response.species.charAt(0).toUpperCase() + response.species.slice(1);
+                            $('#pet-species').val(response_species);
                             animateShine($('#pet-species').parent('.form-floating'));
-                            // $('.drop-zone').floatingText(getRandomResponse(response.species));
+                            localStorage.setItem('form_pet-species', response_species);
                             page_1_continue_validate();
                         }
                     } else {
@@ -769,6 +872,7 @@ $(document).ready(function() {
                     console.error("Error:", error);
                 }
             });
+
             if (input.files && input.files[0]) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
@@ -777,7 +881,7 @@ $(document).ready(function() {
                 };
                 reader.readAsDataURL(input.files[0]);
             }
-            // Show offcanvas and button if more than one image.
+
             if (input.files.length > 1) {
                 $('.drop-zone-primary-img').addClass('drop-zone-multiple-primary-img');
                 $(".offcanvas-input-images-btn").show();
@@ -809,9 +913,7 @@ $(document).ready(function() {
         let dropZone = $(e.target).closest(".drop-zone");
         let files = e.originalEvent.dataTransfer.files;
         let input = dropZone.siblings("input[type='file']")[0];
-
         droppedFiles[input.id] = files;
-
         dropZone.removeClass("dragging");
 
         if (files.length) {
@@ -854,6 +956,34 @@ $(document).ready(function() {
                 </div>`);
             }
         });
+    }
+
+    function resetDropZone(dropZoneSelector) {
+        let dropZones = $(dropZoneSelector);
+        dropZones.each(function() {
+            let dropZone = $(this);
+            dropZone.find("img").remove();
+            dropZone.html(`<div class="drop-message">
+                <img src="{{ asset('images/mayor_icons_add-image.png') }}" class="mb-3" width="48" height="48">
+                <br>
+                <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
+                <br>
+                <span style="font-size: 14px;">or press to browse from your device.</span>
+            </div>`);
+        });
+        $("input[type='file']").val('');
+    }
+
+    function clearFormStorage(name = null) {
+        if (name) {
+            localStorage.removeItem('form_' + name);
+        } else {
+            for (let key in localStorage) {
+                if (key.startsWith('form_') || key === 'pet_image_gallery') {
+                    localStorage.removeItem(key);
+                }
+            }
+        }
     }
 
     setupDropZone(".create-drop-zone");
@@ -910,6 +1040,7 @@ $(document).ready(function() {
                     
                     $input.val(`${city}, ${region}, ${country}`);
                     animateShine($input.parent('.form-floating'));
+                    localStorage.setItem('form_pet-address', `${city}, ${region}, ${country}`);
                 }).always(function() {
                     resetPetLocationAutofill($button, $input);
                 });
@@ -948,7 +1079,8 @@ $(document).ready(function() {
                     var country = data.address.country || "Unknown Country";
                     
                     $input.val(`${city}, ${region}, ${country}`);
-                    animateShine($input.parent('.form-floating'));
+                    animateShine($input.parent('.form-floating'))
+                    localStorage.setItem('form_pet-owner_location', `${city}, ${region}, ${country}`);
                 }).always(function() {
                     resetPetOwnerLocationAutofill($button, $input);
                 });
@@ -976,7 +1108,9 @@ $(document).ready(function() {
         let years = Math.floor(diff.years);
         let months = Math.floor(diff.months);
 
-        let ageText = years > 0 ? `${years} years, ${months} months` : `${months} months`;
+        let ageText = years > 0 
+            ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}` 
+            : `${months} month${months > 1 ? 's' : ''}`;
         
         $('#pet-birth_date').val(birthDate);
         $('#pet-age').val(ageText);
@@ -991,6 +1125,7 @@ $(document).ready(function() {
         const option = $(this).data('option');
         $('#pet-species').val(option);
         $('#offcanvas-select-species').offcanvas('hide');
+        localStorage.setItem('form_pet-species', option);
         page_1_continue_validate();
     });
 
@@ -998,6 +1133,7 @@ $(document).ready(function() {
         const option = $(this).data('option');
         $('#pet-gender').val(option);
         $('#offcanvas-select-gender').offcanvas('hide');
+        localStorage.setItem('form_pet-gender', option);
     });
 
     $('.page_1-incomplete-continue-btn').on('click', function() {
@@ -1059,23 +1195,182 @@ $(document).ready(function() {
         formData.append('female_parent', $('#pet-dam-name').val() || '');
         formData.append('female_parent_uuid', $('#pet-dam-uuid').val() || '');
 
-        // Log the form data for debugging
         for (var pair of formData.entries()) {
             console.log(pair[0] + ': ' + pair[1]);
         }
 
-        // Example AJAX call to submit the form data
         $.ajax({
-            url: '{{ route("rest.v1.pets.create") }}', // Replace with your endpoint
+            url: '{{ route("rest.v1.pets.create") }}',
             type: 'POST',
             data: formData,
             contentType: false,
             processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response) {
                 console.log('Registration submitted successfully:', response);
             },
             error: function(xhr, status, error) {
                 console.error('Error submitting registration:', error);
+            }
+        });
+    });
+
+    $('input, textarea, select').each(function () {
+        let name = $(this).attr('name') || $(this).attr('id');
+        if (!name) return;
+        let saved = localStorage.getItem('form_' + name);
+        if (saved !== null) {
+            $(this).val(saved);
+        }
+        if (name === 'pet-name') {
+            $('.pet-preview-pet_name').text(saved);
+        }
+        if (name === 'pet-species') {
+            $('.pet-preview-pet_species').text(saved);
+        }
+        if (name === 'pet-age') {
+            $('.pet-preview-pet_age').text(saved);
+        }
+        if (name === 'pet-breed') {
+            $('.pet-preview-pet_breed').text(saved);
+        }
+        if (name === 'pet-birth_date-mimic' || name === 'pet-birth_date') {
+            const birthDate = saved;
+            if (!birthDate) return;
+
+            let dt = luxon.DateTime.fromISO(birthDate);
+            let now = luxon.DateTime.now();
+            let diff = now.diff(dt, ['years', 'months']).toObject();
+
+            let years = Math.floor(diff.years);
+            let months = Math.floor(diff.months);
+
+            let ageText = years > 0 
+            ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}` 
+            : `${months} month${months > 1 ? 's' : ''}`;
+            
+            $('#pet-birth_date').val(birthDate);
+            $('#pet-age').val(ageText);
+            $('.pet-preview-pet_age').text(ageText);
+
+            $('.pet-input-age-mimic-group').hide();
+            $('.pet-input-age-actual-group').show();
+        }
+        page_1_continue_validate();
+    });
+
+    $(document).on('input change', 'input, textarea, select', function () {
+        let name = $(this).attr('name') || $(this).attr('id');
+        if (!name) return;
+        localStorage.setItem('form_' + name, $(this).val());
+    });
+
+    let gallery = localStorage.getItem('pet_image_gallery');
+    if (gallery) {
+        let images = JSON.parse(gallery);
+        let input = $("input[type='file']").get(0);
+        let dropZone = $(input).siblings(".drop-zone");
+        $(".pet-input-images-container").empty();
+        dropZone.empty();
+        images.forEach(function(src, index) {
+            hasPetImage = true;
+            page_1_continue_validate();
+
+            let dzImg = $("<img>")
+                .attr("src", src)
+                .addClass("drop-zone-img")
+                .data("index", index)
+                .css({
+                    "object-fit": "contain",
+                    "max-width": "100%",
+                    "max-height": "100%"
+                });
+            if (index === 0) {
+                dzImg.addClass('drop-zone-primary-img').css({
+                    "transform": "none",
+                    "position": "relative",
+                    "z-index": 10
+                });
+                $('.pet-preview-image').attr('src', src);
+                $('.pet-preview-image-backdrop').attr('src', src);
+            } else {
+                let rotation = (index % 2 === 0 ? "rotate(3deg)" : "rotate(-3deg)");
+                dzImg.css({
+                    "transform": rotation,
+                    "position": "absolute",
+                    "top": 0,
+                    "left": 0,
+                    "z-index": 10 - index,
+                    "border": "none"
+                });
+            }
+            dropZone.append(dzImg);
+
+            let card = $("<div>")
+                .addClass("pet-image-card")
+                .data("index", index)
+                .css({
+                    "cursor": "pointer",
+                    "border": index === 0 ? "2px solid #000" : "none",
+                    "margin-bottom": "10px",
+                    "max-width": "300px",
+                    "max-height": "300px",
+                    "overflow": "hidden"
+                });
+            let cardImg = $("<img>")
+                .attr("src", src)
+                .css({
+                    "width": "100%",
+                    "height": "100%",
+                    "object-fit": "contain"
+                });
+            card.append(cardImg);
+            $(".pet-input-images-container").append(card);
+        });
+    }
+
+    $('.loading-group .nucleobase').show();
+    TweenMax.staggerFrom(".loading-group .nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
+    setTimeout(function() {
+        $('.loading-group').hide();
+        $('.group-container[data-group="page_1"]').show();
+        TweenMax.staggerFrom('.group-container[data-group="page_1"] div', 0.7, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
+    }, 1150);
+
+    $('.pet-sire-search-iagd-number-btn').on('click', function() {
+        const iagdNumber = $('#pet-sire-search-iagd-number-input').val();
+        if (!iagdNumber) return;
+
+        // loader and spinner
+        _this = this;
+        $(_this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Searching');
+
+        $.ajax({
+            url: 'https://iagd-api.metaanimals.org/iagd/search/',
+            type: 'POST',
+            data: { iagd_number: iagdNumber },
+            success: function(response) {
+                if (response && response.data && response.data.length > 0) {
+                    let sireData = response.data[0];
+                    $('#pet-sire-name').val(sireData.name);
+                    $('#pet-sire-uuid').val(sireData.uuid);
+                    $('#offcanvas-input-sire-iagd-number').offcanvas('hide');
+                    animateShine($('#pet-sire-name').parent('.form-floating'));
+                } else {
+                    alert('No sire found with the provided IAGD number.');
+                }
+                setTimeout(function() {
+                    $(_this).prop('disabled', false).html('<i class="bi bi-search"></i> Search Records');
+                }, 750);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                $(_this).html('<i class="bi bi-exclamation-circle"></i> Error Occured!');
+                setTimeout(function() {
+                    $(_this).prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Try Again');
+                }, 1500);
             }
         });
     });
