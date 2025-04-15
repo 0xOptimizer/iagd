@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PetsDetails extends Model
 {
@@ -42,4 +43,14 @@ class PetsDetails extends Model
         'female_parent_uuid',
         'display_status'
     ];
+
+    /**
+     * Get the pet that owns the PetsDetails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pet(): BelongsTo
+    {
+        return $this->belongsTo(Pets::class, 'uuid', 'uuid');
+    }
 }

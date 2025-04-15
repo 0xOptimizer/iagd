@@ -71,22 +71,14 @@
                                         <table id="petsTable" class="table table-condensed table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Column 1</th>
-                                                    <th scope="col">Column 2</th>
-                                                    <th scope="col">Column 3</th>
+                                                    <th>Pet Name</th>
+                                                    <th>Type</th>
+                                                    <th>Owner</th>
+                                                    <th>IAGD Number</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="">
-                                                    <td scope="row">R1C1</td>
-                                                    <td>R1C2</td>
-                                                    <td>R1C3</td>
-                                                </tr>
-                                                <tr class="">
-                                                    <td scope="row">Item</td>
-                                                    <td>Item</td>
-                                                    <td>Item</td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
 
@@ -109,7 +101,7 @@
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
 
-    <script src="{{ asset('admin-resources/js/pets.js') }}"></script>
+    <script type="module" src="{{ asset('admin-resources/js/pets.js') }}"></script>
 </body>
 
 </html>
