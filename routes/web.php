@@ -88,6 +88,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/form', [AdminPetsController::class, 'form'])->name('admin.pets.form');
 
+        Route::get('/all', [AdminPetsController::class, 'all'])->name('admin.pets.all');
+
 
     });
 });
