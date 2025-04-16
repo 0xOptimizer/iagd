@@ -7,6 +7,7 @@ use App\Models\Pets;
 use Illuminate\Http\Request;
 use JavaScript;
 use URL;
+use Validator;
 
 class PetsController extends Controller
 {
@@ -77,12 +78,72 @@ class PetsController extends Controller
             'recordsFiltered' => $total,
             'data' => $pets->map(function ($pet) {
                 return [
-                    $pet->pet_name,
-                    $pet->pet_type,
-                    $pet->details->owner ?? '-',
-                    $pet->details->iagd_number ?? '-',
+                    'id' => $pet->id,
+                    'pet_name' => $pet->pet_name,
+                    'pet_type' => $pet->pet_type,
+                    'owner' => $pet->details->owner ?? '-',
+                    'iagd_number' => $pet->details->iagd_number ?? '-',
                 ];
             })
         ]);
+    }
+
+    /**
+     * Delete pet in datatable
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dtDelete(Request $request) {
+
+        // Create rules
+        $rules = [
+            'id' => 'required'
+        ];
+
+        // Create validation messages
+        $validationMessage = [
+            'id.required' => 'Something\'s wrong! Please try again.'
+        ];
+
+        // Validate request
+        $validator = Validator::make($request->all(),$rules,$validationMessage);
+
+        // If validator fails
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+
+        // Find pet
+        $pet = Pets::find($request->input('id'));
+
+        // If pet is empty
+        if (!$pet) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'Pet data not found.'
+            ], 404);
+
+        }
+
+        // If pet not deleted
+        if (!$pet->delete()) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete pet.'
+            ], 500);
+
+        }
+
+        // If pet is deleted
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet deleted successfully.'
+        ], 200);
     }
 }

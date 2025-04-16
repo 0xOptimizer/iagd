@@ -75,10 +75,11 @@
                                                     <th>Type</th>
                                                     <th>Owner</th>
                                                     <th>IAGD Number</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+
                                             </tbody>
                                         </table>
 

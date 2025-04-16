@@ -84,11 +84,14 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::prefix('pets')->middleware(['auth'])->group(function () {
+
         Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
 
         Route::get('/form', [AdminPetsController::class, 'form'])->name('admin.pets.form');
 
-        Route::get('/all', [AdminPetsController::class, 'all'])->name('admin.pets.all');
+        Route::get('/dt/all', [AdminPetsController::class, 'all'])->name('admin.pets.dt.all');
+
+        Route::post('/dt/delete', [AdminPetsController::class, 'dtDelete'])->name('admin.pets.dt.delete');
 
 
     });
