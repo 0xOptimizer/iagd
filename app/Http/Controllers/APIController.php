@@ -83,4 +83,45 @@ class APIController extends Controller
             'total_species_count' => $totalSpeciesCount
         ]);
     }
+
+    public function get_pet_profile($iagd_number)
+    {
+        $pet = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->whereHas('details', function ($q) use ($iagd_number) {
+            $q->where('iagd_number', $iagd_number);
+        })
+        ->first();
+
+        if (!$pet) {
+            return response()->json(['error' => 'Pet not found'], 200);
+        }
+
+        $file = $pet->files->first();
+        $pet->primary_image = $file
+            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+            : null;
+
+        return response()->json($pet);
+    }
+    public function get_pet_profile_by_name($name)
+    {
+        $pet = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->where('pet_name', 'LIKE', '%' . $name . '%')
+        ->first();
+
+        if (!$pet) {
+            return response()->json(['error' => 'Pet not found'], 404);
+        }
+
+        $file = $pet->files->first();
+        $pet->primary_image = $file
+            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+            : null;
+
+        return response()->json($pet);
+    }
 }

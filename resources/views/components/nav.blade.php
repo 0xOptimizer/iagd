@@ -25,8 +25,8 @@
 
         <!-- Right Group - Buttons -->
         <div class="d-flex gap-2">
-            <a href="{{ route('register') }}" class="btn btn-primary" style="width: 235px; height: 38px;"><i class="bi bi-feather"></i> Register Pet</a>
-            <button type="button" class="btn btn-secondary" style="width: 150px; height: 38px;"><i class="bi bi-dice-5"></i> Random</button>
+            <a href="{{ route('register') }}" class="btn btn-primary" style="width: 235px; height: 57px; align-content: center;"><i class="bi bi-feather"></i> Register Pet</a>
+            <button type="button" class="btn btn-secondary" style="width: 150px; height: 57px; align-content: center;"><i class="bi bi-dice-5"></i> Random</button>
         </div>
     </div>
 </nav>

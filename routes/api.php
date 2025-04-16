@@ -24,4 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/pets/count', [APIController::class, 'get_pets_count'])->name('api.v1.pets.count');
     Route::get('/species/{species}', [APIController::class, 'get_species'])->name('api.v1.species.filter');
+
+    Route::group(['prefix' => 'search'], function () {
+        Route::get('/pets/id/{iagd_number}', [APIController::class, 'get_pet_profile'])->name('api.v1.pets.profile');
+        Route::get('/pets/name/{name}', [APIController::class, 'get_pet_profile_by_name'])->name('api.v1.pets.profile.name');
+    });
 });

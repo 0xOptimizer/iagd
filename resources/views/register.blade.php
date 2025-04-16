@@ -109,7 +109,7 @@
                 </div>
                 <div class="page_1-error-banner row" style="display: none;">
                     <div class="col-12">
-                        <div class="banner-info p-3 text-danger text-center w-100" style="font-weight: bold;">
+                        <div class="banner-container banner-info p-3 text-danger text-center w-100" style="font-weight: bold;">
                             <i class="bi bi-exclamation-circle"></i> We need your pet's name, photo, and species.
                         </div>
                     </div>
@@ -183,8 +183,9 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Note: As part of IAGD, your pet details will appear publicly.
+                <div class="banner-container banner-info p-3 text-center">
+                    <i class="banner-icon bi bi-info-circle"></i>
+                    Note: As part of IAGD, your pet details will appear publicly.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -253,8 +254,8 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Note: Using IAGD, we automatically trace and connect your pet's pedigree, including their parents and ancestors. You only need to add their immediate details to the database.
+                <div class="banner-container banner-info p-3 text-center">
+                    <i class="banner-icon bi bi-info-circle"></i> Note: Using IAGD, we automatically trace and connect your pet's pedigree, including their parents and ancestors. You only need to add their immediate details to the database.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -315,8 +316,8 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="banner-info p-3 text-center">
-                    <i class="bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
+                <div class="banner-container banner-info p-3 text-center">
+                    <i class="banner-icon bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
                 </div>
             </div>
             <!-- Submit Button -->
@@ -334,8 +335,8 @@
     </div>
     <div class="group-container" data-group="page_5" style="display: none;">
         <div class="row mb-2">
-            <div class="banner-info p-3 text-center">
-                <i class="bi bi-info-circle"></i> Review all information before submitting. You can go back to make changes.
+            <div class="banner-container banner-info p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Review all information before submitting. You can go back to make changes.
             </div>
         </div>
         <div class="summary-container">
@@ -481,8 +482,8 @@
             </div>
         </div>
         <div class="mt-2">
-            <div class="banner-info p-3 text-center">
-                <i class="bi bi-info-circle"></i> Can't find your pet species?<br>Contact us and let us help you!
+            <div class="banner-container banner-info p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Can't find your pet species?<br>Contact us and let us help you!
             </div>
         </div>
         <!-- <div class="card mt-2">
@@ -567,8 +568,8 @@
             </div>
         </div>
         <div class="mt-2">
-            <div class="banner-info p-3 text-center">
-                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            <div class="banner-container banner-info p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
             </div>
         </div>
         <!-- <div class="card mt-2">
@@ -608,8 +609,8 @@
             </div>
         </div>
         <div class="mt-2">
-            <div class="banner-info p-3 text-center">
-                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            <div class="banner-container banner-info p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
             </div>
         </div>
         <!-- <div class="card mt-2">
@@ -642,12 +643,22 @@
             </button>
         </div>
         <hr class="my-3">
-        <div class="sire-search-iagd-number-container">
+        <div class="pet-sire-search-iagd-number-results">
 
         </div>
+        <div class="pet-sire-search-iagd-number-banner-no_records_found mt-2" style="display: none;">
+            <div class="banner-container banner-warning p-3 text-center">
+                <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-sire-search-iagd-number-preview_input">...</b>
+                <div class="mt-3">
+                    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd-name">
+                        Search for their name instead
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="mt-2">
-            <div class="banner-info p-3 text-center">
-                <i class="bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
+            <div class="banner-container banner-info p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
             </div>
         </div>
         <!-- <div class="card mt-2">
@@ -1343,27 +1354,35 @@ $(document).ready(function() {
         const iagdNumber = $('#pet-sire-search-iagd-number-input').val();
         if (!iagdNumber) return;
 
-        // loader and spinner
         _this = this;
         $(_this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Searching');
 
         $.ajax({
-            url: 'https://iagd-api.metaanimals.org/iagd/search/',
-            type: 'POST',
-            data: { iagd_number: iagdNumber },
+            url: '{{ url("api/v1/search/pets/id") }}/' + iagdNumber,
+            type: 'GET',
             success: function(response) {
-                if (response && response.data && response.data.length > 0) {
-                    let sireData = response.data[0];
-                    $('#pet-sire-name').val(sireData.name);
-                    $('#pet-sire-uuid').val(sireData.uuid);
-                    $('#offcanvas-input-sire-iagd-number').offcanvas('hide');
-                    animateShine($('#pet-sire-name').parent('.form-floating'));
+                if (response && response.id) {
+                    const cardHtml = `
+                        <div class="card card-hoverable h-100">
+                            <img src="${response.primary_image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="${response.pet_name}" style="height: 256px;">
+                            <div class="card-body">
+                                <b class="card-title">${response.pet_name}</b>
+                                <p class="card-text">${iagdNumber}&nbsp;·&nbsp;${response.breed}</p>
+                                <p class="card-text"><small class="text-muted">ID ${response.id}</small></p>
+                            </div>
+                            <div class="card-icon" style="top: 250px;">
+                                <i class="bi bi-caret-right-fill"></i>
+                            </div>
+                        </div>
+                    `;
+                    $('.pet-sire-search-iagd-number-results').html(cardHtml).show();
                 } else {
-                    alert('No sire found with the provided IAGD number.');
+                    $('.pet-sire-search-iagd-number-banner-no_records_found').show();
+                    $('.pet-sire-search-iagd-number-preview_input').text(iagdNumber);
+                    TweenMax.staggerFrom('.pet-sire-search-iagd-number-banner-no_records_found', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04);
                 }
-                setTimeout(function() {
-                    $(_this).prop('disabled', false).html('<i class="bi bi-search"></i> Search Records');
-                }, 750);
+
+                $(_this).prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Search Again');
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
