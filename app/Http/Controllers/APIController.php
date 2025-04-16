@@ -84,44 +84,52 @@ class APIController extends Controller
         ]);
     }
 
-    public function get_pet_profile($iagd_number)
+    public function get_pet_profile($iagd_number, $type)
     {
-        $pet = Pets::with(['details', 'meta', 'files' => function ($q) {
+        $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
         }])
+        ->where('pet_type', $type)
         ->whereHas('details', function ($q) use ($iagd_number) {
-            $q->where('iagd_number', $iagd_number);
+            $q->where('iagd_number', 'LIKE', $iagd_number . '%');
         })
-        ->first();
+        ->get();
 
-        if (!$pet) {
+        if ($pets->isEmpty()) {
             return response()->json(['error' => 'Pet not found'], 200);
         }
 
-        $file = $pet->files->first();
-        $pet->primary_image = $file
-            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
-            : null;
+        foreach ($pets as $pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+        }
 
-        return response()->json($pet);
+        return response()->json($pets);
     }
-    public function get_pet_profile_by_name($name)
+
+    public function get_pet_profile_by_name($name, $type)
     {
-        $pet = Pets::with(['details', 'meta', 'files' => function ($q) {
+        $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
         }])
-        ->where('pet_name', 'LIKE', '%' . $name . '%')
-        ->first();
+        ->where('pet_type', $type)
+        ->where('pet_name', 'LIKE', $name . '%')
+        ->get();
 
-        if (!$pet) {
+        if ($pets->isEmpty()) {
             return response()->json(['error' => 'Pet not found'], 404);
         }
 
-        $file = $pet->files->first();
-        $pet->primary_image = $file
-            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
-            : null;
+        foreach ($pets as $pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+        }
 
-        return response()->json($pet);
+        return response()->json($pets);
     }
+
 }

@@ -26,7 +26,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/species/{species}', [APIController::class, 'get_species'])->name('api.v1.species.filter');
 
     Route::group(['prefix' => 'search'], function () {
-        Route::get('/pets/id/{iagd_number}', [APIController::class, 'get_pet_profile'])->name('api.v1.pets.profile');
-        Route::get('/pets/name/{name}', [APIController::class, 'get_pet_profile_by_name'])->name('api.v1.pets.profile.name');
+        Route::get('/pets/id/{species}/{iagd_number}', [APIController::class, 'get_pet_profile'])->name('api.v1.pets.profile');
+        Route::get('/pets/name/{species}/{name}', [APIController::class, 'get_pet_profile_by_name'])->name('api.v1.pets.profile.name');
     });
 });

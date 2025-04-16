@@ -38,10 +38,12 @@ return new class extends Migration {
             $table->string('height')->nullable();
             $table->string('icgd_number')->nullable();
             $table->string('link')->nullable();
-            $table->string('male_parent')->nullable();
+            $table->string('male_parent')->nullable()->comment('if no uuid');
             $table->string('male_parent_uuid')->nullable();
-            $table->string('female_parent')->nullable();
+            $table->string('male_parent_breed')->nullable()->comment('if no uuid');
+            $table->string('female_parent')->nullable()->comment('if no uuid');
             $table->string('female_parent_uuid')->nullable();
+            $table->string('female_parent_breed')->nullable()->comment('if no uuid');
             $table->string('display_status')->nullable();
         });
 

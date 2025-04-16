@@ -213,9 +213,15 @@
         <form id="registrationForm" autocomplete="off">
             <input type="text" id="pet-sire-uuid" hidden>
             <input type="text" id="pet-dam-uuid" hidden>
-            <div class="row">
+            <div class="pet-sire-before-selection-group row">
+                <div class="form-floating col-12">
+                    <input type="text" class="pet-sire-input input-interactable-readonly form-control" id="pet-sire" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire" placeholder="Sire" readonly>
+                    <label for="pet-sire" style="margin-left: 12px;">Sire</label>
+                </div>
+            </div>
+            <div class="pet-sire-after-selection-group row" style="display: none;">
                 <div class="form-floating col-2">
-                    <img src="" class="img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
+                    <img src="" class="pet-sire-preview-image img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
                 </div>
                 <div class="form-floating col-6">
                     <input type="text" class="pet-sire-input input-interactable-readonly form-control" id="pet-sire-name" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire" placeholder="Sire's Name" readonly>
@@ -538,11 +544,11 @@
         <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
         <div class="card card-interactable">
             <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
-                <img src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
+                <img class="pet-sire-preview-image" src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
                 <div>
-                    <span style="font-size: 24px;">Male</span>
+                    <span class="pet-sire-preview-pet_name" style="font-size: 24px;">...</span>
                     <br>
-                    <span style="opacity: 0.16;">No IAGD number found.</span>
+                    <span class="pet-sire-preview-pet_breed" style="opacity: 0.16;">...</span>
                 </div>
             </div>
         </div>
@@ -1351,35 +1357,60 @@ $(document).ready(function() {
     }, 1150);
 
     $('.pet-sire-search-iagd-number-btn').on('click', function() {
+        const species = $('#pet-species').val();
+        if (!species) return;
+
         const iagdNumber = $('#pet-sire-search-iagd-number-input').val();
         if (!iagdNumber) return;
 
         _this = this;
         $(_this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Searching');
 
+        $('.pet-sire-search-iagd-number-results').html('');
+        $('.pet-sire-search-iagd-number-results').hide();
+        $('.pet-sire-search-iagd-number-banner-no_records_found').hide();
+
         $.ajax({
-            url: '{{ url("api/v1/search/pets/id") }}/' + iagdNumber,
+            url: `{{ url("api/v1/search/pets/id") }}/${species}/${iagdNumber}`,
             type: 'GET',
             success: function(response) {
-                if (response && response.id) {
-                    const cardHtml = `
-                        <div class="card card-hoverable h-100">
-                            <img src="${response.primary_image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="${response.pet_name}" style="height: 256px;">
-                            <div class="card-body">
-                                <b class="card-title">${response.pet_name}</b>
-                                <p class="card-text">${iagdNumber}&nbsp;·&nbsp;${response.breed}</p>
-                                <p class="card-text"><small class="text-muted">ID ${response.id}</small></p>
+                if (Array.isArray(response) && response.length) {
+                    let html = '';
+
+                    response.forEach(function(pet) {
+                        const genderIcon = pet.details.gender === "Male"
+                            ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
+                            : '<i class="bi bi-gender-female" style="color: pink;"></i> Female';
+
+                        const cardHtml = `
+                            <div class="card card-hoverable h-100 mb-3">
+                                <img src="${pet.primary_image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="${pet.pet_name}" style="height: 256px;">
+                                <div class="card-body">
+                                    <b class="card-title">${pet.pet_name}</b>
+                                    <p class="card-text">${pet.details.iagd_number}&nbsp;·&nbsp;${pet.details.breed}</p>
+                                    <p class="card-text"><small class="text-muted">${genderIcon}&nbsp${pet.pet_type}&nbsp;·&nbsp;${pet.id}</small></p>
+                                </div>
+                                <div class="d-flex p-3" style="top: 125px;">
+                                    <a class="btn btn-outline-primary me-2" style="flex: 1;" href="{{ url('pets') }}/${pet.details.iagd_number}" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right"></i> View
+                                    </a>
+                                    <button class="pet-sire-select-option-btn btn btn-primary" style="flex: 2;" data-uuid="${pet.uuid}" data-primary_image="${pet.primary_image}" data-pet_name="${pet.pet_name}" data-breed="${pet.details.breed}">
+                                        <i class="bi bi-check2-circle"></i> Select as Sire
+                                    </button>
+                                </div>
                             </div>
-                            <div class="card-icon" style="top: 250px;">
-                                <i class="bi bi-caret-right-fill"></i>
-                            </div>
-                        </div>
-                    `;
-                    $('.pet-sire-search-iagd-number-results').html(cardHtml).show();
+                        `;
+
+                        html += cardHtml;
+                    });
+
+                    $('.pet-sire-search-iagd-number-results').html(html).show();
+                    $('.pet-sire-search-iagd-number-banner-no_records_found').hide();
+                    TweenMax.staggerFrom('.pet-sire-search-iagd-number-results .card', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
                 } else {
                     $('.pet-sire-search-iagd-number-banner-no_records_found').show();
                     $('.pet-sire-search-iagd-number-preview_input').text(iagdNumber);
-                    TweenMax.staggerFrom('.pet-sire-search-iagd-number-banner-no_records_found', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04);
+                    TweenMax.staggerFrom('.pet-sire-search-iagd-number-banner-no_records_found', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
                 }
 
                 $(_this).prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Search Again');
@@ -1392,6 +1423,32 @@ $(document).ready(function() {
                 }, 1500);
             }
         });
+    });
+
+    $('body').on('click', '.pet-sire-select-option-btn', function() {
+        const uuid = $(this).data('uuid');
+        const primaryImage = $(this).data('primary_image');
+        const petName = $(this).data('pet_name');
+        const breed = $(this).data('breed');
+
+        $('#pet-sire-uuid').val(uuid);
+        $('#pet-sire-name').val(petName);
+        $('#pet-sire-breed').val(breed);
+        $('.pet-sire-preview-image').attr('src', primaryImage);
+        $('.pet-sire-preview-pet_name').text(petName);
+        $('.pet-sire-preview-pet_breed').text(breed);
+
+        animateShine($('#pet-sire-name').parent('.form-floating'));
+        animateShine($('#pet-sire-breed').parent('.form-floating'));
+
+        localStorage.setItem('form_pet-sire-uuid', uuid);
+        localStorage.setItem('form_pet-sire-name', petName);
+        localStorage.setItem('form_pet-sire-breed', breed);
+
+        $('.pet-sire-search-iagd-number-results').hide();
+        $('.pet-sire-before-selection-group').hide();
+        $('.pet-sire-after-selection-group').show();
+        $('#offcanvas-input-sire-iagd-number').offcanvas('hide');
     });
 });
 </script>

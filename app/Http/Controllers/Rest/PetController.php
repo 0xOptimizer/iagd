@@ -231,8 +231,10 @@ class PetController extends Controller
                 'link' => $request->input('link'),
                 'male_parent' => $request->input('male_parent'),
                 'male_parent_uuid' => (string) Str::uuid(),
+                'male_parent_breed' => $request->input('male_parent_breed'),
                 'female_parent' => $request->input('female_parent'),
                 'female_parent_uuid' => (string) Str::uuid(),
+                'female_parent_breed' => $request->input('female_parent_breed'),
                 'display_status' => 'visible',
             ]);
         } catch (\Throwable $th) {
@@ -351,8 +353,10 @@ class PetController extends Controller
             // 'link' => 'nullable',
             // 'male_parent' => 'nullable',
             // 'male_parent_uuid' => 'nullable',
+            // 'male_parent_breed' => 'nullable',
             // 'female_parent' => 'nullable',
             // 'female_parent_uuid' => 'nullable',
+            // 'female_parent_breed' => 'nullable',
             // 'display_status' => 'visible',
         ];
 
