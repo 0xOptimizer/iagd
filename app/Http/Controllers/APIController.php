@@ -84,7 +84,7 @@ class APIController extends Controller
         ]);
     }
 
-    public function get_pet_profile($iagd_number, $type)
+    public function get_pet_profile($type, $iagd_number)
     {
         $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
@@ -96,8 +96,10 @@ class APIController extends Controller
         ->get();
 
         if ($pets->isEmpty()) {
-            return response()->json(['error' => 'Pet not found'], 200);
-        }
+            return response()->json([
+                'error' => 'Pet not found'
+            ], 200);
+        }        
 
         foreach ($pets as $pet) {
             $file = $pet->files->first();
@@ -109,7 +111,7 @@ class APIController extends Controller
         return response()->json($pets);
     }
 
-    public function get_pet_profile_by_name($name, $type)
+    public function get_pet_profile_by_name($type, $name)
     {
         $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
             $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
