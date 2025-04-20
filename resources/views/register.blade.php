@@ -233,7 +233,13 @@
                     <label for="pet-sire-breed" style="margin-left: 12px;">Sire's Breed</label>
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="pet-dam-before-selection-group row mt-2">
+                <div class="form-floating col-12">
+                    <input type="text" class="pet-dam-input input-interactable-readonly form-control" id="pet-dam" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam" placeholder="Dam" readonly>
+                    <label for="pet-dam" style="margin-left: 12px;">Dam</label>
+                </div>
+            </div>
+            <div class="pet-dam-after-selection-group row mt-2" style="display: none;">
                 <div class="form-floating col-2">
                     <img src="" class="img-border-primary rounded-circle" width="60" height="60" style="object-fit: contain;">
                 </div>
@@ -432,7 +438,7 @@
                     <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Back</button>
                 </div>
                 <div class="form-floating col-9 mb-3">
-                    <button type="submit" class="registration-submit-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">
+                    <button type="submit" class="registration-submit-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-register-submit">
                         <i class="bi bi-check-circle-fill"></i> Submit Registration
                     </button>
                 </div>
@@ -440,335 +446,22 @@
         </div>
     </div>
 </div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-select-species">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">What is your pet's species?</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
-        <div class="card card-interactable">
-            <div class="select-species-option card-body d-flex align-items-center" data-option="Dog">
-                <img src="{{ asset('images/mayor_icons_dog.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Dog</span>
-                    <br>
-                    <span style="font-style: italic; opacity: 0.16;">Genus: Canis lupus familiaris</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-            <div class="select-species-option card-body d-flex align-items-center" data-option="Cat">
-                <img src="{{ asset('images/mayor_icons_cat.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Cat</span>
-                    <br>
-                    <span style="font-style: italic; opacity: 0.16;">Genus: Felis catus</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-            <div class="select-species-option card-body d-flex align-items-center" data-option="Rabbit">
-                <img src="{{ asset('images/mayor_icons_rabbit.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Rabbit</span>
-                    <br>
-                    <span style="font-style: italic; opacity: 0.16;">Genus: Oryctolagus cuniculus</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-            <div class="select-species-option card-body d-flex align-items-center" data-option="Bird">
-                <img src="{{ asset('images/mayor_icons_bird.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Bird</span>
-                    <br>
-                    <span style="font-style: italic; opacity: 0.16;">Genus: Aves</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> Can't find your pet species?<br>Contact us and let us help you!
-            </div>
-        </div>
-        <!-- <div class="card mt-2">
-            <div class="select-species-option card-body d-flex align-items-center">
-                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
-                <div class="w-100">
-                    <input type="text" class="form-control" placeholder="Other (Enter species)">
-                </div>
-            </div>
-        </div> -->
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-select-gender">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">What is your pet's gender?</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="card card-interactable">
-            <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
-                <img src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Male</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-            <div class="select-gender-option card-body d-flex align-items-center" data-option="Female">
-                <img src="{{ asset('images/freepik_female.png') }}" width="48" height="48" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Female</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-pet-images">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Select an image to make it the primary</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="pet-input-images-container"></div>
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Who is <span class="pet-preview-pet_name">...</span>'s Sire?</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
-        <div class="card card-interactable">
-            <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
-                <img class="pet-sire-preview-image" src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
-                <div>
-                    <span class="pet-sire-preview-pet_name" style="font-size: 24px;">...</span>
-                    <br>
-                    <span class="pet-sire-preview-pet_breed" style="opacity: 0.16;">...</span>
-                </div>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="card card-interactable">
-            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd">
-                <img src="{{ asset('images/mayor_icons_search.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Search Database</span>
-                    <br>
-                    <span style="opacity: 0.16;">Find and identify the sire's details automatically.</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-         <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-no_iagd">
-                <img src="{{ asset('images/mayor_icons_pencil.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">No IAGD Number</span>
-                    <br>
-                    <span style="opacity: 0.16;">No database record? Enter the sire's name manually.</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
-            </div>
-        </div>
-        <!-- <div class="card mt-2">
-            <div class="select-species-option card-body d-flex align-items-center">
-                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
-                <div class="w-100">
-                    <input type="text" class="form-control" placeholder="Other (Enter species)">
-                </div>
-            </div>
-        </div> -->
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-iagd">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Search through our records</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="card card-interactable">
-            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd-number">
-                <img src="{{ asset('images/iagd_logo_mica.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Use IAGD Number</span>
-                    <br>
-                    <span style="opacity: 0.16;">Find the sire using their database ID.</span>
-                </div>
-            </div>
-        </div>
-        <div class="card card-interactable">
-            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-name">
-                <img src="{{ asset('images/mayor_icons_paper-work.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Search their Name</span>
-                    <br>
-                    <span style="opacity: 0.16;">Find the sire using their name.</span>
-                </div>
-            </div>
-        </div>
-        <hr class="my-5">
-        <div class="card card-interactable">
-            <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-no_iagd">
-                <img src="{{ asset('images/mayor_icons_pencil.png') }}" width="64" height="64" class="me-4">
-                <div>
-                    <span style="font-size: 24px;">Manual Entry</span>
-                    <br>
-                    <span style="opacity: 0.16;">No database record? Enter the sire's name manually.</span>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
-            </div>
-        </div>
-        <!-- <div class="card mt-2">
-            <div class="select-species-option card-body d-flex align-items-center">
-                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
-                <div class="w-100">
-                    <input type="text" class="form-control" placeholder="Other (Enter species)">
-                </div>
-            </div>
-        </div> -->
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-iagd-number">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Enter the sire's IAGD number</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="pet-sire-search-number-input" placeholder="IAGD Number">
-            <label for="pet-sire-search-number-input">IAGD Number</label>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd" aria-label="Back">
-                Back
-            </button>
-            <button type="button" class="pet-sire-search-number-btn btn btn-primary flex-grow-1">
-                <i class="bi bi-search"></i> Search Records
-            </button>
-        </div>
-        <hr class="my-3">
-        <div class="pet-sire-search-number-results">
-
-        </div>
-        <div class="pet-sire-search-number-banner-no_records_found mt-2" style="display: none;">
-            <div class="banner-container banner-warning p-3 text-center">
-                <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-sire-search-number-preview_input">...</b>
-                <div class="mt-3">
-                    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-name">
-                        Search for their name instead
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
-            </div>
-        </div>
-        <!-- <div class="card mt-2">
-            <div class="select-species-option card-body d-flex align-items-center">
-                <i class="bi bi-info-circle me-3" style="font-size: 48px;"></i>
-                <div class="w-100">
-                    <input type="text" class="form-control" placeholder="Other (Enter species)">
-                </div>
-            </div>
-        </div> -->
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-name">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Enter the sire's name</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="form-floating">
-            <input type="text" class="form-control" id="pet-sire-search-name-input" placeholder="Sire's Name">
-            <label for="pet-sire-search-name-input">Sire's Name</label>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd" aria-label="Back">
-                Back
-            </button>
-            <button type="button" class="pet-sire-search-name-btn btn btn-primary flex-grow-1">
-                <i class="bi bi-search"></i> Search Records
-            </button>
-        </div>
-        <hr class="my-3">
-        <div class="pet-sire-search-name-results">
-
-        </div>
-        <div class="pet-sire-search-name-banner-no_records_found mt-2" style="display: none;">
-            <div class="banner-container banner-warning p-3 text-center">
-                <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-sire-search-name-preview_input">...</b>
-                <div class="mt-3">
-                    <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd-number">
-                        Search for their IAGD number instead
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="mt-2">
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> Can't find the sire?<br>Contact us and let us help you!
-            </div>
-        </div>
-    </div>
-</div>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-input-sire-no_iagd">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-gradient-primary text-center">Enter the sire's details</h5>
-        <button type="button" class="btn btn-outline-primary ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"><i class="bi bi-x" style="font-size: 32px;"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <!-- <input type="file" class="form-control" id="pet-sire-image-input" accept="image/*" style="display: none;"> -->
-        <!-- <div class="text-center">
-            <div id="pet-sire-image-input-mimic" style="width: 128px; height: 128px;">
-                <i class="bi bi-plus-circle-dotted"></i>
-                <span>Press to upload the sire's image</span>
-            </div>
-        </div> -->
-        <div>
-            <div class="banner-container banner-info p-3 text-center">
-                <i class="banner-icon bi bi-info-circle"></i> To upload the sire's photo, they must be a registered IAGD member. You can connect them to IAGD in the future.
-            </div>
-        </div>
-        <div class="form-floating mt-2">
-            <input type="text" class="form-control" id="pet-sire-no_iagd-name-input" placeholder="Sire's Name">
-            <label for="pet-sire-no_iagd-name-input">Sire's Name</label>
-        </div>
-        <div class="form-floating mt-2">
-            <input type="text" class="form-control" id="pet-sire-no_iagd-breed-input" placeholder="Sire's Breed">
-            <label for="pet-sire-no_iagd-breed-input">Sire's Breed</label>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-sire-iagd" aria-label="Back">
-                Back
-            </button>
-            <button type="button" class="pet-sire-no_iagd-save-btn btn btn-primary flex-grow-1">
-                <i class="bi bi-check-circle-fill"></i> Save Sire
-            </button>
-        </div>
-    </div>
-</div>
+@include('offcanvas.register.species')
+@include('offcanvas.register.gender')
+@include('offcanvas.register.primary_image')
+@include('offcanvas.register.sire.main')
+@include('offcanvas.register.sire.iagd')
+@include('offcanvas.register.sire.name')
+@include('offcanvas.register.sire.no_iagd')
+@include('offcanvas.register.dam.main')
+@include('offcanvas.register.dam.iagd')
+@include('offcanvas.register.dam.name')
+@include('offcanvas.register.dam.no_iagd')
+@include('offcanvas.register.submit')
 </body>
-<script src="{{ asset('js/chart.js') }}"></script>
-<script src="{{ asset('js/chartjs-plugin-datalabels.js') }}"></script>
 <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script> -->
 <script src="{{ asset('js/luxon.min.js') }}"></script>
-<script src="{{ asset('js/html2canvas.min.js') }}"></script>
 <script>
 var hasPetImage = false;
 function page_1_continue_validate() {
@@ -785,6 +478,61 @@ function page_1_continue_validate() {
     } else {
         $('.page_1-complete-continue-btn-group').hide();
     }
+}
+function submitRegistration() {
+    let formData = new FormData();
+    formData.append('pet_name', $('#pet-name').val() || '');
+    formData.append('pet_type', $('#pet-species').val() || '');
+    let petImages = $('#self-input-photo').prop('files');
+    if (petImages && petImages.length > 0) {
+        for (let i = 0; i < petImages.length; i++) {
+            formData.append('pet_images[]', petImages[i]);
+        }
+    }
+    formData.append('breed', $('#pet-breed').val() || '');
+    formData.append('date_of_birth', $('#pet-birth_date').val() || '');
+    formData.append('gender', $('#pet-gender').val() || '');
+    formData.append('weight', $('#pet-weight').val() || '');
+    formData.append('height', $('#pet-height').val() || '');
+    formData.append('colors_eye', $('#pet-color_eye').val() || '');
+    formData.append('colors_body', $('#pet-color_body').val() || '');
+    formData.append('markings', $('#pet-markings').val() || '');
+    formData.append('pet_location', $('#pet-address').val() || '');
+    formData.append('owner', $('#pet-owner').val() || '');
+    formData.append('co_owners', $('#pet-co_owners').val() || '');
+    formData.append('owner_location', $('#pet-owner_location').val() || '');
+    formData.append('owner_contact', $('#pet-owner_contact').val() || '');
+    formData.append('owner_email', $('#pet-owner_email').val() || '');
+    formData.append('animal_facility', $('#pet-animal_facility').val() || '');
+    formData.append('animal_facility_uuid', $('#pet-animal_facility_uuid').val() || '');
+    formData.append('vet_records', $('#pet-vet_records').val() || '');
+    formData.append('male_parent', $('#pet-sire-name').val() || '');
+    formData.append('male_parent_uuid', $('#pet-sire-uuid').val() || '');
+    formData.append('male_parent_breed', $('#pet-sire-breed').val() || '');
+    formData.append('female_parent', $('#pet-dam-name').val() || '');
+    formData.append('female_parent_uuid', $('#pet-dam-uuid').val() || '');
+    formData.append('female_parent_breed', $('#pet-dam-breed').val() || '');
+
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    $.ajax({
+        url: '{{ route("rest.v1.pets.create") }}',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            console.log('Registration submitted successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error submitting registration:', error);
+        }
+    });
 }
 $(document).ready(function() {
 
@@ -1263,62 +1011,6 @@ $(document).ready(function() {
 
         var petName = $('#pet-name').val();
         $('.pet-preview-pet_name').text(petName);
-    });
-
-    $('.registration-submit-btn').on('click', function() {
-        let formData = new FormData();
-        formData.append('pet_name', $('#pet-name').val() || '');
-        formData.append('pet_type', $('#pet-species').val() || '');
-        let petImages = $('#self-input-photo').prop('files');
-        if (petImages && petImages.length > 0) {
-            for (let i = 0; i < petImages.length; i++) {
-                formData.append('pet_images[]', petImages[i]);
-            }
-        }
-        formData.append('breed', $('#pet-breed').val() || '');
-        formData.append('date_of_birth', $('#pet-birth_date').val() || '');
-        formData.append('gender', $('#pet-gender').val() || '');
-        formData.append('weight', $('#pet-weight').val() || '');
-        formData.append('height', $('#pet-height').val() || '');
-        formData.append('colors_eye', $('#pet-color_eye').val() || '');
-        formData.append('colors_body', $('#pet-color_body').val() || '');
-        formData.append('markings', $('#pet-markings').val() || '');
-        formData.append('pet_location', $('#pet-address').val() || '');
-        formData.append('owner', $('#pet-owner').val() || '');
-        formData.append('co_owners', $('#pet-co_owners').val() || '');
-        formData.append('owner_location', $('#pet-owner_location').val() || '');
-        formData.append('owner_contact', $('#pet-owner_contact').val() || '');
-        formData.append('owner_email', $('#pet-owner_email').val() || '');
-        formData.append('animal_facility', $('#pet-animal_facility').val() || '');
-        formData.append('animal_facility_uuid', $('#pet-animal_facility_uuid').val() || '');
-        formData.append('vet_records', $('#pet-vet_records').val() || '');
-        formData.append('male_parent', $('#pet-sire-name').val() || '');
-        formData.append('male_parent_uuid', $('#pet-sire-uuid').val() || '');
-        formData.append('male_parent_breed', $('#pet-sire-breed').val() || '');
-        formData.append('female_parent', $('#pet-dam-name').val() || '');
-        formData.append('female_parent_uuid', $('#pet-dam-uuid').val() || '');
-        formData.append('female_parent_breed', $('#pet-dam-breed').val() || '');
-
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ': ' + pair[1]);
-        }
-
-        $.ajax({
-            url: '{{ route("rest.v1.pets.create") }}',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                console.log('Registration submitted successfully:', response);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error submitting registration:', error);
-            }
-        });
     });
 
     $('input, textarea, select').each(function () {
@@ -1869,6 +1561,397 @@ $(document).ready(function() {
         $('.pet-sire-before-selection-group').hide();
         $('.pet-sire-after-selection-group').show();
         $('#offcanvas-input-sire-no_iagd').offcanvas('hide');
+    });
+
+    $('.pet-dam-search-number-btn').on('click', function() {
+        const species = $('#pet-species').val()?.trim();
+        if (!species) return;
+
+        const iagdNumber = $('#pet-dam-search-number-input').val()?.trim();
+        if (!iagdNumber) return;
+
+        const $button = $(this);
+        $button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Searching');
+
+        $('.pet-dam-search-number-results').empty().hide();
+        $('.pet-dam-search-number-banner-no_records_found').hide();
+        $('.banner-container.banner-warning').remove();
+
+        $.ajax({
+            url: `{{ url("api/v1/search/pets/id") }}/${encodeURIComponent(species)}/${encodeURIComponent(iagdNumber)}`,
+            type: 'GET',
+            success: function(response) {
+                let response_count = 0;
+                if (Array.isArray(response) && response.length > 0) {
+                    let html = '';
+
+                    response.forEach(function(pet) {
+                        const genderRaw = pet?.details?.gender?.toLowerCase() || '';
+                        const isMale = genderRaw.startsWith('male');
+                        const isFemale = genderRaw.startsWith('female');
+
+                        if (!isFemale) {
+                            return;
+                        }
+
+                        response_count++;
+
+                        const genderIcon = isMale
+                            ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
+                            : isFemale
+                                ? '<i class="bi bi-gender-female" style="color: pink;"></i> Female'
+                                : '<i class="bi bi-question-circle" style="color: gray;"></i> Unknown';
+
+                        const image = pet?.primary_image || '';
+                        const petName = pet?.pet_name || 'Unnamed';
+                        const breed = pet?.details?.breed || 'Unknown Breed';
+                        const iagd = pet?.details?.iagd_number || 'Unknown ID';
+                        const type = pet?.pet_type || 'Unknown';
+
+                        const joinDateRaw = pet?.meta?.date_inserted;
+                        let joinDateText = 'Joined unknown';
+
+                        if (joinDateRaw) {
+                            let joinDate = luxon.DateTime.fromISO(joinDateRaw);
+                            if (!joinDate.isValid) {
+                                joinDate = luxon.DateTime.fromFormat(joinDateRaw, 'yyyy-MM-dd hh:mm:ss a');
+                            }
+                            if (joinDate.isValid) {
+                                joinDateText = `Joined ${joinDate.toRelative({ locale: 'en' })}`;
+                            }
+                        }
+
+                        const dobRaw = pet?.details?.date_of_birth;
+                        let dobFormatted = 'Unknown';
+                        let ageText = '';
+
+                        if (dobRaw) {
+                            let dob = luxon.DateTime.fromISO(dobRaw);
+                            if (!dob.isValid) dob = luxon.DateTime.fromFormat(dobRaw, 'MMMM d, yyyy');
+                            if (dob.isValid) {
+                                dobFormatted = dob.toFormat('MMMM d, yyyy');
+
+                                const now = luxon.DateTime.now();
+                                const diff = now.diff(dob, ['years', 'months', 'weeks', 'days']).toObject();
+
+                                const y = Math.floor(diff.years || 0);
+                                const m = Math.floor(diff.months || 0);
+                                const w = Math.floor(diff.weeks || 0);
+                                const d = Math.floor(diff.days || 0);
+
+                                if (y >= 1) {
+                                    ageText = `${y} year${y > 1 ? 's' : ''}`;
+                                    if (m > 0) ageText += `, ${m} month${m > 1 ? 's' : ''}`;
+                                } else if (m >= 1) {
+                                    ageText = `${m} month${m > 1 ? 's' : ''}`;
+                                } else {
+                                    if (w > 0) ageText += `${w} week${w > 1 ? 's' : ''}`;
+                                    if (d > 0) ageText += (w > 0 ? ', ' : '') + `${d} day${d > 1 ? 's' : ''}`;
+                                }
+                            }
+                        }
+
+                        const cardHtml = `
+                            <div class="card card-hoverable h-100 mb-3">
+                                <img src="${image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="${petName}" style="height: 256px;">
+                                <div class="card-body">
+                                    <b class="card-title">${petName}</b>
+                                    <p class="card-text">${iagd}&nbsp;·&nbsp;${breed}</p>
+                                    <p class="card-text"><small class="text-muted">${genderIcon}&nbsp;${type}&nbsp;·&nbsp;${joinDateText}</small></p>
+                                </div>
+                                <div class="d-flex p-3" style="top: 125px;">
+                                    <a class="btn btn-outline-primary me-2" style="flex: 1;" href="{{ url('pets') }}/${iagd}" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right"></i> View
+                                    </a>
+                                    <button class="pet-dam-select-option-btn btn btn-primary" style="flex: 2;" data-uuid="${pet?.uuid}" data-primary_image="${image}" data-pet_name="${petName}" data-breed="${breed}">
+                                        <i class="bi bi-check2-circle"></i> Select as Dam
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+
+                        html += cardHtml;
+                    });
+
+                    $('.pet-dam-search-number-results').html(html).show();
+                    $('.pet-dam-search-number-banner-no_records_found').hide();
+                    TweenMax.staggerFrom('.pet-dam-search-number-results .card', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                } else {
+                    $('.pet-dam-search-number-banner-no_records_found').show();
+                    $('.pet-dam-search-number-preview_input').text(iagdNumber);
+                    $('.pet-dam-search-number-results').hide();
+
+                    const warningBanner = `
+                        <div class="banner-container banner-warning p-3 text-center">
+                            <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-dam-search-number-preview_input">${iagdNumber}</b>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-name">
+                                    Search for their name instead
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.pet-dam-search-number-results').before(warningBanner);
+                    TweenMax.staggerFrom('.banner-container.banner-warning', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                }
+
+                if (response_count === 0) {
+                    const warningBanner = `
+                        <div class="banner-container banner-warning p-3 text-center">
+                            <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-dam-search-number-preview_input">${iagdNumber}</b>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-name">
+                                    Search for their name instead
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.pet-dam-search-number-results').before(warningBanner);
+                    TweenMax.staggerFrom('.banner-container.banner-warning', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                }
+
+                $button.prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Search Again');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+
+                const errorBanner = `
+                    <div class="banner-container banner-warning p-3 text-center">
+                        <i class="banner-icon bi bi-database-fill-exclamation"></i> An error occurred during the search. Please try again.
+                    </div>
+                `;
+                $('.pet-dam-search-number-results').before(errorBanner);
+                $('.pet-dam-search-number-results').hide();
+
+                $button.html('<i class="bi bi-exclamation-circle"></i> Error Occurred!');
+                setTimeout(function() {
+                    $button.prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Try Again');
+                }, 2000);
+            }
+        });
+    });
+
+    $('.pet-dam-search-name-btn').on('click', function() {
+        const species = $('#pet-species').val()?.trim();
+        if (!species) return;
+
+        const name = $('#pet-dam-search-name-input').val()?.trim();
+        if (!name) return;
+
+        const $button = $(this);
+        $button.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Searching');
+
+        $('.pet-dam-search-name-results').empty().hide();
+        $('.pet-dam-search-name-banner-no_records_found').hide();
+        $('.banner-container.banner-warning').remove();
+
+        $.ajax({
+            url: `{{ url("api/v1/search/pets/name") }}/${encodeURIComponent(species)}/${encodeURIComponent(name)}`,
+            type: 'GET',
+            success: function(response) {
+                let response_count = 0;
+                if (Array.isArray(response) && response.length > 0) {
+                    let html = '';
+
+                    response.forEach(function(pet) {
+                        const genderRaw = pet?.details?.gender?.toLowerCase() || '';
+                        const isMale = genderRaw.startsWith('male');
+                        const isFemale = genderRaw.startsWith('female');
+
+                        if (!isFemale) {
+                            return;
+                        }
+
+                        response_count++;
+
+                        const genderIcon = isMale
+                            ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
+                            : isFemale
+                                ? '<i class="bi bi-gender-female" style="color: pink;"></i> Female'
+                                : '<i class="bi bi-question-circle" style="color: gray;"></i> Unknown';
+
+                        const image = pet?.primary_image || '';
+                        const petName = pet?.pet_name || 'Unnamed';
+                        const breed = pet?.details?.breed || 'Unknown Breed';
+                        const iagd = pet?.details?.iagd_number || 'Unknown ID';
+                        const type = pet?.pet_type || 'Unknown';
+
+                        const joinDateRaw = pet?.meta?.date_inserted;
+                        let joinDateText = 'Joined unknown';
+
+                        if (joinDateRaw) {
+                            let joinDate = luxon.DateTime.fromISO(joinDateRaw);
+                            if (!joinDate.isValid) {
+                                joinDate = luxon.DateTime.fromFormat(joinDateRaw, 'yyyy-MM-dd hh:mm:ss a');
+                            }
+                            if (joinDate.isValid) {
+                                joinDateText = `Joined ${joinDate.toRelative({ locale: 'en' })}`;
+                            }
+                        }
+
+                        const dobRaw = pet?.details?.date_of_birth;
+                        let dobFormatted = 'Unknown';
+                        let ageText = '';
+
+                        if (dobRaw) {
+                            let dob = luxon.DateTime.fromISO(dobRaw);
+                            if (!dob.isValid) dob = luxon.DateTime.fromFormat(dobRaw, 'MMMM d, yyyy');
+                            if (dob.isValid) {
+                                dobFormatted = dob.toFormat('MMMM d, yyyy');
+
+                                const now = luxon.DateTime.now();
+                                const diff = now.diff(dob, ['years', 'months', 'weeks', 'days']).toObject();
+
+                                const y = Math.floor(diff.years || 0);
+                                const m = Math.floor(diff.months || 0);
+                                const w = Math.floor(diff.weeks || 0);
+                                const d = Math.floor(diff.days || 0);
+
+                                if (y >= 1) {
+                                    ageText = `${y} year${y > 1 ? 's' : ''}`;
+                                    if (m > 0) ageText += `, ${m} month${m > 1 ? 's' : ''}`;
+                                } else if (m >= 1) {
+                                    ageText = `${m} month${m > 1 ? 's' : ''}`;
+                                } else {
+                                    if (w > 0) ageText += `${w} week${w > 1 ? 's' : ''}`;
+                                    if (d > 0) ageText += (w > 0 ? ', ' : '') + `${d} day${d > 1 ? 's' : ''}`;
+                                }
+                            }
+                        }
+
+                        const cardHtml = `
+                            <div class="card card-hoverable h-100 mb-3">
+                                <img src="${image}" class="img-fluid w-100 object-fit-cover rounded-start" alt="${petName}" style="height: 256px;">
+                                <div class="card-body">
+                                    <b class="card-title">${petName}</b>
+                                    <p class="card-text">${iagd}&nbsp;·&nbsp;${breed}</p>
+                                    <p class="card-text"><small class="text-muted">${genderIcon}&nbsp;${type}&nbsp;·&nbsp;${joinDateText}</small></p>
+                                </div>
+                                <div class="d-flex p-3" style="top: 125px;">
+                                    <a class="btn btn-outline-primary me-2" style="flex: 1;" href="{{ url('pets') }}/${iagd}" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right"></i> View
+                                    </a>
+                                    <button class="pet-dam-select-option-btn btn btn-primary" style="flex: 2;" data-uuid="${pet?.uuid}" data-primary_image="${image}" data-pet_name="${petName}" data-breed="${breed}">
+                                        <i class="bi bi-check2-circle"></i> Select as Sire
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+
+                        html += cardHtml;
+                    });
+
+                    $('.pet-dam-search-name-results').html(html).show();
+                    $('.pet-dam-search-name-banner-no_records_found').hide();
+                    TweenMax.staggerFrom('.pet-dam-search-name-results .card', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                } else {
+                    $('.pet-dam-search-name-banner-no_records_found').show();
+                    $('.pet-dam-search-name-preview_input').text(name);
+                    $('.pet-dam-search-name-results').hide();
+
+                    const warningBanner = `
+                        <div class="banner-container banner-warning p-3 text-center">
+                            <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-dam-search-name-preview_input">${name}</b>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-iagd-number">
+                                    Search for their IAGD number instead
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.pet-dam-search-name-results').before(warningBanner);
+                    TweenMax.staggerFrom('.banner-container.banner-warning', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                }
+
+                if (response_count === 0) {
+                    $('.pet-dam-search-name-banner-no_records_found').show();
+                    $('.pet-dam-search-name-preview_input').text(name);
+                    $('.pet-dam-search-name-results').hide();
+
+                    const warningBanner = `
+                        <div class="banner-container banner-warning p-3 text-center">
+                            <i class="banner-icon bi bi-database-fill-exclamation"></i> No records found for <b class="pet-dam-search-name-preview_input">${name}</b>
+                            <div class="mt-3">
+                                <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-iagd-number">
+                                    Search for their IAGD number instead
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    $('.pet-dam-search-name-results').before(warningBanner);
+                    TweenMax.staggerFrom('.banner-container.banner-warning', 0.3, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.04);
+                }
+
+                $button.prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Search Again');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+
+                const errorBanner = `
+                    <div class="banner-container banner-warning p-3 text-center">
+                        <i class="banner-icon bi bi-database-fill-exclamation"></i> An error occurred during the search. Please try again.
+                    </div>
+                `;
+                $('.pet-dam-search-name-results').before(errorBanner);
+                $('.pet-dam-search-name-results').hide();
+
+                $button.html('<i class="bi bi-exclamation-circle"></i> Error Occurred!');
+                setTimeout(function() {
+                    $button.prop('disabled', false).html('<i class="bi bi-arrow-clockwise"></i> Try Again');
+                }, 2000);
+            }
+        });
+    });
+
+    $('body').on('click', '.pet-dam-select-option-btn', function() {
+        const uuid = $(this).data('uuid');
+        const primaryImage = $(this).data('primary_image');
+        const petName = $(this).data('pet_name');
+        const breed = $(this).data('breed');
+
+        $('#pet-dam-uuid').val(uuid);
+        $('#pet-dam-name').val(petName);
+        $('#pet-dam-breed').val(breed);
+        $('.pet-dam-preview-image').attr('src', primaryImage);
+        $('.pet-dam-preview-pet_name').text(petName);
+        $('.pet-dam-preview-pet_breed').text(breed);
+
+        animateShine($('#pet-dam-name').parent('.form-floating'));
+        animateShine($('#pet-dam-breed').parent('.form-floating'));
+
+        localStorage.setItem('form_pet-dam-uuid', uuid);
+        localStorage.setItem('form_pet-dam-name', petName);
+        localStorage.setItem('form_pet-dam-breed', breed);
+        localStorage.setItem('form_pet-dam-image', primaryImage);
+
+        $('.pet-dam-before-selection-group').hide();
+        $('.pet-dam-after-selection-group').show();
+        $('#offcanvas-input-dam-iagd-number').offcanvas('hide');
+        $('#offcanvas-input-dam-name').offcanvas('hide');
+    });
+
+    $('body').on('click', '.pet-dam-no_iagd-save-btn', function() {
+        const petName = $('#pet-dam-no_iagd-name-input').val();
+        const breed = $('#pet-dam-no_iagd-breed-input').val();
+
+        if (!petName || !breed) {
+            return;
+        }
+
+        $('#pet-dam-name').val(petName);
+        $('#pet-dam-breed').val(breed);
+        $('.pet-dam-preview-pet_name').text(petName);
+        $('.pet-dam-preview-pet_breed').text(breed);
+
+        animateShine($('#pet-dam-name').parent('.form-floating'));
+        animateShine($('#pet-dam-breed').parent('.form-floating'));
+
+        localStorage.setItem('form_pet-dam-name', petName);
+        localStorage.setItem('form_pet-dam-breed', breed);
+
+        $('.pet-dam-before-selection-group').hide();
+        $('.pet-dam-after-selection-group').show();
+        $('#offcanvas-input-dam-no_iagd').offcanvas('hide');
     });
 });
 </script>
