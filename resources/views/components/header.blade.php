@@ -20,5 +20,6 @@
     <link href="{{ asset('css/style_m_iagd.css?v=6') }}" rel="stylesheet">
 @endif
 <link href="{{ asset('css/helix.css') }}" rel="stylesheet">
+<link href="{{ asset('css/factory-loader.css') }}" rel="stylesheet">
 
 @include('components.scripts')

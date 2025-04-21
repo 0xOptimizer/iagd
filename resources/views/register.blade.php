@@ -11,43 +11,43 @@
 <body>
 <div class="phone-container">
     <nav class="navbar navbar-dark header sticky-top">
-        <div class="container-fluid">
+        <div class="container-fluid text-center">
             <!-- Left Group - Logo -->
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/IAGD_Logo_Silver.png') }}" alt="Logo" style="transform: scale(2.25);">
             </a>
 
             <div class="d-flex">
-                IAGD
+                &nbsp;
             </div>
 
             <!-- Middle Group - Search Bar -->
             <div class="flex-grow-1 mx-3">
-                &nbsp;
+                International Animal Genetics Database
             </div>
 
             <!-- Right Group - Buttons -->
             <div class="d-flex gap-2">
-                <img class="rounded-circle" src="{{ asset('images/default.png') }}" width="50" height="50" class="me-3">
+                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2"><i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i></button>
             </div>
         </div>
     </nav>
     <div class="loading-group row text-center mt-5">
-            <div class="col-12">
-                <div class="DNA_cont" style="width: 100%;">
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                    <div class="nucleobase" style="display: none;"></div>
-                </div>
+        <div class="col-12">
+            <div class="DNA_cont" style="width: 100%;">
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
+                <div class="nucleobase" style="display: none;"></div>
             </div>
         </div>
+    </div>
     <div class="group-container" data-group="page_1" style="display: none;">
         <div class="d-flex align-items-center justify-content-center mb-4">
             <div class="rotating" style="position: absolute; top: 74px; left: 57px; font-size: 144px; color: #312c57; opacity: 0.33; z-index: -1; pointer-events: none;">
@@ -445,6 +445,73 @@
             </div>
         </div>
     </div>
+    <div class="group-container" data-group="page_6" style="display: none;">
+        <div class="row text-center">
+            <div class="col-12">
+                <span class="text-gradient-primary" style="font-size: 24px;">Welcome to IAGD!</span>
+            </div>
+            <div class="col-12 mt-2">
+                <img class="pet-preview-image rounded-circle" src="" style="width: 256px; height: 128px;">
+            </div>
+            <div class="col-12 mt-2"><span class="pet-preview-pet_name text-gradient-primary" style="font-size: 32px;"></span></div>
+        </div>
+        <hr class="my-3">
+        <!-- Physical Characteristics -->
+        <div class="summary-section mt-4">
+            <h5 class="summary-title text-gradient-primary">Physical Characteristics</h5>
+            <div class="summary-row">
+                <span class="summary-label">Gender:</span>
+                <span class="summary-value" data-source="pet-gender"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Weight:</span>
+                <span class="summary-value" data-source="pet-weight"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Height:</span>
+                <span class="summary-value" data-source="pet-height"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Colors:</span>
+                <span class="summary-value" data-source="pet-color_body"></span> /
+                <span class="summary-value" data-source="pet-color_eye"></span>
+            </div>
+        </div>
+
+        <!-- Ownership Details -->
+        <div class="summary-section mt-4">
+            <h5 class="summary-title text-gradient-primary">Ownership Details</h5>
+            <div class="summary-row">
+                <span class="summary-label">Main Owner:</span>
+                <span class="summary-value" data-source="pet-owner"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Location:</span>
+                <span class="summary-value" data-source="pet-owner_location"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Contact:</span>
+                <span class="summary-value" data-source="pet-owner_contact"></span>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="row mt-2">
+            <div class="banner-container banner-warning p-3 text-center">
+                <i class="banner-icon bi bi-info-circle"></i> Note: Your pet will remain in pending for up to 24 hours while we verify the details you provided. <br> We will notify you once your pet has been approved for display.
+            </div>
+        </div>
+        <!-- Submit Button -->
+        <div class="d-grid gap-2 mt-4 mb-3">
+            <div class="row">
+                <div class="form-floating col-5 mb-3">
+                    <button type="button" class="btn btn-outline-primary btn-lg" style="height: 100%; width: 100%;">View Profile</button>
+                </div>
+                <div class="form-floating col-7 mb-3">
+                    <button type="button" class="btn btn-primary btn-lg" style="height: 100%; width: 100%;"><i class="bi bi-plus-circle"></i> Register Another Pet</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @include('offcanvas.register.species')
 @include('offcanvas.register.gender')
@@ -462,6 +529,7 @@
 <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script> -->
 <script src="{{ asset('js/luxon.min.js') }}"></script>
+<script src="{{ asset('js/confetti.browser.min.js') }}"></script>
 <script>
 var hasPetImage = false;
 function page_1_continue_validate() {
@@ -513,6 +581,9 @@ function submitRegistration() {
     formData.append('female_parent_uuid', $('#pet-dam-uuid').val() || '');
     formData.append('female_parent_breed', $('#pet-dam-breed').val() || '');
 
+    $('.submit-uploading-inactive-loading-group').hide();
+    $('.submit-uploading-before-loading-group').show();
+
     for (var pair of formData.entries()) {
         console.log(pair[0] + ': ' + pair[1]);
     }
@@ -527,12 +598,78 @@ function submitRegistration() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response) {
-            console.log('Registration submitted successfully:', response);
+            setTimeout(function() {
+                $('.submit-uploading-before-loading-group').hide();
+                $('.submit-uploading-after-loading-group').show();
+
+                animateShine($('.submit-uploading-after-loading-group'));
+
+                $('.submit-assigning-inactive-loading-group').hide();
+                $('.submit-assigning-before-loading-group').show();
+
+                setTimeout(function() {
+                    $('.submit-assigning-before-loading-group').hide();
+                    $('.submit-assigning-after-loading-group').show();
+
+                    animateShine($('.submit-assigning-after-loading-group'));
+
+                    setTimeout(function() {
+                        $('.submit-generating-before-loading-group').hide();
+                        $(`.group-container`).hide();
+                        $(`.group-container[data-group="page_6"]`).show();
+                        $('#offcanvas-register-submit').offcanvas('hide');
+
+                        $('html, body').scrollTop(0);
+                    }, 1600);
+
+                    setTimeout(function() {
+                        var count = 200;
+                        var defaults = {
+                            origin: { y: 0.7 }
+                        };
+                        
+                        function fire(particleRatio, opts) {
+                            confetti({
+                                ...defaults,
+                                ...opts,
+                                particleCount: Math.floor(count * particleRatio)
+                            });
+                        }
+                        
+                        fire(0.25, {
+                            spread: 26,
+                            startVelocity: 55,
+                        });
+                        fire(0.2, {
+                            spread: 60,
+                        });
+                        fire(0.35, {
+                            spread: 100,
+                            decay: 0.91,
+                            scalar: 0.8
+                        });
+                        fire(0.1, {
+                            spread: 120,
+                            startVelocity: 25,
+                            decay: 0.92,
+                            scalar: 1.2
+                        });
+                        fire(0.1, {
+                            spread: 120,
+                            startVelocity: 45,
+                        });
+                    }, 2100);
+
+                }, Math.floor(Math.random() * 400) + 800);
+
+            }, 1500);
         },
         error: function(xhr, status, error) {
             console.error('Error submitting registration:', error);
         }
     });
+
+    return false;
 }
 $(document).ready(function() {
 
@@ -1952,6 +2089,18 @@ $(document).ready(function() {
         $('.pet-dam-before-selection-group').hide();
         $('.pet-dam-after-selection-group').show();
         $('#offcanvas-input-dam-no_iagd').offcanvas('hide');
+    });
+
+    $('.registration-submit-btn').on('click', async function() {
+        $('.submit-nucleus-text .nucleobase').show();
+        TweenMax.staggerFrom(".submit-nucleus-text .nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
+        setTimeout(function() {
+            $('.submit-uploading-inactive-loading-group').fadeIn('fast');
+            $('.submit-assigning-inactive-loading-group').fadeIn('fast');
+            setTimeout(function() {
+                submitRegistration();
+            }, 350);
+        }, 500);
     });
 });
 </script>

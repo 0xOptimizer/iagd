@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Pets;
 use App\Models\PetsDetails;
 use App\Models\PetsFile;
+use App\Models\PetsMeta;
 use Cache;
 use Carbon\Carbon;
 use DB;
@@ -169,40 +170,51 @@ class PetController extends Controller
                 'image' => null,
             ]);
 
+            $petMeta = PetsMeta::create([
+                'uuid' => $uuid,
+                'status' => 1,
+                'from_system' => 'website',
+                'inserted_by' => auth()->user()->name ?? 'self',
+                'date_inserted' => now(),
+                'date_added' => now(),
+            ]);
+
             // Prepare array
             $uploadedFiles = [];
 
             // For each images upload then insert to collection
-            foreach ($request->file('images') as $image) {
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
 
-                // Create path
-                $path = public_path("uploads/pets/$uuid");
+                    // Create path
+                    $path = public_path("uploads/pets/$uuid");
 
-                // Create image name
-                $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
+                    // Create image name
+                    $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
 
-                // Create filepath
-                $filePath = "img/pets/$uuid/$imgname";
+                    // Create filepath
+                    $filePath = "img/pets/$uuid/$imgname";
 
-                // Insert to PetsFile collection
-                $petsFile = PetsFile::create([
-                    'uuid' => (string) Str::uuid(),
-                    'attached_to_uuid' => $uuid,
-                    'file_name' => $imgname,
-                    'file_path' => $filePath,
-                    'file_type' => Str::upper($image->getClientOriginalExtension()),
-                    'file_size' => $image->getSize(),
-                    'file_extension' => "." . $image->getClientOriginalExtension(),
-                    'file_mime_type' => $image->getMimeType(),
-                    'file_hash' =>  sha1_file($image->getRealPath()),
-                    'status' => 1,
-                ]);
+                    // Insert to PetsFile collection
+                    $petsFile = PetsFile::create([
+                        'uuid' => (string) Str::uuid(),
+                        'attached_to_uuid' => $uuid,
+                        'file_name' => $imgname,
+                        'file_path' => $filePath,
+                        'file_type' => Str::upper($image->getClientOriginalExtension()),
+                        'file_size' => $image->getSize(),
+                        'file_extension' => "." . $image->getClientOriginalExtension(),
+                        'file_mime_type' => $image->getMimeType(),
+                        'file_hash' =>  sha1_file($image->getRealPath()),
+                        'status' => 1,
+                    ]);
 
-                // Upload file to $path with file name $imgname
-                $image->move($path, $imgname);
+                    // Upload file to $path with file name $imgname
+                    $image->move($path, $imgname);
 
-                // Append $filepath to array
-                $uploadedFiles[] = $filePath;
+                    // Append $filepath to array
+                    $uploadedFiles[] = $filePath;
+                }
             }
 
             // Step 2: Insert into `pets_details` table using the relationship

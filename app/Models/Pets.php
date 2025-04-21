@@ -14,6 +14,7 @@ class Pets extends Model
     use HasFactory;
 
     protected $table = 'pets';
+    public $timestamps = false;
 
     protected $fillable = [
         'uuid', 'pet_name', 'pet_type', 'image'

@@ -10,6 +10,7 @@ class PetsMeta extends Model
     use HasFactory;
 
     protected $table = 'pets_meta';
+    public $timestamps = false;
 
     protected $fillable = [
         'uuid',
