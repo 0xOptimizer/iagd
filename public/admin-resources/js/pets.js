@@ -14,15 +14,34 @@ $(function () {
             {
                 data: null,
                 render: function (data, type, row) {
-                    let statusRow = `<span class="badge bg-warning">N/A</span>`;
+                    console.log(row);
+                    let statusRow = "";
 
                     if (row.status == 0) {
-                        statusRow = `<span class="badge bg-info">Pending</span>`;
+
+                        statusRow = `<span class="badge bg-danger">Deleted</span>`;
+
+                    } else if (row.status == 1) {
+
+                        statusRow = `<span class="badge bg-primary">Active</span>`;
+
+                    } else if (row.status == 2) {
+
+                        statusRow = `<span class="badge bg-success">Approved</span>`;
+
+                    } else if (row.status == 3) {
+
+                        statusRow = `<span class="badge bg-danger">Rejected</span>`;
+
+                    } else if (row.status == 4) {
+
+                        statusRow = `<span class="badge bg-info">For use</span>`;
+
+                    } else {
+
+                        statusRow = `<span class="badge bg-warning">N/A</span>`;
                     }
 
-                    if (row.status == 1) {
-                        statusRow = `<span class="badge bg-success">Approved</span>`;
-                    }
                     return statusRow;
                 },
             },
@@ -59,7 +78,7 @@ $(function () {
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item d-flex flex-row align-items-center btnUpdateStatus" href="javascript:void(0);" data-id="${row.id}">
+                            <a class="dropdown-item d-flex flex-row align-items-center btnUpdateStatus" href="javascript:void(0);" data-id="${row.id}" data-current-value="${row.status}">
                                 <div class="svg-icon me-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -85,19 +104,36 @@ $(function () {
         ],
     });
 
-    const populateDatatableWithPetsData = () => {
-        fetchApiGetData(`${window.urlBase}/admin/pets/dt/all`).then((res) => {
-            console.log(res);
-        });
-    };
-
-    // populateDatatableWithPetsData();
-
     $(document).on("click", ".btnUpdateStatus", function () {
-        alert($(this).attr("data-id"));
+        const id = $(this).attr("data-id");
+        const current_value = $(this).attr("data-current-value");
+
+        let current_status;
+
+        if (current_value < 1) {
+            current_status = "Do you want to approved this pet ?";
+        } else {
+            return;
+        }
+
+        let swalTxt = current_status;
+        let swalIcon = "info";
+        let confirmBtnTxt = "YES";
+        let cancelBtnTxt = "CANCEL";
+        let classConfirmBtn = "btn btn-primary";
+        let classCancelBtn = "btn btn-danger";
+        swalConfirmation(
+            swalTxt,
+            swalIcon,
+            confirmBtnTxt,
+            cancelBtnTxt,
+            classConfirmBtn,
+            classCancelBtn
+        );
     });
 
     $(document).on("click", ".btnDeletePet", function () {
+        let thisBtn = $(this);
         let pet_id = $(this).attr("data-id");
 
         let swalTxt = "Do you want to delete this pet ?";
@@ -121,7 +157,35 @@ $(function () {
 
             fd.append("id", pet_id);
 
-            fetchApiPostData(`${window.urlBase}/admin/pets/dt/delete`, fd);
+            fetchApiPostData(`${window.urlBase}/admin/pets/dt/delete`, fd).then(
+                (result) => {
+                    if (
+                        typeof result === "undefined" ||
+                        typeof result.status === "undefined"
+                    ) {
+                        console.error("Error! Invalid results");
+
+                        return;
+                    }
+
+                    swalPrompt(result.message, result.status, `Okay`).then(
+                        (action) => {
+                            if (
+                                action.isConfirmed &&
+                                result.status == "success"
+                            ) {
+                                // Redirect to dashboard
+                                petsTable
+                                    .row(thisBtn.closest("tr"))
+                                    .remove()
+                                    .draw();
+
+                                return;
+                            }
+                        }
+                    );
+                }
+            );
         });
     });
 });

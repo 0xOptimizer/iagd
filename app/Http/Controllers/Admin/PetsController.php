@@ -53,7 +53,7 @@ class PetsController extends Controller
      */
     public function all(Request $request)
     {
-        $query = Pets::with('details');
+        $query = Pets::with(['details','meta']);
 
         // Search
         if ($search = $request->input('search.value')) {
@@ -101,9 +101,10 @@ class PetsController extends Controller
                     'id' => $pet->id,
                     'pet_name' => $pet->pet_name,
                     'pet_type' => $pet->pet_type,
-                    "status" => $pet->status,
+                    "status" => $pet->meta->status ?? null,
                     'owner' => $pet->details->owner ?? '-',
                     'iagd_number' => $pet->details->iagd_number ?? '-',
+
                 ];
             }),
         ]);
