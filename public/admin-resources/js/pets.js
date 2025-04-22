@@ -8,13 +8,29 @@ import {
 $(function () {
     let petsTable = new DataTable("#petsTable", {
         processing: true,
-        serverSide: true,
+        // serverSide: true,
         ajax: `${window.urlBase}/admin/pets/dt/all`,
         columns: [
-            { data: "pet_name", },
-            { data: "pet_type", },
-            { data: "owner", },
-            { data: "iagd_number", },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    let statusRow = `<span class="badge bg-warning">N/A</span>`;
+
+                    if (row.status == 0) {
+                        statusRow = `<span class="badge bg-info">Pending</span>`;
+                    }
+
+                    if (row.status == 1) {
+                        statusRow = `<span class="badge bg-success">Approved</span>`;
+                    }
+                    return statusRow;
+                },
+            },
+            { data: "pet_name" },
+            { data: "pet_type" },
+
+            { data: "owner" },
+            { data: "iagd_number" },
             {
                 data: null,
                 orderable: false,
@@ -77,12 +93,12 @@ $(function () {
 
     // populateDatatableWithPetsData();
 
-    $(document).on('click','.btnUpdateStatus', function () {
-        alert($(this).attr('data-id'));
+    $(document).on("click", ".btnUpdateStatus", function () {
+        alert($(this).attr("data-id"));
     });
 
-    $(document).on('click','.btnDeletePet', function () {
-        let pet_id = $(this).attr('data-id');
+    $(document).on("click", ".btnDeletePet", function () {
+        let pet_id = $(this).attr("data-id");
 
         let swalTxt = "Do you want to delete this pet ?";
         let swalIcon = "info";
@@ -98,21 +114,14 @@ $(function () {
             classConfirmBtn,
             classCancelBtn
         ).then((action) => {
-
             if (!action.isConfirmed) {
-
                 return;
-
             }
             const fd = new FormData();
 
-            fd.append('id' , pet_id);
+            fd.append("id", pet_id);
 
-
-            fetchApiPostData(`${window.urlBase}/admin/pets/dt/delete`,fd);
+            fetchApiPostData(`${window.urlBase}/admin/pets/dt/delete`, fd);
         });
-
-
     });
-
 });

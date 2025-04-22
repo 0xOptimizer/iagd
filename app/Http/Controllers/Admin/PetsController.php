@@ -53,9 +53,9 @@ class PetsController extends Controller
      */
     public function all(Request $request)
     {
-
         $query = Pets::with('details');
 
+        // Search
         if ($search = $request->input('search.value')) {
             $query->where('pet_name', 'like', "%{$search}%")
                 ->orWhere('pet_type', 'like', "%{$search}%")
@@ -65,11 +65,31 @@ class PetsController extends Controller
                 });
         }
 
+        // Sorting
+        $columns = [
+            'id',
+            'pet_name',
+            'pet_type',
+            "status",
+            'owner',
+            'iagd_number',
+        ];
+
+        $orderColumnIndex = $request->input('order.0.column');
+        $orderDirection = $request->input('order.0.dir', 'asc');
+        $orderColumn = $columns[$orderColumnIndex] ?? 'id';
+
+        // Only sort if it's a pets column (not related)
+        if (in_array($orderColumn, ['id', 'pet_name', 'pet_type'])) {
+            $query->orderBy($orderColumn, $orderDirection);
+        }
+
+        // Count and paginate
         $total = $query->count();
 
         $pets = $query
-            ->offset($request->input('start'))
-            ->limit($request->input('length'))
+            // ->offset($request->input('start'))
+            // ->limit($request->input('length'))
             ->get();
 
         return response()->json([
@@ -81,10 +101,11 @@ class PetsController extends Controller
                     'id' => $pet->id,
                     'pet_name' => $pet->pet_name,
                     'pet_type' => $pet->pet_type,
+                    "status" => $pet->status,
                     'owner' => $pet->details->owner ?? '-',
                     'iagd_number' => $pet->details->iagd_number ?? '-',
                 ];
-            })
+            }),
         ]);
     }
 
@@ -93,7 +114,8 @@ class PetsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function dtDelete(Request $request) {
+    public function dtDelete(Request $request)
+    {
 
         // Create rules
         $rules = [
@@ -106,7 +128,7 @@ class PetsController extends Controller
         ];
 
         // Validate request
-        $validator = Validator::make($request->all(),$rules,$validationMessage);
+        $validator = Validator::make($request->all(), $rules, $validationMessage);
 
         // If validator fails
         if ($validator->fails()) {
@@ -127,7 +149,6 @@ class PetsController extends Controller
                 'status' => 'warning',
                 'message' => 'Pet data not found.'
             ], 404);
-
         }
 
         // If pet not deleted
@@ -137,7 +158,6 @@ class PetsController extends Controller
                 'status' => 'error',
                 'message' => 'Failed to delete pet.'
             ], 500);
-
         }
 
         // If pet is deleted
