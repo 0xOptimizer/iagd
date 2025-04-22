@@ -162,7 +162,7 @@ color: #312c57;
     border-top: 1px solid rgb(135 135 135 / 25%);
 }
 
-.btn-primary:active, .btn-primary:focus {
+.btn-primary:active, .btn-primary:focus, .btn-primary:focus-visible, .btn-primary:disabled, .btn-primary.disabled {
     background-color: rgba(92, 11, 147, 0.75) !important;
     border: 2px solid transparent !important;
     border-top: 1px solid rgb(135 135 135 / 25%) !important;
@@ -411,14 +411,33 @@ select.form-control option {
 	z-index: -5;
 	object-fit: contain;
 	pointer-events: none;
+	opacity: 0.5;
 }
 
-.banner-info {
-	background-color: rgba(151, 100, 255, 0.16);
+.banner-container {
+	position: relative;
 	border-radius: 16px;
 	width: 95%;
 	margin: 0 auto;
 	font-size: 14px;
+	overflow: hidden;
+}
+
+/* .banner-container .banner-icon {
+	position: absolute;
+	top: -8px;
+	left: 6px;
+	font-size: 47px;
+	color: #403170;
+	z-index: -1;
+} */
+
+.banner-info {
+	background-color: rgba(151, 100, 255, 0.16);
+}
+
+.banner-warning {
+	background-color: #2c0734;
 }
 
 .input-interactable-readonly {
@@ -607,4 +626,4 @@ main .card-hoverable:hover {
 	.species-list-wrapper {
 		margin-top: 40px;
 	}
-}  
+}

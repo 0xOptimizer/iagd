@@ -39,8 +39,10 @@ class PetsDetails extends Model
         'link',
         'male_parent',
         'male_parent_uuid',
+        'male_parent_breed',
         'female_parent',
         'female_parent_uuid',
+        'female_parent_breed',
         'display_status'
     ];
 

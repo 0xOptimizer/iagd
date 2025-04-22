@@ -83,4 +83,55 @@ class APIController extends Controller
             'total_species_count' => $totalSpeciesCount
         ]);
     }
+
+    public function get_pet_profile($type, $iagd_number)
+    {
+        $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->where('pet_type', $type)
+        ->whereHas('details', function ($q) use ($iagd_number) {
+            $q->where('iagd_number', 'LIKE', $iagd_number . '%');
+        })
+        ->get();
+
+        if ($pets->isEmpty()) {
+            return response()->json([
+                'error' => 'Pet not found'
+            ], 200);
+        }        
+
+        foreach ($pets as $pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+        }
+
+        return response()->json($pets);
+    }
+
+    public function get_pet_profile_by_name($type, $name)
+    {
+        $pets = Pets::with(['details', 'meta', 'files' => function ($q) {
+            $q->where('file_mime_type', 'LIKE', 'image%')->orderBy('created_at');
+        }])
+        ->where('pet_type', $type)
+        ->where('pet_name', 'LIKE', $name . '%')
+        ->get();
+
+        if ($pets->isEmpty()) {
+            return response()->json(['error' => 'Pet not found'], 404);
+        }
+
+        foreach ($pets as $pet) {
+            $file = $pet->files->first();
+            $pet->primary_image = $file
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                : null;
+        }
+
+        return response()->json($pets);
+    }
+
 }
