@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pets;
+use Auth;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use JavaScript;
 use URL;
@@ -53,7 +56,7 @@ class PetsController extends Controller
      */
     public function all(Request $request)
     {
-        $query = Pets::with(['details','meta']);
+        $query = Pets::with(['details', 'meta']);
 
         // Search
         if ($search = $request->input('search.value')) {
@@ -152,8 +155,22 @@ class PetsController extends Controller
             ], 404);
         }
 
+        // Begin transaction
+        DB::beginTransaction();
+
+        if ($pet && $pet->meta) {
+
+            // $pet->meta->status = 0;
+            $pet->meta->deleted_by = Auth::user()->uuid;
+            $pet->meta->date_deleted = Carbon::now();
+
+            $pet->meta->save();
+        }
+
         // If pet not deleted
         if (!$pet->delete()) {
+
+            DB::rollBack();
 
             return response()->json([
                 'status' => 'error',
@@ -161,10 +178,108 @@ class PetsController extends Controller
             ], 500);
         }
 
+
+        DB::commit();
+
+
         // If pet is deleted
         return response()->json([
             'status' => 'success',
             'message' => 'Pet deleted successfully.'
+        ], 200);
+    }
+
+    /**
+     * Approve pet registration
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dtApprove(Request $request)
+    {
+
+        // Validation rules
+        $rules = [
+            'id' => 'required'
+        ];
+
+        // Validation message
+        $validationMessage = [
+            'id.required' => 'Invalid request! Please try again later.'
+        ];
+
+        // Request validation
+        $validator = Validator::make($request->all(), $rules, $validationMessage);
+
+        // When validation fails
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 422);
+        }
+
+        // Begin transaction
+        DB::beginTransaction();
+
+        // Find pet using id
+        $pet = Pets::find($request->input('id'));
+
+        // Check if pet and pet meta is empty
+        if (!$pet || !$pet->meta) {
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'Pet not found!'
+            ], 404);
+        }
+
+        // Update pet meta
+        $pet->meta->status = 2;
+        $pet->meta->updated_by = Auth::user()->uuid;
+        $pet->meta->date_updated = Carbon::now();
+
+        // Check if pet meta is saved
+        if (!$pet->meta->save()) {
+
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'Failed to approve pet registration!'
+            ], 500);
+        }
+
+        // Update updated_at column in pet
+        $pet->updated_at = Carbon::now();
+
+        // check if pet is saved
+        if (!$pet->save()) {
+
+            DB::rollback();
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'Failed to approve pet registration!'
+            ], 500);
+        }
+
+        // Commit database transaction
+        DB::commit();
+
+        // Create data array
+        $data = [
+            'id' => $pet->id,
+            'pet_name' => $pet->pet_name,
+            'pet_type' => $pet->pet_type,
+            "status" => $pet->meta->status ?? null,
+            'owner' => $pet->details->owner ?? '-',
+            'iagd_number' => $pet->details->iagd_number ?? '-',
+        ];
+
+        // Return response json with data
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet approved successfully!',
+            'data' => $data
         ], 200);
     }
 }
