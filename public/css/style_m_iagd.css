@@ -440,6 +440,20 @@ select.form-control option {
 	background-color: #2c0734;
 }
 
+.text-background-info {
+	padding: 0.5rem 1rem;
+	background-color: rgba(151, 100, 255, 0.16);
+	border-radius: 8px;
+	color: #fff;
+}
+
+.text-background-warning {
+	padding: 0.5rem 1rem;
+	background-color: #2c0734;
+	border-radius: 8px;
+	color: #fff;
+}
+
 .input-interactable-readonly {
 	transition: background-color 0.3s ease;
 }
@@ -562,6 +576,7 @@ main .card-hoverable:hover {
 .summary-label {
     font-weight: 500;
     color: #312c57;
+	align-content:center;
 }
 
 .summary-value {
