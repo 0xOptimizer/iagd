@@ -83,12 +83,57 @@ Route::prefix('admin')->group(function () {
 
     });
 
+    /**
+     * Pet page route groups
+     * @param string 'pets'
+     * @return \Illuminate\Routing\RouteRegistrar
+     */
     Route::prefix('pets')->middleware(['auth'])->group(function () {
+
+        /**
+         * show pet page
+         * @param string '/'
+         * @param array [AdminPetsController::class , 'index']
+         * @param string 'admin.pets'
+         * @return \Illuminate\Routing\Route
+         */
         Route::get('/', [AdminPetsController::class, 'index'])->name('admin.pets');
 
+        /**
+         * Show pet form
+         * @param string '/form'
+         * @param array [AdminPetsController::class , 'form']
+         * @param string 'admin.pets.form'
+         * @return \Illuminate\Routing\Route
+         */
         Route::get('/form', [AdminPetsController::class, 'form'])->name('admin.pets.form');
 
-        Route::get('/all', [AdminPetsController::class, 'all'])->name('admin.pets.all');
+        /**
+         * Get all pets
+         * @param string '/dt/all'
+         * @param array [AdminPetsController::class , 'all']
+         * @param string 'admin.pets.dt.all'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::get('/dt/all', [AdminPetsController::class, 'all'])->name('admin.pets.dt.all');
+
+        /**
+         * Delete specific pet
+         * @param string '/dt/delete'
+         * @param array [AdminPetsController::class , 'dtDelete']
+         * @param string 'admin.pets.dt.delete'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::post('/dt/delete', [AdminPetsController::class, 'dtDelete'])->name('admin.pets.dt.delete');
+
+        /**
+         * Approve specific pet
+         * @param string '/dt/approve'
+         * @param array [AdminPetsController::class , 'dtApprove']
+         * @param string 'admin.pets.dt.approve'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::post('/dt/approve', [AdminPetsController::class, 'dtApprove'])->name('admin.pets.dt.approve');
 
 
     });

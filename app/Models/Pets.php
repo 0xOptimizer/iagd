@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\PetsDetails;
 use App\Models\PetsMeta;
 use App\Models\PetsFile;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pets extends Model
 {
-    use HasFactory;
+    use HasFactory , SoftDeletes;
 
     protected $table = 'pets';
     public $timestamps = false;
