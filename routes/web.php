@@ -135,6 +135,24 @@ Route::prefix('admin')->group(function () {
          */
         Route::post('/dt/approve', [AdminPetsController::class, 'dtApprove'])->name('admin.pets.dt.approve');
 
+        /**
+         * Show pet View/Edit page
+         * @param string '/'
+         * @param array [AdminPetsController::class , 'viewEdit']
+         * @param string 'admin.pets.viewEdit'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::get('/view', [AdminPetsController::class, 'viewEdit'])->name('admin.pets.viewEdit');
+
+        /**
+         * Check if pet exist
+         * @param string '/'
+         * @param array [AdminPetsController::class , 'dtCheckPetId']
+         * @param string 'admin.pets.dtCheckPetId'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::get('/dt/check', [AdminPetsController::class, 'dtCheckPetId'])->name('admin.pets.dtCheckPetId');
+
 
     });
 });

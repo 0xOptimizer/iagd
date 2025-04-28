@@ -136,9 +136,38 @@ $(function () {
     };
 
     $(document).on("click", ".viewEditPetDetails", function () {
-        alert($(this).attr("data-id"));
+
+        const id = $(this).attr("data-id");
+
+        fetchApiGetData(`${window.urlBase}/admin/pets/dt/check?id=${id}`).then((res) => {
+
+
+            if (typeof res === 'undefined' || typeof res.status === 'undefined') {
+
+                console.log("Something's wrong! Please try again later.");
+                return;
+            }
+
+            console.log(res);
+
+
+
+            swalPrompt(res.message, res.status, `Okay`).then((action) => {
+
+                if (action.isConfirmed && res.status == 'success') {
+                    window.location.href = `${window.urlBase}/admin/pets/view?id=${id}`;
+                }
+
+            });
+        });
+
     });
 
+    /**
+     * On click approve pet
+     * @param {any} document
+     * @returns {any}
+     */
     $(document).on("click", ".btnApproveRegisteredPet", function () {
         const pet_id = $(this).attr("data-id");
 
@@ -210,6 +239,11 @@ $(function () {
         });
     });
 
+    /**
+     * On click delete pet
+     * @param {any} document
+     * @returns {any}
+     */
     $(document).on("click", ".btnDeletePet", function () {
         let thisBtn = $(this);
         let pet_id = $(this).attr("data-id");

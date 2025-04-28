@@ -45,6 +45,12 @@
     border-color: var(--input-border-color);
     box-shadow: 0 0 0 0.2rem rgba(136, 14, 212, 0.35);
 }
+.form-select:focus {
+    letter-spacing: 1pt;
+
+    border-color: var(--input-border-color);
+    box-shadow: 0 0 0 0.2rem rgba(136, 14, 212, 0.35);
+}
 
 .padd-m {
     padding: 2rem;

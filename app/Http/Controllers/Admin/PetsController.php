@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pets;
+use App\Models\Species;
 use Auth;
 use Carbon\Carbon;
 use DB;
@@ -281,5 +282,67 @@ class PetsController extends Controller
             'message' => 'Pet approved successfully!',
             'data' => $data
         ], 200);
+    }
+
+    /**
+     * Check if pet exist
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dtCheckPetId(Request $request) {
+
+        $validator = Validator::make($request->all(),[
+            'id' => 'required'
+        ],[
+            'id.required' => 'Invalid request! Please try again later.'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => $validator->errors()->first()
+            ], 422);
+
+        }
+
+        $pet = Pets::find($request->input('id'));
+
+        if (!$pet) {
+
+            return response()->json([
+                'status' => 'warning',
+                'message' => 'Pet not found!'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pet found.'
+        ], 200);
+
+    }
+    /**
+     * Description
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function viewEdit(Request $request) {
+
+        $pet = Pets::where('id',$request->input('id'))->with(['details','meta'])->first();
+        $type = Species::select('type')->distinct()->get();
+        $data = [
+            'title' => 'View / Edit Pets | International Animals Genetic Database (v2!)',
+            'pet' => $pet,
+            'type' => $type
+        ];
+
+        JavaScript::put([
+            'urlBase' => URL::to('/'),
+            'assetUrl' => asset('/'),
+        ]);
+
+        return view('admin.pages.pets.form-view-edit', $data);
+
     }
 }
