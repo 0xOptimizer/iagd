@@ -162,8 +162,22 @@ class PetController extends Controller
                 throw new \Exception('Invalid or missing next_iagd_number in GlobalMeta.');
             }
 
-            $nextIagdNumber = (int) $nextIagdMeta->meta_value;
+            $fullIagdNumber = $nextIagdMeta->meta_value; 
+            $hexPart = substr(strrchr($fullIagdNumber, '-'), 1); 
+            $nextIagdNumber = hexdec($hexPart); 
+            $year = date('Y');
+            $fixedPart = '002';
+            
+            // Ensure the hexadecimal part is within the allowed range
+            $hexValue = dechex($nextIagdNumber);
+            if (strlen($hexValue) > 4 || hexdec($hexValue) > hexdec('FFFF')) {
+                throw new \Exception('Maximum IAGD number reached.');
+            }
 
+            // Format the IAGD number as YYYY-002-{HEX}
+            $formattedIagdNumber = "{$year}-{$fixedPart}-" . str_pad($hexValue, 4, '0', STR_PAD_LEFT);
+
+            // Create the pet and other records as before
             $pet = Pets::create([
                 'uuid' => $uuid,
                 'pet_name' => $request->input('pet_name'),
@@ -209,7 +223,7 @@ class PetController extends Controller
             PetsDetails::create([
                 'uuid' => $uuid,
                 'breed' => $request->input('breed'),
-                'iagd_number' => $nextIagdNumber,
+                'iagd_number' => $formattedIagdNumber,
                 'stars' => $request->input('stars'),
                 'owner' => $request->input('owner'),
                 'owner_uuid' => (string) Str::uuid(),
@@ -240,14 +254,15 @@ class PetController extends Controller
 
             GlobalMeta::updateOrCreate(
                 ['meta_key' => 'previous_iagd_number'],
-                ['meta_value' => $nextIagdNumber]
+                ['meta_value' => $formattedIagdNumber]
             );
 
             GlobalMeta::updateOrCreate(
                 ['meta_key' => 'current_iagd_number'],
-                ['meta_value' => $nextIagdNumber]
+                ['meta_value' => $formattedIagdNumber]
             );
 
+            // Increment the next IAGD number
             $nextIagdMeta->meta_value = $nextIagdNumber + 1;
             $nextIagdMeta->save();
         } catch (\Throwable $th) {

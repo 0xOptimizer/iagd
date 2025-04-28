@@ -11,6 +11,8 @@ class GlobalMeta extends Model
 
     protected $table = "global_meta";
 
+    public $timestamps = false;
+
     protected $fillable = [
         'meta_key',
         'meta_value'
