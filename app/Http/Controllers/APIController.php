@@ -14,6 +14,25 @@ class APIController extends Controller
 {
     function get_pets_count()
     {
+        $petCounts = SpeciesMeta::select('species_id', DB::raw('count as total'))
+            ->pluck('total', 'species_id');
+
+        $latestPets = SpeciesMeta::select('species_id', DB::raw('MAX(latest_entry) as latest'))
+            ->groupBy('species_id')
+            ->pluck('latest', 'species_id');
+
+        $total = $petCounts->sum();
+
+        $data = [
+            'pet_counts' => $petCounts,
+            'latest_pets' => $latestPets,
+            'total' => $total
+        ];
+
+        return response()->json($data);
+    }
+    function get_pets_count_cached()
+    {
         $petCounts = Cache::remember('pet_counts_by_type', 300, function () {
             return SpeciesMeta::select('species_id', DB::raw('count as total'))
                 ->pluck('total', 'species_id');
