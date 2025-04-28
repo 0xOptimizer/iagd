@@ -28,7 +28,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://manalok9universit.com" target="_blank" class="card card-interactable">
+        <a href="https://manalok9university.com" target="_blank" class="card card-interactable">
             <div class="card-body d-flex align-items-center">
                 <img src="{{ asset('images/website-mk9.png') }}" width="64" height="64" class="me-4">
                 <div>

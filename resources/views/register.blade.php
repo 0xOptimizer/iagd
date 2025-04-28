@@ -302,7 +302,10 @@
                 </div>
                 <div class="form-floating col-4" style="position: relative;">
                     <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
-                    <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100"><i class="bi bi-link-45deg"></i> Link Lounge</button>
+                    <!-- <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100"><i class="bi bi-link-45deg"></i> Link Lounge</button> -->
+                    <button type="button" class="btn btn-primary btn-lg w-100 h-100" data-bs-toggle="tooltip" data-bs-placement="top" title="This feature will be unlocked in a future update" disabled>
+                        <i class="bi bi-lock-fill"></i> Link Lounge
+                    </button>
                 </div>
             </div>
             <div class="row mt-2">
@@ -801,7 +804,7 @@ function clearFormStorage() {
     });
 }
 $(document).ready(function() {
-
+    $('[data-bs-toggle="tooltip"]').tooltip();
     $('.group-navigate-btn').on('click', function() {
         const group = $(this).data('group');
 
