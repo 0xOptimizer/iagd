@@ -81,7 +81,7 @@
                         <div class="nucleobase"></div>
                         <div class="nucleobase"></div>
                     </div>
-                <h4 style="color: #fff">12,595,304 records</h4>
+                <h4 style="color: #fff">{{ number_format($total ?? 0) }} records</h4>
             </div>
         </div>
         <div class="iagd-containers row" style="display: none;">
@@ -96,8 +96,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Dogs</b>
-                                    <p class="card-text"><span class="iagd-total-count" data-group="Dog">{{ number_format($pet_counts['Dog'] ?? 0) }}</span>&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Dog">{{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</span></small></p>
+                                    <p class="card-text"><span class="iagd-total-count" data-group="Dog">{{ number_format($pet_counts['10'] ?? 0) }}</span>&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Dog">{{ \Carbon\Carbon::parse($latest_pets['10'] ?? now())->diffForHumans() }}</span></small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -116,8 +116,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Cats</b>
-                                    <p class="card-text"><span class="iagd-total-count" data-group="Cat">{{ number_format($pet_counts['Cat'] ?? 0) }}</span>&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Cat">{{ \Carbon\Carbon::parse($latest_pets['Cat'] ?? now())->diffForHumans() }}</span></small></p>
+                                    <p class="card-text"><span class="iagd-total-count" data-group="Cat">{{ number_format($pet_counts['11'] ?? 0) }}</span>&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Cat">{{ \Carbon\Carbon::parse($latest_pets['11'] ?? now())->diffForHumans() }}</span></small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -136,8 +136,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Birds</b>
-                                    <p class="card-text"><span class="iagd-total-count" data-group="Bird">{{ number_format($pet_counts['Bird'] ?? 0) }}</span>&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Bird">{{ \Carbon\Carbon::parse($latest_pets['Bird'] ?? now())->diffForHumans() }}</span></small></p>
+                                    <p class="card-text"><span class="iagd-total-count" data-group="Bird">{{ number_format($pet_counts['12'] ?? 0) }}</span>&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Bird">{{ \Carbon\Carbon::parse($latest_pets['12'] ?? now())->diffForHumans() }}</span></small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
@@ -156,8 +156,8 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <b class="card-title">Rabbits</b>
-                                    <p class="card-text"><span class="iagd-total-count" data-group="Rabbit">{{ number_format($pet_counts['Rabbit'] ?? 0) }}</span>&nbsp;registered</p>
-                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Rabbit">{{ \Carbon\Carbon::parse($latest_pets['Rabbit'] ?? now())->diffForHumans() }}</span></small></p>
+                                    <p class="card-text"><span class="iagd-total-count" data-group="Rabbit">{{ number_format($pet_counts['13'] ?? 0) }}</span>&nbsp;registered</p>
+                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="Rabbit">{{ \Carbon\Carbon::parse($latest_pets['13'] ?? now())->diffForHumans() }}</span></small></p>
                                 </div>
                                 <div class="card-icon">
                                     <i class="bi bi-caret-right-fill"></i>
