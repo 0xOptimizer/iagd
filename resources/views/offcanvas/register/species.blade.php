@@ -31,7 +31,7 @@
                 <div>
                     <span style="font-size: 24px;">Rabbit</span>
                     <br>
-                    <span style="font-style: italic; opacity: 0.16;">Genus: Oryctolagus cuniculus</span>
+                    <span style="font-style: italic; opacity: 0.16;">Genus: Oryctolagus cuniculus domesticus</span>
                 </div>
             </div>
         </div>

@@ -9,10 +9,11 @@
 
 </style>
 <body>
+@include('offcanvas.navigation.apps')
 <div class="phone-container">
     <nav class="navbar navbar-dark header sticky-top">
         <div class="container-fluid text-center">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('index') }}">
                 <img src="{{ asset('images/IAGD_Logo_Silver.png') }}" alt="Logo" style="transform: scale(2.25);">
             </a>
             <div class="d-flex">
@@ -23,7 +24,7 @@
                 <span class="d-inline d-md-none">IAGD</span>
             </div>
             <div class="d-flex gap-2">
-                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2">
+                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon">
                     <i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i>
                 </button>
             </div>
@@ -47,7 +48,7 @@
     </div>
     <div class="group-container" data-group="page_1" style="display: none;">
         <div class="d-flex align-items-center justify-content-center mb-4">
-            <div class="rotating" style="position: absolute; top: 74px; left: 57px; font-size: 144px; color: #312c57; opacity: 0.33; z-index: -1; pointer-events: none;">
+            <div class="rotating" style="position: absolute; top: -48px; left: 57px; font-size: 144px; color: #312c57; opacity: 0.33; z-index: -1; pointer-events: none;">
                 <i class="rotating bi bi-ubuntu"></i>
             </div>
             <!-- <img src="{{ asset('images/iagd_logo_mica.png') }}" width="150" height="150" style="position: absolute; top: 102px; left: 57px; opacity: 0.55;"> -->
@@ -95,7 +96,7 @@
             <div class="d-grid gap-2 mt-4 mb-3">
                 <div class="row">
                     <div class="form-floating col-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="main" style="height: 100%; width: 100%;" disabled>Back</button>
+                        <a href="{{ route('index') }}" class="btn btn-outline-primary btn-lg" style="height: 100%; width: 100%;">Back</a>
                     </div>
                     <div class="page_1-incomplete-continue-btn-group form-floating col-9">
                         <button type="button" class="page_1-incomplete-continue-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;">Continue</button>
@@ -250,13 +251,17 @@
                     <label for="pet-dam-breed" style="margin-left: 12px;">Dam's Breed</label>
                 </div>
             </div>
-            <!-- <div class="row mt-4">
+            <div class="row mt-4">
                 <div class="form-floating col-12">
-                    <input type="text" class="pet-animal_facility-input input-interactable-readonly form-control" id="pet-animal_facility" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-animal_facility" placeholder="Animal Facility" readonly>
+                    <input type="text" class="pet-animal_facility-input form-control" id="pet-animal_facility" placeholder="Animal Facility">
                     <label for="pet-animal_facility" style="margin-left: 12px;">Animal Facility</label>
                 </div>
+                <!-- <div class="form-floating col-12">
+                    <input type="text" class="pet-animal_facility-input input-interactable-readonly form-control" id="pet-animal_facility" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-animal_facility" placeholder="Animal Facility" readonly>
+                    <label for="pet-animal_facility" style="margin-left: 12px;">Animal Facility</label>
+                </div> -->
             </div>
-            <div class="row mt-2">
+            <!-- <div class="row mt-2">
                 <div class="form-floating col-12">
                     <input type="text" class="pet-vet_records-input input-interactable-readonly form-control" id="pet-vet_records" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-vet_records" placeholder="Vet Records" readonly>
                     <label for="pet-vet_records" style="margin-left: 12px;">Vet Records</label>
@@ -412,11 +417,11 @@
             <!-- Additional Information -->
             <div class="summary-section mt-4">
                 <h5 class="summary-title text-gradient-primary">Additional Information</h5>
-                <!-- <div class="summary-row">
+                <div class="summary-row">
                     <span class="summary-label">Animal Facility:</span>
                     <span class="summary-value" data-source="pet-animal_facility"></span>
                 </div>
-                <div class="summary-row">
+                <!-- <div class="summary-row">
                     <span class="summary-label">Vet Records:</span>
                     <span class="summary-value" data-source="pet-vet_records"></span>
                 </div> -->
@@ -488,14 +493,32 @@
                 <span class="summary-value"><span class="submit-overview-gender"></span></span>
             </div>
             <div class="summary-row">
-                <span class="summary-label">Physical (Weight / Height):</span>
-                <span class="summary-value" data-source="pet-weight"></span> /
+                <span class="summary-label">Physical</span>
+                <span class="summary-value">&nbsp;</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">* Weight:</span>
+                <span class="summary-value" data-source="pet-weight"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">* Height:</span>
                 <span class="summary-value" data-source="pet-height"></span>
             </div>
             <div class="summary-row">
-                <span class="summary-label">Colors (Body / Eye):</span>
-                <span class="summary-value" data-source="pet-color_body"></span> /
+                <span class="summary-label">Colors</span>
+                <span class="summary-value">&nbsp;</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">* Eye Color:</span>
                 <span class="summary-value" data-source="pet-color_eye"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">* Body Color:</span>
+                <span class="summary-value" data-source="pet-color_body"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">* Markings:</span>
+                <span class="summary-value" data-source="pet-markings"></span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Main Owner:</span>
@@ -503,7 +526,12 @@
             </div>
             <div class="summary-row">
                 <span class="summary-label">Location:</span>
-                <span class="summary-value"></span><span class="submit-overview-pet_location"></span>&nbsp;<button type="button" class="btn btn-outline-primary" onclick="openPetAddressMap()"><i class="bi bi-geo-alt-fill"></i></button>
+                <span class="summary-value">
+                    <span class="submit-overview-pet_location"></span>
+                    <button type="button" class="btn btn-outline-primary ms-2" onclick="openPetAddressMap()">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </button>
+                </span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Animal Facility:</span>
@@ -519,10 +547,7 @@
         <!-- Submit Button -->
         <div class="d-grid gap-2 mt-4 mb-3">
             <div class="row">
-                <div class="form-floating col-5 mb-3">
-                    <button type="button" class="btn btn-outline-primary btn-lg" style="height: 100%; width: 100%;">View Profile</button>
-                </div>
-                <div class="form-floating col-7 mb-3">
+                <div class="form-floating col-12 mb-3">
                     <button type="button" class="btn btn-primary btn-lg" style="height: 100%; width: 100%;"><i class="bi bi-plus-circle"></i> Register Another Pet</button>
                 </div>
             </div>
@@ -615,8 +640,12 @@ function submitRegistration() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response) {
+            clearFormStorage();
+
             const details = response.data.details;
             const iagd_number = details?.iagd_number || 'NO IAGD NUMBER';
+            appendToSavedPets(iagd_number);
+
             const share_url = `{{ url('pet') }}/${iagd_number}`;
             
             const genderRaw = details?.gender?.toLowerCase() || '';
@@ -758,6 +787,18 @@ function openPetAddressMap() {
     if (newWindow) {
         newWindow.focus();
     }
+}
+function appendToSavedPets(pet) {
+    let savedPets = JSON.parse(localStorage.getItem('saved_pets')) || [];
+    savedPets.push(pet);
+    localStorage.setItem('saved_pets', JSON.stringify(savedPets));
+}
+function clearFormStorage() {
+    Object.keys(localStorage).forEach(function(key) {
+        if (key.startsWith('form_')) {
+            localStorage.removeItem(key);
+        }
+    });
 }
 $(document).ready(function() {
 
@@ -913,7 +954,7 @@ $(document).ready(function() {
                     });
 
                     if (index === files.length - 1) {
-                        localStorage.setItem('pet_image_gallery', JSON.stringify(base64Images));
+                        localStorage.setItem('form_pet_image_gallery', JSON.stringify(base64Images));
                     }
                 };
                 reader.readAsDataURL(file);
@@ -1054,7 +1095,7 @@ $(document).ready(function() {
             localStorage.removeItem('form_' + name);
         } else {
             for (let key in localStorage) {
-                if (key.startsWith('form_') || key === 'pet_image_gallery') {
+                if (key.startsWith('form_') || key === 'form_pet_image_gallery') {
                     localStorage.removeItem(key);
                 }
             }
@@ -1336,7 +1377,7 @@ $(document).ready(function() {
         localStorage.setItem('form_' + name, $(this).val());
     });
 
-    let gallery = localStorage.getItem('pet_image_gallery');
+    let gallery = localStorage.getItem('form_pet_image_gallery');
     if (gallery) {
         let images = JSON.parse(gallery);
         let input = $("input[type='file']").get(0);

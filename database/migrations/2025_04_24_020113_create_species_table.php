@@ -18,8 +18,6 @@ return new class extends Migration
 
             $table->string('name');
 
-            $table->string('type');
-
             $table->string('scientific_name')->nullable();
 
             $table->softDeletes();

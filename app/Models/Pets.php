@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pets extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory;
 
     protected $table = 'pets';
     public $timestamps = false;
