@@ -1244,82 +1244,93 @@ $(document).ready(function() {
     $('input, textarea, select').each(function () {
         let name = $(this).attr('name') || $(this).attr('id');
         if (!name) return;
-        let saved = localStorage.getItem('form_' + name);
+        let saved = localStorage.getItem(`form_${name}`);
         if (saved !== null) {
-            $(this).val(saved);
-        }
-        if (name === 'pet-name') {
-            $('.pet-preview-pet_name').text(saved);
-        }
-        if (name === 'pet-species') {
-            $('.pet-preview-pet_species').text(saved);
-        }
-        if (name === 'pet-age') {
-            $('.pet-preview-pet_age').text(saved);
-        }
-        if (name === 'pet-breed') {
-            $('.pet-preview-pet_breed').text(saved);
-        }
-        if (name === 'pet-birth_date-mimic' || name === 'pet-birth_date') {
-            const birthDate = saved;
-            if (!birthDate) return;
-
-            let dt = luxon.DateTime.fromISO(birthDate);
-            let now = luxon.DateTime.now();
-            let diff = now.diff(dt, ['years', 'months']).toObject();
-
-            let years = Math.floor(diff.years);
-            let months = Math.floor(diff.months);
-
-            let ageText = years > 0 
-            ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}` 
-            : `${months} month${months > 1 ? 's' : ''}`;
-            
-            $('#pet-birth_date').val(birthDate);
-            $('#pet-age').val(ageText);
-            $('.pet-preview-pet_age').text(ageText);
-
-            $('.pet-input-age-mimic-group').hide();
-            $('.pet-input-age-actual-group').show();
-        }
-        if (name === 'pet-sire-name' || name === 'pet-sire-uuid' || name === 'pet-sire-breed' || name === 'pet-sire-image') {
-            const sireName = localStorage.getItem('form_pet-sire-name') || '';
-            const sireUuid = localStorage.getItem('form_pet-sire-uuid') || '';
-            const sireBreed = localStorage.getItem('form_pet-sire-breed') || '';
-            const sireImage = localStorage.getItem('form_pet-sire-image') || '';
-
-            if (sireName || sireUuid || sireBreed || sireImage) {
-                $('#pet-sire-name').val(sireName);
-                $('#pet-sire-uuid').val(sireUuid);
-                $('#pet-sire-breed').val(sireBreed);
-                $('.pet-sire-preview-image').attr('src', sireImage);
-                $('.pet-sire-preview-pet_name').text(sireName);
-                $('.pet-sire-preview-pet_breed').text(sireBreed);
-
-                $('.pet-sire-before-selection-group').hide();
-                $('.pet-sire-after-selection-group').show();
+            try {
+                $(this).val(saved);
+            } catch (e) {
+                console.error(`Error setting value for ${name}:`, e);
             }
         }
-        if (name === 'pet-dam-name' || name === 'pet-dam-uuid' || name === 'pet-dam-breed' || name === 'pet-dam-image') {
-            const damName = localStorage.getItem('form_pet-dam-name') || '';
-            const damUuid = localStorage.getItem('form_pet-dam-uuid') || '';
-            const damBreed = localStorage.getItem('form_pet-dam-breed') || '';
-            const damImage = localStorage.getItem('form_pet-dam-image') || '';
-
-            if (damName || damUuid || damBreed || damImage) {
-                $('#pet-dam-name').val(damName);
-                $('#pet-dam-uuid').val(damUuid);
-                $('#pet-dam-breed').val(damBreed);
-                $('.pet-dam-preview-image').attr('src', damImage);
-                $('.pet-dam-preview-pet_name').text(damName);
-                $('.pet-dam-preview-pet_breed').text(damBreed);
-
-                $('.pet-dam-before-selection-group').hide();
-                $('.pet-dam-after-selection-group').show();
+        try {
+            if (name === 'pet-name') {
+                $('.pet-preview-pet_name').text(saved);
             }
-        }
+            if (name === 'pet-species') {
+                $('.pet-preview-pet_species').text(saved);
+            }
+            if (name === 'pet-age') {
+                $('.pet-preview-pet_age').text(saved);
+            }
+            if (name === 'pet-breed') {
+                $('.pet-preview-pet_breed').text(saved);
+            }
+            if (name === 'pet-birth_date-mimic' || name === 'pet-birth_date') {
+                const birthDate = saved;
+                if (!birthDate) return;
 
-        page_1_continue_validate();
+                let dt = luxon.DateTime.fromISO(birthDate);
+                let now = luxon.DateTime.now();
+                let diff = now.diff(dt, ['years', 'months']).toObject();
+
+                let years = Math.floor(diff.years);
+                let months = Math.floor(diff.months);
+
+                let ageText = years > 0
+                    ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}`
+                    : `${months} month${months > 1 ? 's' : ''}`;
+
+                $('#pet-birth_date').val(birthDate);
+                $('#pet-age').val(ageText);
+                $('.pet-preview-pet_age').text(ageText);
+
+                $('.pet-input-age-mimic-group').hide();
+                $('.pet-input-age-actual-group').show();
+            }
+            if (name === 'pet-sire-name' || name === 'pet-sire-uuid' || name === 'pet-sire-breed' || name === 'pet-sire-image') {
+                const sireName = localStorage.getItem('form_pet-sire-name') || '';
+                const sireUuid = localStorage.getItem('form_pet-sire-uuid') || '';
+                const sireBreed = localStorage.getItem('form_pet-sire-breed') || '';
+                const sireImage = localStorage.getItem('form_pet-sire-image') || '';
+
+                if (sireName || sireUuid || sireBreed || sireImage) {
+                    $('#pet-sire-name').val(sireName);
+                    $('#pet-sire-uuid').val(sireUuid);
+                    $('#pet-sire-breed').val(sireBreed);
+                    $('.pet-sire-preview-image').attr('src', sireImage);
+                    $('.pet-sire-preview-pet_name').text(sireName);
+                    $('.pet-sire-preview-pet_breed').text(sireBreed);
+
+                    $('.pet-sire-before-selection-group').hide();
+                    $('.pet-sire-after-selection-group').show();
+                }
+            }
+            if (name === 'pet-dam-name' || name === 'pet-dam-uuid' || name === 'pet-dam-breed' || name === 'pet-dam-image') {
+                const damName = localStorage.getItem('form_pet-dam-name') || '';
+                const damUuid = localStorage.getItem('form_pet-dam-uuid') || '';
+                const damBreed = localStorage.getItem('form_pet-dam-breed') || '';
+                const damImage = localStorage.getItem('form_pet-dam-image') || '';
+
+                if (damName || damUuid || damBreed || damImage) {
+                    $('#pet-dam-name').val(damName);
+                    $('#pet-dam-uuid').val(damUuid);
+                    $('#pet-dam-breed').val(damBreed);
+                    $('.pet-dam-preview-image').attr('src', damImage);
+                    $('.pet-dam-preview-pet_name').text(damName);
+                    $('.pet-dam-preview-pet_breed').text(damBreed);
+
+                    $('.pet-dam-before-selection-group').hide();
+                    $('.pet-dam-after-selection-group').show();
+                }
+            }
+        } catch (e) {
+            console.error(`Error processing ${name}:`, e);
+        }
+        try {
+            page_1_continue_validate();
+        } catch (e) {
+            console.error('Error in page_1_continue_validate:', e);
+        }
     });
 
     $(document).on('input change', 'input, textarea, select', function () {
