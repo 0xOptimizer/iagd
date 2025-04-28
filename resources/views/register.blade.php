@@ -12,23 +12,20 @@
 <div class="phone-container">
     <nav class="navbar navbar-dark header sticky-top">
         <div class="container-fluid text-center">
-            <!-- Left Group - Logo -->
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/IAGD_Logo_Silver.png') }}" alt="Logo" style="transform: scale(2.25);">
             </a>
-
             <div class="d-flex">
                 &nbsp;
             </div>
-
-            <!-- Middle Group - Search Bar -->
             <div class="flex-grow-1 mx-3">
-                International Animal Genetics Database
+                <span class="d-none d-md-inline">International Animal Genetics Database</span>
+                <span class="d-inline d-md-none">IAGD</span>
             </div>
-
-            <!-- Right Group - Buttons -->
             <div class="d-flex gap-2">
-                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2"><i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i></button>
+                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2">
+                    <i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -253,7 +250,7 @@
                     <label for="pet-dam-breed" style="margin-left: 12px;">Dam's Breed</label>
                 </div>
             </div>
-            <div class="row mt-4">
+            <!-- <div class="row mt-4">
                 <div class="form-floating col-12">
                     <input type="text" class="pet-animal_facility-input input-interactable-readonly form-control" id="pet-animal_facility" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-animal_facility" placeholder="Animal Facility" readonly>
                     <label for="pet-animal_facility" style="margin-left: 12px;">Animal Facility</label>
@@ -264,7 +261,7 @@
                     <input type="text" class="pet-vet_records-input input-interactable-readonly form-control" id="pet-vet_records" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-vet_records" placeholder="Vet Records" readonly>
                     <label for="pet-vet_records" style="margin-left: 12px;">Vet Records</label>
                 </div>
-            </div>
+            </div> -->
             <div class="row mt-2">
                 <div class="banner-container banner-info p-3 text-center">
                     <i class="banner-icon bi bi-info-circle"></i> Note: Using IAGD, we automatically trace and connect your pet's pedigree, including their parents and ancestors. You only need to add their immediate details to the database.
@@ -415,14 +412,14 @@
             <!-- Additional Information -->
             <div class="summary-section mt-4">
                 <h5 class="summary-title text-gradient-primary">Additional Information</h5>
-                <div class="summary-row">
+                <!-- <div class="summary-row">
                     <span class="summary-label">Animal Facility:</span>
                     <span class="summary-value" data-source="pet-animal_facility"></span>
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Vet Records:</span>
                     <span class="summary-value" data-source="pet-vet_records"></span>
-                </div>
+                </div> -->
                 <div class="summary-row">
                     <span class="summary-label">Pedigree:</span>
                     <span class="summary-value" data-source="pet-sire-name"></span> /
@@ -451,52 +448,71 @@
                 <span class="text-gradient-primary" style="font-size: 24px;">Welcome to IAGD!</span>
             </div>
             <div class="col-12 mt-2">
+                <img class="pet-preview-image-backdrop rounded-circle" src="" style="width: 256px; height: 128px;">
                 <img class="pet-preview-image rounded-circle" src="" style="width: 256px; height: 128px;">
             </div>
             <div class="col-12 mt-2"><span class="pet-preview-pet_name text-gradient-primary" style="font-size: 32px;"></span></div>
         </div>
-        <hr class="my-3">
-        <!-- Physical Characteristics -->
-        <div class="summary-section mt-4">
-            <h5 class="summary-title text-gradient-primary">Physical Characteristics</h5>
+        <div class="d-flex align-items-center mt-2 w-100">
+            <button type="button" class="btn btn-primary flex-grow-1 me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-share-pet">
+                <i class="bi bi-share me-1"></i> Share
+            </button>
+            <a href="#" target="_blank" class="submit-view_profile-btn btn btn-outline-primary flex-grow-1 me-2">
+                <i class="bi bi-box-arrow-up-right me-1"></i> View Profile
+            </a>
+            <button type="button" class="btn btn-outline-primary flex-grow-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-export-pet">
+                <i class="bi bi-qr-code me-1"></i> QR Code
+            </button>
+        </div>
+        <div class="summary-section mt-2">
+            <h5 class="summary-title d-flex align-items-center">
+                Overview
+                <button type="button" class="btn btn-outline-primary ms-auto" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-export-pet" style="font-size: 14px;">
+                    <i class="bi bi-file-earmark-arrow-down me-1"></i> Download
+                </button>
+            </h5>
+            <div class="summary-row">
+                <span class="summary-label">IAGD No.</span>
+                <span class="summary-value submit-overview-iagd_number text-background-info"></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">IAGD Status</span>
+                <span class="summary-value"><span class="text-background-info">Verifying</span>&nbsp;<button type="button" class="btn btn-outline-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-qna-status">?</button></span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Breed:</span>
+                <span class="summary-value"><span class="submit-overview-breed"></span></span>
+            </div>
             <div class="summary-row">
                 <span class="summary-label">Gender:</span>
-                <span class="summary-value" data-source="pet-gender"></span>
+                <span class="summary-value"><span class="submit-overview-gender"></span></span>
             </div>
             <div class="summary-row">
-                <span class="summary-label">Weight:</span>
-                <span class="summary-value" data-source="pet-weight"></span>
-            </div>
-            <div class="summary-row">
-                <span class="summary-label">Height:</span>
+                <span class="summary-label">Physical (Weight / Height):</span>
+                <span class="summary-value" data-source="pet-weight"></span> /
                 <span class="summary-value" data-source="pet-height"></span>
             </div>
             <div class="summary-row">
-                <span class="summary-label">Colors:</span>
+                <span class="summary-label">Colors (Body / Eye):</span>
                 <span class="summary-value" data-source="pet-color_body"></span> /
                 <span class="summary-value" data-source="pet-color_eye"></span>
             </div>
-        </div>
-
-        <!-- Ownership Details -->
-        <div class="summary-section mt-4">
-            <h5 class="summary-title text-gradient-primary">Ownership Details</h5>
             <div class="summary-row">
                 <span class="summary-label">Main Owner:</span>
                 <span class="summary-value" data-source="pet-owner"></span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Location:</span>
-                <span class="summary-value" data-source="pet-owner_location"></span>
+                <span class="summary-value"></span><span class="submit-overview-pet_location"></span>&nbsp;<button type="button" class="btn btn-outline-primary" onclick="openPetAddressMap()"><i class="bi bi-geo-alt-fill"></i></button>
             </div>
             <div class="summary-row">
-                <span class="summary-label">Contact:</span>
-                <span class="summary-value" data-source="pet-owner_contact"></span>
+                <span class="summary-label">Animal Facility:</span>
+                <span class="summary-value" data-source="pet-animal_facility"></span>
             </div>
         </div>
         <hr class="my-3">
         <div class="row mt-2">
-            <div class="banner-container banner-warning p-3 text-center">
+            <div class="banner-container banner-info p-3 text-center">
                 <i class="banner-icon bi bi-info-circle"></i> Note: Your pet will remain in pending for up to 24 hours while we verify the details you provided. <br> We will notify you once your pet has been approved for display.
             </div>
         </div>
@@ -525,6 +541,7 @@
 @include('offcanvas.register.dam.name')
 @include('offcanvas.register.dam.no_iagd')
 @include('offcanvas.register.submit')
+@include('offcanvas.register.share')
 </body>
 <script src="{{ asset('js/TweenMax.min.js') }}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.3/luxon.min.js"></script> -->
@@ -598,6 +615,26 @@ function submitRegistration() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(response) {
+            const details = response.data.details;
+            const iagd_number = details?.iagd_number || 'NO IAGD NUMBER';
+            const share_url = `{{ url('pet') }}/${iagd_number}`;
+            
+            const genderRaw = details?.gender?.toLowerCase() || '';
+            const isMale = genderRaw.startsWith('male');
+            const isFemale = genderRaw.startsWith('female');
+
+            const genderIcon = isMale
+                ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
+                : isFemale
+                    ? '<i class="bi bi-gender-female" style="color: pink;"></i> Female'
+                    : '<i class="bi bi-question-circle" style="color: gray;"></i> Unknown';
+
+            $('.submit-view_profile-btn').attr('href', share_url);
+            $('.submit-overview-iagd_number').text(iagd_number);
+            $('.submit-overview-breed').html(details?.gender || '');
+            $('.submit-overview-gender').html(genderIcon);
+            $('.submit-overview-pet_location').html(details?.pet_location || '');
+
             setTimeout(function() {
                 $('.submit-uploading-before-loading-group').hide();
                 $('.submit-uploading-after-loading-group').show();
@@ -613,53 +650,60 @@ function submitRegistration() {
 
                     animateShine($('.submit-assigning-after-loading-group'));
 
-                    setTimeout(function() {
-                        $('.submit-generating-before-loading-group').hide();
-                        $(`.group-container`).hide();
-                        $(`.group-container[data-group="page_6"]`).show();
-                        $('#offcanvas-register-submit').offcanvas('hide');
-
-                        $('html, body').scrollTop(0);
-                    }, 1600);
+                    $('.submit-creating-inactive-loading-group').hide();
+                    $('.submit-creating-before-loading-group').show();
 
                     setTimeout(function() {
-                        var count = 200;
-                        var defaults = {
-                            origin: { y: 0.7 }
-                        };
-                        
-                        function fire(particleRatio, opts) {
-                            confetti({
-                                ...defaults,
-                                ...opts,
-                                particleCount: Math.floor(count * particleRatio)
-                            });
-                        }
-                        
-                        fire(0.25, {
-                            spread: 26,
-                            startVelocity: 55,
-                        });
-                        fire(0.2, {
-                            spread: 60,
-                        });
-                        fire(0.35, {
-                            spread: 100,
-                            decay: 0.91,
-                            scalar: 0.8
-                        });
-                        fire(0.1, {
-                            spread: 120,
-                            startVelocity: 25,
-                            decay: 0.92,
-                            scalar: 1.2
-                        });
-                        fire(0.1, {
-                            spread: 120,
-                            startVelocity: 45,
-                        });
-                    }, 2100);
+                        $('.submit-creating-before-loading-group').hide();
+                        $('.submit-creating-after-loading-group').show();
 
+                        animateShine($('.submit-creating-after-loading-group'));
+                        setTimeout(function() {
+                            $(`.group-container`).hide();
+                            $(`.group-container[data-group="page_6"]`).show();
+                            $('#offcanvas-register-submit').offcanvas('hide');
+
+                            $('.phone-container').scrollTop(0);
+
+                            setTimeout(function() {
+                                var count = 200;
+                                var defaults = {
+                                    origin: { y: 0.7 }
+                                };
+                                
+                                function fire(particleRatio, opts) {
+                                    confetti({
+                                        ...defaults,
+                                        ...opts,
+                                        particleCount: Math.floor(count * particleRatio)
+                                    });
+                                }
+                                
+                                fire(0.25, {
+                                    spread: 26,
+                                    startVelocity: 55,
+                                });
+                                fire(0.2, {
+                                    spread: 60,
+                                });
+                                fire(0.35, {
+                                    spread: 100,
+                                    decay: 0.91,
+                                    scalar: 0.8
+                                });
+                                fire(0.1, {
+                                    spread: 120,
+                                    startVelocity: 25,
+                                    decay: 0.92,
+                                    scalar: 1.2
+                                });
+                                fire(0.1, {
+                                    spread: 120,
+                                    startVelocity: 45,
+                                });
+                            }, 400)
+                        }, 700);
+                    }, 2700);
                 }, Math.floor(Math.random() * 400) + 800);
 
             }, 1500);
@@ -670,6 +714,50 @@ function submitRegistration() {
     });
 
     return false;
+}
+function share(platform) {
+    if (typeof platform !== 'string') return;
+    platform = platform.toLowerCase().trim();
+    if (!['facebook', 'twitter', 'linkedin', 'whatsapp'].includes(platform)) return;
+
+    var petName = $('#pet-name').val();
+    if (typeof petName !== 'string' || !(petName = petName.trim())) return;
+
+    var message = `My pet, ${petName}, now has an online profile via IAGD!`;
+    var profileUrl = `{{ url('pet') }}/${$('.submit-overview-iagd_number').text()}`;
+    var encodedUrl = encodeURIComponent(profileUrl);
+    var shareUrl = "";
+
+    switch(platform) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodeURIComponent(message)}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message + " " + profileUrl)}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(message + " " + profileUrl)}`;
+            break;
+        default:
+            return;
+    }
+
+    try {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    } catch (e) {
+        console.error("Share failed:", e);
+    }
+}
+function openPetAddressMap() {
+    const query = $('#pet-address').val();
+    const url = `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+    const newWindow = window.open(url, '_blank');
+    if (newWindow) {
+        newWindow.focus();
+    }
 }
 $(document).ready(function() {
 
@@ -1153,82 +1241,93 @@ $(document).ready(function() {
     $('input, textarea, select').each(function () {
         let name = $(this).attr('name') || $(this).attr('id');
         if (!name) return;
-        let saved = localStorage.getItem('form_' + name);
+        let saved = localStorage.getItem(`form_${name}`);
         if (saved !== null) {
-            $(this).val(saved);
-        }
-        if (name === 'pet-name') {
-            $('.pet-preview-pet_name').text(saved);
-        }
-        if (name === 'pet-species') {
-            $('.pet-preview-pet_species').text(saved);
-        }
-        if (name === 'pet-age') {
-            $('.pet-preview-pet_age').text(saved);
-        }
-        if (name === 'pet-breed') {
-            $('.pet-preview-pet_breed').text(saved);
-        }
-        if (name === 'pet-birth_date-mimic' || name === 'pet-birth_date') {
-            const birthDate = saved;
-            if (!birthDate) return;
-
-            let dt = luxon.DateTime.fromISO(birthDate);
-            let now = luxon.DateTime.now();
-            let diff = now.diff(dt, ['years', 'months']).toObject();
-
-            let years = Math.floor(diff.years);
-            let months = Math.floor(diff.months);
-
-            let ageText = years > 0 
-            ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}` 
-            : `${months} month${months > 1 ? 's' : ''}`;
-            
-            $('#pet-birth_date').val(birthDate);
-            $('#pet-age').val(ageText);
-            $('.pet-preview-pet_age').text(ageText);
-
-            $('.pet-input-age-mimic-group').hide();
-            $('.pet-input-age-actual-group').show();
-        }
-        if (name === 'pet-sire-name' || name === 'pet-sire-uuid' || name === 'pet-sire-breed' || name === 'pet-sire-image') {
-            const sireName = localStorage.getItem('form_pet-sire-name') || '';
-            const sireUuid = localStorage.getItem('form_pet-sire-uuid') || '';
-            const sireBreed = localStorage.getItem('form_pet-sire-breed') || '';
-            const sireImage = localStorage.getItem('form_pet-sire-image') || '';
-
-            if (sireName || sireUuid || sireBreed || sireImage) {
-                $('#pet-sire-name').val(sireName);
-                $('#pet-sire-uuid').val(sireUuid);
-                $('#pet-sire-breed').val(sireBreed);
-                $('.pet-sire-preview-image').attr('src', sireImage);
-                $('.pet-sire-preview-pet_name').text(sireName);
-                $('.pet-sire-preview-pet_breed').text(sireBreed);
-
-                $('.pet-sire-before-selection-group').hide();
-                $('.pet-sire-after-selection-group').show();
+            try {
+                $(this).val(saved);
+            } catch (e) {
+                console.error(`Error setting value for ${name}:`, e);
             }
         }
-        if (name === 'pet-dam-name' || name === 'pet-dam-uuid' || name === 'pet-dam-breed' || name === 'pet-dam-image') {
-            const damName = localStorage.getItem('form_pet-dam-name') || '';
-            const damUuid = localStorage.getItem('form_pet-dam-uuid') || '';
-            const damBreed = localStorage.getItem('form_pet-dam-breed') || '';
-            const damImage = localStorage.getItem('form_pet-dam-image') || '';
-
-            if (damName || damUuid || damBreed || damImage) {
-                $('#pet-dam-name').val(damName);
-                $('#pet-dam-uuid').val(damUuid);
-                $('#pet-dam-breed').val(damBreed);
-                $('.pet-dam-preview-image').attr('src', damImage);
-                $('.pet-dam-preview-pet_name').text(damName);
-                $('.pet-dam-preview-pet_breed').text(damBreed);
-
-                $('.pet-dam-before-selection-group').hide();
-                $('.pet-dam-after-selection-group').show();
+        try {
+            if (name === 'pet-name') {
+                $('.pet-preview-pet_name').text(saved);
             }
-        }
+            if (name === 'pet-species') {
+                $('.pet-preview-pet_species').text(saved);
+            }
+            if (name === 'pet-age') {
+                $('.pet-preview-pet_age').text(saved);
+            }
+            if (name === 'pet-breed') {
+                $('.pet-preview-pet_breed').text(saved);
+            }
+            if (name === 'pet-birth_date-mimic' || name === 'pet-birth_date') {
+                const birthDate = saved;
+                if (!birthDate) return;
 
-        page_1_continue_validate();
+                let dt = luxon.DateTime.fromISO(birthDate);
+                let now = luxon.DateTime.now();
+                let diff = now.diff(dt, ['years', 'months']).toObject();
+
+                let years = Math.floor(diff.years);
+                let months = Math.floor(diff.months);
+
+                let ageText = years > 0
+                    ? `${years} year${years > 1 ? 's' : ''}, ${months} month${months > 1 ? 's' : ''}`
+                    : `${months} month${months > 1 ? 's' : ''}`;
+
+                $('#pet-birth_date').val(birthDate);
+                $('#pet-age').val(ageText);
+                $('.pet-preview-pet_age').text(ageText);
+
+                $('.pet-input-age-mimic-group').hide();
+                $('.pet-input-age-actual-group').show();
+            }
+            if (name === 'pet-sire-name' || name === 'pet-sire-uuid' || name === 'pet-sire-breed' || name === 'pet-sire-image') {
+                const sireName = localStorage.getItem('form_pet-sire-name') || '';
+                const sireUuid = localStorage.getItem('form_pet-sire-uuid') || '';
+                const sireBreed = localStorage.getItem('form_pet-sire-breed') || '';
+                const sireImage = localStorage.getItem('form_pet-sire-image') || '';
+
+                if (sireName || sireUuid || sireBreed || sireImage) {
+                    $('#pet-sire-name').val(sireName);
+                    $('#pet-sire-uuid').val(sireUuid);
+                    $('#pet-sire-breed').val(sireBreed);
+                    $('.pet-sire-preview-image').attr('src', sireImage);
+                    $('.pet-sire-preview-pet_name').text(sireName);
+                    $('.pet-sire-preview-pet_breed').text(sireBreed);
+
+                    $('.pet-sire-before-selection-group').hide();
+                    $('.pet-sire-after-selection-group').show();
+                }
+            }
+            if (name === 'pet-dam-name' || name === 'pet-dam-uuid' || name === 'pet-dam-breed' || name === 'pet-dam-image') {
+                const damName = localStorage.getItem('form_pet-dam-name') || '';
+                const damUuid = localStorage.getItem('form_pet-dam-uuid') || '';
+                const damBreed = localStorage.getItem('form_pet-dam-breed') || '';
+                const damImage = localStorage.getItem('form_pet-dam-image') || '';
+
+                if (damName || damUuid || damBreed || damImage) {
+                    $('#pet-dam-name').val(damName);
+                    $('#pet-dam-uuid').val(damUuid);
+                    $('#pet-dam-breed').val(damBreed);
+                    $('.pet-dam-preview-image').attr('src', damImage);
+                    $('.pet-dam-preview-pet_name').text(damName);
+                    $('.pet-dam-preview-pet_breed').text(damBreed);
+
+                    $('.pet-dam-before-selection-group').hide();
+                    $('.pet-dam-after-selection-group').show();
+                }
+            }
+        } catch (e) {
+            console.error(`Error processing ${name}:`, e);
+        }
+        try {
+            page_1_continue_validate();
+        } catch (e) {
+            console.error('Error in page_1_continue_validate:', e);
+        }
     });
 
     $(document).on('input change', 'input, textarea, select', function () {
@@ -2097,10 +2196,11 @@ $(document).ready(function() {
         setTimeout(function() {
             $('.submit-uploading-inactive-loading-group').fadeIn('fast');
             $('.submit-assigning-inactive-loading-group').fadeIn('fast');
+            $('.submit-creating-inactive-loading-group').fadeIn('fast');
             setTimeout(function() {
                 submitRegistration();
-            }, 350);
-        }, 500);
+            }, 750);
+        }, 750);
     });
 });
 </script>
