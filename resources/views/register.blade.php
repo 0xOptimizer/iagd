@@ -12,23 +12,20 @@
 <div class="phone-container">
     <nav class="navbar navbar-dark header sticky-top">
         <div class="container-fluid text-center">
-            <!-- Left Group - Logo -->
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('images/IAGD_Logo_Silver.png') }}" alt="Logo" style="transform: scale(2.25);">
             </a>
-
             <div class="d-flex">
                 &nbsp;
             </div>
-
-            <!-- Middle Group - Search Bar -->
             <div class="flex-grow-1 mx-3">
-                International Animal Genetics Database
+                <span class="d-none d-md-inline">International Animal Genetics Database</span>
+                <span class="d-inline d-md-none">IAGD</span>
             </div>
-
-            <!-- Right Group - Buttons -->
             <div class="d-flex gap-2">
-                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2"><i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i></button>
+                <button type="button" class="offcanvas-nav-apps-btn tewi-btn-icon me-2">
+                    <i class="bi bi-grid-3x3-gap-fill" style="vertical-align: 0px; font-size: 32px;"></i>
+                </button>
             </div>
         </div>
     </nav>
