@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rest;
 
 use App\Http\Controllers\Controller;
+use App\Models\GlobalMeta;
 use App\Models\Pets;
 use App\Models\PetsDetails;
 use App\Models\PetsFile;
@@ -142,27 +143,41 @@ class PetController extends Controller
      */
     public function create(Request $request)
     {
-        // Validate requests
         $validator = $this->validatePetCreateRequest($request);
 
-        // If validation fails
         if ($validator->fails()) {
-
             return response()->json([
                 'status' => 'warning',
                 'message' => $validator->errors()->first()
             ], 422);
         }
 
-        // Begin transaction
         DB::beginTransaction();
 
-        // Set uuid
-        $uuid = (string) Str::uuid(); // Unique identifier for linking the records
+        $uuid = (string) Str::uuid();
 
-        // Try and catch errors
         try {
-            // Insert new pet collection
+            $nextIagdMeta = GlobalMeta::where('meta_key', 'next_iagd_number')->lockForUpdate()->first();
+            if (!$nextIagdMeta) {
+                throw new \Exception('Invalid or missing next_iagd_number in GlobalMeta.');
+            }
+
+            $fullIagdNumber = $nextIagdMeta->meta_value; 
+            $hexPart = substr(strrchr($fullIagdNumber, '-'), 1); 
+            $nextIagdNumber = hexdec($hexPart); 
+            $year = date('Y');
+            $fixedPart = '002';
+            
+            // Ensure the hexadecimal part is within the allowed range
+            $hexValue = dechex($nextIagdNumber);
+            if (strlen($hexValue) > 4 || hexdec($hexValue) > hexdec('FFFF')) {
+                throw new \Exception('Maximum IAGD number reached.');
+            }
+
+            // Format the IAGD number as YYYY-002-{HEX}
+            $formattedIagdNumber = "{$year}-{$fixedPart}-" . str_pad($hexValue, 4, '0', STR_PAD_LEFT);
+
+            // Create the pet and other records as before
             $pet = Pets::create([
                 'uuid' => $uuid,
                 'pet_name' => $request->input('pet_name'),
@@ -170,7 +185,7 @@ class PetController extends Controller
                 'image' => null,
             ]);
 
-            $petMeta = PetsMeta::create([
+            PetsMeta::create([
                 'uuid' => $uuid,
                 'status' => 1,
                 'from_system' => 'website',
@@ -179,24 +194,15 @@ class PetController extends Controller
                 'date_added' => now(),
             ]);
 
-            // Prepare array
             $uploadedFiles = [];
 
-            // For each images upload then insert to collection
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-
-                    // Create path
                     $path = public_path("uploads/pets/$uuid");
-
-                    // Create image name
                     $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
-
-                    // Create filepath
                     $filePath = "img/pets/$uuid/$imgname";
 
-                    // Insert to PetsFile collection
-                    $petsFile = PetsFile::create([
+                    PetsFile::create([
                         'uuid' => (string) Str::uuid(),
                         'attached_to_uuid' => $uuid,
                         'file_name' => $imgname,
@@ -205,23 +211,19 @@ class PetController extends Controller
                         'file_size' => $image->getSize(),
                         'file_extension' => "." . $image->getClientOriginalExtension(),
                         'file_mime_type' => $image->getMimeType(),
-                        'file_hash' =>  sha1_file($image->getRealPath()),
+                        'file_hash' => sha1_file($image->getRealPath()),
                         'status' => 1,
                     ]);
 
-                    // Upload file to $path with file name $imgname
                     $image->move($path, $imgname);
-
-                    // Append $filepath to array
                     $uploadedFiles[] = $filePath;
                 }
             }
 
-            // Step 2: Insert into `pets_details` table using the relationship
-            $petDetails = PetsDetails::create([
+            PetsDetails::create([
                 'uuid' => $uuid,
                 'breed' => $request->input('breed'),
-                'iagd_number' => $request->input('iagd_number'),
+                'iagd_number' => $formattedIagdNumber,
                 'stars' => $request->input('stars'),
                 'owner' => $request->input('owner'),
                 'owner_uuid' => (string) Str::uuid(),
@@ -249,29 +251,36 @@ class PetController extends Controller
                 'female_parent_breed' => $request->input('female_parent_breed'),
                 'display_status' => 'visible',
             ]);
+
+            GlobalMeta::updateOrCreate(
+                ['meta_key' => 'previous_iagd_number'],
+                ['meta_value' => $formattedIagdNumber]
+            );
+
+            GlobalMeta::updateOrCreate(
+                ['meta_key' => 'current_iagd_number'],
+                ['meta_value' => $formattedIagdNumber]
+            );
+
+            // Increment the next IAGD number
+            $nextIagdMeta->meta_value = $nextIagdNumber + 1;
+            $nextIagdMeta->save();
         } catch (\Throwable $th) {
-
-            // Rollback database transaction
             DB::rollBack();
-
-            // Return error
             return response()->json([
                 "status" => "error",
                 "message" => $th->getMessage()
             ], 500);
         }
 
-        // Commit database transaction
         DB::commit();
 
-        // Load all pet data
         $load_pet = $pet->load([
             'images',
             'details',
             'meta'
         ]);
 
-        // Return success with pet data
         return response()->json([
             "status" => "success",
             "message" => "New pet added.",

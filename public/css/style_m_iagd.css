@@ -642,3 +642,17 @@ main .card-hoverable:hover {
 		margin-top: 40px;
 	}
 }
+
+.hr-with-text {
+	text-align: center;
+	border-bottom: 1px solid #312c57;
+	line-height: 0;
+	margin: 2rem 0;
+}
+
+.hr-with-text span {
+	background: #130d22;
+	padding: 0 10px;
+	font-size: 1.2rem;
+	color: #312c57;
+}
