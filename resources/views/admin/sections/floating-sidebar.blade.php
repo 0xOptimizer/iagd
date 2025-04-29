@@ -83,6 +83,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link link-dark d-flex flex-row justify-content-start align-items-center" href="{{ route("redirections") }}">
+                                    <div class="svg-icon-xs me-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                          </svg>
+
+                                    </div>
+                                    Redirections
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link link-dark d-flex flex-row justify-content-start align-items-center" href="#">
                                     <div class="svg-icon-xs me-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
