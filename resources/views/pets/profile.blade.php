@@ -16,7 +16,11 @@
                 @php
                     $file = $pet->files->first();
                 @endphp
-                <img src="{{ asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension) }}" class="rounded-circle" alt="" width="128" height="128">
+                @if ($file)
+                    <img src="{{ asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension) }}" class="rounded-circle" alt="" width="128" height="128">
+                @else
+                    <img src="{{ asset('uploads/pets/default.png') }}" class="rounded-circle" alt="Default Image" width="128" height="128">
+                @endif
             </div>
             <div class="mt-3">
                 <h1 class="h1wrap text-center">

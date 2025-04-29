@@ -162,20 +162,19 @@ class PetController extends Controller
                 throw new \Exception('Invalid or missing next_iagd_number in GlobalMeta.');
             }
 
-            $fullIagdNumber = $nextIagdMeta->meta_value; 
-            $hexPart = substr(strrchr($fullIagdNumber, '-'), 1); 
-            $nextIagdNumber = hexdec($hexPart); 
+            // Retrieve the next IAGD number as a decimal value
+            $nextIagdNumber = (int)$nextIagdMeta->meta_value;
             $year = date('Y');
             $fixedPart = '002';
             
-            // Ensure the hexadecimal part is within the allowed range
-            $hexValue = dechex($nextIagdNumber);
-            if (strlen($hexValue) > 4 || hexdec($hexValue) > hexdec('FFFF')) {
+            // Check if the next number exceeds the maximum allowed (0xFFFF = 65535)
+            if ($nextIagdNumber > 0xFFFF) {
                 throw new \Exception('Maximum IAGD number reached.');
             }
 
-            // Format the IAGD number as YYYY-002-{HEX}
-            $formattedIagdNumber = "{$year}-{$fixedPart}-" . str_pad($hexValue, 4, '0', STR_PAD_LEFT);
+            // Convert to 4-digit hexadecimal and format the IAGD number
+            $hexValue = str_pad(dechex($nextIagdNumber), 4, '0', STR_PAD_LEFT);
+            $formattedIagdNumber = "{$year}-{$fixedPart}-{$hexValue}";
 
             // Create the pet and other records as before
             $pet = Pets::create([
@@ -262,7 +261,7 @@ class PetController extends Controller
                 ['meta_value' => $formattedIagdNumber]
             );
 
-            // Increment the next IAGD number
+            // Increment the next IAGD number and save
             $nextIagdMeta->meta_value = $nextIagdNumber + 1;
             $nextIagdMeta->save();
         } catch (\Throwable $th) {

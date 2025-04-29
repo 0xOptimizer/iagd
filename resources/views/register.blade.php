@@ -551,7 +551,7 @@
         <div class="d-grid gap-2 mt-4 mb-3">
             <div class="row">
                 <div class="form-floating col-12 mb-3">
-                    <button type="button" class="btn btn-primary btn-lg" style="height: 100%; width: 100%;"><i class="bi bi-plus-circle"></i> Register Another Pet</button>
+                    <a href="{{ route('register') }}" class="btn btn-primary btn-lg" style="height: 100%; width: 100%;"><i class="bi bi-plus-circle"></i> Register Another Pet</a>
                 </div>
             </div>
         </div>
@@ -595,7 +595,18 @@ function page_1_continue_validate() {
 function submitRegistration() {
     let formData = new FormData();
     formData.append('pet_name', $('#pet-name').val() || '');
-    formData.append('pet_type', $('#pet-species').val() || '');
+    let petType = $('#pet-species').val();
+    let petTypeId = '';
+    if (petType === "Dog") {
+        petTypeId = 10;
+    } else if (petType === "Cat") {
+        petTypeId = 11;
+    } else if (petType === "Bird") {
+        petTypeId = 12;
+    } else if (petType === "Rabbit") {
+        petTypeId = 13;
+    }
+    formData.append('pet_type', petTypeId || '');
     let petImages = $('#self-input-photo').prop('files');
     if (petImages && petImages.length > 0) {
         for (let i = 0; i < petImages.length; i++) {
@@ -633,118 +644,89 @@ function submitRegistration() {
         console.log(pair[0] + ': ' + pair[1]);
     }
 
-    $.ajax({
-        url: '{{ route("rest.v1.pets.create") }}',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            clearFormStorage();
+    function attemptSubmission() {
+        $.ajax({
+            url: '{{ route("rest.v1.pets.create") }}',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                clearPetFormStorage();
+                const details = response.data.details;
+                const iagd_number = details?.iagd_number || 'NO IAGD NUMBER';
+                appendToSavedPets(iagd_number);
+                const pet_type = response.data.pet_type;
+                const share_url = `{{ url('pets') }}/${pet_type}/${iagd_number}`;
+                const genderRaw = details?.gender?.toLowerCase() || '';
+                const isMale = genderRaw.startsWith('male');
+                const isFemale = genderRaw.startsWith('female');
+                const genderIcon = isMale
+                    ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
+                    : isFemale
+                        ? '<i class="bi bi-gender-female" style="color: pink;"></i> Female'
+                        : '<i class="bi bi-question-circle" style="color: gray;"></i> Unknown';
 
-            const details = response.data.details;
-            const iagd_number = details?.iagd_number || 'NO IAGD NUMBER';
-            appendToSavedPets(iagd_number);
-
-            const share_url = `{{ url('pet') }}/${iagd_number}`;
-            
-            const genderRaw = details?.gender?.toLowerCase() || '';
-            const isMale = genderRaw.startsWith('male');
-            const isFemale = genderRaw.startsWith('female');
-
-            const genderIcon = isMale
-                ? '<i class="bi bi-gender-male" style="color: cyan;"></i> Male'
-                : isFemale
-                    ? '<i class="bi bi-gender-female" style="color: pink;"></i> Female'
-                    : '<i class="bi bi-question-circle" style="color: gray;"></i> Unknown';
-
-            $('.submit-view_profile-btn').attr('href', share_url);
-            $('.submit-overview-iagd_number').text(iagd_number);
-            $('.submit-overview-breed').html(details?.gender || '');
-            $('.submit-overview-gender').html(genderIcon);
-            $('.submit-overview-pet_location').html(details?.pet_location || '');
-
-            setTimeout(function() {
-                $('.submit-uploading-before-loading-group').hide();
-                $('.submit-uploading-after-loading-group').show();
-
-                animateShine($('.submit-uploading-after-loading-group'));
-
-                $('.submit-assigning-inactive-loading-group').hide();
-                $('.submit-assigning-before-loading-group').show();
+                $('.submit-view_profile-btn').attr('href', share_url);
+                $('.submit-overview-iagd_number').text(iagd_number);
+                $('.submit-overview-breed').html(details?.breed || '');
+                $('.submit-overview-gender').html(genderIcon);
+                $('.submit-overview-pet_location').html(details?.pet_location || '');
 
                 setTimeout(function() {
-                    $('.submit-assigning-before-loading-group').hide();
-                    $('.submit-assigning-after-loading-group').show();
-
-                    animateShine($('.submit-assigning-after-loading-group'));
-
-                    $('.submit-creating-inactive-loading-group').hide();
-                    $('.submit-creating-before-loading-group').show();
+                    $('.submit-uploading-before-loading-group').hide();
+                    $('.submit-uploading-after-loading-group').show();
+                    animateShine($('.submit-uploading-after-loading-group'));
+                    $('.submit-assigning-inactive-loading-group').hide();
+                    $('.submit-assigning-before-loading-group').show();
 
                     setTimeout(function() {
-                        $('.submit-creating-before-loading-group').hide();
-                        $('.submit-creating-after-loading-group').show();
+                        $('.submit-assigning-before-loading-group').hide();
+                        $('.submit-assigning-after-loading-group').show();
+                        animateShine($('.submit-assigning-after-loading-group'));
+                        $('.submit-creating-inactive-loading-group').hide();
+                        $('.submit-creating-before-loading-group').show();
 
-                        animateShine($('.submit-creating-after-loading-group'));
                         setTimeout(function() {
-                            $(`.group-container`).hide();
-                            $(`.group-container[data-group="page_6"]`).show();
-                            $('#offcanvas-register-submit').offcanvas('hide');
-
-                            $('.phone-container').scrollTop(0);
+                            $('.submit-creating-before-loading-group').hide();
+                            $('.submit-creating-after-loading-group').show();
+                            animateShine($('.submit-creating-after-loading-group'));
 
                             setTimeout(function() {
-                                var count = 200;
-                                var defaults = {
-                                    origin: { y: 0.7 }
-                                };
-                                
-                                function fire(particleRatio, opts) {
-                                    confetti({
-                                        ...defaults,
-                                        ...opts,
-                                        particleCount: Math.floor(count * particleRatio)
-                                    });
-                                }
-                                
-                                fire(0.25, {
-                                    spread: 26,
-                                    startVelocity: 55,
-                                });
-                                fire(0.2, {
-                                    spread: 60,
-                                });
-                                fire(0.35, {
-                                    spread: 100,
-                                    decay: 0.91,
-                                    scalar: 0.8
-                                });
-                                fire(0.1, {
-                                    spread: 120,
-                                    startVelocity: 25,
-                                    decay: 0.92,
-                                    scalar: 1.2
-                                });
-                                fire(0.1, {
-                                    spread: 120,
-                                    startVelocity: 45,
-                                });
-                            }, 400)
-                        }, 700);
-                    }, 2700);
-                }, Math.floor(Math.random() * 400) + 800);
+                                $('.group-container').hide();
+                                $('.group-container[data-group="page_6"]').show();
+                                $('#offcanvas-register-submit').offcanvas('hide');
+                                $('.phone-container').scrollTop(0);
+                                TweenMax.staggerFrom(".group-container[data-group='page_6'] div", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.06);
 
-            }, 1500);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error submitting registration:', error);
-        }
-    });
+                                setTimeout(function() {
+                                    var count = 200;
+                                    var defaults = {origin: {y: 0.7}};
+                                    function fire(particleRatio, opts) {
+                                        confetti({...defaults, ...opts, particleCount: Math.floor(count * particleRatio)});
+                                    }
+                                    fire(0.25, {spread: 26, startVelocity: 55});
+                                    fire(0.2, {spread: 60});
+                                    fire(0.35, {spread: 100, decay: 0.91, scalar: 0.8});
+                                    fire(0.1, {spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2});
+                                    fire(0.1, {spread: 120, startVelocity: 45});
+                                }, 400);
+                            }, 700);
+                        }, 2700);
+                    }, Math.floor(Math.random() * 400) + 800);
+                }, 1500);
+            },
+            error: function(xhr, status, error) {
+                console.error('Submission failed, retrying in 3 seconds:', error);
+                setTimeout(attemptSubmission, 3000);
+            }
+        });
+    }
 
+    attemptSubmission();
     return false;
 }
 function share(platform) {
@@ -792,11 +774,21 @@ function openPetAddressMap() {
     }
 }
 function appendToSavedPets(pet) {
+    if (!pet || typeof pet !== 'string' || !pet.trim()) {
+        console.warn('Invalid pet identifier provided.');
+        return;
+    }
+
     let savedPets = JSON.parse(localStorage.getItem('saved_pets')) || [];
+    if (savedPets.includes(pet)) {
+        console.warn('Pet is already in the saved list.');
+        return;
+    }
+
     savedPets.push(pet);
     localStorage.setItem('saved_pets', JSON.stringify(savedPets));
 }
-function clearFormStorage() {
+function clearPetFormStorage() {
     Object.keys(localStorage).forEach(function(key) {
         if (key.startsWith('form_')) {
             localStorage.removeItem(key);
@@ -1344,6 +1336,8 @@ $(document).ready(function() {
 
                     $('.pet-sire-before-selection-group').hide();
                     $('.pet-sire-after-selection-group').show();
+
+                    $('.has-sire').show();
                 }
             }
             if (name === 'pet-dam-name' || name === 'pet-dam-uuid' || name === 'pet-dam-breed' || name === 'pet-dam-image') {
@@ -1362,6 +1356,8 @@ $(document).ready(function() {
 
                     $('.pet-dam-before-selection-group').hide();
                     $('.pet-dam-after-selection-group').show();
+
+                    $('.has-dam').show();
                 }
             }
         } catch (e) {
@@ -1817,6 +1813,8 @@ $(document).ready(function() {
         $('.pet-sire-after-selection-group').show();
         $('#offcanvas-input-sire-iagd-number').offcanvas('hide');
         $('#offcanvas-input-sire-name').offcanvas('hide');
+
+        $('.has-sire').show();
     });
 
     $('body').on('click', '.pet-sire-no_iagd-save-btn', function() {
@@ -1841,6 +1839,8 @@ $(document).ready(function() {
         $('.pet-sire-before-selection-group').hide();
         $('.pet-sire-after-selection-group').show();
         $('#offcanvas-input-sire-no_iagd').offcanvas('hide');
+
+        $('.has-sire').show();
     });
 
     $('.pet-dam-search-number-btn').on('click', function() {
@@ -2208,6 +2208,8 @@ $(document).ready(function() {
         $('.pet-dam-after-selection-group').show();
         $('#offcanvas-input-dam-iagd-number').offcanvas('hide');
         $('#offcanvas-input-dam-name').offcanvas('hide');
+
+        $('.has-dam').show();
     });
 
     $('body').on('click', '.pet-dam-no_iagd-save-btn', function() {
@@ -2232,6 +2234,8 @@ $(document).ready(function() {
         $('.pet-dam-before-selection-group').hide();
         $('.pet-dam-after-selection-group').show();
         $('#offcanvas-input-dam-no_iagd').offcanvas('hide');
+        
+        $('.has-dam').show();
     });
 
     $('.registration-submit-btn').on('click', async function() {

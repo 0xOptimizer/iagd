@@ -27,7 +27,7 @@ Route::post('/auth/logout', [SessionController::class, 'logout'])->name('logout'
 Route::get('/', [PublicController::class, 'index'])->name('index');
 Route::get('/register', [PublicController::class, 'register'])->name('register');
 
-Route::get('/pets/{iagd_number}', [PublicController::class, 'pet_profile'])->name('pet_profile');
+Route::get('/pets/{pet_type}/{iagd_number}', [PublicController::class, 'pet_profile'])->name('pet_profile');
 Route::get('/species/{species}', [PublicController::class, 'species'])->name('species');
 
 

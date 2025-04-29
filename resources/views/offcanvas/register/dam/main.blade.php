@@ -5,9 +5,9 @@
     </div>
     <div class="offcanvas-body">
         <!-- <i class="bi bi-caret-left-fill" style="position: absolute; top: 0px; left: 320px; font-size: 420px; color: #130d22;"></i> -->
-        <div class="card card-interactable">
+        <div class="has-dam card card-interactable" style="display: none;">
             <div class="select-gender-option card-body d-flex align-items-center" data-option="Male">
-                <img class="pet-dam-preview-image" src="{{ asset('images/freepik_male.png') }}" width="48" height="48" class="me-4">
+                <img class="pet-dam-preview-image me-4" src="{{ asset('images/freepik_male.png') }}" width="48" height="48">
                 <div>
                     <span class="pet-dam-preview-pet_name" style="font-size: 24px;">...</span>
                     <br>
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <hr class="my-5">
+        <hr class="has-dam my-5" style="display: none;">
         <div class="card card-interactable">
             <div class="card-body d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-iagd">
                 <img src="{{ asset('images/mayor_icons_search.png') }}" width="64" height="64" class="me-4">

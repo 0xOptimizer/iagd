@@ -18,18 +18,18 @@
         </div>
         <div class="form-floating mt-2">
             <input type="text" class="form-control" id="pet-dam-no_iagd-name-input" placeholder="dam's Name">
-            <label for="pet-dam-no_iagd-name-input">dam's Name</label>
+            <label for="pet-dam-no_iagd-name-input">Dam's Name</label>
         </div>
         <div class="form-floating mt-2">
             <input type="text" class="form-control" id="pet-dam-no_iagd-breed-input" placeholder="dam's Breed">
-            <label for="pet-dam-no_iagd-breed-input">dam's Breed</label>
+            <label for="pet-dam-no_iagd-breed-input">Dam's Breed</label>
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
             <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-input-dam-iagd" aria-label="Back">
                 Back
             </button>
             <button type="button" class="pet-dam-no_iagd-save-btn btn btn-primary flex-grow-1">
-                <i class="bi bi-check-circle-fill"></i> Save dam
+                <i class="bi bi-check-circle-fill"></i> Save Dam
             </button>
         </div>
     </div>
