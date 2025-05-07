@@ -45,6 +45,12 @@
     border-color: var(--input-border-color);
     box-shadow: 0 0 0 0.2rem rgba(136, 14, 212, 0.35);
 }
+.form-select:focus {
+    letter-spacing: 1pt;
+
+    border-color: var(--input-border-color);
+    box-shadow: 0 0 0 0.2rem rgba(136, 14, 212, 0.35);
+}
 
 .padd-m {
     padding: 2rem;
@@ -384,12 +390,35 @@
         -o-transform: rotate(0deg);
     }
 } */
+ 
 
+.offcanvas-custom {
+    width: 100% !important;
+    background-color: transparent;
+    border: 1px solid transparent !important;
+}
+
+.offcanvas-custom-container {
+    height: 100% !important;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+    .offcanvas-custom {
+        width: 80% !important;
+    }
+}
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+    .offcanvas-custom {
+        width: 70% !important;
+    }
+}
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -427,10 +456,22 @@
     .toggle-sidebar {
         visibility: hidden;
     }
+
+    .offcanvas-custom {
+        width: 60% !important;
+    }
 }
 
 /* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    .offcanvas-custom {
+        width: 50% !important;
+    }
+}
 
 /* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+    .offcanvas-custom {
+        width: 40% !important;
+    }
+}

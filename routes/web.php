@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PetsController as AdminPetsController;
+use App\Http\Controllers\Admin\RedirectionsController;
 use App\Http\Controllers\Admin\SignInController;
 use Illuminate\Support\Facades\Route;
 
@@ -134,6 +135,44 @@ Route::prefix('admin')->group(function () {
          * @return \Illuminate\Routing\Route
          */
         Route::post('/dt/approve', [AdminPetsController::class, 'dtApprove'])->name('admin.pets.dt.approve');
+
+        /**
+         * Show pet View/Edit page
+         * @param string '/'
+         * @param array [AdminPetsController::class , 'viewEdit']
+         * @param string 'admin.pets.viewEdit'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::get('/view', [AdminPetsController::class, 'viewEdit'])->name('admin.pets.viewEdit');
+
+        /**
+         * Check if pet exist
+         * @param string '/'
+         * @param array [AdminPetsController::class , 'dtCheckPetId']
+         * @param string 'admin.pets.dtCheckPetId'
+         * @return \Illuminate\Routing\Route
+         */
+        Route::get('/dt/check', [AdminPetsController::class, 'dtCheckPetId'])->name('admin.pets.dtCheckPetId');
+
+
+    });
+
+    /**
+     * Redirection page and sub pages endpoints
+     * @param string 'redirections'
+     * @return \Illuminate\Routing\RouteRegistrar
+     */
+    Route::prefix('redirections')->group(function () {
+
+        Route::get('/', [RedirectionsController::class, 'index'])->name('redirections');
+
+        Route::get('/dt/all', [RedirectionsController::class, 'all'])->name('redirections.all');
+
+        Route::get('/dt/get', [RedirectionsController::class, 'get'])->name('redirections.get');
+
+        Route::post('/dt/store', [RedirectionsController::class, 'store'])->name('redirections.store');
+
+        Route::post('/dt/destroy', [RedirectionsController::class, 'destroy'])->name('redirections.destroy');
 
 
     });
