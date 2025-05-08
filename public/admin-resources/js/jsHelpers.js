@@ -1,3 +1,13 @@
+/**
+ * Export function sweet alert confirmation
+ * @param {any} swalTxt
+ * @param {any} swalIcon
+ * @param {any} confirmBtnTxt
+ * @param {any} cancelBtnTxt
+ * @param {any} classConfirmBtn
+ * @param {any} classCancelBtn
+ * @returns {any}
+ */
 export const swalConfirmation = (
     swalTxt,
     swalIcon,
@@ -19,6 +29,13 @@ export const swalConfirmation = (
     });
 };
 
+/**
+ * Export function sweet alert prompt
+ * @param {any} swalTxt
+ * @param {any} swalIcon
+ * @param {any} confirmBtnTxt
+ * @returns {any}
+ */
 export const swalPrompt = (swalTxt, swalIcon, confirmBtnTxt) => {
     return Swal.fire({
         text: `${swalTxt}`,
@@ -30,6 +47,11 @@ export const swalPrompt = (swalTxt, swalIcon, confirmBtnTxt) => {
     });
 };
 
+/**
+ * Export function fetch api get using URL with CSRF token
+ * @param {any} url
+ * @returns {any}
+ */
 export const fetchApiGetData = async (url) => {
     try {
         const response = await fetch(url, {
@@ -46,6 +68,12 @@ export const fetchApiGetData = async (url) => {
     }
 };
 
+/**
+ * Export function fetch api post using URL with CSRF token & formdata
+ * @param {any} url
+ * @param {any} fd
+ * @returns {any}
+ */
 export const fetchApiPostData = async (url,fd) => {
     try {
         const response = await fetch(url, {

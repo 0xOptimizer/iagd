@@ -138,6 +138,13 @@ $(function () {
         });
     });
 
+    /**
+     * On click delete button
+     * - Show confimation
+     * - Create post request with id and submit using fetch POST API to endpoint "${window.urlBase}/admin/redirections/dt/destroy"
+     * @param {any} document
+     * @returns {any}
+     */
     $(document).on("click", ".btnDeleteRedirections", function () {
         const thisBtn = $(this);
 

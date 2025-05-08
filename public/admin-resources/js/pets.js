@@ -6,6 +6,18 @@ import {
 } from "../js/jsHelpers.js";
 
 $(function () {
+    /**
+     * Fill datatable with pets data
+     * @param {any} "#petsTable"
+     * @param {any} {//processing:true
+     * @param {any} //serverSide:true
+     * @param {any} ajax:`${window.urlBase}/admin/pets/dt/all`
+     * @param {any} columns:[{data:null
+     * @param {any} render:function(data
+     * @param {any} type
+     * @param {any} row
+     * @returns {any}
+     */
     let petsTable = new DataTable("#petsTable", {
         // processing: true,
         // serverSide: true,
@@ -67,7 +79,14 @@ $(function () {
                         </div> Approve`;
                     } else if (row.status == 2) {
                         rowClass = "btnCancelApprovedPet";
-                        rowStatusLabel = "Cancel";
+
+                        rowStatusLabel = `
+                        <div class="svg-icon me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                            </svg>
+                        </div> Cancel Registration`;
+
                     } else if (row.status == 3) {
                         rowClass = "btnRejectPet";
                         rowStatusLabel = "Reject";
@@ -126,6 +145,14 @@ $(function () {
         }
     });
 
+
+    /**
+     * Update row status
+     * @param {any} rowClass
+     * @param {any} rowStatusLabel
+     * @param {any} row
+     * @returns {any}
+     */
     const submenuUpdatePetStatus = (rowClass, rowStatusLabel, row) => {
         return `
         <a class="dropdown-item d-flex flex-row align-items-center ${rowClass}" href="javascript:void(0);" data-id="${row.id}" data-current-value="${row.status}">
@@ -135,6 +162,11 @@ $(function () {
         `;
     };
 
+    /**
+     * On click view or edit pet
+     * @param {any} document
+     * @returns {any}
+     */
     $(document).on("click", ".viewEditPetDetails", function () {
 
         const id = $(this).attr("data-id");
