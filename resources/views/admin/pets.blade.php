@@ -71,6 +71,7 @@
                                         <table id="petsTable" class="table table-condensed table-bordered table-hover">
                                             <thead>
                                                 <tr>
+                                                    <th>ID</th>
                                                     <th>Status</th>
                                                     <th>Pet Name</th>
                                                     <th>Type</th>

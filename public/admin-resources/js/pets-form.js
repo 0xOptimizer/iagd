@@ -1,4 +1,9 @@
 $(function () {
+    /**
+     * On click submit pet for ( Need improvement )
+     * @param {any} "#submitPetForm"
+     * @returns {any}
+     */
     $("#submitPetForm").on("click", function () {
         const fd = new FormData();
 

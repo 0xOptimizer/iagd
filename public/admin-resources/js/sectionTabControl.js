@@ -1,4 +1,8 @@
 $(function () {
+
+    /**
+     * Declare vaiables
+     */
     let sectionPageMin = 1;
 
     let currentPage = 1;
@@ -7,6 +11,10 @@ $(function () {
 
     let sectionPageMax = 0;
 
+    /**
+     * Section Container
+     * @returns {any}
+     */
     const sectionTabContainer = () => {
         const sectionTabContainer = $(".sectionTabContainer");
 
@@ -29,15 +37,19 @@ $(function () {
 
         sectionPageMax = idNumberCount;
 
-        console.log(`sectionPageMin = ${sectionPageMin}`);
-        console.log(`currentPage = ${currentPage}`);
-        console.log(`idNumberCount = ${idNumberCount}`);
-        console.log(`sectionPageMax = ${sectionPageMax}`);
-
     };
 
+    /**
+     * Initialize sectionTabContainer()
+     */
     sectionTabContainer();
 
+
+    /**
+     * On click nextSectionTabs show next section tab
+     * @param {any} ".nextSectionTabs"
+     * @returns {any}
+     */
     $(".nextSectionTabs").on("click", function () {
 
 
@@ -68,6 +80,11 @@ $(function () {
         });
     });
 
+    /**
+     * On click prevSectionTabs show previous section tab
+     * @param {any} ".prevSectionTabs"
+     * @returns {any}
+     */
     $(".prevSectionTabs").on("click", function () {
         if (currentPage  < sectionPageMin) {
 

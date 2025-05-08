@@ -84,9 +84,11 @@ class PetsController extends Controller
         $orderColumn = $columns[$orderColumnIndex] ?? 'id';
 
         // Only sort if it's a pets column (not related)
-        if (in_array($orderColumn, ['id', 'pet_name', 'pet_type'])) {
-            $query->orderBy($orderColumn, $orderDirection);
-        }
+        // if (in_array($orderColumn, ['id', 'pet_name', 'pet_type'])) {
+        //     $query->orderBy($orderColumn, $orderDirection);
+        // }
+
+        $query->orderBy('id', "DESC");
 
         // Count and paginate
         $total = $query->count();
@@ -289,11 +291,12 @@ class PetsController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function dtCheckPetId(Request $request) {
+    public function dtCheckPetId(Request $request)
+    {
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'id' => 'required'
-        ],[
+        ], [
             'id.required' => 'Invalid request! Please try again later.'
         ]);
 
@@ -303,7 +306,6 @@ class PetsController extends Controller
                 'status' => 'warning',
                 'message' => $validator->errors()->first()
             ], 422);
-
         }
 
         $pet = Pets::find($request->input('id'));
@@ -320,17 +322,17 @@ class PetsController extends Controller
             'status' => 'success',
             'message' => 'Pet found.'
         ], 200);
-
     }
     /**
      * Description
      * @param Request $request
      * @return \Illuminate\Contracts\View\View
      */
-    public function viewEdit(Request $request) {
+    public function viewEdit(Request $request)
+    {
 
-        $pet = Pets::where('id',$request->input('id'))->with(['details','meta'])->first();
-        $type = Species::select('type')->distinct()->get();
+        $pet = Pets::where('id', $request->input('id'))->with(['details', 'meta'])->first();
+        $type = Species::select('name')->get();
         $data = [
             'title' => 'View / Edit Pets | International Animals Genetic Database (v2!)',
             'pet' => $pet,
@@ -343,6 +345,5 @@ class PetsController extends Controller
         ]);
 
         return view('admin.pages.pets.form-view-edit', $data);
-
     }
 }

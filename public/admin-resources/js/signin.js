@@ -6,6 +6,11 @@ import {
 } from "../js/jsHelpers.js";
 
 $(function () {
+    /**
+     * On click submit credentials email address and password
+     * @param {any} "#btnSubmitCredentials"
+     * @returns {any}
+     */
     $("#btnSubmitCredentials").on("click", function () {
         let swalTxt = "Submit credentials ?";
         let swalIcon = "info";

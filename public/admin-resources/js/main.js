@@ -6,6 +6,10 @@ import {
 } from "../js/jsHelpers.js";
 
 $(function () {
+    /**
+     * Handle sidebar events status
+     * @returns {any}
+     */
     const handleSidebarStatus = () => {
         const toggleStatus = localStorage.getItem("sidebar-toggle");
 
@@ -23,8 +27,16 @@ $(function () {
         }
     };
 
+    /**
+     * Initialize "handleSidebarStatus"
+     */
     handleSidebarStatus();
 
+    /**
+     * On toggle sidebar button click , Toggle sidebar status
+     * @param {any} ".toggle-sidebar"
+     * @returns {any}
+     */
     $(".toggle-sidebar").on("click", function () {
         const toggleStatus = localStorage.getItem("sidebar-toggle");
 
@@ -40,11 +52,13 @@ $(function () {
             localStorage.setItem('sidebar-toggle',false);
         }
 
-
     });
 
-    // localStorage.setItem('sidebar-toggle',false);
-
+    /**
+     * On click button logout user
+     * @param {any} '.btnLogoutAdmin'
+     * @returns {any}
+     */
     $('.btnLogoutAdmin').on('click', function () {
         let swalTxt = "Do you want to logout ?";
         let swalIcon = "info";
