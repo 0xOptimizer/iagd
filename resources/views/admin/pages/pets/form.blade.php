@@ -461,6 +461,8 @@
     @include('admin.sections.jsscripts')
 
     <script src="{{ asset('admin-resources/js/sectionTabControl.js') }}"></script>
+
+    <script type="module" src="{{ asset("admin-resources/js/pets-form.js") }}"></script>
 </body>
 
 </html>
