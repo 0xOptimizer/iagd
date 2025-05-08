@@ -104,7 +104,7 @@
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
 
-    <script type="module" src="{{ asset('admin-resources/js/pets.js') }}"></script>
+    <script type="module" src="{{ asset('admin-resources/js/pets.js?v=2') }}"></script>
 </body>
 
 </html>
