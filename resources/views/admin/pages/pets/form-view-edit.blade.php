@@ -144,12 +144,19 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-xl-4">
-                                                    <div class="mb-3 p-5">
-                                                        <img src="{{ asset('images/no_img.png') }}" class="img-fluid rounded-top"
-                                                            alt="" />
+                                                <div class="col-12">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            @foreach ($pet->images as $row)
+                                                            <div class="col-12 col-xl-4">
+                                                                <div class="mb-3 p-5">
+                                                                    <img src="{{ asset("uploads/$row->file_path") }}" class="img-fluid rounded-top"
+                                                                        alt="" />
+                                                                </div>
+                                                            </div>
 
-
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">

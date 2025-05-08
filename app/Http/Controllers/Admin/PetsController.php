@@ -331,7 +331,7 @@ class PetsController extends Controller
     public function viewEdit(Request $request)
     {
 
-        $pet = Pets::where('id', $request->input('id'))->with(['details', 'meta'])->first();
+        $pet = Pets::where('id', $request->input('id'))->with(['details', 'meta','images'])->first();
         $type = Species::select('name')->get();
         $data = [
             'title' => 'View / Edit Pets | International Animals Genetic Database (v2!)',
