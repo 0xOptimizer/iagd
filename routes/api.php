@@ -28,5 +28,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'search'], function () {
         Route::get('/pets/id/{species}/{iagd_number}', [APIController::class, 'get_pet_profile'])->name('api.v1.pets.profile');
         Route::get('/pets/name/{species}/{name}', [APIController::class, 'get_pet_profile_by_name'])->name('api.v1.pets.profile.name');
+        Route::get('/pets/internal/{id}', [APIController::class, 'get_pet_profile_by_id'])->name('api.v1.pets.profile.id');
     });
 });

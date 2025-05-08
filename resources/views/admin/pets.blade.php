@@ -96,6 +96,9 @@
         </div>
     </div>
 
+    {{-- Offcanvas --}}
+    @include('offcanvas.admin.pets.view')
+
     {{-- Laravel PHP to javascript variables footer --}}
     @include('jsVars')
 

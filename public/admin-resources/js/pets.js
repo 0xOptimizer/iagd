@@ -177,7 +177,10 @@ $(function () {
     $(document).on("click", ".viewEditPetDetails", function () {
         const id = $(this).attr("data-id");
 
-        fetchApiGetData(`${window.urlBase}/admin/pets/dt/check?id=${id}`).then(
+        $("#offcanvas-pets-view").offcanvas("show");
+        $("#view-pets-loading").show();
+
+        fetchApiGetData(`${window.urlBase}/api/v1/search/pets/internal/${id}`).then(
             (res) => {
                 if (
                     typeof res === "undefined" ||
@@ -187,13 +190,43 @@ $(function () {
                     return;
                 }
 
-                console.log(res);
+                $("#view-pets-loading").hide();
+                $("#view-pets-container").html("");
 
-                swalPrompt(res.message, res.status, `Okay`).then((action) => {
-                    if (action.isConfirmed && res.status == "success") {
-                        window.location.href = `${window.urlBase}/admin/pets/view?id=${id}`;
-                    }
-                });
+                const data = res;
+                const details = data.details;
+                const meta = data.meta;
+
+                const tableHtml = `
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr><th>Pet Name</th><td>${data.pet_name || ""}</td></tr>
+                            <tr><th>Pet Type</th><td>${data.pet_type || ""}</td></tr>
+                            <tr><th>Status</th><td>${data.status}</td></tr>
+                            <tr><th>Breed</th><td>${details.breed || ""}</td></tr>
+                            <tr><th>IAGD Number</th><td>${details.iagd_number || ""}</td></tr>
+                            <tr><th>Owner</th><td>${details.owner || ""}</td></tr>
+                            <tr><th>Pet Location</th><td>${details.pet_location || ""}</td></tr>
+                            <tr><th>Owner Location</th><td>${details.owner_location || ""}</td></tr>
+                            <tr><th>Gender</th><td>${details.gender || ""}</td></tr>
+                            <tr><th>Date of Birth</th><td>${details.date_of_birth || ""}</td></tr>
+                            <tr><th>Markings</th><td>${details.markings || ""}</td></tr>
+                            <tr><th>Body Color</th><td>${details.colors_body || ""}</td></tr>
+                            <tr><th>Eye Color</th><td>${details.colors_eye || ""}</td></tr>
+                            <tr><th>Weight</th><td>${details.weight || ""}</td></tr>
+                            <tr><th>Height</th><td>${details.height || ""}</td></tr>
+                            <tr><th>Male Parent</th><td>${details.male_parent || ""}</td></tr>
+                            <tr><th>Female Parent</th><td>${details.female_parent || ""}</td></tr>
+                            <tr><th>Display Status</th><td>${details.display_status || ""}</td></tr>
+                            <tr><th>Inserted By</th><td>${meta.inserted_by || ""}</td></tr>
+                            <tr><th>From System</th><td>${meta.from_system || ""}</td></tr>
+                            <tr><th>Date Inserted</th><td>${meta.date_inserted || ""}</td></tr>
+                        </tbody>
+                    </table>
+                `;
+
+                $("#view-pets-container").html(tableHtml);
+
             }
         );
     });
