@@ -19,10 +19,19 @@ $(function () {
      * @returns {any}
      */
     let petsTable = new DataTable("#petsTable", {
+        order: [[0, 'desc']],
         // processing: true,
         // serverSide: true,
-        ajax: `${window.urlBase}/admin/pets/dt/all`,
+        ajax: {
+            url: `${window.urlBase}/admin/pets/dt/all`,
+            type: "GET",
+            dataSrc: function (json) {
+                console.log("DataSrc:", json);
+                return json.data; // Make sure to return data array
+            },
+        },
         columns: [
+            { data: 'id' , visible : false},
             {
                 data: null,
                 render: function (data, type, row) {
@@ -31,7 +40,7 @@ $(function () {
                     if (row.status == 0) {
                         statusRow = `<span class="badge bg-danger">Deleted</span>`;
                     } else if (row.status == 1) {
-                        statusRow = `<span class="badge bg-primary">Active</span>`;
+                        statusRow = `<span class="badge bg-primary">Registered</span>`;
                     } else if (row.status == 2) {
                         statusRow = `<span class="badge bg-success">Approved</span>`;
                     } else if (row.status == 3) {
@@ -86,7 +95,6 @@ $(function () {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
                             </svg>
                         </div> Cancel Registration`;
-
                     } else if (row.status == 3) {
                         rowClass = "btnRejectPet";
                         rowStatusLabel = "Reject";
@@ -140,11 +148,10 @@ $(function () {
                 },
             },
         ],
-        rowCallback: function(row, data) {
-            $(row).attr('data-id', data.id); // ✅ sets <tr data-id="...">
-        }
+        rowCallback: function (row, data) {
+            $(row).attr("data-id", data.id); // ✅ sets <tr data-id="...">
+        },
     });
-
 
     /**
      * Update row status
@@ -168,31 +175,27 @@ $(function () {
      * @returns {any}
      */
     $(document).on("click", ".viewEditPetDetails", function () {
-
         const id = $(this).attr("data-id");
 
-        fetchApiGetData(`${window.urlBase}/admin/pets/dt/check?id=${id}`).then((res) => {
-
-
-            if (typeof res === 'undefined' || typeof res.status === 'undefined') {
-
-                console.log("Something's wrong! Please try again later.");
-                return;
-            }
-
-            console.log(res);
-
-
-
-            swalPrompt(res.message, res.status, `Okay`).then((action) => {
-
-                if (action.isConfirmed && res.status == 'success') {
-                    window.location.href = `${window.urlBase}/admin/pets/view?id=${id}`;
+        fetchApiGetData(`${window.urlBase}/admin/pets/dt/check?id=${id}`).then(
+            (res) => {
+                if (
+                    typeof res === "undefined" ||
+                    typeof res.status === "undefined"
+                ) {
+                    console.log("Something's wrong! Please try again later.");
+                    return;
                 }
 
-            });
-        });
+                console.log(res);
 
+                swalPrompt(res.message, res.status, `Okay`).then((action) => {
+                    if (action.isConfirmed && res.status == "success") {
+                        window.location.href = `${window.urlBase}/admin/pets/view?id=${id}`;
+                    }
+                });
+            }
+        );
     });
 
     /**

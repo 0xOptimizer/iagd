@@ -128,8 +128,8 @@
                                                                     <div class="form-floating">
                                                                         <select id="pet_type" class="form-select">
                                                                             @foreach ($type as $row)
-                                                                            <option value="{{ $row->type }}">
-                                                                                {{ Str::upper($row->type) }}
+                                                                            <option value="{{ $row->name }}">
+                                                                                {{ Str::upper($row->name) }}
                                                                             </option>
                                                                             @endforeach
                                                                         </select>
