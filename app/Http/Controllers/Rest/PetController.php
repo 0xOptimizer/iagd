@@ -195,8 +195,8 @@ class PetController extends Controller
 
             $uploadedFiles = [];
 
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
+            if ($request->hasFile('pet_images')) {
+                foreach ($request->file('pet_images') as $image) {
                     $path = public_path("uploads/pets/$uuid");
                     $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
                     $filePath = "img/pets/$uuid/$imgname";
