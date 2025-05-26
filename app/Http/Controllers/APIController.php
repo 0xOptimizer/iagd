@@ -85,7 +85,7 @@ class APIController extends Controller
         $pets->getCollection()->transform(function ($pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->file_name)
                 : null;
             return $pet;
         });
@@ -128,7 +128,7 @@ class APIController extends Controller
         foreach ($pets as $pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->file_name)
                 : null;
         }
 
@@ -151,7 +151,7 @@ class APIController extends Controller
         foreach ($pets as $pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->file_name)
                 : null;
         }
 
@@ -172,7 +172,7 @@ class APIController extends Controller
 
         $file = $pet->files->first();
         $pet->primary_image = $file
-            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
+            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->file_name)
             : null;
 
         return response()->json($pet);
