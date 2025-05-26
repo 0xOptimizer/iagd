@@ -57,9 +57,8 @@ class PetsController extends Controller
      */
     public function all(Request $request)
     {
-        $query = Pets::with(['details', 'meta']);
+        $query = Pets::with(['details', 'meta', 'files']);
 
-        // Search
         if ($search = $request->input('search.value')) {
             $query->where('pet_name', 'like', "%{$search}%")
                 ->orWhere('pet_type', 'like', "%{$search}%")
@@ -69,9 +68,9 @@ class PetsController extends Controller
                 });
         }
 
-        // Sorting
         $columns = [
             'id',
+            'pet_image',
             'pet_name',
             'pet_type',
             "status",
@@ -83,34 +82,28 @@ class PetsController extends Controller
         $orderDirection = $request->input('order.0.dir', 'asc');
         $orderColumn = $columns[$orderColumnIndex] ?? 'id';
 
-        // Only sort if it's a pets column (not related)
-        // if (in_array($orderColumn, ['id', 'pet_name', 'pet_type'])) {
-        //     $query->orderBy($orderColumn, $orderDirection);
-        // }
-
         $query->orderBy('id', "DESC");
 
-        // Count and paginate
         $total = $query->count();
 
-        $pets = $query
-            // ->offset($request->input('start'))
-            // ->limit($request->input('length'))
-            ->get();
+        $pets = $query->get();
 
         return response()->json([
             'draw' => intval($request->input('draw')),
             'recordsTotal' => $total,
             'recordsFiltered' => $total,
             'data' => $pets->map(function ($pet) {
+                $file = $pet->files->first();
+                $petImage = $file ? url("uploads/pets/{$pet->uuid}/{$file->file_name}") : null;
+
                 return [
                     'id' => $pet->id,
+                    'pet_image' => $petImage,
                     'pet_name' => $pet->pet_name,
                     'pet_type' => $pet->pet_type,
                     "status" => $pet->meta->status ?? null,
                     'owner' => $pet->details->owner ?? '-',
                     'iagd_number' => $pet->details->iagd_number ?? '-',
-
                 ];
             }),
         ]);

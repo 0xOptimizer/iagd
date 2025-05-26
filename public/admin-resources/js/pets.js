@@ -54,6 +54,15 @@ $(function () {
                     return statusRow;
                 },
             },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    let pet_image = row.pet_image;
+                    return pet_image
+                        ? `<img src="${pet_image}" alt="${row.pet_name}'s Cute Photo" class="img-thumbnail" style="width: 50px; height: 50px;">`
+                        : '';
+                }
+            },
             { data: "pet_name" },
             { data: "pet_type" },
 
@@ -198,6 +207,9 @@ $(function () {
                 const meta = data.meta;
 
                 const tableHtml = `
+                    <div>
+                        <img src="${data.primary_image || ""}" alt="${data.pet_name}'s Cute Photo" class="img-thumbnail mb-3" style="max-width: 384px; max-height: 384px;">
+                    </div>
                     <table class="table table-bordered">
                         <tbody>
                             <tr><th>Pet Name</th><td>${data.pet_name || ""}</td></tr>
