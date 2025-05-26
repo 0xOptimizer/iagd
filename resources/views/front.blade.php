@@ -87,7 +87,7 @@
         <div class="iagd-containers row" style="display: none;">
             <div class="row g-3">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="species-card card card-hoverable h-100" data-group="10">
+                    <div class="species-card card card-hoverable h-100 glow-on-hover" data-group="10">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="species-card card card-hoverable h-100" data-group="11">
+                    <div class="species-card card card-hoverable h-100 glow-on-hover" data-group="11">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-cat-raw-2.jfif') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="species-card card card-hoverable h-100" data-group="12">
+                    <div class="species-card card card-hoverable h-100 glow-on-hover" data-group="12">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-bird-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -147,7 +147,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="species-card card card-hoverable h-100" data-group="13">
+                    <div class="species-card card card-hoverable h-100 glow-on-hover" data-group="13">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <!-- <img src="{{ asset('images/iagd-container-rabbit-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
@@ -169,12 +169,12 @@
             </div>
             <div class="row mt-1 g-3">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <div class="card card-hoverable h-100">
-                        <img src="{{ asset('images/iagd-container-animal_facility-raw.jpeg') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="max-height: 256px;">
+                    <div class="card card-hoverable h-100 glow-on-hover">
+                        <img src="{{ asset('images/lounge_banner.png') }}" class="banner-icon img-fluid w-100 object-fit-cover rounded-start" alt="..." style="max-height: 256px; filter: grayscale(25%); opacity: 0.45;">
                         <div class="card-body">
-                            <b class="card-title">Animal Facilities</b>
-                            <p class="card-text">534&nbsp;registered</p>
-                            <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
+                            <b class="card-title">Lounge — A Social Media for Pets!</b>
+                            <p class="card-text">13,000&nbsp;members and growing!</p>
+                            <p class="card-text"><small class="text-muted">Join our community in establishing a vibrant space for pet lovers!</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
@@ -182,10 +182,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="card card-hoverable h-100">
-                        <img src="{{ asset('images/iagd-container-cat-raw.png') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
+                    <div class="card card-hoverable h-100 glow-on-hover">
+                        <img src="{{ asset('images/cats_of_brutalism_01.png') }}" class="banner-icon img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px; filter: grayscale(25%); opacity: 0.45;">
                         <div class="card-body">
-                            <b class="card-title">Vet & Medical</b>
+                            <b class="card-title">Animal Facilities</b>
                             <p class="card-text">534&nbsp;records</p>
                             <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
                         </div>
@@ -195,15 +195,37 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="card card-hoverable h-100">
-                        <img src="{{ asset('images/iagd-container-other_animal-raw.png') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
+                    <div class="card card-hoverable h-100 glow-on-hover">
+                        <img src="{{ asset('images/certificate.png') }}" class="banner-icon img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px; filter: grayscale(25%); opacity: 0.45;">
                         <div class="card-body">
-                            <b class="card-title">Other Animals</b>
-                            <p class="card-text">534&nbsp;registered</p>
-                            <p class="card-text"><small class="text-muted">Newest {{ \Carbon\Carbon::parse($latest_pets['Dog'] ?? now())->diffForHumans() }}</small></p>
+                            <b class="card-title">Certificates</b>
+                            <p class="card-text">534&nbsp;issued</p>
+                            <p class="card-text"><small class="text-muted">Give your pet their own recognition!</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1 g-3">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="species-card card card-hoverable h-100 glow-on-hover" data-group="list">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <!-- <img src="{{ asset('images/iagd-container-dog-raw.png') }}" class="img-fluid w-100 h-100 object-fit-cover rounded-start" alt="..."> -->
+                                <img src="{{ asset('images/mayor_icons_globe.png') }}" class="img-fluid rounded-start mt-2 ms-2" alt="..." width="128" height="128">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <b class="card-title">All Species</b>
+                                    <p class="card-text"><span class="iagd-total-count" data-group="10">{{ number_format($pet_counts['10'] ?? 0) }}</span>&nbsp;records</p>
+                                    <p class="card-text"><small class="text-muted">Newest <span class="iagd-newest-registry" data-group="10">{{ \Carbon\Carbon::parse($latest_pets['10'] ?? now())->diffForHumans() }}</span></small></p>
+                                </div>
+                                <div class="card-icon">
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,9 +239,16 @@
 $(document).ready(function() {
     $('.card-hoverable').on('mouseover', function() {
         $(this).find('.card-title').addClass('text-gradient-primary');
+        $(this).find('img.banner-icon').css('transition', 'transform 0.5s ease-in-out');
+        $(this).find('img.banner-icon').css('filter', 'grayscale(0%)');
+        $(this).find('img.banner-icon').css('opacity', '1');
     });
+
     $('.card-hoverable').on('mouseout', function() {
         $(this).find('.card-title').removeClass('text-gradient-primary');
+        $(this).find('img.banner-icon').css('transition', 'transform 0.5s ease-in-out');
+        $(this).find('img.banner-icon').css('filter', 'grayscale(25%)');
+        $(this).find('img.banner-icon').css('opacity', '0.45');
     });
 
     $.ajax({

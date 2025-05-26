@@ -68,11 +68,12 @@ class APIController extends Controller
         ->orderByRaw('(SELECT iagd_number FROM pets_details WHERE pets_details.uuid = pets.uuid) ASC');
 
         if ($request->has('starts_with')) {
-            $query->where('pet_name', 'LIKE', $request->input('starts_with') . '%');
+            $starts_with = filter_var($request->input('starts_with'), FILTER_SANITIZE_STRING);
+            $query->where('pet_name', 'LIKE', $starts_with . '%');
         }
 
         if ($request->has('species')) {
-            $species = rtrim($request->input('species'), 's');
+            $species = filter_var($request->input('species'), FILTER_SANITIZE_STRING);
             $query->where('pet_type', $species);
         } else {
             $species = null;
@@ -84,7 +85,7 @@ class APIController extends Controller
         $pets->getCollection()->transform(function ($pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
                 : null;
             return $pet;
         });
@@ -127,7 +128,7 @@ class APIController extends Controller
         foreach ($pets as $pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
                 : null;
         }
 
@@ -150,7 +151,7 @@ class APIController extends Controller
         foreach ($pets as $pet) {
             $file = $pet->files->first();
             $pet->primary_image = $file
-                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+                ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
                 : null;
         }
 
@@ -171,7 +172,7 @@ class APIController extends Controller
 
         $file = $pet->files->first();
         $pet->primary_image = $file
-            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension)
+            ? asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . $file->file_extension)
             : null;
 
         return response()->json($pet);

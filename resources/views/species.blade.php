@@ -122,7 +122,7 @@ var isFetching = false; // Failsafe to prevent multiple triggers
 var isFirstTime = true;
 var hasReachedEnd = false;
 
-function fetchSpecies(page = 1, startsWith = 'a', species = 'cats') {
+function fetchSpecies(page = 1, startsWith = 'a', species = 11) {
     if (hasReachedEnd) {
         return;
     }
@@ -239,7 +239,7 @@ $(document).ready(function() {
   
     introOpen();
 
-    fetchSpecies(scroll_page_counter, starts_with, '{{ $species_name }}');
+    fetchSpecies(scroll_page_counter, starts_with, '{{ $species_id }}');
 
     $(window).scroll(function() {
         if (isFirstTime) {
@@ -248,7 +248,7 @@ $(document).ready(function() {
         if (!isFetching && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
             isFetching = true; // Set fetching flag
             scroll_page_counter++;
-            fetchSpecies(scroll_page_counter, starts_with, '{{ $species_name }}');
+            fetchSpecies(scroll_page_counter, starts_with, '{{ $species_id }}');
         }
     });
 
@@ -269,7 +269,7 @@ $(document).ready(function() {
         isFirstTime = true;
         hasReachedEnd = false;
         $('.species-list-container').empty(); // Clear the container
-        fetchSpecies(scroll_page_counter, starts_with, '{{ $species_name }}'); // Fetch new data
+        fetchSpecies(scroll_page_counter, starts_with, '{{ $species_id }}'); // Fetch new data
     });
 });
 </script>

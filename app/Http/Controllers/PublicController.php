@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use App\Models\Pets;
+use App\Models\Species;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use JavaScript;
@@ -36,9 +37,9 @@ class PublicController extends Controller
         return view($view, $data);
     }
 
-    function pet_profile($pet_type, $iagd_number) {
+    function pet_profile($species_id, $iagd_number) {
         $pet = Pets::with(['details', 'meta', 'files'])
-            ->where('pet_type', $pet_type)
+            ->where('pet_type', $species_id)
             ->whereHas('details', function ($query) use ($iagd_number) {
                 $query->where('iagd_number', $iagd_number);
             })
@@ -56,29 +57,40 @@ class PublicController extends Controller
         return view('pets.profile', $data);
     }
 
-    function species($species) {
-        $valid_species = ['cats', 'dogs', 'rabbits', 'birds'];
-
-        if (!in_array($species, $valid_species)) {
-            abort(404, 'Species not found');
-        }
+    function species($species_id) {
+        $key_map = [
+            10 => 'dogs',
+            11 => 'cats',
+            12 => 'rabbits',
+            13 => 'birds'
+        ];
 
         $icon_map = [
-            'cats' => 'mayor_icons_cat.png',
             'dogs' => 'mayor_icons_dog.png',
+            'cats' => 'mayor_icons_cat.png',
             'rabbits' => 'mayor_icons_rabbit.png',
             'birds' => 'mayor_icons_bird.png'
         ];
 
-        // capitalize first letter
-        $species_name = ucfirst($species);
+        if (!array_key_exists($species_id, $key_map)) {
+            abort(404, 'Species not found');
+        }
+
+        $species = Species::find($species_id);
+        if (!$species) {
+            abort(404, 'Species not found in database');
+        }
+
+        $species_key = $key_map[$species_id];
+        $species_name = ucfirst($species_key);
 
         $data = [
-            'title' => $species_name . ' — IAGD',
+            'title' => "{$species_name} — IAGD",
+            'species_id' => $species_id,
             'species_name' => $species_name,
-            'species_icon' => asset('images/' . $icon_map[$species]),
+            'species_icon' => asset("images/{$icon_map[$species_key]}")
         ];
-    
+
         return view('species', $data);
     }
 }
