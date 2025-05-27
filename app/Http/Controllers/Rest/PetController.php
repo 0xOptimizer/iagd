@@ -202,33 +202,47 @@ class PetController extends Controller
 
             if ($request->hasFile('pet_images')) {
                 foreach ($request->file('pet_images') as $image) {
-                    if (! $image->isValid()) {
-                        throw new \Exception('One of the uploaded images is invalid.');
-                    }
-
-                    $extension = $image->getClientOriginalExtension();
-                    $filename  = Str::random(32) . '.' . $extension;
-                    $fullPath  = "uploads/pets/{$uuid}/{$filename}";
-
-                    $image->move($destination, $filename);
-
-                    PetsFile::create([
-                        'uuid'             => (string) Str::uuid(),
-                        'attached_to_uuid' => $uuid,
-                        'file_name'        => $filename,
-                        'file_path'        => $fullPath,
-                        'file_type'        => Str::upper($extension),
-                        'file_size'        => $image->getSize(),
-                        'file_extension'   => "." . $extension,
-                        'file_mime_type'   => $image->getMimeType(),
-                        'file_hash'        => sha1_file($destination . DIRECTORY_SEPARATOR . $filename),
-                        'status'           => 1,
-                    ]);
-
-                    if (! $firstImagePath) {
-                        $firstImagePath = $fullPath;
-                    }
+                if (! $image->isValid()) {
+                    throw new \Exception('One of the uploaded images is invalid.');
                 }
+
+                // Compute metadata before moving
+                $originalPath = $image->getRealPath();
+                $fileSize     = $image->getSize();
+                $fileMime     = $image->getMimeType();
+                $fileHash     = sha1_file($originalPath);
+
+                $extension = $image->getClientOriginalExtension();
+                $filename  = Str::random(32) . '.' . $extension;
+                $fullPath  = "uploads/pets/{$uuid}/{$filename}";
+
+                // Ensure directory exists
+                $destination = public_path("uploads/pets/{$uuid}");
+                if (! File::isDirectory($destination)) {
+                    File::makeDirectory($destination, 0755, true);
+                }
+
+                // Move temp file into place
+                $image->move($destination, $filename);
+
+                // Now insert record using pre‐computed values
+                PetsFile::create([
+                    'uuid'             => (string) Str::uuid(),
+                    'attached_to_uuid' => $uuid,
+                    'file_name'        => $filename,
+                    'file_path'        => $fullPath,
+                    'file_type'        => Str::upper($extension),
+                    'file_size'        => $fileSize,
+                    'file_extension'   => "." . $extension,
+                    'file_mime_type'   => $fileMime,
+                    'file_hash'        => $fileHash,
+                    'status'           => 1,
+                ]);
+
+                if (! isset($firstImagePath)) {
+                    $firstImagePath = $fullPath;
+                }
+            }
             }
 
             PetsDetails::create([
