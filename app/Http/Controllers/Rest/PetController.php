@@ -302,38 +302,6 @@ class PetController extends Controller
         ], 200);
     }
 
-    private function validatePetCreateRequest(Request $request)
-    {
-        return Validator::make($request->all(), [
-            'pet_name'        => 'required|string|max:255',
-            'pet_type'        => 'required|string|max:255',
-            'breed'           => 'nullable|string|max:255',
-            'pet_images'      => 'nullable|array',
-            'pet_images.*'    => 'file|mimes:jpeg,jpg,png,gif,bmp,webp,jfif,svg|max:65536',
-            'stars'           => 'nullable|integer',
-            'owner'           => 'nullable|string|max:255',
-            'co_owner'        => 'nullable|string|max:255',
-            'pet_location'    => 'nullable|string|max:255',
-            'owner_location'  => 'nullable|string|max:255',
-            'breeder'         => 'nullable|string|max:255',
-            'animal_facility' => 'nullable|string|max:255',
-            'gender'          => 'nullable|string|max:50',
-            'date_of_birth'   => 'nullable|date',
-            'markings'        => 'nullable|string',
-            'colors_body'     => 'nullable|string',
-            'colors_eye'      => 'nullable|string',
-            'weight'          => 'nullable|numeric',
-            'height'          => 'nullable|numeric',
-            'icgd_number'     => 'nullable|string|max:255',
-            'link'            => 'nullable|url',
-            'male_parent'     => 'nullable|string|max:255',
-            'male_parent_breed'=> 'nullable|string|max:255',
-            'female_parent'   => 'nullable|string|max:255',
-            'female_parent_breed'=> 'nullable|string|max:255',
-            'animal_facility_uuid' => 'nullable|string|uuid',
-        ]);
-    }
-
     public function update(Request $request) {}
 
     public function delete(Request $request)
@@ -377,5 +345,78 @@ class PetController extends Controller
             'status' => 'success',
             'message' => 'Pet deleted.'
         ], 200);
+    }
+
+    /**
+     * Validate request
+     * @param Request $request
+     * @return Illuminate\Validation\Validator
+     */
+    public function validatePetCreateRequest($request)
+    {
+
+        // Validation rules
+        $rules = [
+            // Pet rules
+            'pet_name' => 'required',
+            'pet_type' => 'required',
+
+            // Pet images
+            'pet_images'      => 'nullable|array',
+            'pet_images.*'    => 'file|mimes:jpeg,jpg,png,gif,bmp,webp,jfif,svg|max:65536',
+
+            // Pet details rules
+            // 'breed' => 'required',
+            // 'iagd_number' => 'required',
+            // 'stars' => 'required',
+            // 'owner' => 'required',
+            // 'owner_uuid' => 'required',
+            // 'co_owner' => 'required',
+            // 'co_owner_uuid' => 'required',
+            // 'pet_location' => 'nullable',
+            // 'owner_location' => 'nullable',
+            // 'breeder' => 'nullable',
+            // 'animal_facility' => 'nullable',
+            // 'gender' => 'nullable',
+            // 'date_of_birth' => 'nullable',
+            // 'markings' => 'nullable',
+            // 'colors_body' => 'required',
+            // 'colors_eye' => 'required',
+            // 'weight' => 'nullable',
+            // 'height' => 'nullable',
+            // 'icgd_number' => 'nullable',
+            // 'link' => 'nullable',
+            // 'male_parent' => 'nullable',
+            // 'male_parent_uuid' => 'nullable',
+            // 'male_parent_breed' => 'nullable',
+            // 'female_parent' => 'nullable',
+            // 'female_parent_uuid' => 'nullable',
+            // 'female_parent_breed' => 'nullable',
+            // 'display_status' => 'visible',
+        ];
+
+        $validationMessage = [
+            // Pet validation messages
+            'pet_name.required' => 'Pet name is required.',
+            'pet_type.required' => 'Pet type is required.',
+
+            // Pet images messages
+            'pet_images.*.image' => 'Choose a valid image file.',
+            'pet_images.*.mimes' => 'Selected image format not supported.',
+            'pet_images.*.max' => 'Image file exceed the maximum file size : 64MB.',
+
+            // Pet details validation messages
+            // 'breed.required' => 'Breed is required.',
+            // 'iagd_number.required' => 'IAGD number is required.',
+            // 'stars.required' => 'Stars is required.',
+            // 'owner.required' => 'Owner is required.',
+            // 'owner_uuid.required' => 'Owner uuid is required.',
+            // 'co_owner.required' => 'Co-owner is required.',
+            // 'co_owner_uuid.required' => 'Co-owner uuid is required.',
+            // 'location' => 'nullable',
+        ];
+
+
+        return Validator::make($request->all(), $rules, $validationMessage);
     }
 }
