@@ -12,6 +12,7 @@ use Cache;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use File;
 use Str;
 use Validator;
 
