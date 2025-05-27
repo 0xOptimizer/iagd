@@ -157,118 +157,133 @@ class PetController extends Controller
         $uuid = (string) Str::uuid();
 
         try {
-            $nextIagdMeta = GlobalMeta::where('meta_key', 'next_iagd_number')->lockForUpdate()->first();
-            if (!$nextIagdMeta) {
+            $nextIagdMeta = GlobalMeta::where('meta_key', 'next_iagd_number')
+                ->lockForUpdate()
+                ->first();
+
+            if (! $nextIagdMeta) {
                 throw new \Exception('Invalid or missing next_iagd_number in GlobalMeta.');
             }
 
-            // Retrieve the next IAGD number as a decimal value
-            $nextIagdNumber = (int)$nextIagdMeta->meta_value;
+            $nextIagdNumber = (int) $nextIagdMeta->meta_value;
             $year = date('Y');
             $fixedPart = '002';
-            
-            // Check if the next number exceeds the maximum allowed (0xFFFF = 65535)
+
             if ($nextIagdNumber > 0xFFFF) {
                 throw new \Exception('Maximum IAGD number reached.');
             }
 
-            // Convert to 4-digit hexadecimal and format the IAGD number
             $hexValue = str_pad(dechex($nextIagdNumber), 4, '0', STR_PAD_LEFT);
             $formattedIagdNumber = "{$year}-{$fixedPart}-{$hexValue}";
 
-            // Create the pet and other records as before
             $pet = Pets::create([
-                'uuid' => $uuid,
+                'uuid'     => $uuid,
                 'pet_name' => $request->input('pet_name'),
                 'pet_type' => $request->input('pet_type'),
-                'image' => null,
+                'image'    => null,
             ]);
 
             PetsMeta::create([
-                'uuid' => $uuid,
-                'status' => 1,
-                'from_system' => 'website',
-                'inserted_by' => auth()->user()->name ?? 'self',
+                'uuid'          => $uuid,
+                'status'        => 1,
+                'from_system'   => 'website',
+                'inserted_by'   => auth()->user()->name ?? 'self',
                 'date_inserted' => now(),
-                'date_added' => now(),
+                'date_added'    => now(),
             ]);
 
-            $uploadedFiles = [];
+            $destination = public_path("uploads/pets/{$uuid}");
+            if (! File::isDirectory($destination)) {
+                File::makeDirectory($destination, 0755, true);
+            }
+
+            $firstImagePath = null;
 
             if ($request->hasFile('pet_images')) {
                 foreach ($request->file('pet_images') as $image) {
-                    $path = public_path("uploads/pets/$uuid");
-                    $imgname = Str::random(32) . '.' . $image->getClientOriginalExtension();
-                    $filePath = "img/pets/$uuid/$imgname";
+                    if (! $image->isValid()) {
+                        throw new \Exception('One of the uploaded images is invalid.');
+                    }
+
+                    $extension = $image->getClientOriginalExtension();
+                    $filename  = Str::random(32) . '.' . $extension;
+                    $fullPath  = "uploads/pets/{$uuid}/{$filename}";
+
+                    $image->move($destination, $filename);
 
                     PetsFile::create([
-                        'uuid' => (string) Str::uuid(),
+                        'uuid'             => (string) Str::uuid(),
                         'attached_to_uuid' => $uuid,
-                        'file_name' => $imgname,
-                        'file_path' => $filePath,
-                        'file_type' => Str::upper($image->getClientOriginalExtension()),
-                        'file_size' => $image->getSize(),
-                        'file_extension' => "." . $image->getClientOriginalExtension(),
-                        'file_mime_type' => $image->getMimeType(),
-                        'file_hash' => sha1_file($image->getRealPath()),
-                        'status' => 1,
+                        'file_name'        => $filename,
+                        'file_path'        => $fullPath,
+                        'file_type'        => Str::upper($extension),
+                        'file_size'        => $image->getSize(),
+                        'file_extension'   => "." . $extension,
+                        'file_mime_type'   => $image->getMimeType(),
+                        'file_hash'        => sha1_file($destination . DIRECTORY_SEPARATOR . $filename),
+                        'status'           => 1,
                     ]);
 
-                    $image->move($path, $imgname);
-                    $uploadedFiles[] = $filePath;
+                    if (! $firstImagePath) {
+                        $firstImagePath = $fullPath;
+                    }
                 }
             }
 
             PetsDetails::create([
-                'uuid' => $uuid,
-                'breed' => $request->input('breed'),
-                'iagd_number' => $formattedIagdNumber,
-                'stars' => $request->input('stars'),
-                'owner' => $request->input('owner'),
-                'owner_uuid' => (string) Str::uuid(),
-                'co_owner' => $request->input('co_owner'),
-                'co_owner_uuid' => (string) Str::uuid(),
-                'pet_location' => $request->input('pet_location'),
-                'owner_location' => $request->input('owner_location'),
-                'breeder' => $request->input('breeder'),
-                'animal_facility' => $request->input('animal_facility'),
+                'uuid'                 => $uuid,
+                'breed'                => $request->input('breed'),
+                'iagd_number'          => $formattedIagdNumber,
+                'stars'                => $request->input('stars'),
+                'owner'                => $request->input('owner'),
+                'owner_uuid'           => (string) Str::uuid(),
+                'co_owner'             => $request->input('co_owner'),
+                'co_owner_uuid'        => (string) Str::uuid(),
+                'pet_location'         => $request->input('pet_location'),
+                'owner_location'       => $request->input('owner_location'),
+                'breeder'              => $request->input('breeder'),
+                'animal_facility'      => $request->input('animal_facility'),
                 'animal_facility_uuid' => $request->input('animal_facility_uuid'),
-                'gender' => $request->input('gender'),
-                'date_of_birth' => $request->input('date_of_birth'),
-                'markings' => $request->input('markings'),
-                'colors_body' => $request->input('colors_body'),
-                'colors_eye' => $request->input('colors_eye'),
-                'weight' => $request->input('weight'),
-                'height' => $request->input('height'),
-                'icgd_number' => $request->input('icgd_number'),
-                'link' => $request->input('link'),
-                'male_parent' => $request->input('male_parent'),
-                'male_parent_uuid' => (string) Str::uuid(),
-                'male_parent_breed' => $request->input('male_parent_breed'),
-                'female_parent' => $request->input('female_parent'),
-                'female_parent_uuid' => (string) Str::uuid(),
-                'female_parent_breed' => $request->input('female_parent_breed'),
-                'display_status' => 'visible',
+                'gender'               => $request->input('gender'),
+                'date_of_birth'        => $request->input('date_of_birth'),
+                'markings'             => $request->input('markings'),
+                'colors_body'          => $request->input('colors_body'),
+                'colors_eye'           => $request->input('colors_eye'),
+                'weight'               => $request->input('weight'),
+                'height'               => $request->input('height'),
+                'icgd_number'          => $request->input('icgd_number'),
+                'link'                 => $request->input('link'),
+                'male_parent'          => $request->input('male_parent'),
+                'male_parent_uuid'     => (string) Str::uuid(),
+                'male_parent_breed'    => $request->input('male_parent_breed'),
+                'female_parent'        => $request->input('female_parent'),
+                'female_parent_uuid'   => (string) Str::uuid(),
+                'female_parent_breed'  => $request->input('female_parent_breed'),
+                'display_status'       => 'visible',
             ]);
 
             GlobalMeta::updateOrCreate(
-                ['meta_key' => 'previous_iagd_number'],
+                ['meta_key'   => 'previous_iagd_number'],
                 ['meta_value' => $formattedIagdNumber]
             );
 
             GlobalMeta::updateOrCreate(
-                ['meta_key' => 'current_iagd_number'],
+                ['meta_key'   => 'current_iagd_number'],
                 ['meta_value' => $formattedIagdNumber]
             );
 
-            // Increment the next IAGD number and save
             $nextIagdMeta->meta_value = $nextIagdNumber + 1;
             $nextIagdMeta->save();
+
+            if ($firstImagePath) {
+                $pet->image = $firstImagePath;
+                $pet->save();
+            }
         } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
-                "status" => "error",
-                "message" => $th->getMessage()
+                'status'  => 'error',
+                'message' => $th->getMessage()
             ], 500);
         }
 
@@ -281,10 +296,42 @@ class PetController extends Controller
         ]);
 
         return response()->json([
-            "status" => "success",
-            "message" => "New pet added.",
-            "data" => $load_pet
+            'status'  => 'success',
+            'message' => 'New pet added.',
+            'data'    => $load_pet
         ], 200);
+    }
+
+    private function validatePetCreateRequest(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'pet_name'        => 'required|string|max:255',
+            'pet_type'        => 'required|string|max:255',
+            'breed'           => 'nullable|string|max:255',
+            'pet_images'      => 'nullable|array',
+            'pet_images.*'    => 'file|mimes:jpeg,jpg,png,gif,bmp,webp,jfif,svg|max:65536',
+            'stars'           => 'nullable|integer',
+            'owner'           => 'nullable|string|max:255',
+            'co_owner'        => 'nullable|string|max:255',
+            'pet_location'    => 'nullable|string|max:255',
+            'owner_location'  => 'nullable|string|max:255',
+            'breeder'         => 'nullable|string|max:255',
+            'animal_facility' => 'nullable|string|max:255',
+            'gender'          => 'nullable|string|max:50',
+            'date_of_birth'   => 'nullable|date',
+            'markings'        => 'nullable|string',
+            'colors_body'     => 'nullable|string',
+            'colors_eye'      => 'nullable|string',
+            'weight'          => 'nullable|numeric',
+            'height'          => 'nullable|numeric',
+            'icgd_number'     => 'nullable|string|max:255',
+            'link'            => 'nullable|url',
+            'male_parent'     => 'nullable|string|max:255',
+            'male_parent_breed'=> 'nullable|string|max:255',
+            'female_parent'   => 'nullable|string|max:255',
+            'female_parent_breed'=> 'nullable|string|max:255',
+            'animal_facility_uuid' => 'nullable|string|uuid',
+        ]);
     }
 
     public function update(Request $request) {}
@@ -330,78 +377,5 @@ class PetController extends Controller
             'status' => 'success',
             'message' => 'Pet deleted.'
         ], 200);
-    }
-
-    /**
-     * Validate request
-     * @param Request $request
-     * @return Illuminate\Validation\Validator
-     */
-    public function validatePetCreateRequest($request)
-    {
-
-        // Validation rules
-        $rules = [
-            // Pet rules
-            'pet_name' => 'required',
-            'pet_type' => 'required',
-
-            // Pet images
-            'image' => 'image|array|min:1',
-            'image.*' => 'image|mimes:jpeg,jpg,png,gif|max:15000',
-
-            // Pet details rules
-            // 'breed' => 'required',
-            // 'iagd_number' => 'required',
-            // 'stars' => 'required',
-            // 'owner' => 'required',
-            // 'owner_uuid' => 'required',
-            // 'co_owner' => 'required',
-            // 'co_owner_uuid' => 'required',
-            // 'pet_location' => 'nullable',
-            // 'owner_location' => 'nullable',
-            // 'breeder' => 'nullable',
-            // 'animal_facility' => 'nullable',
-            // 'gender' => 'nullable',
-            // 'date_of_birth' => 'nullable',
-            // 'markings' => 'nullable',
-            // 'colors_body' => 'required',
-            // 'colors_eye' => 'required',
-            // 'weight' => 'nullable',
-            // 'height' => 'nullable',
-            // 'icgd_number' => 'nullable',
-            // 'link' => 'nullable',
-            // 'male_parent' => 'nullable',
-            // 'male_parent_uuid' => 'nullable',
-            // 'male_parent_breed' => 'nullable',
-            // 'female_parent' => 'nullable',
-            // 'female_parent_uuid' => 'nullable',
-            // 'female_parent_breed' => 'nullable',
-            // 'display_status' => 'visible',
-        ];
-
-        $validationMessage = [
-            // Pet validation messages
-            'pet_name.required' => 'Pet name is required.',
-            'pet_type.required' => 'Pet type is required.',
-
-            // Pet images messages
-            'image.*.image' => 'Choose a valid image file.',
-            'image.*.mimes' => 'Selected image format not supported.',
-            'image.*.max' => 'Image file exceed the maximum file size : 15MB.',
-
-            // Pet details validation messages
-            // 'breed.required' => 'Breed is required.',
-            // 'iagd_number.required' => 'IAGD number is required.',
-            // 'stars.required' => 'Stars is required.',
-            // 'owner.required' => 'Owner is required.',
-            // 'owner_uuid.required' => 'Owner uuid is required.',
-            // 'co_owner.required' => 'Co-owner is required.',
-            // 'co_owner_uuid.required' => 'Co-owner uuid is required.',
-            // 'location' => 'nullable',
-        ];
-
-
-        return Validator::make($request->all(), $rules, $validationMessage);
     }
 }
