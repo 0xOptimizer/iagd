@@ -243,7 +243,7 @@ class PetController extends Controller
                     $firstImagePath = $fullPath;
                 }
             }
-            }
+        }
 
             PetsDetails::create([
                 'uuid'                 => $uuid,

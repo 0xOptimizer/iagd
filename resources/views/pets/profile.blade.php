@@ -10,24 +10,36 @@
 </style>
 <body>
     @include('components.nav')
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+        <img src="{{ asset('images/map.svg') }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+    </div>
     <main class="p-3" style="position: relative;">
         <div class="mt-5">
-            <div>
+            <div class="image-container text-center">
                 @php
                     $file = $pet->files->first();
                 @endphp
                 @if ($file)
-                    <img src="{{ asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension) }}" class="rounded-circle" alt="" width="128" height="128">
+                    <img src="{{ asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->uuid . '.' . $file->file_extension) }}" class="rounded-circle" alt="" width="192" height="192">
                 @else
-                    <img src="{{ asset('uploads/pets/default.png') }}" class="rounded-circle" alt="Default Image" width="128" height="128">
+                    <img src="{{ asset('uploads/pets/default.png') }}" class="rounded-circle" alt="Default Image" width="192" height="192">
                 @endif
             </div>
-            <div class="mt-3">
-                <h1 class="h1wrap text-center">
+            <div class="mt-3 text-center">
+                <h1 class="h1wrap">
                     <span class="text-gradient-primary">{{ $pet->pet_name }}</span>
                 </h1>
             </div>
-            <div class="mt-3" style="width: 250px; overflow-x: auto;">
+            <div class="pet-tabs-container text-center justify-content-center mt-3">
+                <button class="pet-tab btn @if(!request()->has('tab') || request()->get('tab') == 'details') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-info-circle"></i> Details</button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'pedigree') btn-primary @else btn-secondary @endif" style="width: 130px;"></i><i class="bi bi-diagram-2"></i> Pedigree</button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'gallery') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-images"></i> Gallery</button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'documents') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-stack"></i> Documents</button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'settings') btn-primary @else btn-secondary @endif"><i class="bi bi-gear"></i></button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'export') btn-primary @else btn-secondary @endif"><i class="bi bi-file-earmark-arrow-down"></i></button>
+                <!-- <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button> -->
+            </div>
+            <div class="mt-3" style="width: 1000px; overflow-x: auto;">
                 <pre style="color: #fff; white-space: pre-wrap; word-wrap: break-word;">
                     {{ $pet }}
                 </pre>
@@ -80,7 +92,6 @@ $(document).ready(function() {
     $('.h1wrap').each(function(){
         $(this).find("h1").html( $(this).find("h1").html().replace(/./g, "<span>$&</span>").replace(/\s/g, "&nbsp;"));
     });
-
 
     function introOpen(){  
       //Using ex. transform:"translate3d(x,x,x)" instead of (y:__) or (top:__) to maintain vh or em units responsiveness

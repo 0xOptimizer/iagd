@@ -22,10 +22,8 @@
                 </div>
             </form>
         </div>
-
-        <div>
-</div>
-
+    </div>
+    <div>
         <!-- Right Group - Buttons -->
         <div class="d-flex gap-2">
             <a href="{{ route('register') }}" class="btn btn-primary" style="width: 235px; height: 57px; align-content: center;"><i class="bi bi-feather"></i> Register Pet</a>

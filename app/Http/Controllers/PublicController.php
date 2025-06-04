@@ -48,9 +48,15 @@ class PublicController extends Controller
         if (!$pet) {
             abort(404, 'Pet not found');
         }
+
+        $pet_name = $pet->pet_name;
+        $pet_name = htmlspecialchars($pet_name, ENT_QUOTES, 'UTF-8');
+        if (!$pet_name) {
+            $pet_name = 'Unknown Pet';
+        }
     
         $data = [
-            'title' => $pet->name . ' — Pet Profile',
+            'title' => $pet_name . ' — Pet Profile',
             'pet' => $pet
         ];
     

@@ -183,7 +183,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="card card-hoverable h-100 glow-on-hover">
-                        <img src="{{ asset('images/cats_of_brutalism_01.png') }}" class="banner-icon img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px; filter: grayscale(25%); opacity: 0.45;">
+                        <img src="{{ asset('images/animal_facility.png') }}" class="img-fluid w-100 object-fit-cover rounded-start" alt="..." style="height: 256px;">
                         <div class="card-body">
                             <b class="card-title">Animal Facilities</b>
                             <p class="card-text">534&nbsp;records</p>

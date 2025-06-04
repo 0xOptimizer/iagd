@@ -173,23 +173,37 @@ function fetchSpecies(page = 1, startsWith = 'a', species = 11) {
             const image = pet.primary_image || '/images/no_img.png';
             const name = pet.pet_name || 'Unnamed Pet';
             const iagdNumber = pet.details?.iagd_number || 'No IAGD Number';
-            const createdAt = pet.details?.created_at ? moment(pet.details.created_at).fromNow() : 'Unknown';
+            const inserted = pet.meta?.date_inserted;
+            let createdAt = "Unknown";
+
+            if (inserted) {
+                const dt = luxon.DateTime.fromFormat(inserted, "yyyy-MM-dd hh:mm:ss a");
+                if (dt.isValid) {
+                    createdAt = dt.toRelative({ locale: "en" }) || "Unknown";
+                } else {
+                    const dt24 = luxon.DateTime.fromFormat(inserted, "yyyy-MM-dd HH:mm:ss");
+                    if (dt24.isValid) {
+                        createdAt = dt24.toRelative({ locale: "en" }) || "Unknown";
+                    }
+                }
+            }
+
 
             const card = `
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="card card-hoverable h-100" style="${isFirstTime ? 'display: none;' : ''}; position: relative;">
+                    <a href="{{ url('/pets') }}/${pet.pet_type ? pet.pet_type : ''}/${pet.details?.iagd_number ? pet.details.iagd_number : ''}" class="card card-hoverable h-100" style="${isFirstTime ? 'display: none;' : ''}; position: relative;">
                         <div class="card-background" style="position: absolute; top: 0; left: 0; right: 0; height: 256px; background-color: rgba(0, 0, 0, 0.16); z-index: -1;"></div>
                         <!-- <div class="card-background" style="position: absolute; top: 0; left: 0; right: 0; height: 256px; background-image: url('${image}'); background-size: cover; background-position: center; filter: blur(8px); z-index: -1;"></div> -->
                         <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}'s Cute Photo" style="height: 256px; object-fit: contain; object-position: top;">
                         <div class="card-body">
                             <b class="card-title">${name}</b>
                             <p class="card-text">${iagdNumber}</p>
-                            <p class="card-text"><small class="text-muted">Newest ${createdAt}</small></p>
+                            <p class="card-text"><small class="text-muted">Registered ${createdAt}</small></p>
                         </div>
                         <div class="card-icon" style="top: 250px;">
                             <i class="bi bi-caret-right-fill"></i>
                         </div>
-                    </div>
+                    </a>
                 </div>`;
             $('.species-list-container').append(card);
         });

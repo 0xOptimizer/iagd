@@ -700,3 +700,42 @@ main .card-hoverable:hover {
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
+
+.image-container {
+    position: relative;
+    margin: 0 auto;
+    width: 192px;
+    height: 192px;
+    border-radius: 192px;
+    background: linear-gradient(0deg, #000, #272727);
+}
+
+.image-container:before, .image-container:after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(45deg, #914193, #efd534, #b873fe, #8035eb, #914193, #efd534, #b873fe, #8035eb, #914193, #efd534);
+    background-size: 400%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border-radius: 192px;
+    z-index: -1;
+    animation: steam 40s linear infinite;
+}
+
+@keyframes steam {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.image-container:after {
+    filter: blur(50px);
+}
