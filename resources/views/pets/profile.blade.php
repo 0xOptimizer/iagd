@@ -14,6 +14,15 @@
         <img src="{{ asset('images/map.svg') }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
     </div>
     <main class="p-3" style="position: relative;">
+        <div class="iagd-circle-containers">
+            <div class="iagd-circle-01"></div>
+            <div class="iagd-circle-02"></div>
+            <div class="iagd-circle-03"></div>
+            <div class="iagd-circle-04"></div>
+            <div class="iagd-circle-05"></div>
+            <div class="iagd-circle-06"></div>
+            <div class="iagd-circle-07"></div>
+        </div>
         <div class="mt-5">
             <div class="image-container text-center">
                 @php
@@ -38,6 +47,300 @@
                 <button class="pet-tab btn @if(request()->get('tab') == 'settings') btn-primary @else btn-secondary @endif"><i class="bi bi-gear"></i></button>
                 <button class="pet-tab btn @if(request()->get('tab') == 'export') btn-primary @else btn-secondary @endif"><i class="bi bi-file-earmark-arrow-down"></i></button>
                 <!-- <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button> -->
+            </div>
+            <div class="mt-3 d-grid gap-1" style="grid-template-columns: 50% 33.333% 16.667%;">
+                <div class="group-container">
+                    <div class="row p-3">
+                        <!-- Pet Details 1/2 -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
+                                        <div class="pet-breed-background"></div>
+                                        <div class="pet-breed-icon" style="top: -19px; left: 10px;">
+                                            @if ($pet->pet_type == 10)
+                                                <img src="{{ asset('images/mayor_icons_dog.png') }}" alt="Pet Breed Icon" width="64" height="64">
+                                            @elseif ($pet->pet_type == 11)
+                                                <img src="{{ asset('images/mayor_icons_cat.png') }}" alt="Pet Breed Icon" width="64" height="64">
+                                            @elseif ($pet->pet_type == 12)
+                                                <img src="{{ asset('images/mayor_icons_bird.png') }}" alt="Pet Breed Icon" width="64" height="64">
+                                            @elseif ($pet->pet_type == 13)
+                                                <img src="{{ asset('images/mayor_icons_rabbit.png') }}" alt="Pet Breed Icon" width="64" height="64">
+                                            @endif
+                                        </div>
+                                        <h6 class="pet-breed-title">{{ $pet->details->breed ?? 'No Breed' }}</h6>
+                                        <span class="pet-breed-tooltip">
+                                            100% ASPIN / 100% ASPIN / 100% ASPIN / 100% ASPIN
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-3">
+                                    <div class="form-floating position-relative">
+                                        <input type="text" class="form-control w-100" id="petMarkings" placeholder="Pet Markings" value="{{ $pet->details->markings }}" readonly>
+                                        <label for="petMarkings" style="color: #15a4ff !important;"><i class="bi bi-lightning-fill"></i> Markings</label>
+                                        <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="row g-1">
+                                        <div class="col-sm-6">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petBodyColor" placeholder="Pet Body Color" value="{{ $pet->details->colors_body ?? 'Unspecified' }}" readonly>
+                                                <label for="petBodyColor" style="color: #15a4ff !important;"><i class="bi bi-gitlab"></i> Body Color</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petEyeColor" placeholder="Pet Eye Color" value="{{ $pet->details->colors_eye ?? 'Unspecified' }}" readonly>
+                                                <label for="petEyeColor" style="color: #15a4ff !important;"><i class="bi bi-eye-fill"></i> Eye Color</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="pet-banner pet-banner-gallery w-100">
+                                        <img src="{{ asset('images/iagd-container-cat-raw.png') }}" alt="Gallery Images" class="pet-banner-image">
+                                        <div class="pet-banner-title text-center">
+                                            <h6 style="color: #15a4ff; font-size: 24px;"><span class="outlined-text" style="color: white;"><i class="bi bi-images"></i> Gallery <span style="opacity: 0.33;">//</span> 24,506 images</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pet Details 2/2 -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
+                                        <div class="pet-breed-background"></div>
+                                        <div class="pet-breed-icon" style="top: -19px; left: 10px;">
+                                            <img src="{{ asset('images/mayor_icons_summer.png') }}" alt="Age Icon" width="64" height="64">
+                                        </div>
+                                        @php
+                                            use Carbon\Carbon;
+
+                                            $dob = Carbon::parse($pet->details->date_of_birth);
+                                            $dobFormatted = $dob->format('F d, Y');
+                                            $now = Carbon::now();
+                                            $diff = $dob->diff($now);
+
+                                            $ageParts = [];
+
+                                            if ($diff->y > 0) {
+                                                $ageParts[] = $diff->y . ' year' . ($diff->y > 1 ? 's' : '');
+                                                if ($diff->m > 0) {
+                                                    $ageParts[] = $diff->m . ' month' . ($diff->m > 1 ? 's' : '');
+                                                }
+                                            } elseif ($diff->m > 0) {
+                                                $ageParts[] = $diff->m . ' month' . ($diff->m > 1 ? 's' : '');
+                                                if ($diff->d >= 7) {
+                                                    $weeks = intdiv($diff->d, 7);
+                                                    $ageParts[] = $weeks . ' week' . ($weeks > 1 ? 's' : '');
+                                                }
+                                            } elseif ($diff->d > 0) {
+                                                $ageParts[] = $diff->d . ' day' . ($diff->d > 1 ? 's' : '');
+                                                if ($diff->h > 0) {
+                                                    $ageParts[] = $diff->h . ' hour' . ($diff->h > 1 ? 's' : '');
+                                                }
+                                            } elseif ($diff->h > 0) {
+                                                $ageParts[] = $diff->h . ' hour' . ($diff->h > 1 ? 's' : '');
+                                                if ($diff->i > 0) {
+                                                    $ageParts[] = $diff->i . ' minute' . ($diff->i > 1 ? 's' : '');
+                                                }
+                                            } elseif ($diff->i > 0) {
+                                                $ageParts[] = $diff->i . ' minute' . ($diff->i > 1 ? 's' : '');
+                                            } else {
+                                                $ageParts[] = 'Just now';
+                                            }
+
+                                            $ageFormatted = implode(', ', array_slice($ageParts, 0, 2));
+                                        @endphp
+                                        <h6 class="pet-breed-title">{{ $ageFormatted }} old</h6>
+                                        <span class="pet-breed-tooltip">
+                                            Born {{ $dobFormatted }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-3">
+                                    <div class="row g-1">
+                                        <div class="col-sm-6">
+                                            <div class="form-floating position-relative">
+                                                @php
+                                                    $gender = $pet->details->gender;
+                                                    $genderIcon = 'bi-gender-ambiguous';
+                                                    $genderColor = '#15a4ff'; // Default color
+                                                    if ($gender == 'Male') {
+                                                        $genderIcon = 'bi-gender-male';
+                                                        $genderColor = '#007bff';
+                                                    } elseif ($gender == 'Female') {
+                                                        $genderIcon = 'bi-gender-female';
+                                                        $genderColor = '#ff69b4';
+                                                    }
+                                                @endphp
+                                                <i class="bi {{ $genderIcon }} position-absolute" style="top: 26px; left: 10px; color: {{ $genderColor }};"></i>
+                                                <input type="text" class="form-control w-100" id="petGender" placeholder="Pet Gender" value="{{ $pet->details->gender }}" style="padding-left: 30px;" readonly>
+                                                <label for="petGender" style="color: #15a4ff !important;"><i class="bi bi-balloon-fill"></i> Gender</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petWeight" placeholder="Pet Weight" value="{{ $pet->details->weight ?? 'Unspecified' }}" readonly>
+                                                <label for="petWeight" style="color: #15a4ff !important;"><i class="bi bi-align-center"></i> Weight</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petHeight" placeholder="Pet Height" value="{{ $pet->details->height ?? 'Unspecified' }}" readonly>
+                                                <label for="petHeight" style="color: #15a4ff !important;"><i class="bi bi-align-middle"></i> Height</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="row g-1">
+                                        <div class="col-sm-6">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petSire" placeholder="Sire" value="{{ empty($pet->details->male_parent) ? 'Unspecified' : $pet->details->male_parent }}" readonly>
+                                                <label for="petSire" style="color: #15a4ff !important;"><i class="bi bi-brightness-high-fill"></i> Sire</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control w-100" id="petDam" placeholder="Dam" value="{{ empty($pet->details->female_parent) ? 'Unspecified' : $pet->details->female_parent }}" readonly>
+                                                <label for="petDam" style="color: #15a4ff !important;"><i class="bi bi-brightness-low-fill"></i> Dam</label>
+                                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mt-2">
+                                    <div class="pet-banner pet-banner-gallery position-relative w-100">
+                                        <img src="{{ asset('images/carl-burton-23.gif') }}" alt="Documents" class="pet-banner-image" style="opacity: 0.5; object-position: 50% 45%;">
+                                        <img src="{{ asset('images/mayor_icons_pdf.png') }}" alt="Documents" class="position-absolute start-50 top-50 translate-middle" style="width: 128px;">
+                                        <div class="pet-banner-title text-center">
+                                            <h6 style="color: #15a4ff; font-size: 24px;"><span class="outlined-text" style="color: white;"><i class="bi bi-folder"></i> Documents <span style="opacity: 0.33;">//</span> 335,230 files</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-container">
+                    <div class="row p-3">
+                        <div class="col-sm-12">
+                            <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
+                                <div class="pet-breed-background"></div>
+                                <div class="pet-breed-icon" style="top: -19px; left: 10px;">
+                                    <img src="{{ asset('images/mayor_icons_badge.png') }}" alt="Age Icon" width="64" height="64">
+                                </div>
+                                <h6 class="pet-breed-title">{{ empty($pet->details->animal_facility) ? 'No Animal Facility' : $pet->details->animal_facility }}</h6>
+                                <span class="pet-breed-tooltip">
+                                    {{ empty($pet->extra->animal_facility_location) ? $pet->pet_name . ' is not part of any animal facility' : $pet->extra->animal_facility_location }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="row g-1">
+                                <div class="col-sm-8">
+                                    <div class="form-floating position-relative">
+                                        <input type="text" class="form-control w-100" id="petOwner" placeholder="Pet Owner" value="{{ empty($pet->details->owner) ? 'Unspecified' : $pet->details->owner }}" readonly>
+                                        <label for="petOwner" style="color: #ffc400 !important;"><i class="bi bi-flower3"></i> Owner</label>
+                                        <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-secondary w-100 h-100"><i class="bi bi-facebook"></i></button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-secondary w-100 h-100"><i class="bi bi-twitter-x"></i></button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-secondary w-100 h-100"><i class="bi bi-globe2"></i></button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="button" class="btn btn-secondary w-100 h-100"><i class="bi bi-person-circle"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <div class="form-floating position-relative">
+                                <input type="text" class="form-control w-100" id="petCoOwner" placeholder="Pet Co-Owner" value="{{ empty($pet->details->co_owner) ? 'None' : $pet->details->co_owner }}" readonly>
+                                <label for="petCoOwner" style="color: #ffc400 !important;"><i class="bi bi-flower3"></i> Co-Owners (0)</label>
+                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <div class="pet-banner pet-banner-gallery w-100">
+                                <img src="{{ asset('images/steph.jpg') }}" alt="Certificates" class="pet-banner-image" style="object-position: 50% 18%;">
+                                <div class="pet-banner-title text-center">
+                                    <h6 style="color: #ffc400; font-size: 24px;"><span class="outlined-text" style="color: white;"><i class="bi bi-card-heading"></i> Certificates <span style="opacity: 0.33;">//</span> 8,114 records</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-container">
+                    <div class="row p-3">
+                        <div class="col-sm-12">
+                            <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
+                                <div class="pet-breed-background"></div>
+                                <div class="pet-breed-icon" style="top: -19px; left: 10px;">
+                                    <img src="{{ asset('images/mayor_icons_globe2.png') }}" alt="Age Icon" width="64" height="64">
+                                </div>
+                                <h6 class="pet-breed-title">{{ empty($pet->extra->_country) ? 'Unspecified' : $pet->extra->pet_location_country }}</h6>
+                                <span class="pet-breed-tooltip">
+                                    {{ empty($pet->details->pet_location) ? 'Unspecified address' : $pet->details->pet_location }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-3">
+                            <div class="pet-banner pet-banner-gallery w-100">
+                                <img src="{{ asset('images/location_philippines.png') }}" alt="Certificates" class="pet-banner-image" style="object-fit: contain;">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <div class="form-floating position-relative">
+                                <input type="text" class="form-control w-100" id="petMicrochip" placeholder="Pet Microchip" value="{{ empty($pet->details->microchip) ? 'None' : $pet->details->microchip }}" readonly>
+                                <label for="petMicrochip" style="color: #88bdf6 !important;"><i class="bi bi-check2-circle"></i> Microchip ID</label>
+                                <button type="button" class="btn btn-secondary position-absolute" style="top: 8px; right: 8px;">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 mt-2">
+                            <button type="button" class="btn btn-secondary w-100 h-100" style="font-size: 14px; padding: 10px;">
+                                <i class="bi bi-caret-right-fill"></i> View Medical Records
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="mt-3" style="width: 1000px; overflow-x: auto;">
                 <pre style="color: #fff; white-space: pre-wrap; word-wrap: break-word;">
