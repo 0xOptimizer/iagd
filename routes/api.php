@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
-
+use App\Http\Controllers\NydusLoungeLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +30,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/pets/name/{species}/{name}', [APIController::class, 'get_pet_profile_by_name'])->name('api.v1.pets.profile.name');
         Route::get('/pets/internal/{id}', [APIController::class, 'get_pet_profile_by_id'])->name('api.v1.pets.profile.id');
     });
+});
+
+Route::prefix('nydus')->group(function () {
+    Route::post('/callback', [NydusLoungeLinkController::class, 'callback'])->name('api.nydus.callback');
 });

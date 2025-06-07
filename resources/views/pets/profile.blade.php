@@ -49,7 +49,7 @@
                 <!-- <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button> -->
             </div>
             <div class="mt-3 d-grid gap-1" style="grid-template-columns: 50% 33.333% 16.667%;">
-                <div class="group-container">
+                <div class="profile-group-container">
                     <div class="row p-3">
                         <!-- Pet Details 1/2 -->
                         <div class="col-lg-6 col-sm-12">
@@ -248,7 +248,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="group-container">
+                <div class="profile-group-container">
                     <div class="row p-3">
                         <div class="col-sm-12">
                             <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
@@ -306,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="group-container">
+                <div class="profile-group-container">
                     <div class="row p-3">
                         <div class="col-sm-12">
                             <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">

@@ -816,7 +816,7 @@ main .card-hoverable:hover {
     }
 }
 
-.group-container {
+.profile-group-container {
     border-radius: 8px;
     border: 1px solid #312c57;
     background-color: rgba(0, 0, 0, 0.16);

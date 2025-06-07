@@ -11,6 +11,8 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Rest\PetController as RestPetController;
 use App\Http\Controllers\SessionController;
 
+use App\Http\Controllers\NydusLoungeLinkController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -203,3 +205,8 @@ Route::prefix('rest/v1')->group(function () {
     });
 });
 
+Route::prefix('nydus')->group(function () {
+    Route::prefix('poll')->group(function () {
+        Route::get('/', [NydusLoungeLinkController::class, 'poll'])->name('nydus.lounge.link.poll');
+    });
+});

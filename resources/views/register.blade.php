@@ -302,7 +302,7 @@
                 </div>
                 <div class="form-floating col-4" style="position: relative;">
                     <i class="bi bi-caret-left-fill" style="position: absolute; top: 25%; left: -15px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
-                    <a href="https://lounge.metaanimals.org/nydus/iagd-v2/initiate?key={{ strtoupper(uniqid() . '02-' . \Illuminate\Support\Str::random(48)) }}" target="_blank" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100 align-content-center"><i class="bi bi-link-45deg"></i> Link Lounge</a>
+                    <button type="button" class="pet-owner-link_lounge-btn btn btn-primary btn-lg w-100 h-100 align-content-center"><i class="bi bi-link-45deg"></i> Link Lounge</button>
                     <!-- <button type="button" class="btn btn-primary btn-lg w-100 h-100" data-bs-toggle="tooltip" data-bs-placement="top" title="This feature will be unlocked in a future update" disabled>
                         <i class="bi bi-lock-fill"></i> Link Lounge
                     </button> -->
@@ -2249,6 +2249,12 @@ $(document).ready(function() {
                 submitRegistration();
             }, 750);
         }, 750);
+    });
+
+    $('.pet-owner-link_lounge-btn').on('click', function(e) {
+        const baseUrl = window.location.hostname;
+        const url = `https://lounge.metaanimals.org/nydus/iagd-v2/initiate?token={{ strtoupper(uniqid() . '02-' . \Illuminate\Support\Str::random(48)) }}&callback=${encodeURIComponent(baseUrl)}`;
+        window.open(url, 'LoungePopup', 'width=480,height=640,resizable=no,scrollbars=no');
     });
 });
 </script>
