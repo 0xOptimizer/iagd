@@ -13,7 +13,7 @@ class NydusLoungeLinkController extends Controller
             'nydus_initiate_token' => 'required|string',
             'nydus_network_token' => 'required|string',
             'callback_url' => 'required|url',
-            'database_id' => 'required|string',
+            'database_id' => 'required|numeric',
             'user_uuid' => 'required|string',
         ]);
 
