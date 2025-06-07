@@ -206,7 +206,5 @@ Route::prefix('rest/v1')->group(function () {
 });
 
 Route::prefix('nydus')->group(function () {
-    Route::prefix('poll')->group(function () {
-        Route::get('/', [NydusLoungeLinkController::class, 'poll'])->name('nydus.lounge.link.poll');
-    });
+    Route::get('poll', [NydusLoungeLinkController::class, 'poll'])->name('nydus.lounge.link.poll');
 });

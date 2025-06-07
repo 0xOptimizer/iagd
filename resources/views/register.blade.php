@@ -577,6 +577,7 @@
 <script src="{{ asset('js/confetti.browser.min.js') }}"></script>
 <script>
 var hasPetImage = false;
+var ownerUUID = null;
 function page_1_continue_validate() {
     const petName = $('#pet-name').val();
     const petSpecies = $('#pet-species').val();
@@ -2251,10 +2252,98 @@ $(document).ready(function() {
         }, 750);
     });
 
+    let nydusLinkPollInterval = null;
+    let nydusLinkIsPolling = false;
+    let nydusLinkToken = null;
+    let nydusLinkIsLinked = false;
+
+    function generateNydusLinkToken(isRelink = false) {
+        const random = Math.random().toString(36).substr(2, 48).toUpperCase();
+        const unique = Date.now().toString(36).toUpperCase();
+        return `${unique}02-${random}${isRelink ? '-R' : ''}`;
+    }
+
+    function resetNydusLinkFields() {
+        $('#pet-owner').val('').prop('readonly', false);
+        $('#pet-co_owners').val('').prop('readonly', false);
+        $('#pet-owner_location').val('').prop('readonly', false);
+        $('#pet-owner_contact').val('').prop('readonly', false);
+        $('#pet-owner_email').val('').prop('readonly', false);
+    }
+
+    function stopNydusLinkPolling() {
+        clearInterval(nydusLinkPollInterval);
+        nydusLinkIsPolling = false;
+        nydusLinkPollInterval = null;
+    }
+
+    function startNydusLinkPolling(token, btn) {
+        if (nydusLinkIsPolling || nydusLinkPollInterval) return;
+
+        nydusLinkIsPolling = true;
+
+        function pollNydusLinkStatus() {
+            $.ajax({
+                url: `{{ route('nydus.lounge.link.poll') }}`,
+                method: 'GET',
+                data: {
+                    token: token
+                },
+                dataType: 'json',
+                timeout: 4000,
+                success: function(response) {
+                    if (!response?.success || !response.data) return;
+                    
+                    stopNydusLinkPolling();
+                    nydusLinkIsLinked = true;
+                    ownerUUID = response.data.user_uuid;
+                    
+                    $('#pet-owner').val(response.data.owner).prop('readonly', true);
+                    $('#pet-co_owners').val(response.data.co_owners).prop('readonly', true);
+                    $('#pet-owner_location').val(response.data.location).prop('readonly', true);
+                    $('#pet-owner_contact').val(response.data.contact).prop('readonly', true);
+                    $('#pet-owner_email').val(response.data.email).prop('readonly', true);
+                    
+                    btn.html('<i class="bi bi-unlink"></i> Unlink');
+                    btn.prop('disabled', false);
+                },
+                error: function(xhr, status) {
+                    if (status === 'timeout' || xhr.status >= 500) {
+                        console.debug('[nydusLink] Poll error:', status);
+                    }
+                }
+            });
+        }
+
+        nydusLinkPollInterval = setInterval(pollNydusLinkStatus, 3000);
+        pollNydusLinkStatus();
+    }
+
     $('.pet-owner-link_lounge-btn').on('click', function(e) {
+        e.preventDefault();
+        const btn = $(this);
+
+        if (nydusLinkIsPolling) return;
+
+        if (nydusLinkIsLinked) {
+            resetNydusLinkFields();
+            stopNydusLinkPolling();
+            ownerUUID = null;
+            nydusLinkToken = generateNydusLinkToken(true);
+            nydusLinkIsLinked = false;
+            btn.html('<i class="bi bi-link-45deg"></i> Link Lounge');
+            return;
+        }
+
+        nydusLinkToken = generateNydusLinkToken();
         const baseUrl = window.location.hostname;
-        const url = `https://lounge.metaanimals.org/nydus/iagd-v2/initiate?token={{ strtoupper(uniqid() . '02-' . \Illuminate\Support\Str::random(48)) }}&callback=${encodeURIComponent(baseUrl)}`;
-        window.open(url, 'LoungePopup', 'width=480,height=640,resizable=no,scrollbars=no');
+        const linkUrl = `https://lounge.metaanimals.org/nydus/iagd-v2/initiate?token=${nydusLinkToken}&callback=${encodeURIComponent(baseUrl)}`;
+        window.open(linkUrl, 'LoungePopup', 'width=480,height=640,resizable=no,scrollbars=no');
+
+        btn.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Linking...`);
+        btn.prop('disabled', true);
+
+        startNydusLinkPolling(nydusLinkToken, btn);
     });
 });
 </script>

@@ -12,7 +12,7 @@ class NydusLoungeLinkController extends Controller
         $validated = $request->validate([
             'nydus_initiate_token' => 'required|string',
             'nydus_network_token' => 'required|string',
-            'callback_url' => 'required|url',
+            'callback_url' => 'required|string',
             'database_id' => 'required|numeric',
             'user_uuid' => 'required|string',
         ]);
@@ -27,8 +27,10 @@ class NydusLoungeLinkController extends Controller
         }
     }
 
-    public function poll($initiateToken)
+    public function poll(Request $request)
     {
+        $initiateToken = $request->query('token');
+
         if (empty($initiateToken)) {
             return response()->json(['success' => false, 'message' => 'Initiate token is required'], 400);
         }
@@ -36,7 +38,7 @@ class NydusLoungeLinkController extends Controller
         $record = NydusLoungeLink::where('nydus_initiate_token', $initiateToken)->first();
 
         if (!$record) {
-            return response()->json(['success' => false, 'message' => 'Data not yet found.'], 404);
+            return response()->json(['success' => false, 'message' => 'Data unavailable or expired.'], 404);
         }
 
         try {
