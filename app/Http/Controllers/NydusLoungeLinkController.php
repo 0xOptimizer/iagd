@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\NydusLoungeLink;
 
 class NydusLoungeLinkController extends Controller
@@ -31,21 +32,41 @@ class NydusLoungeLinkController extends Controller
     {
         $initiateToken = $request->query('token');
 
-        if (empty($initiateToken)) {
-            return response()->json(['success' => false, 'message' => 'Initiate token is required'], 400);
+        if (!is_string($initiateToken) || trim($initiateToken) === '') {
+            return response()->json(['success' => false, 'message' => 'Valid initiate token is required'], 400);
         }
 
-        $record = NydusLoungeLink::where('nydus_initiate_token', $initiateToken)->first();
+        $query = NydusLoungeLink::where('nydus_initiate_token', $initiateToken)->limit(2);
+        $records = $query->get();
 
-        if (!$record) {
-            return response()->json(['success' => false, 'message' => 'Data unavailable or expired.'], 404);
+        if ($records->count() !== 1) {
+            return response()->json(['success' => false, 'message' => 'Data unavailable, expired, or data integrity issue.'], 404);
         }
+
+        $record = $records->first();
+
+        DB::beginTransaction();
 
         try {
-            $record->delete();
-            return response()->json(['success' => true, 'data' => $record], 200);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+            if (!$record || !$record instanceof NydusLoungeLink) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => 'Record invalid or already deleted.'], 404);
+            }
+
+            $recordData = $record->toArray();
+
+            $deleted = $record->delete();
+
+            if (!$deleted) {
+                DB::rollBack();
+                return response()->json(['success' => false, 'message' => 'Deletion failed'], 500);
+            }
+
+            DB::commit();
+            return response()->json(['success' => true, 'data' => $recordData], 200);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => 'Unexpected error', 'details' => $e->getMessage()], 500);
         }
     }
 }
