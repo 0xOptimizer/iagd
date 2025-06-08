@@ -36,37 +36,19 @@ class NydusLoungeLinkController extends Controller
             return response()->json(['success' => false, 'message' => 'Valid initiate token is required'], 400);
         }
 
-        $query = NydusLoungeLink::where('nydus_initiate_token', $initiateToken)->limit(2);
-        $records = $query->get();
+        $record = NydusLoungeLink::where('nydus_initiate_token', $initiateToken)->first();
 
-        if ($records->count() !== 1) {
-            return response()->json(['success' => false, 'message' => 'Data unavailable, expired, or data integrity issue.'], 404);
+        if (!$record) {
+            return response()->json(['success' => false, 'message' => 'Data unavailable or expired.'], 404);
         }
 
-        $record = $records->first();
+        $now = now();
+        $createdAt = $record->created_at ?? $record->updated_at;
 
-        DB::beginTransaction();
-
-        try {
-            if (!$record || !$record instanceof NydusLoungeLink) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => 'Record invalid or already deleted.'], 404);
-            }
-
-            $recordData = $record->toArray();
-
-            $deleted = $record->delete();
-
-            if (!$deleted) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'message' => 'Deletion failed'], 500);
-            }
-
-            DB::commit();
-            return response()->json(['success' => true, 'data' => $recordData], 200);
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            return response()->json(['success' => false, 'error' => 'Unexpected error', 'details' => $e->getMessage()], 500);
+        if (!$createdAt || $now->diffInSeconds($createdAt) > 180) {
+            return response()->json(['success' => false, 'message' => 'Token expired.'], 404);
         }
+
+        return response()->json(['success' => true, 'data' => $record], 200);
     }
 }

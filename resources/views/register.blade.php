@@ -2256,13 +2256,14 @@ $(document).ready(function() {
     let nydusLinkIsPolling = false;
     let nydusLinkToken = null;
     let nydusLinkIsLinked = false;
-
+    let isPollingRequestPending = false;
+    
     function generateNydusLinkToken(isRelink = false) {
         const random = Math.random().toString(36).substr(2, 48).toUpperCase();
         const unique = Date.now().toString(36).toUpperCase();
         return `${unique}02-${random}${isRelink ? '-R' : ''}`;
     }
-
+    
     function resetNydusLinkFields() {
         $('#pet-owner').val('').prop('readonly', false);
         $('#pet-co_owners').val('').prop('readonly', false);
@@ -2270,19 +2271,23 @@ $(document).ready(function() {
         $('#pet-owner_contact').val('').prop('readonly', false);
         $('#pet-owner_email').val('').prop('readonly', false);
     }
-
+    
     function stopNydusLinkPolling() {
         clearInterval(nydusLinkPollInterval);
         nydusLinkIsPolling = false;
         nydusLinkPollInterval = null;
+        isPollingRequestPending = false;
     }
-
+    
     function startNydusLinkPolling(token, btn) {
         if (nydusLinkIsPolling || nydusLinkPollInterval) return;
-
+        
         nydusLinkIsPolling = true;
-
+        
         function pollNydusLinkStatus() {
+            if (isPollingRequestPending) return;
+            isPollingRequestPending = true;
+            
             $.ajax({
                 url: `{{ route('nydus.lounge.link.poll') }}`,
                 method: 'GET',
@@ -2291,6 +2296,9 @@ $(document).ready(function() {
                 },
                 dataType: 'json',
                 timeout: 4000,
+                complete: function() {
+                    isPollingRequestPending = false;
+                },
                 success: function(response) {
                     if (!response?.success || !response.data) return;
                     
@@ -2298,11 +2306,33 @@ $(document).ready(function() {
                     nydusLinkIsLinked = true;
                     ownerUUID = response.data.user_uuid;
                     
-                    $('#pet-owner').val(response.data.owner).prop('readonly', true);
-                    $('#pet-co_owners').val(response.data.co_owners).prop('readonly', true);
-                    $('#pet-owner_location').val(response.data.location).prop('readonly', true);
-                    $('#pet-owner_contact').val(response.data.contact).prop('readonly', true);
-                    $('#pet-owner_email').val(response.data.email).prop('readonly', true);
+                    let first = response.data.first_name || '';
+                    let middle = response.data.middle_name || '';
+                    let last = response.data.last_name || '';
+
+                    let middleInitial = middle ? `${middle.charAt(0)}.` : '';
+
+                    let parts = [];
+
+                    if (first) parts.push(first);
+                    else if (middleInitial) parts.push(middleInitial);
+
+                    if (middleInitial && first) parts.push(middleInitial);
+
+                    if (last) parts.push(last);
+
+                    let fullName = parts.join(' ').trim();
+
+                    $('#pet-owner').val(fullName);
+                    // $('#pet-co_owners').val(response.data.co_owners);
+                    $('#pet-owner_location').val(response.data.address);
+                    $('#pet-owner_contact').val(response.data.contact_number);
+                    $('#pet-owner_email').val(response.data.email_address);
+
+                    animateShine($('#pet-owner').parent('.form-floating'));
+                    animateShine($('#pet-owner_location').parent('.form-floating'));
+                    animateShine($('#pet-owner_contact').parent('.form-floating'));
+                    animateShine($('#pet-owner_email').parent('.form-floating'));
                     
                     btn.html('<i class="bi bi-unlink"></i> Unlink');
                     btn.prop('disabled', false);
@@ -2314,17 +2344,17 @@ $(document).ready(function() {
                 }
             });
         }
-
+        
         nydusLinkPollInterval = setInterval(pollNydusLinkStatus, 3000);
         pollNydusLinkStatus();
     }
-
+    
     $('.pet-owner-link_lounge-btn').on('click', function(e) {
         e.preventDefault();
         const btn = $(this);
-
+        
         if (nydusLinkIsPolling) return;
-
+        
         if (nydusLinkIsLinked) {
             resetNydusLinkFields();
             stopNydusLinkPolling();
@@ -2334,15 +2364,15 @@ $(document).ready(function() {
             btn.html('<i class="bi bi-link-45deg"></i> Link Lounge');
             return;
         }
-
+        
         nydusLinkToken = generateNydusLinkToken();
         const baseUrl = window.location.hostname;
         const linkUrl = `https://lounge.metaanimals.org/nydus/iagd-v2/initiate?token=${nydusLinkToken}&callback=${encodeURIComponent(baseUrl)}`;
         window.open(linkUrl, 'LoungePopup', 'width=480,height=640,resizable=no,scrollbars=no');
-
+        
         btn.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Linking...`);
         btn.prop('disabled', true);
-
+        
         startNydusLinkPolling(nydusLinkToken, btn);
     });
 });

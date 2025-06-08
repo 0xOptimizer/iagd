@@ -11,6 +11,7 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\Rest\PetController as RestPetController;
 use App\Http\Controllers\SessionController;
 
+use App\Http\Controllers\CallbacksController;
 use App\Http\Controllers\NydusLoungeLinkController;
 
 /*
@@ -207,4 +208,8 @@ Route::prefix('rest/v1')->group(function () {
 
 Route::prefix('nydus')->group(function () {
     Route::get('poll', [NydusLoungeLinkController::class, 'poll'])->name('nydus.lounge.link.poll');
-});
+}); 
+
+Route::prefix('callback')->group(function () {
+    Route::get('nydus', [CallbacksController::class, 'lounge_link'])->name('callbacks.nydus.lounge_link');
+}); 
