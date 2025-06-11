@@ -24,7 +24,19 @@
             <div class="iagd-circle-07"></div>
         </div>
         <div class="mt-5">
-            <div class="image-container text-center">
+            <div class="image-container text-center position-relative">
+                <div class="circle-text pet-profile-iagd_number position-absolute" style="top: 0px; left: 0px;">
+                    <svg viewBox="0 0 200 200" width="192" height="192" style="display: block;">
+                        <defs>
+                            <path id="circlePath" d="M 100,100 m -60,0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"/>
+                        </defs>
+                        <text dy="-5" fill="#333" font-size="14" text-anchor="middle">
+                            <textPath xlink:href="#circlePath" startOffset="15%">
+                                {{ $pet->details->iagd_number }}
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
                 @php
                     $file = $pet->files->first();
                 @endphp
@@ -34,22 +46,70 @@
                     <img src="{{ asset('uploads/pets/default.png') }}" class="rounded-circle" alt="Default Image" width="192" height="192">
                 @endif
             </div>
-            <div class="mt-3 text-center">
+            <div class="mt-3 text-center position-relative">
                 <h1 class="h1wrap">
-                    <span class="text-gradient-primary">{{ $pet->pet_name }}</span>
+                    <span class="pet-profile-name text-gradient-primary" style="z-index: 2;">{{ $pet->pet_name }}</span>
                 </h1>
+                <h1 class="h1wrap position-absolute" style="top: 28px; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+                    <span style="color: black; opacity: 0.5; font-weight: bold;">{{ $pet->pet_name }}</span>
+                </h1>
+                <h2 class="phrases"></h2>
             </div>
-            <div class="pet-tabs-container text-center justify-content-center mt-3">
-                <button class="pet-tab btn @if(!request()->has('tab') || request()->get('tab') == 'details') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-info-circle"></i> Details</button>
+            <!-- <div class="pet-tabs-container text-center justify-content-center mt-3">
+                <button class="pet-tab btn @if(!request()-> has('tab') || request()->get('tab') == 'details') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-info-circle"></i> Details</button>
                 <button class="pet-tab btn @if(request()->get('tab') == 'pedigree') btn-primary @else btn-secondary @endif" style="width: 130px;"></i><i class="bi bi-diagram-2"></i> Pedigree</button>
                 <button class="pet-tab btn @if(request()->get('tab') == 'gallery') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-images"></i> Gallery</button>
-                <button class="pet-tab btn @if(request()->get('tab') == 'documents') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-stack"></i> Documents</button>
+                <button class="pet-tab btn @if(request()->get('tab') == 'documents') btn-primary @else btn-secondary @endif" style="width: 130px;"><i class="bi bi-stack"></i> Comments</button>
                 <button class="pet-tab btn @if(request()->get('tab') == 'settings') btn-primary @else btn-secondary @endif"><i class="bi bi-gear"></i></button>
                 <button class="pet-tab btn @if(request()->get('tab') == 'export') btn-primary @else btn-secondary @endif"><i class="bi bi-file-earmark-arrow-down"></i></button>
-                <!-- <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button> -->
+                <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button>
+            </div> -->
+            <div class="pet-interactives-container d-flex justify-content-between w-100 align-items-center">
+                <!-- Left group -->
+                <div class="text-start">
+                    <button id="pet-like-btn" class="pet-interact btn btn-secondary align-content-center position-relative" data-value="like" data-active="false" data-icon-default="{{ asset('images/mayor_icons_like.png') }}" data-icon-active="{{ asset('images/mayor_icons_like_white.png') }}">
+                        <img src="{{ asset('images/mayor_icons_like_white.png') }}" class="position-absolute" style="width: 28px; height: 28px; left: 7px; top: 1px;">
+                        <span class="pet-interact-count">0</span>
+                    </button>
+                    <button id="pet-favorite-btn" class="pet-interact btn btn-secondary align-content-center position-relative" data-value="favorite" data-active="false" data-icon-default="{{ asset('images/mayor_icons_heart.png') }}" data-icon-active="{{ asset('images/mayor_icons_heart_white.png') }}">
+                        <img src="{{ asset('images/mayor_icons_heart_white.png') }}" class="position-absolute" style="width: 28px; height: 28px; left: 7px; top: 1px;">
+                        <span class="pet-interact-count">0</span>
+                    </button>
+                    <button id="pet-chat-btn" class="pet-interact-passive btn btn-secondary align-content-center position-relative">
+                        <img src="{{ asset('images/mayor_icons_chat_white.png') }}" class="position-absolute" style="width: 28px; height: 28px; left: 7px; top: 1px;">
+                        <span class="pet-interact-count">0</span>
+                    </button>
+                </div>
+
+                <!-- Middle group (hidden on small screens) -->
+                <div class="text-center">
+                    <div class="d-none d-md-block">
+                        <span class="badge bg-primary">Adopted</span>
+                        <span class="badge bg-success">Vaccinated</span>
+                        <span class="badge bg-warning">Neutered</span>
+                    </div>
+                    <div class="d-block d-md-none">
+                        <span class="badge bg-primary">Adopted</span>
+                        <span class="badge bg-success">Vaccinated</span>
+                        <span class="badge bg-warning">Neutered</span>
+                    </div>
+                </div>
+
+                <!-- Right group (hidden on small screens) -->
+                <div class="d-none d-md-block text-end">
+                    <span class="badge bg-info">Microchipped</span>
+                    <span class="badge bg-light">Special Needs</span>
+                </div>
+
+                <!-- Cog button (only on small screens) -->
+                <div class=" text-end">
+                    <button class="btn btn-secondary" id="pet-options-btn">
+                        <i class="bi bi-gear-fill"></i>
+                    </button>
+                </div>
             </div>
-            <div class="mt-3 d-grid gap-1" style="grid-template-columns: 50% 33.333% 16.667%;">
-                <div class="profile-group-container">
+            <div class="mt-1 profile-group-container-grid">
+                <div class="profile-group-container" style="display: none;">
                     <div class="row p-3">
                         <!-- Pet Details 1/2 -->
                         <div class="col-lg-6 col-sm-12">
@@ -237,7 +297,7 @@
                                 </div>
                                 <div class="col-sm-12 mt-2">
                                     <div class="pet-banner pet-banner-gallery position-relative w-100">
-                                        <img src="{{ asset('images/carl-burton-23.gif') }}" alt="Documents" class="pet-banner-image" style="opacity: 0.5; object-position: 50% 45%;">
+                                        <img src="{{ asset('images/carl_burton_23_blue.gif') }}" alt="Documents" class="pet-banner-image" style="opacity: 0.5; object-position: 50% 45%;">
                                         <img src="{{ asset('images/mayor_icons_pdf.png') }}" alt="Documents" class="position-absolute start-50 top-50 translate-middle" style="width: 128px;">
                                         <div class="pet-banner-title text-center">
                                             <h6 style="color: #15a4ff; font-size: 24px;"><span class="outlined-text" style="color: white;"><i class="bi bi-folder"></i> Documents <span style="opacity: 0.33;">//</span> 335,230 files</span></h6>
@@ -248,7 +308,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-group-container">
+                <div class="profile-group-container" style="display: none;">
                     <div class="row p-3">
                         <div class="col-sm-12">
                             <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
@@ -306,7 +366,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-group-container">
+                <div class="profile-group-container" style="display: none;">
                     <div class="row p-3">
                         <div class="col-sm-12">
                             <div class="pet-breed-container btn btn-secondary" data-link="https://www.tiktok.com/@DocAbelManaloOfficial/">
@@ -321,7 +381,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 mt-3">
-                            <div class="pet-banner pet-banner-gallery w-100">
+                            <div class="pet-banner pet-banner-gallery w-100 map-ripple" style="height: 360px;">
                                 <img src="{{ asset('images/location_philippines.png') }}" alt="Certificates" class="pet-banner-image" style="object-fit: contain;">
                             </div>
                         </div>
@@ -342,7 +402,52 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-3" style="width: 1000px; overflow-x: auto;">
+            @php
+                $images = $pet->files->where('file_type', 'image')->take(15)->values();
+            @endphp
+
+            <!-- <div class="mt-3 d-grid gap-1" style="grid-template-columns: repeat(5, 1fr);">
+                @foreach($images as $image)
+                    <div>
+                        <img src="{{ asset('storage/' . $image->file_path) }}" style="width: 100%; height: auto;" alt="">
+                    </div>
+                @endforeach
+            </div> -->
+
+            @php
+                $total = min(7, 15);
+                $perRow = 5;
+                $fullRows = intdiv($total, $perRow);
+                $remainder = $total % $perRow;
+            @endphp
+
+            <div class="mt-3">
+                @for ($i = 0; $i < $fullRows * $perRow; $i++)
+                    @if ($i % $perRow === 0)
+                        <div class="pet-profile-gallery-grid">
+                    @endif
+
+                    <div>
+                        <img src="{{ asset('images/iagd-container-cat-raw.png') }}" style="width: 100%; height: 360px; object-fit: cover;" alt="">
+                    </div>
+
+                    @if ($i % $perRow === $perRow - 1)
+                        </div>
+                    @endif
+                @endfor
+
+                @if ($remainder > 0)
+                    <div class="pet-profile-gallery-grid-last" style="grid-template-columns: repeat({{ $remainder }}, 1fr);">
+                        @for ($i = 0; $i < $remainder; $i++)
+                            <div>
+                                <img src="{{ asset('images/iagd-container-cat-raw.png') }}" style="width: 100%; height: 360px; object-fit: cover;" alt="">
+                            </div>
+                        @endfor
+                    </div>
+                @endif
+            </div>
+
+            <div class="mt-3" style="width: 100%; overflow-x: auto;">
                 <pre style="color: #fff; white-space: pre-wrap; word-wrap: break-word;">
                     {{ $pet }}
                 </pre>
@@ -350,6 +455,8 @@
         </div>
     </main>
 </body>
+<!-- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
 <script>
 $(document).ready(function() {
@@ -392,27 +499,156 @@ $(document).ready(function() {
         }
     });
 
-    $('.h1wrap').each(function(){
-        $(this).find("h1").html( $(this).find("h1").html().replace(/./g, "<span>$&</span>").replace(/\s/g, "&nbsp;"));
+    // $('.h1wrap').each(function(){
+    //     $(this).find("h1").html( $(this).find("h1").html().replace(/./g, "<span>$&</span>").replace(/\s/g, "&nbsp;"));
+    // });;
+
+    $('.profile-group-container').show();
+    TweenMax.staggerFrom(".profile-group-container", 0.4, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06);
+
+    // setTimeout(function() { 
+    //     animateScramble('.pet-profile-name');
+    // }, 300);
+
+    // var map = L.map('map', {
+    //     zoomControl: false,
+    //     attributionControl: false
+    // }).setView([37.422, -122.084], 16);
+
+    // L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    //     maxZoom: 19,
+    //     subdomains: 'abcd'
+    // }).addTo(map);
+
+    $(document).on('click', '.pet-interact', function () {
+        const $btn = $(this);
+        const isActive = $btn.attr('data-active') === 'true';
+        let count = parseInt($btn.find('span.pet-interact-count').text(), 10) || 0;
+
+        if (isActive) {
+            // Switch to INACTIVE state
+            $btn.attr('data-active', 'false')
+                .removeClass('btn-primary').addClass('btn-secondary')
+                .find('img').attr('src', $btn.attr('data-icon-active'))
+                .css({ width: '28px', height: '28px', left: '7px', top: '1px' });
+
+            $btn.find('span.pet-interact-count').removeClass('text-gradient-golden');
+
+            count -= 1;
+            $btn.find('span.pet-interact-count').text(count);
+        } else {
+            // Switch to ACTIVE state
+            $btn.attr('data-active', 'true')
+                .removeClass('btn-secondary').addClass('btn-primary')
+                .find('img').attr('src', $btn.attr('data-icon-default'))
+                .css({ width: '35px', height: '35px', left: '-1px', top: '-2px' });
+
+            $btn.find('span.pet-interact-count').addClass('text-gradient-golden');
+
+            count += 1
+            $btn.find('span.pet-interact-count').text(count);
+
+            $btn.floatingText({
+                text: '+1',
+                color: '#fff',
+                backgroundColor: 'transparent',
+                fontSize: '14px',
+                duration: 1500,
+                floatDistance: 40
+            });
+        }
     });
 
-    function introOpen(){  
-      //Using ex. transform:"translate3d(x,x,x)" instead of (y:__) or (top:__) to maintain vh or em units responsiveness
-    //   TweenMax.staggerFrom("h1 > span", 1.2, {opacity:0, transform: "translateY(16vh) scaleY(-0.382)", transformOrigin:'50% 20%', ease:Expo.easeOut, force3D: true},0.035)
-      
-    //   TweenMax.from("h1", 3.6, {transform: "translateY(16vh)", ease:Expo.easeOut, force3D: true})
-      $('.nucleobase').show();
-      $('.skeleton').show();
-      TweenMax.staggerFrom(".nucleobase", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.06)
-      TweenMax.staggerFrom(".skeleton", 0.5, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
-    };
+    // Preload
+    const sources = [
+        '{{ asset("images/mayor_icons_like.png") }}',
+        '{{ asset("images/mayor_icons_like_white.png") }}',
+        '{{ asset("images/mayor_icons_heart.png") }}',
+        '{{ asset("images/mayor_icons_heart_white.png") }}',
+        '{{ asset("images/mayor_icons_fire_white.png") }}'
+    ];
 
-    function afterLoading(){  
-        $('.iagd-containers .card').show();
-        TweenMax.staggerFrom(".iagd-containers .card", 0.4, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0.333, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true},0.04)
-    };
-  
-    introOpen();
+    for (let src of sources) {
+        const img = new Image();
+        img.src = src;
+    }
 });
+
+class TextScramble {
+    constructor(el) {
+        this.el = el
+        this.chars = '!<>-_\\/[]{}—=+*^?#________'
+        this.update = this.update.bind(this)
+    }
+    setText(newText) {
+        const oldText = this.el.innerText
+        const length = Math.max(oldText.length, newText.length)
+        const promise = new Promise((resolve) => this.resolve = resolve)
+        this.queue = []
+        for (let i = 0; i < length; i++) {
+            const from = oldText[i] || ''
+            const to = newText[i] || ''
+            const start = Math.floor(Math.random() * 40)
+            const end = start + Math.floor(Math.random() * 40)
+            this.queue.push({ from, to, start, end })
+        }
+        cancelAnimationFrame(this.frameRequest)
+        this.frame = 0
+        this.update()
+        return promise
+    }
+    update() {
+        let output = ''
+        let complete = 0
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+            let { from, to, start, end, char } = this.queue[i]
+            if (this.frame >= end) {
+                complete++
+                output += to
+            } else if (this.frame >= start) {
+                if (!char || Math.random() < 0.28) {
+                    char = this.randomChar()
+                    this.queue[i].char = char
+                }
+                output += `<span class="dud">${char}</span>`
+            } else {
+                output += from
+            }
+        }
+        this.el.innerHTML = output
+        if (complete === this.queue.length) {
+            this.resolve()
+        } else {
+            this.frameRequest = requestAnimationFrame(this.update)
+            this.frame++
+        }
+    }
+    randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)]
+    }
+}
+
+function animateScramble(selector) {
+    const el = document.querySelector(selector)
+    if (!el) return
+    const finalText = el.textContent
+    const fx = new TextScramble(el)
+    fx.setText(finalText)
+}
+
+function circularText(txt, radius, classIndex) {
+    txt = txt.split(""),
+    classIndex = document.getElementsByClassName("circle-text")[classIndex];
+    
+    var deg = 360 / txt.length,
+    origin = 0;
+    
+    txt.forEach((ea) => {
+        ea = `<p style='height:${radius}px;position:absolute;transform:rotate(${origin}deg);transform-origin:0 100%'>${ea}</p>`;
+        classIndex.innerHTML += ea;
+        origin += deg;
+    });
+}
+
 </script>
 </html>

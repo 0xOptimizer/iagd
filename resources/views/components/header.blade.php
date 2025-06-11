@@ -21,5 +21,6 @@
 @endif
 <link href="{{ asset('css/helix.css') }}" rel="stylesheet">
 <link href="{{ asset('css/factory-loader.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> 
 
 @include('components.scripts')

@@ -623,6 +623,7 @@ function submitRegistration() {
     formData.append('colors_body', $('#pet-color_body').val() || '');
     formData.append('markings', $('#pet-markings').val() || '');
     formData.append('pet_location', $('#pet-address').val() || '');
+    formData.append('owner_uuid', ownerUUID);
     formData.append('owner', $('#pet-owner').val() || '');
     formData.append('co_owners', $('#pet-co_owners').val() || '');
     formData.append('owner_location', $('#pet-owner_location').val() || '');

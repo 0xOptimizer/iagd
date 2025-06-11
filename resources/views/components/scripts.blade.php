@@ -229,7 +229,8 @@ function getRandomResponse(species) {
                     whiteSpace: "nowrap",
                     zIndex: 9999,
                     opacity: 1,
-                    transition: `transform ${settings.duration / 1000}s ease-out, opacity ${settings.duration / 1000}s ease-out`
+                    transition: `transform ${settings.duration / 1000}s ease-out, opacity ${settings.duration / 1000}s ease-out`,
+                    pointerEvents: 'none'
                 }
             }).appendTo("body");
 

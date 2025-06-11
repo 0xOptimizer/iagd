@@ -7,7 +7,7 @@
 <body>
 <div class="phone-container">
     <!-- Success (if &return=true) -->
-    @if (request()->get('return') == 'true')
+    @if (request()->get('return') == 'success')
     <div class="wrapper row text-center mt-5" style="display: none;">
         <div>
             <h1 class="text-success" style="font-size: 48px;"><i class="bi bi-check2-circle"></i> Success!</h1>
@@ -19,7 +19,7 @@
             <span>You may now close this window.</span>
         </div>
         <div class="mt-2 mb-4">
-            <a href="https://www.facebook.com/icgdpage" class="btn btn-primary me-2" onclick="window.close();">Problem? Message us via <i class="bi bi-messenger" style="vertical-align: 0px;"></i> Messenger</a>
+            <a href="https://www.facebook.com/icgdpage" class="btn btn-primary me-2">Problem? Message us via <i class="bi bi-messenger" style="vertical-align: 0px;"></i> Messenger</a>
         </div>
         <hr class="my-4">
         <div class="mt-4">
@@ -39,7 +39,7 @@
             <span class="font-size: 16px;">Please try again later.</span>
         </div>
         <div class="mt-2 mb-4">
-            <a href="https://www.facebook.com/icgdpage" class="btn btn-primary me-2" onclick="window.close();">Problem? Message us via <i class="bi bi-messenger" style="vertical-align: 0px;"></i> Messenger</a>
+            <a href="https://www.facebook.com/icgdpage" class="btn btn-primary me-2">Problem? Message us via <i class="bi bi-messenger" style="vertical-align: 0px;"></i> Messenger</a>
         </div>
         <hr class="my-4">
         <div class="mt-4">
