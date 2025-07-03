@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->text('co_owner_uuid')->nullable();
             $table->text('pet_location')->nullable();
             $table->text('owner_location')->nullable();
+            $table->string('owner_contact')->nullable();
+            $table->string('owner_email')->nullable();
             $table->string('breeder')->nullable();
             $table->string('animal_facility')->nullable();
             $table->string('animal_facility_uuid')->nullable();
@@ -38,6 +40,7 @@ return new class extends Migration {
             $table->string('height')->nullable();
             $table->string('icgd_number')->nullable();
             $table->string('link')->nullable();
+            $table->string('microchip_number')->nullable()->comment('any ISO format');
             $table->string('male_parent')->nullable()->comment('if no uuid');
             $table->string('male_parent_uuid')->nullable();
             $table->string('male_parent_breed')->nullable()->comment('if no uuid');
@@ -45,6 +48,16 @@ return new class extends Migration {
             $table->string('female_parent_uuid')->nullable();
             $table->string('female_parent_breed')->nullable()->comment('if no uuid');
             $table->string('display_status')->nullable();
+        });
+
+        Schema::create('pets_breed_mix', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('uuid')->unique();
+            $table->string('breed');
+            $table->decimal('percentage', 10, 9);
+            $table->string('source')->nullable();
+            $table->unsignedInteger('rank_order')->nullable();
+            $table->timestamps();
         });
 
         Schema::create('pets_meta', function (Blueprint $table) {

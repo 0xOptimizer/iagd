@@ -64,8 +64,6 @@ hr {
 	height: 100vh;
 	background-color: rgba(214, 167, 255, 0.05);
      color: rgba(231, 231, 231, 1);
-	padding-left: 20px;
-	padding-right: 20px;
 	position: relative;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -116,6 +114,10 @@ background-color: #170e2d;
 color: #312c57;
 }
 
+.form-control::placeholder {
+	color: #312c57;
+}
+
 .form-floating label {
 	color: #fff !important;
 }
@@ -132,6 +134,10 @@ color: #312c57;
 }
 .group-container {
 	--animate-duration: 0.24s;
+}
+.group-containers {
+	padding-left: 20px;
+	padding-right: 20px;
 }
 .animate__durationExcluded {
 	--animate-duration: 1s !important;
@@ -189,6 +195,11 @@ color: #312c57;
     background-color: rgba(49, 44, 87, 0.75);
     border: 2px solid transparent;
     border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
+.btn-secondary:active, .btn-secondary:focus, .btn-secondary:focus-visible {
+    background-color: #333052 !important;
+    border-color: #333052 !important;
 }
 
 .btn-outline-primary {
@@ -405,8 +416,8 @@ select.form-control option {
 .phone-container .navbar {
 	padding: 4px 16px;
 	backdrop-filter: blur(16px); /* Apply blur effect to the background */
-	width: calc(100% + 40px);
-	margin-left: -20px;
+	width: 100%;
+	margin-left: 0px;
 	margin-top: 0px;
 	margin-bottom: 20px;
 	border-bottom: 1px solid #312c57;
@@ -465,6 +476,12 @@ select.form-control option {
 	color: #fff;
 }
 
+.input-group-text {
+	background-color: rgba(0, 0, 0, 0.16);
+    color: white;
+    border: 1px solid #1d152d;
+}
+
 .input-interactable-readonly {
 	transition: background-color 0.3s ease;
 }
@@ -480,6 +497,35 @@ select.form-control option {
 	transition: transform 0.16s ease-in-out; !important
 }
 
+.offcanvas:before {
+    content: '';
+    background: linear-gradient(45deg, #9d00ff, #6a00ff, #2b00ff, #0084ff, #00ffd5, #002bff, #7a00ff, #ff00c8, #9d00ff);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.offcanvas:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+	/* background: #19123a; */
+    left: 0;
+    top: 0;
+}
+
 .offcanvas-backdrop {
 	background-color: transparent;
 }
@@ -487,6 +533,7 @@ select.form-control option {
 .offcanvas-backdrop.show {
 	opacity: 1;
 	backdrop-filter: blur(16px);
+	background-color: rgba(0, 0, 0, 0.33);
 }
 
 main .card {
@@ -694,6 +741,40 @@ main .card-hoverable:hover {
 }
 
 .glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background: transparent; */
+	background: #19123a;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+.glow-gradient {
+    position: relative;
+}
+
+.glow-gradient:before {
+    content: '';
+    background: linear-gradient(45deg, #9d00ff, #6a00ff, #2b00ff, #0084ff, #00ffd5, #002bff, #7a00ff, #ff00c8, #9d00ff);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 1;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-gradient:after {
     z-index: -1;
     content: '';
     position: absolute;
@@ -1023,4 +1104,130 @@ main .card-hoverable:hover {
 	display: block;
     font-size: 14px;
     margin-top: 0px;
+}
+
+.iagd-badge {
+	border: 1px solid;
+	border-radius: 128px;
+	height: 35px;
+	align-content: center;
+	padding: 8px;
+	font-family: 'Roboto';
+	font-size: 13px;
+}
+
+.iagd-badge-premium {
+	--badge-color: rgba(255, 192, 203, 1);
+	--badge-color-border: rgba(255, 192, 203, 0.12);
+	--badge-color-background: rgba(255, 192, 203, 0.08);
+
+	border-color: var(--badge-color-border);
+	color: var(--badge-color);
+	background-color: var(--badge-color-background);
+}
+
+.iagd-badge-early_member {
+	--badge-color: rgb(192, 255, 200);
+	--badge-color-border: rgba(192, 255, 200, 0.12);
+	--badge-color-background: rgba(192, 255, 200, 0.08);
+
+	border-color: var(--badge-color-border);
+	color: var(--badge-color);
+	background-color: var(--badge-color-background);
+}
+
+.iagd-badge-join_date {
+	--badge-color: rgb(192, 255, 200);
+	--badge-color-border: rgba(192, 255, 200, 0.12);
+	--badge-color-background: rgba(192, 255, 200, 0.08);
+
+	border-color: var(--badge-color-border);
+	color: var(--badge-color);
+	background-color: var(--badge-color-background);
+}
+
+.radio-btn-group {
+    display: inline-flex;
+    border-radius: 20px;
+    overflow: hidden;
+	background-color: rgba(49, 44, 87, 0.5);
+    border: 2px solid transparent;
+    border-top: 1px solid rgba(88, 88, 88, 0.25);
+}
+
+.radio-btn {
+    position: relative;
+    padding: 10px 20px;
+	width: 100%;
+	color: white;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    outline: none;
+    z-index: 1;
+}
+
+.radio-btn:hover {
+    background-color: rgba(49, 44, 87, 0.75);
+}
+
+.radio-btn.radio-btn-active {
+	background-color: #0e0825fa;
+}
+
+.radio-btn:not(:last-child)::after {
+    /* content: "";
+    position: absolute;
+    top: 0;
+    right: -15px;
+    width: 1px;
+    height: 100%;
+    background: white;
+    transform: skewX(-30deg);
+    border-right: 3px solid black;
+    z-index: 2; */
+}
+
+.radio-btn:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 1px;
+    height: 100%;
+    background: #312c57;
+    z-index: 0;
+}
+
+.tewi-toast {
+	background-color: rgba(0, 0, 0, 0.36);
+    color: #fff;
+	border: 1px solid #b339d3;
+	font-weight: bold;
+    font-size: 18px;
+}
+
+.tewi-toast .toast-body {
+	position: relative;
+	overflow: hidden;
+}
+
+.tewi-toast .toast-body i {
+	position: absolute;
+    font-size: 48px;
+    top: -8px;
+    left: 0px;
+    color: #b339d37d;
+}
+
+.tewi-toast .toast-body span {
+	margin-left: 42px;
+}
+
+.tewi-banner {
+    border-radius: 4px;
+    border: 1px solid #312c57;
+    padding: 16px;
+    background: rgb(58 26 106) 16%;
+    background: linear-gradient(50deg, rgb(58 26 106) 16%, rgb(58 26 106) 16%, rgba(255, 194, 194, 0) 62%);
 }

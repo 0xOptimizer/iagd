@@ -65,7 +65,6 @@
                 <button class="pet-tab btn btn-secondary"><i class="bi bi-flag" style="color: red;"></i></button>
             </div> -->
             <div class="pet-interactives-container d-flex justify-content-between w-100 align-items-center">
-                <!-- Left group -->
                 <div class="text-start">
                     <button id="pet-like-btn" class="pet-interact btn btn-secondary align-content-center position-relative" data-value="like" data-active="false" data-icon-default="{{ asset('images/mayor_icons_like.png') }}" data-icon-active="{{ asset('images/mayor_icons_like_white.png') }}">
                         <img src="{{ asset('images/mayor_icons_like_white.png') }}" class="position-absolute" style="width: 28px; height: 28px; left: 7px; top: 1px;">
@@ -80,32 +79,27 @@
                         <span class="pet-interact-count">0</span>
                     </button>
                 </div>
-
-                <!-- Middle group (hidden on small screens) -->
                 <div class="text-center">
                     <div class="d-none d-md-block">
-                        <span class="badge bg-primary">Adopted</span>
-                        <span class="badge bg-success">Vaccinated</span>
-                        <span class="badge bg-warning">Neutered</span>
+                        <span class="iagd-badge iagd-badge-premium"><i class="bi bi-gem"></i> Premium</span>
+                        <span class="iagd-badge iagd-badge-early_member"><i class="bi bi-trophy-fill"></i> Early Member</span>
+                        <span class="iagd-badge iagd-badge-new_member"><i class="bi bi-brightness-alt-high-fill"></i> New Member</span>
+                        <span class="iagd-badge iagd-badge-join_date"><i class="bi bi-trophy-fill"></i> 10 years</span>
                     </div>
                     <div class="d-block d-md-none">
-                        <span class="badge bg-primary">Adopted</span>
-                        <span class="badge bg-success">Vaccinated</span>
-                        <span class="badge bg-warning">Neutered</span>
                     </div>
                 </div>
-
-                <!-- Right group (hidden on small screens) -->
-                <div class="d-none d-md-block text-end">
-                    <span class="badge bg-info">Microchipped</span>
-                    <span class="badge bg-light">Special Needs</span>
-                </div>
-
-                <!-- Cog button (only on small screens) -->
-                <div class=" text-end">
-                    <button class="btn btn-secondary" id="pet-options-btn">
-                        <i class="bi bi-gear-fill"></i>
-                    </button>
+                <div class="text-end">
+                    <div class="d-none d-md-block">
+                        <button class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-pet-profile-qr_code"><i class="bi bi-qr-code"></i> QR Code</button>
+                        <button class="btn btn-secondary"><i class="bi bi-file-earmark-arrow-down"></i> Export</button>
+                        <button class="btn btn-secondary"><i class="bi bi-gear-fill"></i></button>
+                    </div>
+                    <div class="d-block d-md-none">
+                        <button class="btn btn-secondary" id="pet-options-btn">
+                            <i class="bi bi-gear-fill"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="mt-1 profile-group-container-grid">
@@ -454,10 +448,13 @@
             </div>
         </div>
     </main>
+@include('offcanvas.pets.profile.qr_code')
 </body>
 <!-- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-rotatedmarker/leaflet.rotatedMarker.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+<script src="{{ asset('js/luxon.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
 <script>
 $(document).ready(function() {
     $('.card-hoverable').on('mouseover', function() {
@@ -465,38 +462,6 @@ $(document).ready(function() {
     });
     $('.card-hoverable').on('mouseout', function() {
         $(this).find('.card-title').removeClass('text-gradient-primary');
-    });
-
-    $.ajax({
-        url: '{{ route("api.v1.pets.count") }}',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            // Update the pet counts
-            $.each(data.pet_counts, function(group, count) {
-                $('.iagd-total-count[data-group="' + group + '"]').text(count.toLocaleString());
-            });
-
-            // Update the newest registry dates
-            $.each(data.latest_pets, function(group, date) {
-                $('.iagd-newest-registry[data-group="' + group + '"]').text(moment(date).fromNow());
-            });
-
-            setTimeout(function() {
-                $('.loading-group').fadeOut(100, function() {
-                    $(this).removeClass('animate__animated animate__fadeOut');
-                });
-            }, 200);
-            setTimeout(function() {
-                $('.iagd-containers').fadeIn(100, function() {
-                    $(this).removeClass('animate__animated animate__fadeIn');
-                });
-                afterLoading();
-            }, 300);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error fetching pet counts:', error);
-        }
     });
 
     // $('.h1wrap').each(function(){
@@ -558,6 +523,18 @@ $(document).ready(function() {
             });
         }
     });
+
+    $(".pet-qr-theme-btn").on("click", function() {
+        const selectedEC = 'M';
+        const selectedTheme = $(this).data("theme");
+
+        $('.pet-qr-theme-btn').removeClass('radio-btn-active');
+        $(this).addClass('radio-btn-active');
+
+        generateQRCode(selectedEC, selectedTheme);
+    });
+
+    generateQRCode();
 
     // Preload
     const sources = [
@@ -650,5 +627,70 @@ function circularText(txt, radius, classIndex) {
     });
 }
 
+function generateQRCode(ec = "M", theme = "light") {
+    $("#qrcode").html('<div id="qr-loading" style="display: flex; justify-content: center; align-items: center; height: 256px;"><i class="spinner-border spinner-border-sm" style="width: 64px; height: 64px;"></i></div>');
+
+    setTimeout(function() {
+        $("#qrcode").empty();
+
+        let flatDotsColor = "#000000";
+        let flatBackgroundColor = '#ffffff';
+        let gradientDotsColor = null;
+        let logo = "{{ asset('images/iagd_logo_large.png') }}";
+
+        if (theme === "dark") {
+            flatDotsColor = "#ffffff";
+            flatBackgroundColor = "#000000";
+            logo = "{{ asset('images/iagd_silver_logo.png') }}";
+        } else if (theme === "purple") {
+            flatDotsColor = "#ffffff";
+            flatBackgroundColor = "#312c57";
+            logo = "{{ asset('images/iagd_silver_logo.png') }}";
+        } else if (theme === "golden") {
+            flatBackgroundColor = "#ffffff";
+            gradientDotsColor = {
+                type: "linear",
+                rotation: 0,
+                colorStops: [
+                    { offset: 0, color: "#FFD700" },
+                    { offset: 1, color: "#FFA500" }
+                ]
+            };
+            logo = "{{ asset('images/iagd_logo_large.png') }}";
+        }
+
+        const qrCode = new QRCodeStyling({
+            width: 256,
+            height: 256,
+            data: "{{ url()->current() }}?t=q",
+            qrOptions: {
+                errorCorrectionLevel: ec
+            },
+            dotsOptions: {
+                type: "rounded",
+                color: gradientDotsColor ? undefined : flatDotsColor,
+                gradient: gradientDotsColor || undefined
+            },
+            backgroundOptions: {
+                color: flatBackgroundColor
+            },
+            image: logo,
+            imageOptions: {
+                crossOrigin: "anonymous",
+                margin: 4,
+                imageSize: 0.7
+            },
+            cornersSquareOptions: {
+                type: "extra-rounded"
+            },
+            cornersDotOptions: {
+                type: "dot"
+            }
+        });
+
+        qrCode.append(document.getElementById("qrcode"));
+        animateShine($('#qrcode'), 300);
+    }, 10);
+}
 </script>
 </html>

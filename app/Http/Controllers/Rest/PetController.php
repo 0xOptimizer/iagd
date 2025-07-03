@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Rest;
 use App\Http\Controllers\Controller;
 use App\Models\GlobalMeta;
 use App\Models\Pets;
+use App\Models\PetsBreeds;
 use App\Models\PetsDetails;
 use App\Models\PetsFile;
 use App\Models\PetsMeta;
@@ -184,6 +185,18 @@ class PetController extends Controller
                 'image'    => null,
             ]);
 
+            $breeds = $request->input('breeds', []);
+            foreach ($breeds as $breed) {
+                PetsBreeds::create([
+                    'uuid'       => $uuid,
+                    'breed'      => $breed['name'],
+                    'percentage' => $breed['percent'] ?? 0,
+                    'source'     => $breed['source'] ?? 'Unspecified',
+                    'rank_order' => $breed['rank_order'] ?? 0,
+                ]);
+            }
+
+
             PetsMeta::create([
                 'uuid'          => $uuid,
                 'status'        => 1,
@@ -256,6 +269,8 @@ class PetController extends Controller
                 'co_owner_uuid'        => (string) Str::uuid(),
                 'pet_location'         => $request->input('pet_location'),
                 'owner_location'       => $request->input('owner_location'),
+                'owner_contact'        => $request->input('owner_contact'),
+                'owner_email'          => $request->input('owner_email'),
                 'breeder'              => $request->input('breeder'),
                 'animal_facility'      => $request->input('animal_facility'),
                 'animal_facility_uuid' => $request->input('animal_facility_uuid'),
@@ -408,6 +423,7 @@ class PetController extends Controller
             // 'female_parent_uuid' => 'nullable',
             // 'female_parent_breed' => 'nullable',
             // 'display_status' => 'visible',
+            
         ];
 
         $validationMessage = [

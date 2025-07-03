@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\PetsDetails;
+use App\Models\PetsBreeds;
 use App\Models\PetsMeta;
 use App\Models\PetsFile;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,5 +45,10 @@ class Pets extends Model
     public function files()
     {
         return $this->hasMany(PetsFile::class, 'attached_to_uuid', 'uuid');
+    }
+
+    public function breeds()
+    {
+        return $this->hasMany(PetsBreeds::class, 'uuid', 'uuid');
     }
 }
