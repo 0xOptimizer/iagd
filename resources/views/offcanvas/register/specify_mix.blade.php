@@ -13,17 +13,17 @@
         </div>
         <div class="pet-breeds-container">
             <div class="pet-breeds-input-container specify_mix-default row mt-2">
-                <div class="col-sm-1 pet-breeds-grip">
+                <div class="col-1 pet-breeds-grip">
                     <i class="bi bi-grip-vertical" style="font-size: 36px; margin-left: -8px; color: #312c57"></i>
                 </div>
-                <div class="col-sm-7 position-relative">
+                <div class="col-7 position-relative">
                     <input type="text" class="pet-breeds-input form-control" style="height: 56px;">
                     <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                     <!-- <button type="button" class="copy-btn btn btn-secondary position-absolute" data-target="pet-profile-qr_code-url" style="top: 8px; right: -40px; background-color: #272042;">
                         <i class="bi bi-trash-fill"></i>
                     </button> -->
                 </div>
-                <div class="col-sm-4">
+                <div class="col-4">
                     <div class="input-group">
                         <input type="number" class="pet-breeds-input-percent form-control" value="100" step="0.01" max="100" style="height: 56px;">
                         <span class="input-group-text">%</span>
@@ -31,14 +31,14 @@
                 </div>
             </div>
             <div class="pet-breeds-input-container specify_mix-add_more row mt-2">
-                <div class="col-sm-1 pet-breeds-grip">
+                <div class="col-1 pet-breeds-grip">
                     <i class="bi bi-grip-vertical" style="display: none; font-size: 36px; margin-left: -8px; color: #312c57;"></i>
                 </div>
-                <div class="col-sm-7 position-relative">
+                <div class="col-7 position-relative">
                     <input type="text" class="pet-breeds-input form-control" placeholder="Add more (if possible)..." style="height: 56px;">
                     <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-4">
                     <div class="input-group">
                         <input type="number" class="pet-breeds-input-percent form-control" placeholder="0" step="0.01" max="100" style="height: 56px;">
                         <span class="input-group-text">%</span>

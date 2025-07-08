@@ -52,7 +52,7 @@
                 <img src="{{ asset('images/garfield.png') }}" width="156" height="156" class="position-absolute" style="top: -30px; left: -18px;">
                 <div style="margin-left: 105px;">
                     <h4 class="text-gradient-primary mt-2">Hi, welcome to IAGD!</h4>
-                    <p>
+                    <p style="font-size: 14px;">
                         Feel free to register your pet below.
                     </p>
                 </div>
@@ -360,7 +360,7 @@
                 <img src="{{ asset('images/garfield_success.png') }}" width="156" height="156" class="position-absolute" style="top: -30px; left: -7px;">
                 <div style="margin-left: 105px;">
                     <h4 class="text-gradient-primary mt-2">You're almost there!</h4>
-                    <p>
+                    <p style="font-size: 14px;">
                         Please review the information before submitting.
                     </p>
                 </div>
@@ -2571,14 +2571,14 @@ $(document).ready(function() {
             if (emptyCount <= 0) {
                 $('.pet-breeds-container').append(`
                     <div class="pet-breed-input-container row mt-2 pet-breeds-input-container">
-                        <div class="col-sm-1 pet-breeds-grip">
+                        <div class="col-1 pet-breeds-grip">
                             <i class="bi bi-grip-vertical" style="display: none; font-size: 36px; margin-left: -8px; color: #312c57;"></i>
                         </div>
-                        <div class="col-sm-7 position-relative">
+                        <div class="col-7 position-relative">
                             <input type="text" class="pet-breeds-input form-control" placeholder="Add more (if possible)..." style="height: 56px;">
                             <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-4">
                             <div class="input-group">
                                 <input type="number" class="pet-breeds-input-percent form-control" placeholder="0" step="0.01" max="100" style="height: 56px;">
                                 <span class="input-group-text">%</span>
