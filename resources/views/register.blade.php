@@ -48,11 +48,10 @@
     </div>
     <div class="group-containers">
         <div class="group-container" data-group="page_1" style="display: none;">
-            <div class="tewi-banner d-flex align-items-center justify-content-center mb-4 position-relative">
-                <img src="{{ asset('images/garfield.png') }}" width="156" height="156" class="position-absolute me-3" style="top: -30px; left: -18px;">
-                <div></div>
-                <div>
-                    <h4 class="text-gradient-primary mt-2">Welcome to IAGD!</h4>
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <img src="{{ asset('images/garfield.png') }}" width="156" height="156" class="position-absolute" style="top: -30px; left: -18px;">
+                <div style="margin-left: 105px;">
+                    <h4 class="text-gradient-primary mt-2">Hi, welcome to IAGD!</h4>
                     <p>
                         Feel free to register your pet below.
                     </p>
@@ -180,7 +179,7 @@
                 <div class="row mt-2">
                     <div class="banner-container banner-info p-3 text-center">
                         <i class="banner-icon bi bi-info-circle"></i>
-                        Note: As part of IAGD, your pet details will appear publicly.
+                        Note: All fields are optional, you can always update them later.
                     </div>
                 </div>
                 <!-- Submit Button -->
@@ -340,7 +339,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="banner-container banner-info p-3 text-center">
-                        <i class="banner-icon bi bi-info-circle"></i> Note: Except the names, owner details will not publicly appear.
+                        <i class="banner-icon bi bi-info-circle"></i> Note: Except the names, owner details will not appear publicly.
                     </div>
                 </div>
                 <!-- Submit Button -->
@@ -357,11 +356,10 @@
             </form>
         </div>
         <div class="group-container" data-group="page_5" style="display: none;">
-            <div class="tewi-banner d-flex align-items-center justify-content-center mb-4 position-relative">
-                <img src="{{ asset('images/garfield_success.png') }}" width="156" height="156" class="position-absolute me-3" style="top: -30px; left: -7px;">
-                <div></div>
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <img src="{{ asset('images/garfield_success.png') }}" width="156" height="156" class="position-absolute" style="top: -30px; left: -7px;">
                 <div style="margin-left: 105px;">
-                    <h4 class="text-gradient-primary mt-2">Almost there!</h4>
+                    <h4 class="text-gradient-primary mt-2">You're almost there!</h4>
                     <p>
                         Please review the information before submitting.
                     </p>
