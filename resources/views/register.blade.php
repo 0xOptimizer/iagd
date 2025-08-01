@@ -1543,9 +1543,11 @@ $(document).ready(function() {
                     resetPetLocationAutofill($button, $input);
                 });
             }, function() {
+                console.log('Error: getCurrentPosition:', navigator.geolocation);
                 resetPetLocationAutofill($button, $input);
             });
         } else {
+            console.log('Error: navigation.geolocation:', navigator.geolocation);
             resetPetLocationAutofill($button, $input);
         }
     });
@@ -1583,9 +1585,11 @@ $(document).ready(function() {
                     resetPetOwnerLocationAutofill($button, $input);
                 });
             }, function() {
+                console.log('Error: getCurrentPosition:', navigator.geolocation);
                 resetPetOwnerLocationAutofill($button, $input);
             });
         } else {
+            console.log('Error: navigation.geolocation:', navigator.geolocation);
             resetPetOwnerLocationAutofill($button, $input);
         }
     });
