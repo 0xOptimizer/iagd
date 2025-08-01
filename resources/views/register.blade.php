@@ -1526,28 +1526,40 @@ $(document).ready(function() {
         $button.prop("disabled", true).html('<span class="spinner-border spinner-border-sm"></span>');
         $input.prop("disabled", true);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
 
-                $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
-                    var city = data.address.city || data.address.town || data.address.village || "Unknown City";
-                    var region = data.address.state || "Unknown Region";
-                    var country = data.address.country || "Unknown Country";
-                    
-                    $input.val(`${city}, ${region}, ${country}`);
-                    animateShine($input.parent('.form-floating'));
-                    localStorage.setItem('form_pet-address', `${city}, ${region}, ${country}`);
-                }).always(function() {
+                    $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
+                        var city = data.address.city || data.address.town || data.address.village || "Unknown City";
+                        var region = data.address.state || "Unknown Region";
+                        var country = data.address.country || "Unknown Country";
+                        
+                        $input.val(`${city}, ${region}, ${country}`);
+                        animateShine($input.parent('.form-floating'));
+                        localStorage.setItem('form_pet-address', `${city}, ${region}, ${country}`);
+                    }).always(function() {
+                        resetPetLocationAutofill($button, $input);
+                    });
+                },
+                function(error) {
+                    let message = "Unable to retrieve location.";
+                    if (error.code === error.PERMISSION_DENIED) {
+                        message = "Location permission denied. Please allow location access in your browser settings.";
+                    } else if (error.code === error.POSITION_UNAVAILABLE) {
+                        message = "Location information is unavailable.";
+                    } else if (error.code === error.TIMEOUT) {
+                        message = "Location request timed out.";
+                    }
+                    alert(message);
                     resetPetLocationAutofill($button, $input);
-                });
-            }, function() {
-                console.log('Error: getCurrentPosition:', navigator.geolocation);
-                resetPetLocationAutofill($button, $input);
-            });
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
         } else {
-            console.log('Error: navigation.geolocation:', navigator.geolocation);
+            alert("Geolocation is not supported by your browser. Please use a modern browser and ensure HTTPS is enabled.");
             resetPetLocationAutofill($button, $input);
         }
     });
@@ -1568,28 +1580,40 @@ $(document).ready(function() {
         $button.prop("disabled", true).html('<span class="spinner-border spinner-border-sm"></span>');
         $input.prop("disabled", true);
 
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
 
-                $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
-                    var city = data.address.city || data.address.town || data.address.village || "Unknown City";
-                    var region = data.address.state || "Unknown Region";
-                    var country = data.address.country || "Unknown Country";
-                    
-                    $input.val(`${city}, ${region}, ${country}`);
-                    animateShine($input.parent('.form-floating'))
-                    localStorage.setItem('form_pet-owner_location', `${city}, ${region}, ${country}`);
-                }).always(function() {
+                    $.getJSON(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`, function(data) {
+                        var city = data.address.city || data.address.town || data.address.village || "Unknown City";
+                        var region = data.address.state || "Unknown Region";
+                        var country = data.address.country || "Unknown Country";
+                        
+                        $input.val(`${city}, ${region}, ${country}`);
+                        animateShine($input.parent('.form-floating'));
+                        localStorage.setItem('form_pet-owner_location', `${city}, ${region}, ${country}`);
+                    }).always(function() {
+                        resetPetOwnerLocationAutofill($button, $input);
+                    });
+                },
+                function(error) {
+                    let message = "Unable to retrieve location.";
+                    if (error.code === error.PERMISSION_DENIED) {
+                        message = "Location permission denied. Please allow location access in your browser settings.";
+                    } else if (error.code === error.POSITION_UNAVAILABLE) {
+                        message = "Location information is unavailable.";
+                    } else if (error.code === error.TIMEOUT) {
+                        message = "Location request timed out.";
+                    }
+                    alert(message);
                     resetPetOwnerLocationAutofill($button, $input);
-                });
-            }, function() {
-                console.log('Error: getCurrentPosition:', navigator.geolocation);
-                resetPetOwnerLocationAutofill($button, $input);
-            });
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
         } else {
-            console.log('Error: navigation.geolocation:', navigator.geolocation);
+            alert("Geolocation is not supported by your browser. Please use a modern browser and ensure HTTPS is enabled.");
             resetPetOwnerLocationAutofill($button, $input);
         }
     });
