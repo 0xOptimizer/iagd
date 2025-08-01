@@ -67,6 +67,8 @@
                             <span style="font-size: 14px;">Drag and drop your pet's photo here,</span>
                             <br>
                             <span style="font-size: 14px;">or press to browse from your device.</span>
+                            <br>
+                            <span style="font-size: 14px;">We will automatically analyze your photo for details.</span>
                         </div>
                     </div>
                 </div>
@@ -112,12 +114,16 @@
             </form>
         </div>
         <div class="group-container" data-group="page_2" style="display: none;">
-            <div class="d-flex align-items-center justify-content-start mb-4">
-                <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <div style="margin-left: 25px;">
-                    <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
-                    <h6 class="pet-preview-pet_breed">...</h6>
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <!-- <img class="pet-preview-image-backdrop rounded-circle position-absolute" src="{{ asset('images/default.png') }}" width="124" height="124" style="top: -8px; left: 0px; object-fit: cover;"> -->
+                 <div class="image-container position-absolute" style="top: -8px; left: 0px; width: 122px; height: 122px; z-index: 4;">
+                    <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="122" height="122" style="object-fit: cover;">
+                 </div>
+                <div style="margin-left: 120px;">
+                    <h4 class="text-gradient-primary mt-2"><span class="pet-preview-pet_name"></span></h4>
+                    <p style="font-size: 14px;">
+                        <span class="pet-preview-pet_breed"></span>
+                    </p>
                 </div>
             </div>
             <form id="registrationForm" autocomplete="off">
@@ -196,12 +202,16 @@
             </form>
         </div>
         <div class="group-container" data-group="page_3" style="display: none;">
-            <div class="d-flex align-items-center justify-content-start mb-4">
-                <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <div style="margin-left: 25px;">
-                    <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
-                    <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <!-- <img class="pet-preview-image-backdrop rounded-circle position-absolute" src="{{ asset('images/default.png') }}" width="124" height="124" style="top: -8px; left: 0px; object-fit: cover;"> -->
+                 <div class="image-container position-absolute" style="top: -8px; left: 0px; width: 122px; height: 122px; z-index: 4;">
+                    <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="122" height="122" style="object-fit: cover;">
+                 </div>
+                <div style="margin-left: 120px;">
+                    <h4 class="text-gradient-primary mt-2"><span class="pet-preview-pet_name"></span></h4>
+                    <p style="font-size: 14px;">
+                        <span class="pet-preview-pet_breed"> · <span class="pet-preview-pet_age"></span> old</span>
+                    </p>
                 </div>
             </div>
             <form id="registrationForm" autocomplete="off">
@@ -209,7 +219,7 @@
                 <input type="text" id="pet-dam-uuid" hidden>
                 <div class="pet-microchip-before-input-group row">
                     <div class="form-floating col-12">
-                        <input type="text" class="pet-microchip-input input-interactable-readonly form-control" id="pet-microchip" placeholder="Microchip No.">
+                        <input type="text" class="pet-microchip-input form-control" id="pet-microchip" placeholder="Microchip No.">
                         <label for="pet-microchip" style="margin-left: 12px;">Microchip No.</label>
                     </div>
                     <div class="pet-microchip-barcode-container form-floating col-4" style="display: none;">
@@ -291,12 +301,16 @@
             </form>
         </div>
         <div class="group-container" data-group="page_4" style="display: none;">
-            <div class="d-flex align-items-center justify-content-start mb-4">
-                <img class="pet-preview-image-backdrop rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="125" height="125" class="me-3">
-                <div style="margin-left: 25px;">
-                    <h4 class="pet-preview-pet_name text-gradient-primary mt-2">...</h4>
-                    <h6><span class="pet-preview-pet_breed">...</span> · <span class="pet-preview-pet_age">...</span> old</h6>
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <!-- <img class="pet-preview-image-backdrop rounded-circle position-absolute" src="{{ asset('images/default.png') }}" width="124" height="124" style="top: -8px; left: 0px; object-fit: cover;"> -->
+                 <div class="image-container position-absolute" style="top: -8px; left: 0px; width: 122px; height: 122px; z-index: 4;">
+                    <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="122" height="122" style="object-fit: cover;">
+                 </div>
+                <div style="margin-left: 120px;">
+                    <h4 class="text-gradient-primary mt-2"><span class="pet-preview-pet_name"></span></h4>
+                    <p style="font-size: 14px;">
+                        <span class="pet-preview-pet_breed"> · <span class="pet-preview-pet_age"></span> old</span>
+                    </p>
                 </div>
             </div>
             <form id="registrationForm" autocomplete="off">
@@ -356,6 +370,55 @@
             </form>
         </div>
         <div class="group-container" data-group="page_5" style="display: none;">
+            <div class="tewi-banner d-flex mb-4 position-relative">
+                <!-- <img class="pet-preview-image-backdrop rounded-circle position-absolute" src="{{ asset('images/default.png') }}" width="124" height="124" style="top: -8px; left: 0px; object-fit: cover;"> -->
+                 <div class="image-container position-absolute" style="top: -8px; left: 0px; width: 122px; height: 122px; z-index: 4;">
+                    <img class="pet-preview-image rounded-circle" src="{{ asset('images/default.png') }}" width="122" height="122" style="object-fit: cover;">
+                 </div>
+                <div style="margin-left: 120px;">
+                    <h4 class="text-gradient-primary mt-2"><span class="pet-preview-pet_name"></span></h4>
+                    <p style="font-size: 14px;">
+                        <span class="pet-preview-pet_breed"> · <span class="pet-preview-pet_age"></span> old</span>
+                    </p>
+                </div>
+            </div>
+            <form id="registrationForm" autocomplete="off">
+                <div class="row position-relative">
+                    <div class="form-floating col-12">
+                        <input type="text" class="form-control input-interactable-readonly" id="pet-owner" value=" " style="height: 380px;">
+                        <label for="pet-owner" style="margin-left: 12px;">Attach any relevant documents (up to 5)</label>
+                    </div>
+                    <div class="documents-input position-absolute" style="top: 0; left: 0px;">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <button type="button" class="document-upload-btn btn btn-secondary tewi-button-group text-start" style="width: 460px; height: 55px; margin-left: 20px; margin-top: {{ $i == 1 ? '40px' : '10px' }};">
+                                <span style="font-weight: normal;">
+                                    <i class="tewi-button-icon bi bi-file-earmark-plus-fill"></i>
+                                    <span class="tewi-button-text" style="font-size: 14px;"><i class="bi bi-bookmark-plus"></i> Attach a Document File</span>
+                                </span>
+                            </button>
+                            <input type="file" name="documents[]" class="document-input" style="display: none;" accept=".pdf,.docx" />
+                        @endfor
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="banner-container banner-info p-3 text-center">
+                        <i class="banner-icon bi bi-info-circle"></i> Do you have more documents? Please contact us!
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="d-grid gap-2 mt-4 mb-3">
+                    <div class="row">
+                        <div class="form-floating col-3 mb-3">
+                            <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Back</button>
+                        </div>
+                        <div class="form-floating col-9 mb-3">
+                            <button type="button" class="group-navigate-btn btn btn-primary btn-lg" data-group="page_6" style="height: 100%; width: 100%;">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="group-container" data-group="page_6" style="display: none;">
             <div class="tewi-banner d-flex mb-4 position-relative">
                 <img src="{{ asset('images/garfield_success.png') }}" width="156" height="156" class="position-absolute" style="top: -30px; left: -7px;">
                 <div style="margin-left: 105px;">
@@ -449,7 +512,7 @@
             <div class="d-grid gap-2 mt-4 mb-3">
                 <div class="row">
                     <div class="form-floating col-3 mb-3">
-                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_4" style="height: 100%; width: 100%;">Back</button>
+                        <button type="button" class="group-navigate-btn btn btn-outline-primary btn-lg" data-group="page_5" style="height: 100%; width: 100%;">Back</button>
                     </div>
                     <div class="form-floating col-9 mb-3">
                         <button type="submit" class="registration-submit-btn btn btn-primary btn-lg" style="height: 100%; width: 100%;" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-register-submit">
@@ -459,7 +522,7 @@
                 </div>
             </div>
         </div>
-        <div class="group-container" data-group="page_6" style="display: none;">
+        <div class="group-container" data-group="page_7" style="display: none;">
             <div class="row text-center">
                 <div class="col-12">
                     <span class="text-gradient-primary" style="font-size: 24px;">Welcome to IAGD!</span>
@@ -578,6 +641,7 @@
         </div>
     </div>
 </div>
+@include('offcanvas.register.analyze')
 @include('offcanvas.register.species')
 @include('offcanvas.register.specify_mix')
 @include('offcanvas.register.gender')
@@ -673,6 +737,13 @@ function submitRegistration() {
         }
     });
 
+    $('.document-input').each(function () {
+        const file = this.files[0];
+        if (file) {
+            formData.append('documents[]', file);
+        }
+    });
+
     $('.submit-uploading-inactive-loading-group').hide();
     $('.submit-uploading-before-loading-group').show();
 
@@ -733,10 +804,10 @@ function submitRegistration() {
 
                             setTimeout(function() {
                                 $('.group-container').hide();
-                                $('.group-container[data-group="page_6"]').show();
+                                $('.group-container[data-group="page_7"]').show();
                                 $('#offcanvas-register-submit').offcanvas('hide');
                                 $('.phone-container').scrollTop(0);
-                                TweenMax.staggerFrom(".group-container[data-group='page_6'] div", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.06);
+                                TweenMax.staggerFrom(".group-container[data-group='page_7'] div", 1.2, {opacity:0.0, transform: "translateY(20vh) scale(0)", delay: 0, transformOrigin:'50% 50%', ease:Circ.easeOut, force3D: true}, 0.06);
 
                                 setTimeout(function() {
                                     var count = 200;
@@ -830,6 +901,140 @@ function clearPetFormStorage() {
             localStorage.removeItem(key);
         }
     });
+}
+
+function updateBeam() {
+    const container = $('.searchlight-container');
+    const bulb = container.find('.searchlight-bulb').position();
+    const target = container.find('.searchlight-target').position();
+
+    const bulbCenter = {
+        x: bulb.left + 10,
+        y: bulb.top + 10
+    };
+
+    const targetCenter = {
+        x: target.left + 50,
+        y: target.top + 50
+    };
+
+    const dx = targetCenter.x - bulbCenter.x;
+    const dy = targetCenter.y - bulbCenter.y;
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    const length = Math.sqrt(dx * dx + dy * dy);
+
+    const beam = container.find('.searchlight-beam');
+
+    beam.css({
+        left: bulbCenter.x,
+        top: bulbCenter.y - 50,
+        width: length,
+        height: 100,
+        zIndex: 5,
+        transform: `rotate(${angle}deg)`
+    });
+}
+
+function moveTarget() {
+    const container = $('.searchlight-container');
+
+    if (!container.is(':visible')) {
+        return;
+    }
+
+    const target = container.find('.searchlight-target');
+    const maxX = container.width() - target.width();
+    const minY = 100;
+    const maxY = container.height() - target.height() - 325;
+
+    const newX = Math.random() * maxX;
+    const newY = minY + Math.random() * (maxY - minY);
+
+    target.animate(
+        { left: newX, top: newY },
+        {
+            duration: 900 + Math.random() * 625,
+            easing: 'easeInOutCubic',
+            step: updateBeam,
+            complete: moveTarget
+        }
+    );
+}
+function animateGradientText(selector) {
+    if (!$('#rotate-gradient-style').length) {
+        $('head').append(`
+            <style id="rotate-gradient-style">
+                @keyframes rotateGradient {
+                    0% { background-position: 0% 0; }
+                    100% { background-position: 400% 0; }
+                }
+            </style>
+        `);
+    }
+
+    $(selector).each(function() {
+        $(this).css({
+            'animation': 'rotateGradient 10s linear infinite',
+            'background-size': '400% 100%',
+            'background-position': '0% 0',
+            'will-change': 'background-position'
+        });
+    });
+}
+function dropIceCubes($targetContainer, count, duration) {
+    if (!$('.ice-cube-style').length) {
+        const style = `
+            .ice-cube-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+            .ice-cube {
+                position: absolute;
+                top: 0px;
+                width: 30px;
+                height: 30px;
+                background: var(--color-primary);
+                border-radius: 5px;
+                animation: fallAndDisappear linear forwards;
+                opacity: 0.33;
+            }
+            @keyframes fallAndDisappear {
+                0% { transform: translateY(0) rotate(0); }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        $('<style class="ice-cube-style">').text(style).appendTo('head');
+    }
+
+    const $container = $('<div class="ice-cube-container"></div>').appendTo($targetContainer);
+    let dropped = 0;
+    const intervalTime = duration / count;
+
+    const interval = setInterval(() => {
+        if (dropped >= count) {
+            clearInterval(interval);
+            setTimeout(() => $container.remove(), 9000);
+            return;
+        }
+
+        const $cube = $('<div class="ice-cube"></div>');
+        const left = Math.random() * 100;
+        const animDuration = 5 + Math.random() * 3;
+
+        $cube.css({
+            left: `${left}%`,
+            animationDuration: `${animDuration}s`
+        });
+
+        $container.append($cube);
+        setTimeout(() => $cube.remove(), animDuration * 1000);
+        dropped++;
+    }, intervalTime);
 }
 $(document).ready(function() {
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -959,6 +1164,7 @@ $(document).ready(function() {
                         });
                     card.append(cardImg);
                     $(".pet-input-images-container").append(card);
+                    $(".cerebrate-analyze-image-card img").attr("src", e.target.result);
 
                     card.on("click", function() {
                         $(".pet-input-images-container .pet-image-card").css("border", "none");
@@ -994,31 +1200,160 @@ $(document).ready(function() {
             dropZone.find(".drop-message").hide();
             droppedFiles[input.id] = input.files;
 
+            // let formData = new FormData();
+            // formData.append("file", input.files[0]);
+            // $.ajax({
+            //     url: "https://iagd-api.metaanimals.org/classify/",
+            //     type: "POST",
+            //     data: formData,
+            //     contentType: false,
+            //     processData: false,
+            //     success: function(response) {
+            //         if (response && response.species) {
+            //             if (response.species_confidence > 0.8) {
+            //                 const response_species = response.species.charAt(0).toUpperCase() + response.species.slice(1);
+            //                 $('#pet-species').val(response_species);
+            //                 animateShine($('#pet-species').parent('.form-floating'));
+            //                 localStorage.setItem('form_pet-species', response_species);
+            //                 page_1_continue_validate();
+            //             }
+            //         } else {
+            //             console.warn("Unexpected response format:", response);
+            //         }
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error("Error:", error);
+            //     }
+            // });
+
             let formData = new FormData();
-            formData.append("file", input.files[0]);
+            formData.append("image", input.files[0]);
+
             $.ajax({
-                url: "https://iagd-api.metaanimals.org/classify/",
+                url: "https://cerebrate-classify.metaanimals.org/analyze",
                 type: "POST",
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    if (response && response.species) {
-                        if (response.species_confidence > 0.8) {
-                            const response_species = response.species.charAt(0).toUpperCase() + response.species.slice(1);
+                    if (response && response.species && response.confidence) {
+                        if (response.confidence > 0.7) {
+                            let response_species = response.species.charAt(0).toUpperCase() + response.species.slice(1).toLowerCase();
                             $('#pet-species').val(response_species);
                             animateShine($('#pet-species').parent('.form-floating'));
                             localStorage.setItem('form_pet-species', response_species);
                             page_1_continue_validate();
+
+                            $('.searchlight-processing').hide();
+                            animateShine('.cerebrate-analyze-image-card img', 300);
+
+                            setTimeout(function() {
+                                $('.searchlight-done').show();
+                                $('.cerebrate-analyze-image-card img').css('filter', 'none');
+
+                                $('#cerebrate-analyze-confidence').text(response.confidence ?? '');
+                                $('#cerebrate-analyze-species').val(response_species ?? '');
+                                $('#cerebrate-analyze-primary_breed').val(response.primary_breed ?? '');
+                                $('#cerebrate-analyze-markings').val(response.notable_markings ?? '');
+                                $('#cerebrate-analyze-body_color').val(response.body_color ?? '');
+                                $('#cerebrate-analyze-eye_color').val(response.eye_color ?? '');
+
+                                if (response.is_mixed) {
+                                    if (!response.mix_percentage || Object.keys(response.mix_percentage).length === 0) {
+                                        return;
+                                    }
+
+                                    $('.cerebrate-analyze-multibreed-container').empty();
+
+                                    let mixArr = Object.entries(response.mix_percentage)
+                                        .map(([breed, percent]) => [breed, percent * 100])
+                                        .sort((a, b) => b[1] - a[1]);
+
+                                    $.each(mixArr, function(index, item) {
+                                        const breed = item[0];
+                                        const percent = item[1];
+                                        const breed_element = `
+                                            <div class="row cerebrate-analyze-multibreed-field mb-2">
+                                                <div class="col-1 position-relative">
+                                                    <i class="bi bi-arrow-return-right" style="font-size: 24px; color: var(--color-primary); opacity: 0.5; position: absolute; top: 20%;"></i>
+                                                </div>
+                                                <div class="form-floating col-8 position-relative">
+                                                    <input type="text" class="cerebrate-analyze-multibreed-breed_name form-control w-100" value="${breed}" readonly>
+                                                    <label style="color: #ffc500 !important; margin-left: 12px;">Breed #${index + 1}</label>
+                                                    <button type="button" class="btn btn-secondary position-absolute cerebrate-analyze-toggle-discard" data-discarded="false" style="top: 8px; right: 20px;">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                    <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="input-group" style="width: 118%;">
+                                                        <input type="number" class="pet-breeds-input-percent form-control" value="${percent}" step="0.01" max="100" style="height: 56px;" readonly>
+                                                        <span class="input-group-text">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        $('.cerebrate-analyze-multibreed-container').append(breed_element);
+                                    });
+
+                                    $('.cerebrate-analyze-multibreed-group').show();
+                                }
+
+                                dropIceCubes('.cerebrate-analyze-image-card', 20, 1750);
+
+                                let fields = $('.cerebrate-analyze-field-container .cerebrate-analyze-field, .cerebrate-analyze-field-container .cerebrate-analyze-multibreed-field');
+                                fields.hide();
+
+                                fields.each(function(i) {
+                                    let $el = $(this);
+                                    let delay = i < 2 ? 0 : (i - 1) * 200;
+
+                                    setTimeout(function() {
+                                        $el.show().addClass('animate__animated animate__backInDown');
+                                    }, delay);
+                                });
+
+                                setTimeout(function() {
+                                    $('.searchlight-done').fadeOut('fast')
+                                }, 2000);
+                            }, 300);
                         }
                     } else {
                         console.warn("Unexpected response format:", response);
                     }
+
+                    $('.searchlight-container').hide();
                 },
                 error: function(xhr, status, error) {
                     console.error("Error:", error);
                 }
             });
+
+            setTimeout(function() {
+                animateGradientText('#offcanvas-register-analyze .tewi-banner h4');
+                $('#offcanvas-register-analyze').offcanvas('show');
+
+                setTimeout(function() {
+                    $('#offcanvas-register-analyze .tewi-banner').fadeIn('333');
+                    $('#offcanvas-register-analyze .tewi-banner').css('display', 'flex');
+                }, 333);
+
+                setTimeout(function() {
+                    $('.cerebrate-analyze-images-container').fadeIn('333');
+                }, 750);
+
+                setTimeout(function() {
+                    $('.searchlight-container').fadeIn('fast');
+                    $('.searchlight-container .searchlight-target').css({ left: 400, top: 100 });
+                    updateBeam();
+                    moveTarget();
+                }, 1100);
+
+                // setTimeout(() => {
+                //     clearInterval(analyzeAnimation);
+                //     $(".cerebrate-analyze-images-container").css("filter", "none");
+                // }, 1250);
+            }, 300);
 
             if (input.files && input.files[0]) {
                 let reader = new FileReader();
@@ -1089,7 +1424,7 @@ $(document).ready(function() {
             $(this).siblings("input[type='file']").click();
         });
 
-        $("input[type='file']").on("change", function () {
+        $("#self-input-photo").on("change", function () {
             let dropZone = $(this).siblings(dropZoneSelector);
             if (this.files.length) {
                 previewImage(this, dropZone);
@@ -1134,7 +1469,7 @@ $(document).ready(function() {
     }
 
     setupDropZone(".create-drop-zone");
-    setupDropZone(".affiliates-drop-zone");
+    setupDropZone(".documents-drop-zone");
 
     function resetDropZone(dropZoneSelector) {
         let dropZones = $(dropZoneSelector);
@@ -2590,6 +2925,210 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('click', '.cerebrate-analyze-toggle-discard', function () {
+        const $btn = $(this);
+        const $input = $btn.siblings('input');
+        const $label = $input.siblings('label');
+        const isDiscarded = $btn.attr('data-discarded') === 'true';
+
+        if (!isDiscarded) {
+            $input.addClass('text-decoration-line-through').css('opacity', 0.33);
+            $label.addClass('text-decoration-line-through').css('opacity', 0.33);
+            // $btn.removeClass('btn-secondary').addClass('btn-success');
+            $btn.find('i').removeClass('bi-x-lg').addClass('bi-arrow-counterclockwise');
+            $btn.attr('data-discarded', 'true');
+        } else {
+            $input.removeClass('text-decoration-line-through').css('opacity', 1);
+            $label.removeClass('text-decoration-line-through').css('opacity', 1);
+            // $btn.removeClass('btn-success').addClass('btn-secondary');
+            $btn.find('i').removeClass('bi-arrow-counterclockwise').addClass('bi-x-lg');
+            $btn.attr('data-discarded', 'false');
+        }
+    });
+
+    $('.cerebrate-analyze-proceed-btn').on('click', function() {
+        const _this = this;
+        $(_this).prop('disabled', true);
+        $(_this).html('<i class="spinner-border spinner-border-sm"></i>');
+
+        const fieldMap = {
+            'cerebrate-analyze-species': 'pet-species',
+            'cerebrate-analyze-primary_breed': 'pet-breed',
+            'cerebrate-analyze-markings': 'pet-markings',
+            'cerebrate-analyze-body_color': 'pet-color_body',
+            'cerebrate-analyze-eye_color': 'pet-color_eye'
+        };
+
+        const targetsToAnimate = [];
+
+        $('.cerebrate-analyze-field').each(function() {
+            const $field = $(this);
+            const $input = $field.find('input');
+
+            if ($input.length === 0) return;
+
+            const $btn = $field.find('.cerebrate-analyze-toggle-discard');
+            if ($btn.attr('data-discarded') === 'true') return;
+
+            const sourceId = $input.attr('id');
+            const targetId = fieldMap[sourceId];
+            if (!targetId) return;
+
+            if (sourceId == 'cerebrate-analyze-primary_breed') {
+                $('.pet-preview-pet_breed').text($input.val());
+            }
+
+            const value = $input.val();
+            const $target = $('#' + targetId);
+            if (!$target.length) return;
+
+            $target.val(value);
+            targetsToAnimate.push($target);
+
+            localStorage.setItem('form_' + targetId, value);
+        });
+        
+        let savedBreeds = [];
+        $('.cerebrate-analyze-multibreed-field').each(function() {
+            const $field = $(this);
+            const $inputName = $field.find('input[type="text"]');
+            const $inputPercent = $field.find('input[type="number"]');
+
+            if ($inputName.length === 0) return;
+            if ($inputPercent.length === 0) return;
+
+            const $btn = $field.find('.cerebrate-analyze-toggle-discard');
+            if ($btn.attr('data-discarded') === 'true') return;
+
+            savedBreeds.push({
+                name: $inputName.val().trim(),
+                percent: parseFloat($inputPercent.val())
+            });
+        });
+
+        if (savedBreeds.length > 0) {
+            $('.pet-breeds-container').empty();
+            
+            for (let i = 0; i < savedBreeds.length; i++) {
+                let breed = savedBreeds[i];
+
+                let container = $(`
+                    <div class="pet-breed-input-container row mt-2 pet-breeds-input-container">
+                        <div class="col-sm-1 pet-breeds-grip">
+                            <i class="bi bi-grip-vertical" style="font-size: 36px; margin-left: -8px; color: #312c57;"></i>
+                        </div>
+                        <div class="col-sm-7 position-relative">
+                            <input type="text" class="pet-breeds-input form-control" placeholder="Add more (if possible)..." style="height: 56px;">
+                            <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <input type="number" class="pet-breeds-input-percent form-control" placeholder="0" step="0.01" max="100" style="height: 56px;">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                    </div>
+                `);
+
+                container.find('.pet-breeds-input').val(breed.name);
+                container.find('.pet-breeds-input-percent').val(breed.percent);
+
+                $('.pet-breeds-container').append(container);
+            }
+
+            $('.specify_mix-btn').show();
+            animateShine($('.specify_mix-btn'), 300);
+
+            $('.specify_mix-default').remove();
+            $('.specify_mix-add_more').remove();
+            let addMore = $(`
+                <div class="pet-breed-input-container row mt-2 pet-breeds-input-container">
+                    <div class="col-sm-1 pet-breeds-grip">
+                        <i class="bi bi-grip-vertical" style="display: none; font-size: 36px; margin-left: -8px; color: #312c57;"></i>
+                    </div>
+                    <div class="col-sm-7 position-relative">
+                        <input type="text" class="pet-breeds-input form-control" placeholder="Add more (if possible)..." style="height: 56px;">
+                        <i class="bi bi-caret-right-fill" style="position: absolute; top: 25%; right: 1px; transform: translateY(-50%); font-size: 32px; color: #312c57;"></i>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="number" class="pet-breeds-input-percent form-control" placeholder="0" step="0.01" max="100" style="height: 56px;">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+            $('.pet-breeds-container').append(addMore);
+
+            saveBreedsToStorage();
+        }
+
+        setTimeout(function() {
+            $('#offcanvas-register-analyze').offcanvas('hide');
+
+            setTimeout(function() {
+                for (const $el of targetsToAnimate) {
+                    animateShine($el);
+                }
+            }, 400);
+        }, 750);
+    });
+
+    $('.document-upload-btn').on('click', function () {
+        $(this).next('.document-input').click();
+    });
+
+    $('.document-input').on('change', function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        const btn = $(this).prev('.document-upload-btn');
+        const text = btn.find('.tewi-button-text');
+        const iconEl = btn.find('.tewi-button-icon');
+
+        const extParts = file.name.split('.');
+        const ext = extParts.length > 1 ? extParts.pop().toLowerCase() : '';
+
+        const fileMeta = {
+            pdf: { icon: 'bi-file-earmark-pdf-fill', color: '#D83B3B' },
+            docx: { icon: 'bi-file-earmark-word-fill', color: '#2B579A' }
+        };
+
+        if (!fileMeta[ext]) {
+            text.html(`<span class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> Invalid file type. Only PDF and DOCX allowed.</span>`);
+            iconEl.removeAttr('style').removeClass().addClass('tewi-button-icon bi bi-file-earmark-plus-fill');
+            this.value = '';
+            return;
+        }
+
+        const iconClass = fileMeta[ext].icon;
+        const iconColor = fileMeta[ext].color;
+
+        iconEl.removeClass().addClass(`tewi-button-icon bi ${iconClass}`).css('color', iconColor);
+
+        let name = file.name;
+        if (name.length > 24) {
+            const parts = file.name.split('.');
+            const extension = '.' + parts.pop();
+            const base = parts.join('.');
+            name = base.substring(0, 12) + '...' + base.substring(base.length - 8) + extension;
+        }
+
+        let size = file.size;
+        const units = ['B', 'KB', 'MB', 'GB'];
+        let i = 0;
+        while (size >= 1024 && i < units.length - 1) {
+            size /= 1024;
+            i++;
+        }
+        const readableSize = size.toFixed(1) + ' ' + units[i];
+
+        const date = new Date(file.lastModified);
+        const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+        text.html(`<i class="bi bi-check2-circle" style="color: #00ff22;"></i> ${name} <span style="opacity: 0.33;">· ${readableSize} · ${dateStr}</span>`);
+        animateShine($(this).prev('.document-upload-btn'), 300);
+    });
 });
 </script>
 </html>
