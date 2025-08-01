@@ -239,6 +239,27 @@ $(function () {
 
                 $("#view-pets-container").html(tableHtml);
 
+                if (Array.isArray(data.files) && data.files.length > 0) {
+                    const filesHtml = `
+                        <div class="mt-4">
+                            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filesCollapse" aria-expanded="false" aria-controls="filesCollapse">
+                                Show Attached Files (${data.files.length})
+                            </button>
+                            <div class="collapse mt-2" id="filesCollapse">
+                                <ul class="list-group">
+                                    ${data.files.map(file => {
+                                        const url = `${window.urlBase}/${file.file_path}`;
+                                        const label = `${file.file_name} (${Math.round(parseInt(file.file_size) / 1024)} KB)`;
+                                        return `<li class="list-group-item">
+                                                    <a href="${url}" target="_blank">${label}</a>
+                                                </li>`;
+                                    }).join("")}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    $("#view-pets-container").append(filesHtml);
+                }
             }
         );
     });

@@ -19,3 +19,5 @@ yarn-error.log
 /.vscode
 /public/img/pets/*
 .htaccess
+
+/public/uploads/*
