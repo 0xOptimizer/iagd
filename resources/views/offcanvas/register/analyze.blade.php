@@ -40,7 +40,7 @@
                 </section>
             @endforeach
         </div>
-        <div class="cerebrate-analyze-field-container row pt-2">
+        <div class="cerebrate-analyze-field-container row pt-2" style="display: none;">
             <div class="cerebrate-analyze-field form-floating col-4 position-relative" style="display: none;"> 
                 <input type="text" class="form-control w-100" id="cerebrate-analyze-species" readonly>
                 <label for="cerebrate-analyze-species" style="color: #ffc500 !important; margin-left: 12px;">Species</label>

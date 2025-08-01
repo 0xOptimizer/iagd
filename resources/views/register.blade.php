@@ -1250,6 +1250,7 @@ $(document).ready(function() {
                             setTimeout(function() {
                                 $('.searchlight-done').show();
                                 $('.cerebrate-analyze-image-card img').css('filter', 'none');
+                                $('.cerebrate-analyze-field-container').show();
 
                                 $('#cerebrate-analyze-confidence').text(response.confidence ?? '');
                                 $('#cerebrate-analyze-species').val(response_species ?? '');
