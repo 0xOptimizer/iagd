@@ -161,7 +161,7 @@ class APIController extends Controller
     public function get_pet_profile_by_id($id)
     {
         $pet = Pets::with(['details', 'meta', 'files' => function ($q) {
-            $q->where('file_mime_type', 'LIKE', 'image%')->orderByDesc('created_at');
+            $q->orderByDesc('created_at');
         }])
         ->where('id', $id)
         ->first();
@@ -170,13 +170,16 @@ class APIController extends Controller
             return response()->json(['error' => 'Pet not found'], 404);
         }
 
-        $pet->images = $pet->files->map(function ($file) {
+        $pet->images = $pet->files->filter(function ($file) {
+            return str_starts_with($file->file_mime_type, 'image/');
+        })->map(function ($file) {
             return asset('uploads/pets/' . $file->attached_to_uuid . '/' . $file->file_name);
-        });
+        })->values();
 
         $primaryFile = $pet->files->first(function ($file) {
             return $file->file_type === 'image';
         });
+
         $pet->primary_image = $primaryFile
             ? asset('uploads/pets/' . $primaryFile->attached_to_uuid . '/' . $primaryFile->file_name)
             : null;
